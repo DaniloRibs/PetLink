@@ -1,0 +1,7 @@
+PetLink
+
+- Atualizar o cronograma
+- Atualizar a lista de revisões
+- Texto deve ser justificado
+-  Corrigir esse texto "A plataforma enviará notificações automáticas pquando as datas de vacinação estiverem ..." na introdução
+
