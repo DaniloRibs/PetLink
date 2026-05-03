@@ -1,0 +1,4 @@
+- Revisar o modelo de dados
+- Colar mais detalhes nos requisitos funcionais 
+- Atualizar o cronograma do projeto com todas as etapas realizadas e planejadas
+- Revisar a formatação do documento
