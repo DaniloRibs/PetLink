@@ -1,4 +1,4 @@
---Criacão das tabelas
+---Criação das tabelas
 CREATE TABLE Usuario (
     id SERIAL PRIMARY KEY,
     nome VARCHAR(150) NOT NULL,
@@ -26,7 +26,7 @@ CREATE TABLE Pet (
     data_nascimento DATE NOT NULL,
     usuario_id INT NOT NULL,
     CONSTRAINT fk_pet_usuario FOREIGN KEY (usuario_id) REFERENCES Usuario(id),
-    CONSTRAINT chk_pet_tipo CHECK (tipo IN ('Cachorro', 'Gato', 'Hamster', 'Pássaro', 'Outro'))
+    CONSTRAINT chk_pet_tipo CHECK (tipo IN ('Cachorro', 'Gato', 'Pássaro', 'Outro'))
 );
 
 CREATE TABLE Vacina (
@@ -75,7 +75,7 @@ CREATE TABLE Aplicacao_Vacina (
 
 INSERT INTO Usuario (nome, email, senha) VALUES
 ('Carlos Oliveira', 'carlos.oliveira@email.com', 'senha1234'),
-('Ana Beatriz Souza', 'ana.souza@email.com', 'senha2345'),
+('Ana Carolina Souza', 'ana.souza@email.com', 'senha2345'),
 ('Associação Protetora dos Animais (APA)', 'contato@apa.org.br', 'senha3456'),
 ('Clínica Veterinária Saúde Animal', 'atendimento@saudeanimal.com.br', 'senha4567');
 
