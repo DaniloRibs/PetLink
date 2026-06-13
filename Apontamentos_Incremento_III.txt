@@ -1,7 +1,0 @@
-Apontamentos do Incremento III
-
-- Rever a formatação do documento seguindo as diretrizes da ABNT
-- Referenciar os anexos no documento
-- Atualizar a visão comportamental o anexo não está atualizado
-- Elaborar os diagramas de Caso de Uso com todos os módulos do sistema
-- Elaborar a visão de interação do usuário
