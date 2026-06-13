@@ -1,6 +1,13 @@
 ﻿<user-preferences>
   <open-windows>
     <window type="FolderOverview" resource="ped9477c5f24546598a2ca60acde975be_766659325" active="false" />
-    <window type="Diagram" resource="pc44cddcad40a4fc59b125b2858634b22_388733796" active="true" />
+    <window type="Diagram" resource="pc44cddcad40a4fc59b125b2858634b22_388733796" active="false" />
+    <window type="Diagram" resource="pd955b8f20293401492481e727a45fa81_358559840" active="false" />
+    <window type="Diagram" resource="p6011bab501044e37a268263a285930fc_311245627" active="false" />
+    <window type="Diagram" resource="p3af89d50560e4efea166fee3aeaf7ab9_295250792" active="false" />
+    <window type="Diagram" resource="pdcfaf4588f674258b12d9132c4513985_908940175" active="false" />
+    <window type="Diagram" resource="p1b1d8b5342c6424b86fc275ca41892c4_506066775" active="false" />
+    <window type="Diagram" resource="pc1a2084d073f4eab972957a86e7c2449_809885869" active="false" />
+    <window type="Diagram" resource="p4bbed0d5b4a441c9a10af75282ac8d20_819199053" active="true" />
   </open-windows>
 </user-preferences>
