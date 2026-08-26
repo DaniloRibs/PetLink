@@ -1,0 +1,114 @@
+{
+  "posts": [
+    {
+      "id": "1",
+      "title": "a title",
+      "views": 100
+    },
+    {
+      "id": "2",
+      "title": "another title",
+      "views": 200
+    }
+  ],
+  "comments": [
+    {
+      "id": "1",
+      "text": "a comment about post 1",
+      "postId": "1"
+    },
+    {
+      "id": "2",
+      "text": "another comment about post 1",
+      "postId": "1"
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "user": [
+    {
+      "id": "1",
+      "fullname": "tiburguin",
+      "email": "tiburgus@gmail.com",
+      "password": "789"
+    },
+    {
+      "id": "2",
+      "fullname": "fhfhf",
+      "email": "aroldus@gmail.com",
+      "password": "123"
+    },
+    {
+      "id": "74c9",
+      "fullname": "cabral",
+      "email": "cabralzin@gmail.com",
+      "password": "567"
+    },
+    {
+      "id": "4",
+      "fullname": "rebergerg",
+      "email": "tiburgus@gmail.com",
+      "password": "789"
+    },
+    {
+      "id": "5",
+      "fullname": "cabral",
+      "email": "tiburgus@gmail.com",
+      "password": "789"
+    },
+    {
+      "fullname": "valor",
+      "email": "qualquer@valor",
+      "password": "1234",
+      "role": "USER",
+      "id": "YIjdo3D4Seg"
+    },
+    {
+      "fullname": "city",
+      "email": "vice@city",
+      "password": "4321",
+      "role": "USER",
+      "id": "g3OPwm9Xxuk"
+    },
+    {
+      "fullname": "testeF",
+      "email": "teste@final",
+      "password": "teste",
+      "role": "USER",
+      "id": "4Hn3pUtx1_Q"
+    },
+    {
+      "fullname": "dan",
+      "email": "dan@dan",
+      "password": "dada",
+      "role": "USER",
+      "id": "wSEbVRf5TjA"
+    },
+    {
+      "fullname": "dadad",
+      "email": "da@dada",
+      "password": "da@dada",
+      "role": "USER",
+      "id": "Qwg3-E1CV50"
+    }
+  ],
+  "product": [
+    {
+      "id": "1",
+      "name": "produto 1",
+      "price": 11.11
+    },
+    {
+      "id": "2",
+      "name": "produto 2qwdqwdqwdqwd",
+      "price": 22.22
+    },
+    {
+      "id": "3",
+      "name": "produto 3",
+      "price": 33.33
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
