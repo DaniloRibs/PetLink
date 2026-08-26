@@ -91,6 +91,26 @@
       "password": "da@dada",
       "role": "USER",
       "id": "Qwg3-E1CV50"
+    },
+    {
+      "fullname": "rodrigo",
+      "email": "rod@rod",
+      "password": "123",
+      "role": "USER",
+      "phone": "123456789",
+      "accountType": "pessoa",
+      "document": "123456789",
+      "id": "skBKympI9w0"
+    },
+    {
+      "fullname": "oi",
+      "email": "oi@oi",
+      "password": "123",
+      "role": "USER",
+      "phone": "123456789",
+      "accountType": "empresa",
+      "document": "123456789",
+      "id": "x-KqorgLXME"
     }
   ],
   "product": [
@@ -110,5 +130,6 @@
       "price": 33.33
     }
   ],
+  "pets": [],
   "$schema": "./node_modules/json-server/schema.json"
 }

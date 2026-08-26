@@ -1,0 +1,28 @@
+<section class="menu-footer-card content-area">
+  <div class="content-form-card">
+    <div class="login-box">
+      <h2>Cadastrar Pet</h2>
+      <form [formGroup]="form" (ngSubmit)="createPet()">
+        <input type="text" placeholder="Nome do Pet" formControlName="name">
+
+        <div class="field-group">
+          <select formControlName="species">
+            <option value="" disabled selected hidden>Selecione o tipo</option>
+            <option [value]="PetSpecies.CACHORRO">Cachorro</option>
+            <option [value]="PetSpecies.GATO">Gato</option>
+            <option [value]="PetSpecies.PASSARO">Pássaro</option>
+            <option [value]="PetSpecies.OUTRO">Outro</option>
+          </select>
+        </div>
+
+        <input type="text" placeholder="Raça" formControlName="breed">
+        <input type="date" placeholder="Data de Nascimento" formControlName="birthDate">
+        <input type="submit" value="Cadastrar Pet" [disabled]="!validateFields()">
+
+        @if (createValidationFailed) {
+          <p class="text-danger">Confira os dados e tente novamente.</p>
+        }
+      </form>
+    </div>
+  </div>
+</section>
