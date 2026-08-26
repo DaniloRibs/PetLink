@@ -42,7 +42,7 @@
   </form>
 </div> -->
 
-<div class="auth-page">
+<!-- <div class="auth-page">
   <div class="auth-shell">
     <header class="auth-header">
       <a class="auth-brand" routerLink="/" aria-label="Voltar para o menu inicial">
@@ -58,6 +58,91 @@
             <input type="email" placeholder="E-mail" required [formControl]="email">
             <input type="password" placeholder="Senha" required [formControl]="password">
             <input type="submit" value="Entrar" [disabled]="!validateFields()">
+          </form>
+
+          @if (loginValidationFailed) {
+            <p class="text-danger">Email e/ou senha incorretos</p>
+          }
+
+          <div class="auth-links">
+            <a routerLink="/account/sign-up">Criar conta</a>
+            <a href="">Esqueci minha senha</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+<!-- <div class="auth-page">
+  <div class="auth-shell">
+    <header class="auth-header">
+      <a class="auth-brand" routerLink="/" aria-label="Voltar para o menu inicial">
+        <img src="assets/images/PetLink_Logo_Marrom.png" alt="PetLink" class="auth-brand-mark">
+      </a>
+    </header>
+
+    <div class="auth-content">
+      <div class="container">
+        <div class="login-box">
+          <h2>Login</h2>
+          <form (ngSubmit)="login()">
+            <div class="form-group">
+              <input type="email" placeholder="E-mail" [formControl]="email">
+              @if (email.invalid && (email.dirty || email.touched)) {
+                <span class="error-text">Digite um e-mail válido.</span>
+              }
+            </div>
+
+            <div class="form-group">
+              <input type="password" placeholder="Senha" [formControl]="password">
+              @if (password.invalid && (password.dirty || password.touched)) {
+                <span class="error-text">A senha deve ter entre 1 e 10 caracteres.</span>
+              }
+            </div>
+
+            <input type="submit" value="Entrar" [disabled]="!validateFields()">
+          </form>
+
+          @if (loginValidationFailed) {
+            <p class="text-danger">{{ errorMessage }}</p>
+          }
+
+          <div class="auth-links">
+            <a routerLink="/account/sign-up">Criar conta</a>
+            <a href="">Esqueci minha senha</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="auth-page">
+  <div class="auth-shell">
+    <header class="auth-header">
+      <a class="auth-brand" routerLink="/" aria-label="Voltar para o menu inicial">
+        <img src="assets/images/PetLink_Logo_Marrom.png" alt="PetLink" class="auth-brand-mark">
+      </a>
+    </header>
+
+    <div class="auth-content">
+      <div class="container">
+        <div class="login-box">
+          <h2>Login</h2>
+          <form>
+            <input type="email" placeholder="E-mail" [formControl]="email">
+            @if (email.touched && email.invalid) {
+              <p class="text-danger">Digite um e-mail válido.</p>
+            }
+
+            <input type="password" placeholder="Senha" [formControl]="password">
+            @if (password.touched && password.invalid) {
+              <p class="text-danger">Digite sua senha.</p>
+            }
+
+            <input type="button" value="Entrar" (click)="login()">
           </form>
 
           @if (loginValidationFailed) {

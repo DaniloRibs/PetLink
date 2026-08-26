@@ -72,7 +72,7 @@
     </div>
   </form>
 </div> -->
-<div class="auth-page">
+<!-- <div class="auth-page">
   <div class="auth-shell">
     <header class="auth-header">
       <a class="auth-brand" routerLink="/" aria-label="Voltar para o menu inicial">
@@ -122,4 +122,61 @@
       </div>
     </div>
   </div>
+</div> -->
+
+<div class="auth-page">
+  <div class="auth-shell">
+    <header class="auth-header">
+      <a class="auth-brand" routerLink="/" aria-label="Voltar para o menu inicial">
+        <img src="assets/images/PetLink_Logo_Marrom.png" alt="PetLink" class="auth-brand-mark">
+      </a>
+    </header>
+
+    <div class="auth-content">
+      <div class="container">
+        <div class="login-box">
+          <h2>Cadastrar Conta</h2>
+          <form [formGroup]="form" (ngSubmit)="createAccount()">
+
+            <div class="toggle-group" role="radiogroup" aria-label="Tipo de conta">
+              <label class="toggle-option">
+                <input type="radio" formControlName="accountType" [value]="AccountType.PESSOA">
+                <span>Pessoa</span>
+              </label>
+              <label class="toggle-option">
+                <input type="radio" formControlName="accountType" [value]="AccountType.EMPRESA">
+                <span>Empresa</span>
+              </label>
+            </div>
+
+            <input type="text" [placeholder]="isEmpresa ? 'Razão Social' : 'Nome Completo'" formControlName="fullname">
+            <input type="email" placeholder="E-mail" formControlName="email">
+            <input type="tel" placeholder="Telefone" formControlName="phone">
+
+            <div class="document-field">
+              <input type="text" [placeholder]="isEmpresa ? 'CNPJ' : 'CPF'" formControlName="document">
+            </div>
+
+            <input type="password" placeholder="Senha (mínimo 4 caracteres)" formControlName="password">
+            <input type="password" placeholder="Confirmar Senha" formControlName="repeatPassword">
+
+            @if (form.get('password')?.touched && !passwordsMatch()) {
+              <p class="text-danger">As senhas não coincidem.</p>
+            }
+
+            <input type="submit" value="Cadastrar">
+
+            @if (createValidationFailed) {
+              <p class="text-danger">Confira os dados informados e tente novamente.</p>
+            }
+          </form>
+
+          <div class="auth-links">
+            <a routerLink="/account/sign-in">Já tenho uma conta</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+

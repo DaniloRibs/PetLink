@@ -28,71 +28,6 @@
   },
   "user": [
     {
-      "id": "1",
-      "fullname": "tiburguin",
-      "email": "tiburgus@gmail.com",
-      "password": "789"
-    },
-    {
-      "id": "2",
-      "fullname": "fhfhf",
-      "email": "aroldus@gmail.com",
-      "password": "123"
-    },
-    {
-      "id": "74c9",
-      "fullname": "cabral",
-      "email": "cabralzin@gmail.com",
-      "password": "567"
-    },
-    {
-      "id": "4",
-      "fullname": "rebergerg",
-      "email": "tiburgus@gmail.com",
-      "password": "789"
-    },
-    {
-      "id": "5",
-      "fullname": "cabral",
-      "email": "tiburgus@gmail.com",
-      "password": "789"
-    },
-    {
-      "fullname": "valor",
-      "email": "qualquer@valor",
-      "password": "1234",
-      "role": "USER",
-      "id": "YIjdo3D4Seg"
-    },
-    {
-      "fullname": "city",
-      "email": "vice@city",
-      "password": "4321",
-      "role": "USER",
-      "id": "g3OPwm9Xxuk"
-    },
-    {
-      "fullname": "testeF",
-      "email": "teste@final",
-      "password": "teste",
-      "role": "USER",
-      "id": "4Hn3pUtx1_Q"
-    },
-    {
-      "fullname": "dan",
-      "email": "dan@dan",
-      "password": "dada",
-      "role": "USER",
-      "id": "wSEbVRf5TjA"
-    },
-    {
-      "fullname": "dadad",
-      "email": "da@dada",
-      "password": "da@dada",
-      "role": "USER",
-      "id": "Qwg3-E1CV50"
-    },
-    {
       "fullname": "rodrigo",
       "email": "rod@rod",
       "password": "123",
@@ -111,6 +46,26 @@
       "accountType": "empresa",
       "document": "123456789",
       "id": "x-KqorgLXME"
+    },
+    {
+      "fullname": "Misterios SA",
+      "email": "misterios@misterios",
+      "password": "12345",
+      "role": "USER",
+      "phone": "12345",
+      "accountType": "empresa",
+      "document": "12345",
+      "id": "VRwCSm6KIZQ"
+    },
+    {
+      "fullname": "rodrigo ribeiro",
+      "email": "rod@rib",
+      "password": "12345",
+      "role": "USER",
+      "phone": "12345",
+      "accountType": "pessoa",
+      "document": "12345",
+      "id": "x3lK_7YsE94"
     }
   ],
   "product": [
@@ -130,6 +85,15 @@
       "price": 33.33
     }
   ],
-  "pets": [],
+  "pets": [
+    {
+      "name": "bolao",
+      "species": "gato",
+      "breed": "persa",
+      "birthDate": "2020-03-18",
+      "ownerEmail": "rod@rib",
+      "id": "HwdLI6XeJgI"
+    }
+  ],
   "$schema": "./node_modules/json-server/schema.json"
 }
