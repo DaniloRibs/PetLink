@@ -1,0 +1,59 @@
+<div class="menu-page">
+
+  <!-- TOPO FIXO -->
+  <header class="menu-header dashboard-header">
+
+    <a routerLink="/painel" class="brand">
+      <img src="assets/images/PetLink_Logo_Marrom.png" alt="PetLink" class="brand-mark">
+    </a>
+
+    <nav class="menu-nav">
+      <a routerLink="/painel">Início</a>
+      <a href="#">Ajuda</a>
+    </nav>
+
+    <div class="menu-actions">
+      <a href="#" class="menu-button">🔔 Notificações</a>
+      <a href="#" class="menu-link">👤 {{ userEmail || 'Minha conta' }}</a>
+    </div>
+
+  </header>
+
+  <!-- MENU LATERAL -->
+  <aside class="dashboard-sidebar">
+
+    <div class="menu-footer-card">
+      <div>
+        <p class="footer-title">PAINEL</p>
+        <h2>PetLink</h2>
+      </div>
+    </div>
+
+    <div class="sidebar-links">
+      <a routerLink="/painel" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" class="sidebar-item">
+        🏠 Dashboard
+      </a>
+
+      <a href="#" class="sidebar-item">🐶 Meus Pets</a>
+
+      <a routerLink="/painel/pets/novo" routerLinkActive="active-link" class="sidebar-item">
+        ➕ Cadastrar Pet
+      </a>
+
+      <a href="#" class="sidebar-item">📅 Agendamentos</a>
+      <a href="#" class="sidebar-item">📢 Anúncios</a>
+      <a href="#" class="sidebar-item">❤️ Adoções</a>
+      <a href="#" class="sidebar-item">💬 Mensagens</a>
+      <a href="#" class="sidebar-item">⚙️ Configurações</a>
+
+      <a href="#" class="sidebar-item" (click)="logout()">🚪 Sair</a>
+    </div>
+
+  </aside>
+
+  <!-- CONTEÚDO -->
+  <main class="dashboard-content">
+    <router-outlet></router-outlet>
+  </main>
+
+</div>
