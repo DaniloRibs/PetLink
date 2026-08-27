@@ -1,74 +1,55 @@
-<div class="base-form">
-  <form class="form mat-elevation-z4" [formGroup]="form" (ngSubmit)="createAccount()">
-    <h2 class="text-center">Crie sua conta!</h2>
+<div class="auth-page">
+  <div class="auth-shell">
+    <header class="auth-header">
+      <a class="auth-brand" routerLink="/" aria-label="Voltar para o menu inicial">
+        <img src="assets/images/PetLink_Logo_Marrom.png" alt="PetLink" class="auth-brand-mark">
+      </a>
+    </header>
 
-    <mat-form-field>
-      <mat-label>Nome completo</mat-label>
-      <input matInput placeholder="Nome completo" formControlName="fullname">
+    <div class="auth-content">
+      <div class="container">
+        <div class="login-box">
+          <h2>Cadastrar Conta</h2>
+          <form [formGroup]="form" (ngSubmit)="createAccount()">
 
-      @if(form.controls['fullname'].hasError('required')){
-        <mat-error>Campo Obrigatorio</mat-error>
-      }
-      @if(form.controls['fullname'].hasError('minlength')){
-        <mat-error>Campo de ter no minimo {{fullnameMiniLength}} caracteres</mat-error>
-      }
-      @if(form.controls['fullname'].hasError('maxlength')){
-        <mat-error>Campo de ter no maximo {{fullnameMaxLength}} caracteres</mat-error>
-      }
+            <div class="toggle-group" role="radiogroup" aria-label="Tipo de conta">
+              <label class="toggle-option">
+                <input type="radio" formControlName="accountType" [value]="AccountType.PESSOA">
+                <span>Pessoa</span>
+              </label>
+              <label class="toggle-option">
+                <input type="radio" formControlName="accountType" [value]="AccountType.EMPRESA">
+                <span>Empresa</span>
+              </label>
+            </div>
 
+            <input type="text" [placeholder]="isEmpresa ? 'Razão Social' : 'Nome Completo'" formControlName="fullname">
+            <input type="email" placeholder="E-mail" formControlName="email">
+            <input type="tel" placeholder="Telefone" formControlName="phone">
 
-    </mat-form-field>
+            <div class="document-field">
+              <input type="text" [placeholder]="isEmpresa ? 'CNPJ' : 'CPF'" formControlName="document">
+            </div>
 
-    <mat-form-field>
-      <mat-label>Email</mat-label>
-      <input matInput placeholder="Email" required formControlName="email">
-      @if(form.controls['email'].hasError('required')){
-        <mat-error>Campo Obrigatorio</mat-error>
-      }
-      @if(form.controls['email'].hasError('email')){
-        <mat-error>email invalido</mat-error>
-      }
+            <input type="password" placeholder="Senha (mínimo 4 caracteres)" formControlName="password">
+            <input type="password" placeholder="Confirmar Senha" formControlName="repeatPassword">
 
-    </mat-form-field>
+            @if (form.get('password')?.touched && !passwordsMatch()) {
+              <p class="text-danger">As senhas não coincidem.</p>
+            }
 
-    <mat-form-field>
-      <mat-label>Senha</mat-label>
-      <input matInput type="password" placeholder="Senha" maxlength="10" formControlName="password">
-      @if(form.controls['password'].hasError('required')){
-        <mat-error>Campo Obrigatorio</mat-error>
-      }
-      @if(form.controls['password'].hasError('minlength')){
-        <mat-error>Campo de ter no minimo {{passwordMiniLength}} caracteres</mat-error>
-      }
-      @if(form.controls['password'].hasError('maxlength')){
-        <mat-error>Campo de ter no maximo {{passwordMaxLength}} caracteres</mat-error>
-      }
+            <input type="submit" value="Cadastrar">
 
+            @if (createValidationFailed) {
+              <p class="text-danger">Confira os dados informados e tente novamente.</p>
+            }
+          </form>
 
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label>Repita a senha</mat-label>
-      <input matInput type="password" placeholder="Senha" formControlName="repeatPassword">
-      @if(form.controls['repeatPassword'].hasError('required')){
-        <mat-error>Campo Obrigatorio</mat-error>
-      }
-      @if(form.controls['repeatPassword'].hasError('minlength')){
-        <mat-error>Campo de ter no minimo {{passwordMiniLength}} caracteres</mat-error>
-      }
-      @if(form.controls['repeatPassword'].hasError('maxlength')){
-        <mat-error>Campo de ter no maximo {{passwordMaxLength}} caracteres</mat-error>
-      }
-
-    </mat-form-field>
-
-    <div class="text-center">
-      <button class="btn btn-primary" [disabled]="!validateFields()">Criar</button>
+          <div class="auth-links">
+            <a routerLink="/account/sign-in">Já tenho uma conta</a>
+          </div>
+        </div>
+      </div>
     </div>
-
-    <hr>
-    <div class="mt-4">
-      <p>Já possui uma conta? <a href="account/sign-in">Clique aqui</a> para entrar agora mesmo!</p>
-    </div>
-  </form>
+  </div>
 </div>

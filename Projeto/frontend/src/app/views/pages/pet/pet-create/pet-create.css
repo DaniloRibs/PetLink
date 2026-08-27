@@ -1,0 +1,12 @@
+.content-form-card .login-box {
+  box-shadow: none;
+  padding: 0;
+  margin: 0 auto;
+}
+
+.text-danger {
+  color: #c0392b;
+  font-size: 13px;
+  text-align: center;
+  margin: 0;
+}

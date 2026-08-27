@@ -1,0 +1,25 @@
+<section class="menu-footer-card content-area">
+  <div class="content-form-card">
+    <p class="footer-title">MEUS PETS</p>
+    <h2>Seus pets cadastrados</h2>
+
+    @if (loading) {
+      <p>Carregando...</p>
+    } @else if (pets.length === 0) {
+      <p>Você ainda não cadastrou nenhum pet. Use a opção "Cadastrar Pet" no menu lateral.</p>
+    } @else {
+      <div class="pet-card-grid">
+        @for (pet of pets; track pet.id) {
+          <article class="pet-card" (click)="openPet(pet)">
+            <div class="pet-card-icon">{{ speciesIcon(pet.species) }}</div>
+            <h3>{{ pet.name }}</h3>
+            <p>{{ pet.breed }}</p>
+            @if (pet.forAdoption) {
+              <span class="pet-badge">Em adoção</span>
+            }
+          </article>
+        }
+      </div>
+    }
+  </div>
+</section>

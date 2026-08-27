@@ -28,69 +28,54 @@
   },
   "user": [
     {
-      "id": "1",
-      "fullname": "tiburguin",
-      "email": "tiburgus@gmail.com",
-      "password": "789"
-    },
-    {
-      "id": "2",
-      "fullname": "fhfhf",
-      "email": "aroldus@gmail.com",
-      "password": "123"
-    },
-    {
-      "id": "74c9",
-      "fullname": "cabral",
-      "email": "cabralzin@gmail.com",
-      "password": "567"
-    },
-    {
-      "id": "4",
-      "fullname": "rebergerg",
-      "email": "tiburgus@gmail.com",
-      "password": "789"
-    },
-    {
-      "id": "5",
-      "fullname": "cabral",
-      "email": "tiburgus@gmail.com",
-      "password": "789"
-    },
-    {
-      "fullname": "valor",
-      "email": "qualquer@valor",
-      "password": "1234",
+      "fullname": "rodrigo",
+      "email": "rod@rod",
+      "password": "123",
       "role": "USER",
-      "id": "YIjdo3D4Seg"
+      "phone": "123456789",
+      "accountType": "pessoa",
+      "document": "123456789",
+      "id": "skBKympI9w0"
     },
     {
-      "fullname": "city",
-      "email": "vice@city",
-      "password": "4321",
+      "fullname": "oi",
+      "email": "oi@oi",
+      "password": "123",
       "role": "USER",
-      "id": "g3OPwm9Xxuk"
+      "phone": "123456789",
+      "accountType": "empresa",
+      "document": "123456789",
+      "id": "x-KqorgLXME"
     },
     {
-      "fullname": "testeF",
-      "email": "teste@final",
-      "password": "teste",
+      "fullname": "Misterios SA",
+      "email": "misterios@misterios",
+      "password": "12345",
       "role": "USER",
-      "id": "4Hn3pUtx1_Q"
+      "phone": "12345",
+      "accountType": "empresa",
+      "document": "12345",
+      "id": "VRwCSm6KIZQ"
     },
     {
-      "fullname": "dan",
-      "email": "dan@dan",
-      "password": "dada",
+      "fullname": "tim",
+      "email": "tim@tim",
+      "password": "12345",
       "role": "USER",
-      "id": "wSEbVRf5TjA"
+      "phone": "123",
+      "accountType": "empresa",
+      "document": "123",
+      "id": "ltkYqZtacy8"
     },
     {
-      "fullname": "dadad",
-      "email": "da@dada",
-      "password": "da@dada",
+      "fullname": "Rodrigo",
+      "email": "rod@rib",
+      "password": "12345",
       "role": "USER",
-      "id": "Qwg3-E1CV50"
+      "phone": "123",
+      "accountType": "pessoa",
+      "document": "123",
+      "id": "wiV5L137llA"
     }
   ],
   "product": [
@@ -110,5 +95,51 @@
       "price": 33.33
     }
   ],
+  "pets": [
+    {
+      "name": "psiu",
+      "species": "gato",
+      "breed": "persa",
+      "birthDate": "2003-03-18",
+      "ownerEmail": "rod@rod",
+      "id": "sR8mB8ehmEY",
+      "forAdoption": false
+    },
+    {
+      "name": "psiu",
+      "species": "passaro",
+      "breed": "calopsita",
+      "birthDate": "2003-03-18",
+      "ownerEmail": "tim@tim",
+      "id": "SNGanMIm-OA"
+    },
+    {
+      "name": "oi",
+      "species": "gato",
+      "breed": "oioi",
+      "birthDate": "2003-03-03",
+      "ownerEmail": "rod@rib",
+      "id": "7hsa-e4FjXU",
+      "forAdoption": true
+    }
+  ],
+  "vaccines": [
+    {
+      "petId": "SNGanMIm-OA",
+      "name": "raiva",
+      "applicationDate": "2003-03-20",
+      "nextDoseDate": "2004-03-20",
+      "id": "XWzgfWWnNDw"
+    },
+    {
+      "petId": "SNGanMIm-OA",
+      "name": "raiva 2",
+      "applicationDate": "2025-08-20",
+      "nextDoseDate": "2026-08-28",
+      "notes": "vacina bem dada",
+      "id": "d_xMIFMBFuw"
+    }
+  ],
+  "campaigns": [],
   "$schema": "./node_modules/json-server/schema.json"
 }

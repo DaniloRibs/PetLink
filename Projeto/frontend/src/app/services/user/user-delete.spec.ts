@@ -1,13 +1,17 @@
 import { TestBed } from '@angular/core/testing';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
-import { UserDelete } from './user-delete';
+import { UserDeleteService } from './user-delete';
 
-describe('UserDelete', () => {
-  let service: UserDelete;
+describe('UserDeleteService', () => {
+  let service: UserDeleteService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(UserDelete);
+    TestBed.configureTestingModule({
+      providers: [provideHttpClient(), provideHttpClientTesting()],
+    });
+    service = TestBed.inject(UserDeleteService);
   });
 
   it('should be created', () => {

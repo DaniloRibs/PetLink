@@ -1,0 +1,26 @@
+.content-form-card .profile-form-box {
+  box-shadow: none;
+  padding: 0;
+  margin: 16px auto 0;
+  width: 100%;
+  max-width: 420px;
+}
+
+.back-link {
+  display: inline-flex;
+  margin-bottom: 12px;
+}
+
+.text-danger {
+  color: #c0392b;
+  font-size: 13px;
+  text-align: center;
+  margin: 0;
+}
+
+.text-success {
+  color: #2e7d32;
+  font-size: 13px;
+  text-align: center;
+  margin: 0;
+}

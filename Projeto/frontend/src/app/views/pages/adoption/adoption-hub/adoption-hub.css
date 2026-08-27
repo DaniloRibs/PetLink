@@ -1,0 +1,53 @@
+.adoption-tabs {
+  display: flex;
+  gap: 10px;
+  margin: 16px 0 20px;
+}
+
+.adoption-tab {
+  border: 1px solid rgba(111, 78, 55, 0.25);
+  background: rgba(255, 255, 255, 0.7);
+  color: #6F4E37;
+  border-radius: 12px;
+  padding: 10px 18px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.adoption-tab.active {
+  background: #6F4E37;
+  color: #fff;
+  border-color: #6F4E37;
+}
+
+.pet-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.pet-card {
+  border-radius: 16px;
+  padding: 20px;
+  background: #f8ede5;
+  border: 1px solid rgba(111, 78, 55, 0.12);
+  text-align: center;
+}
+
+.pet-card h3 {
+  margin: 0 0 4px;
+  color: #33211a;
+}
+
+.pet-card p {
+  margin: 0 0 8px;
+  color: #6b5d55;
+  font-size: 13px;
+}
+
+.adoption-contact {
+  font-weight: 600;
+  color: #6F4E37 !important;
+}

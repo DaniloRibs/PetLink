@@ -1,0 +1,77 @@
+<div class="menu-page">
+
+  <!-- TOPO FIXO -->
+  <header class="menu-header dashboard-header">
+
+    <a routerLink="/painel" class="brand">
+      <img src="assets/images/PetLink_Logo_Marrom.png" alt="PetLink" class="brand-mark">
+    </a>
+
+    <nav class="menu-nav">
+      <a routerLink="/painel">Início</a>
+      <a href="#">Ajuda</a>
+    </nav>
+
+    <div class="menu-actions">
+      <app-notification-bell></app-notification-bell>
+
+      <div class="user-menu">
+        <button type="button" class="menu-link user-menu-trigger" (click)="toggleUserMenu()">
+          👤 {{ currentUser?.fullname || userEmail || 'Minha conta' }}
+        </button>
+
+        @if (userMenuOpen) {
+          <div class="user-menu-dropdown">
+            <a routerLink="/painel/conta/perfil" class="user-menu-item" (click)="closeUserMenu()">
+              ⚙️ Meu perfil
+            </a>
+            <button type="button" class="user-menu-item user-menu-item-danger" (click)="logout()">
+              🚪 Sair
+            </button>
+          </div>
+        }
+      </div>
+    </div>
+
+  </header>
+
+  <!-- MENU LATERAL -->
+  <aside class="dashboard-sidebar">
+
+    <div class="menu-footer-card">
+      <div>
+        <p class="footer-title">PAINEL</p>
+        <h2>PetLink</h2>
+      </div>
+    </div>
+
+    <div class="sidebar-links">
+      <a routerLink="/painel" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" class="sidebar-item">
+        🏠 Dashboard
+      </a>
+
+      <a routerLink="/painel/pets" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" class="sidebar-item">
+        🐾 Meus Pets
+      </a>
+
+      <a routerLink="/painel/pets/novo" routerLinkActive="active-link" class="sidebar-item">
+        ➕ Cadastrar Pet
+      </a>
+
+      <a routerLink="/painel/anuncios" routerLinkActive="active-link" class="sidebar-item">
+        📢 Anúncios
+      </a>
+
+      <a routerLink="/painel/adocoes" routerLinkActive="active-link" class="sidebar-item">
+        ❤️ Adoções
+      </a>
+    </div>
+
+  </aside>
+
+  <!-- CONTEÚDO -->
+  <main class="dashboard-content">
+    <router-outlet></router-outlet>
+  </main>
+
+</div>

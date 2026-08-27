@@ -9,7 +9,6 @@ import { environment } from '../../../environments/environment';
 })
 export class UserReadService {
 
-
   constructor(private http: HttpClient) { }
 
   findAll(): Promise<any> {
@@ -20,8 +19,7 @@ export class UserReadService {
     return firstValueFrom(this.http.get<any>(`${environment.api_endpoint}/user/${id}`));
   }
 
-  findByEmail(email: string): Promise<User> {
-    return firstValueFrom(this.http.get<any>(`${environment.api_endpoint}/user/email/${email}`));
+  findByEmail(email: string): Promise<User[]> {
+    return firstValueFrom(this.http.get<User[]>(`${environment.api_endpoint}/user?email=${email}`));
   }
-
 }

@@ -1,0 +1,60 @@
+<section class="menu-footer-card content-area">
+  <div class="content-form-card">
+    <p class="footer-title">ANÚNCIOS</p>
+    <h2>Campanhas de vacinação</h2>
+    <p class="hero-text">Fique de olho nas campanhas de vacinação divulgadas por empresas parceiras.</p>
+
+    @if (isCompany) {
+      <button class="secondary-button" (click)="toggleForm()">
+        {{ showForm ? 'Cancelar' : '+ Publicar campanha de vacinação' }}
+      </button>
+
+      @if (showForm) {
+        <div class="login-box campaign-form-box">
+          <form [formGroup]="form" (ngSubmit)="createCampaign()">
+            <input type="text" placeholder="Título da campanha" formControlName="title">
+            <input type="text" placeholder="Descrição" formControlName="description">
+            <input type="date" placeholder="Data (opcional)" formControlName="date">
+
+            <input type="submit" value="Publicar" [disabled]="!validateFields()">
+
+            @if (createValidationFailed) {
+              <p class="text-danger">Confira os dados e tente novamente.</p>
+            }
+          </form>
+        </div>
+      }
+    } @else if (!loading) {
+      <p class="announcement-readonly-hint">
+        Você está vendo os anúncios como usuário pessoa: aqui só é possível visualizar as campanhas.
+      </p>
+    }
+
+    @if (loading) {
+      <p>Carregando...</p>
+    } @else if (campaigns.length === 0) {
+      <p>Ainda não há campanhas de vacinação publicadas.</p>
+    } @else {
+      <div class="announcement-list">
+        @for (campaign of campaigns; track campaign.id) {
+          <article class="announcement-item campaign-item">
+            <span class="announcement-icon">💉</span>
+            <div class="campaign-body">
+              <h3>{{ campaign.title }}</h3>
+              <p>{{ campaign.description }}</p>
+              <p class="campaign-meta">
+                {{ campaign.companyName }}
+                @if (campaign.date) {
+                  <span> · {{ campaign.date | date:'dd/MM/yyyy' }}</span>
+                }
+              </p>
+            </div>
+            @if (isCompany && campaign.companyEmail === userEmail) {
+              <button class="secondary-button" (click)="removeCampaign(campaign)">Remover</button>
+            }
+          </article>
+        }
+      </div>
+    }
+  </div>
+</section>
