@@ -1,6 +1,6 @@
-package br.fai.lds.projetolds2026.dto;
+package br.fai.lds.projetolds2026.dto.user;
 
-import br.fai.lds.projetolds2026.domain.UserModel;
+import br.fai.lds.projetolds2026.domain.user.UserModel;
 
 public class UpdateUserNameDto {
 
