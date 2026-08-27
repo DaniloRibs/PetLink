@@ -76,52 +76,22 @@
       "accountType": "pessoa",
       "document": "123",
       "id": "wiV5L137llA"
-    }
-  ],
-  "product": [
-    {
-      "id": "1",
-      "name": "produto 1",
-      "price": 11.11
     },
     {
-      "id": "2",
-      "name": "produto 2qwdqwdqwdqwd",
-      "price": 22.22
-    },
-    {
-      "id": "3",
-      "name": "produto 3",
-      "price": 33.33
+      "fullname": "dada",
+      "email": "da@da",
+      "password": "1234",
+      "role": "USER",
+      "phone": "12431415",
+      "accountType": "pessoa",
+      "document": "151315123",
+      "id": "13yQfsABVSg"
     }
   ],
+
   "pets": [
-    {
-      "name": "psiu",
-      "species": "gato",
-      "breed": "persa",
-      "birthDate": "2003-03-18",
-      "ownerEmail": "rod@rod",
-      "id": "sR8mB8ehmEY",
-      "forAdoption": false
-    },
-    {
-      "name": "psiu",
-      "species": "passaro",
-      "breed": "calopsita",
-      "birthDate": "2003-03-18",
-      "ownerEmail": "tim@tim",
-      "id": "SNGanMIm-OA"
-    },
-    {
-      "name": "oi",
-      "species": "gato",
-      "breed": "oioi",
-      "birthDate": "2003-03-03",
-      "ownerEmail": "rod@rib",
-      "id": "7hsa-e4FjXU",
-      "forAdoption": true
-    }
+
+
   ],
   "vaccines": [
     {
@@ -130,14 +100,6 @@
       "applicationDate": "2003-03-20",
       "nextDoseDate": "2004-03-20",
       "id": "XWzgfWWnNDw"
-    },
-    {
-      "petId": "SNGanMIm-OA",
-      "name": "raiva 2",
-      "applicationDate": "2025-08-20",
-      "nextDoseDate": "2026-08-28",
-      "notes": "vacina bem dada",
-      "id": "d_xMIFMBFuw"
     }
   ],
   "campaigns": [],
