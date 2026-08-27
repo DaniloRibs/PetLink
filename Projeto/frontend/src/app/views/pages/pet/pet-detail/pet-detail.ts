@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -11,7 +12,7 @@ import { VaccineCreateService } from '../../../../services/vaccine/vaccine-creat
 
 @Component({
   selector: 'app-pet-detail',
-  imports: [RouterLink, ReactiveFormsModule],
+  imports: [RouterLink, ReactiveFormsModule, DatePipe],
   templateUrl: './pet-detail.html',
   styleUrl: './pet-detail.css',
 })
@@ -20,13 +21,11 @@ export class PetDetail implements OnInit {
   pet: Pet | null = null;
   vaccines: Vaccine[] = [];
   loading: boolean = true;
-
-  // Cadastro de vacina agora acontece direto na ficha do pet, sem precisar
-  // navegar para uma tela separada.
   vaccineForm: FormGroup;
   showVaccineForm: boolean = false;
   vaccineCreateValidationFailed: boolean = false;
   vaccineCreatedOk: boolean = false;
+  pendingAdoptionConfirmation: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -63,12 +62,21 @@ export class PetDetail implements OnInit {
     }
   }
 
-  toggleAdoption(): void {
+  requestToggleAdoption(): void {
+    this.pendingAdoptionConfirmation = true;
+  }
+
+  cancelToggleAdoption(): void {
+    this.pendingAdoptionConfirmation = false;
+  }
+
+  confirmToggleAdoption(): void {
     if (!this.pet) {
       return;
     }
 
     this.pet.forAdoption = !this.pet.forAdoption;
+    this.pendingAdoptionConfirmation = false;
 
     this.petUpdateService.update(this.pet).subscribe({
       error: (error) => console.error('Erro ao atualizar pet', error),

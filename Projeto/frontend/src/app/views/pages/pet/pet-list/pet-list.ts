@@ -31,9 +31,6 @@ export class PetList implements OnInit {
       console.error('Erro ao carregar seus pets', error);
     } finally {
       this.loading = false;
-      // Garante que a tela saia do "Carregando..." assim que os dados
-      // chegam, mesmo que a deteccao de mudancas automatica do Angular nao
-      // dispare sozinha nesse momento.
       this.cdr.detectChanges();
     }
   }

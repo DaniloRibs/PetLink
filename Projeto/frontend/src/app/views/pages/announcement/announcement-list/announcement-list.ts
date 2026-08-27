@@ -1,91 +1,118 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { DatePipe } from '@angular/common';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
-import { PetReadService } from '../../../../services/pet/pet-read';
-import { VaccineReadService } from '../../../../services/vaccine/vaccine-read';
-import { AuthenticationService } from '../../../../services/security/authentication';
-
-interface AnnouncementItem {
-  petId: string;
-  petName: string;
-  message: string;
-  status: 'overdue' | 'soon' | 'missing';
-}
+import { AccountType } from '../../../../models/domain/user';
+import { VaccineCampaign } from '../../../../models/domain/campaign';
+import { VaccineCampaignReadService } from '../../../../services/campaign/campaign-read';
+import { VaccineCampaignCreateService } from '../../../../services/campaign/campaign-create';
+import { VaccineCampaignDeleteService } from '../../../../services/campaign/campaign-delete';
+import { CurrentUserService } from '../../../../services/security/current-user';
 
 @Component({
   selector: 'app-announcement-list',
-  imports: [RouterLink],
+  imports: [ReactiveFormsModule, DatePipe],
   templateUrl: './announcement-list.html',
   styleUrl: './announcement-list.css',
 })
 export class AnnouncementList implements OnInit {
 
-  announcements: AnnouncementItem[] = [];
+  campaigns: VaccineCampaign[] = [];
   loading: boolean = true;
+  isCompany: boolean = false;
+  userEmail: string = '';
+
+  showForm: boolean = false;
+  form: FormGroup;
+  createValidationFailed: boolean = false;
 
   constructor(
-    private petReadService: PetReadService,
-    private vaccineReadService: VaccineReadService,
-    private authenticationService: AuthenticationService,
+    private formBuilder: FormBuilder,
+    private campaignReadService: VaccineCampaignReadService,
+    private campaignCreateService: VaccineCampaignCreateService,
+    private campaignDeleteService: VaccineCampaignDeleteService,
+    private currentUserService: CurrentUserService,
     private cdr: ChangeDetectorRef,
-  ) { }
+  ) {
+    this.form = this.formBuilder.group({
+      title: ['', [Validators.required]],
+      description: ['', [Validators.required]],
+      date: [''],
+    });
+  }
 
   async ngOnInit(): Promise<void> {
     try {
-      const email = this.authenticationService.getAuthenticatedUserEmail();
-      const [pets, vaccines] = await Promise.all([
-        this.petReadService.findByOwnerEmail(email),
-        this.vaccineReadService.findAll(),
-      ]);
-
-      const today = new Date();
-      const items: AnnouncementItem[] = [];
-
-      for (const pet of pets) {
-        const petVaccines = vaccines.filter(v => v.petId === pet.id);
-
-        if (petVaccines.length === 0) {
-          items.push({
-            petId: pet.id!,
-            petName: pet.name,
-            message: 'ainda não tem nenhuma vacina cadastrada.',
-            status: 'missing',
-          });
-          continue;
-        }
-
-        for (const vaccine of petVaccines) {
-          if (!vaccine.nextDoseDate) {
-            continue;
-          }
-
-          const nextDose = new Date(vaccine.nextDoseDate);
-          const diffDays = Math.ceil((nextDose.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
-
-          if (diffDays < 0) {
-            items.push({
-              petId: pet.id!,
-              petName: pet.name,
-              message: `está com a dose de ${vaccine.name} atrasada.`,
-              status: 'overdue',
-            });
-          } else if (diffDays <= 30) {
-            items.push({
-              petId: pet.id!,
-              petName: pet.name,
-              message: `tem dose de ${vaccine.name} prevista para daqui a ${diffDays} dia(s).`,
-              status: 'soon',
-            });
-          }
-        }
+      let user = this.currentUserService.get();
+      if (!user) {
+        user = await this.currentUserService.load();
       }
 
-      this.announcements = items;
+      this.isCompany = user?.accountType === AccountType.EMPRESA;
+      this.userEmail = user?.email ?? '';
+
+      this.campaigns = await this.campaignReadService.findAll();
     } catch (error) {
-      console.error('Erro ao montar anúncios de vacina', error);
+      console.error('Erro ao carregar campanhas de vacinação', error);
     } finally {
       this.loading = false;
       this.cdr.detectChanges();
     }
+  }
+
+  toggleForm(): void {
+    this.showForm = !this.showForm;
+    this.createValidationFailed = false;
+  }
+
+  validateFields(): boolean {
+    return this.form.valid;
+  }
+
+  createCampaign(): void {
+    this.createValidationFailed = false;
+
+    if (!this.isCompany || !this.validateFields()) {
+      this.createValidationFailed = true;
+      return;
+    }
+
+    const user = this.currentUserService.get();
+
+    const campaign: VaccineCampaign = {
+      title: this.form.controls['title'].value,
+      description: this.form.controls['description'].value,
+      date: this.form.controls['date'].value || undefined,
+      companyEmail: user?.email ?? this.userEmail,
+      companyName: user?.fullname ?? 'Empresa parceira',
+    };
+
+    this.campaignCreateService.create(campaign).subscribe({
+      next: (created) => {
+        this.campaigns = [created, ...this.campaigns];
+        this.form.reset();
+        this.showForm = false;
+        this.cdr.detectChanges();
+      },
+      error: (error) => {
+        console.error('Erro ao publicar campanha', error);
+        this.createValidationFailed = true;
+        this.cdr.detectChanges();
+      },
+    });
+  }
+
+  removeCampaign(campaign: VaccineCampaign): void {
+    if (!campaign.id) {
+      return;
+    }
+
+    this.campaignDeleteService.delete(campaign.id).subscribe({
+      next: () => {
+        this.campaigns = this.campaigns.filter(c => c.id !== campaign.id);
+        this.cdr.detectChanges();
+      },
+      error: (error) => console.error('Erro ao remover campanha', error),
+    });
   }
 }

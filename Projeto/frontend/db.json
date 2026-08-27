@@ -56,6 +56,26 @@
       "accountType": "empresa",
       "document": "12345",
       "id": "VRwCSm6KIZQ"
+    },
+    {
+      "fullname": "tim",
+      "email": "tim@tim",
+      "password": "12345",
+      "role": "USER",
+      "phone": "123",
+      "accountType": "empresa",
+      "document": "123",
+      "id": "ltkYqZtacy8"
+    },
+    {
+      "fullname": "Rodrigo",
+      "email": "rod@rib",
+      "password": "12345",
+      "role": "USER",
+      "phone": "123",
+      "accountType": "pessoa",
+      "document": "123",
+      "id": "wiV5L137llA"
     }
   ],
   "product": [
@@ -82,9 +102,44 @@
       "breed": "persa",
       "birthDate": "2003-03-18",
       "ownerEmail": "rod@rod",
-      "id": "sR8mB8ehmEY"
+      "id": "sR8mB8ehmEY",
+      "forAdoption": false
+    },
+    {
+      "name": "psiu",
+      "species": "passaro",
+      "breed": "calopsita",
+      "birthDate": "2003-03-18",
+      "ownerEmail": "tim@tim",
+      "id": "SNGanMIm-OA"
+    },
+    {
+      "name": "oi",
+      "species": "gato",
+      "breed": "oioi",
+      "birthDate": "2003-03-03",
+      "ownerEmail": "rod@rib",
+      "id": "7hsa-e4FjXU",
+      "forAdoption": true
     }
   ],
-  "vaccines": [],
+  "vaccines": [
+    {
+      "petId": "SNGanMIm-OA",
+      "name": "raiva",
+      "applicationDate": "2003-03-20",
+      "nextDoseDate": "2004-03-20",
+      "id": "XWzgfWWnNDw"
+    },
+    {
+      "petId": "SNGanMIm-OA",
+      "name": "raiva 2",
+      "applicationDate": "2025-08-20",
+      "nextDoseDate": "2026-08-28",
+      "notes": "vacina bem dada",
+      "id": "d_xMIFMBFuw"
+    }
+  ],
+  "campaigns": [],
   "$schema": "./node_modules/json-server/schema.json"
 }

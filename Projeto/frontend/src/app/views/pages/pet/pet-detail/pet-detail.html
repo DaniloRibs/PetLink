@@ -9,15 +9,25 @@
 
       <p class="footer-title">FICHA DO PET</p>
       <h2>{{ pet.name }}</h2>
-      <p>{{ pet.breed }} · Nascido em {{ pet.birthDate }}</p>
+      <p>{{ pet.breed }} · Nascido em {{ pet.birthDate | date:'dd/MM/yyyy' }}</p>
 
       @if (pet.forAdoption) {
         <span class="pet-badge">Em adoção</span>
       }
 
-      <button class="primary-button adoption-toggle" (click)="toggleAdoption()">
-        {{ pet.forAdoption ? 'Remover da lista de adoção' : 'Colocar para adoção' }}
-      </button>
+      @if (pendingAdoptionConfirmation) {
+        <p class="confirm-text">
+          {{ pet.forAdoption ? 'Remover ' + pet.name + ' da lista de adoção?' : 'Colocar ' + pet.name + ' para adoção?' }}
+        </p>
+        <div class="confirm-actions">
+          <button class="primary-button" (click)="confirmToggleAdoption()">Confirmar</button>
+          <button class="secondary-button" (click)="cancelToggleAdoption()">Cancelar</button>
+        </div>
+      } @else {
+        <button class="primary-button adoption-toggle" (click)="requestToggleAdoption()">
+          {{ pet.forAdoption ? 'Remover da lista de adoção' : 'Colocar para adoção' }}
+        </button>
+      }
 
       <hr>
 
@@ -29,9 +39,9 @@
         <ul class="vaccine-list">
           @for (vaccine of vaccines; track vaccine.id) {
             <li>
-              <strong>{{ vaccine.name }}</strong> — aplicada em {{ vaccine.applicationDate }}
+              <strong>{{ vaccine.name }}</strong> — aplicada em {{ vaccine.applicationDate | date:'dd/MM/yyyy' }}
               @if (vaccine.nextDoseDate) {
-                <span> · próxima dose: {{ vaccine.nextDoseDate }}</span>
+                <span> · próxima dose: {{ vaccine.nextDoseDate | date:'dd/MM/yyyy' }}</span>
               }
             </li>
           }

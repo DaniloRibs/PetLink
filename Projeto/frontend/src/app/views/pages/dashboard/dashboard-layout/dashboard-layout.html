@@ -13,8 +13,24 @@
     </nav>
 
     <div class="menu-actions">
-      <a href="#" class="menu-button">🔔 Notificações</a>
-      <a href="#" class="menu-link">👤 {{ userEmail || 'Minha conta' }}</a>
+      <app-notification-bell></app-notification-bell>
+
+      <div class="user-menu">
+        <button type="button" class="menu-link user-menu-trigger" (click)="toggleUserMenu()">
+          👤 {{ currentUser?.fullname || userEmail || 'Minha conta' }}
+        </button>
+
+        @if (userMenuOpen) {
+          <div class="user-menu-dropdown">
+            <a routerLink="/painel/conta/perfil" class="user-menu-item" (click)="closeUserMenu()">
+              ⚙️ Meu perfil
+            </a>
+            <button type="button" class="user-menu-item user-menu-item-danger" (click)="logout()">
+              🚪 Sair
+            </button>
+          </div>
+        }
+      </div>
     </div>
 
   </header>
@@ -34,7 +50,7 @@
         🏠 Dashboard
       </a>
 
-      <a routerLink="/painel/pets" routerLinkActive="active-link" class="sidebar-item">
+      <a routerLink="/painel/pets" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" class="sidebar-item">
         🐾 Meus Pets
       </a>
 
@@ -49,8 +65,6 @@
       <a routerLink="/painel/adocoes" routerLinkActive="active-link" class="sidebar-item">
         ❤️ Adoções
       </a>
-
-      <a href="#" class="sidebar-item" (click)="logout()">🚪 Sair</a>
     </div>
 
   </aside>

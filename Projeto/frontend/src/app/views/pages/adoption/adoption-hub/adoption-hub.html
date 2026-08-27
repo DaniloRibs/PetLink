@@ -46,9 +46,20 @@
             <article class="pet-card">
               <h3>{{ pet.name }}</h3>
               <p>{{ pet.breed }}</p>
-              <button class="secondary-button" (click)="toggleDonation(pet)">
-                {{ pet.forAdoption ? 'Remover da lista' : 'Colocar para doação' }}
-              </button>
+
+              @if (pendingConfirmationId === pet.id) {
+                <p class="confirm-text">
+                  {{ pet.forAdoption ? 'Remover ' + pet.name + ' da lista de adoção?' : 'Colocar ' + pet.name + ' para adoção?' }}
+                </p>
+                <div class="confirm-actions">
+                  <button class="secondary-button" (click)="confirmToggleDonation(pet)">Confirmar</button>
+                  <button class="secondary-button" (click)="cancelToggleDonation()">Cancelar</button>
+                </div>
+              } @else {
+                <button class="secondary-button" (click)="requestToggleDonation(pet)">
+                  {{ pet.forAdoption ? 'Remover da lista' : 'Colocar para doação' }}
+                </button>
+              }
             </article>
           }
         </div>

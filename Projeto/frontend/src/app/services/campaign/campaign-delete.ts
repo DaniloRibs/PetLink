@@ -1,16 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User } from '../../models/domain/user';
+import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
-export class UserCreateService {
+export class VaccineCampaignDeleteService {
 
   constructor(private http: HttpClient) { }
 
-  create(user: User) {
-    return this.http.post(`${environment.api_endpoint}/user`, user);
+  delete(id: string): Observable<void> {
+    return this.http.delete<void>(`${environment.api_endpoint}/campaigns/${id}`);
   }
 }

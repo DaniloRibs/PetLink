@@ -19,6 +19,7 @@ export class AdoptionHub implements OnInit {
   myPets: Pet[] = [];
   loading: boolean = true;
   userEmail: string = '';
+  pendingConfirmationId: string | null = null;
 
   constructor(
     private petReadService: PetReadService,
@@ -48,8 +49,17 @@ export class AdoptionHub implements OnInit {
     this.activeTab = tab;
   }
 
-  toggleDonation(pet: Pet): void {
+  requestToggleDonation(pet: Pet): void {
+    this.pendingConfirmationId = pet.id ?? null;
+  }
+
+  cancelToggleDonation(): void {
+    this.pendingConfirmationId = null;
+  }
+
+  confirmToggleDonation(pet: Pet): void {
     pet.forAdoption = !pet.forAdoption;
+    this.pendingConfirmationId = null;
 
     this.petUpdateService.update(pet).subscribe({
       error: (error) => console.error('Erro ao atualizar pet', error),
