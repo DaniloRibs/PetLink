@@ -129,38 +129,7 @@ public class PetServiceAdapter implements PetService {
         oldOwnerUser.getPets().remove(pet);
 
         pet.setIdOwner(newOwner);
-        petDao.updateOwner(id, newOwner);
-
-        newOwnerUser.getPets().add(pet);
-
-        return true;
-    }
-
-    @Override
-    public boolean setOwner(int id, int owner) {
-        PetModel pet = petDao.readyById(id);
-
-        if (pet == null) {
-            return false;
-        }
-
-        UserModel newUser = userDao.readyById(owner);
-
-        if (newUser == null) {
-            return false;
-        }
-
-        int oldOwnerId = pet.getIdOwner();
-        if (oldOwnerId > 0) {
-            UserModel oldUser = userDao.readyById(oldOwnerId);
-            if (oldUser != null) {
-                oldUser.getPets().remove(pet);
-            }
-        }
-
-        petDao.setOwner(id, owner);
-
-        newUser.getPets().add(pet);
+        petDao.updateInformation(id, pet);
 
         return true;
     }

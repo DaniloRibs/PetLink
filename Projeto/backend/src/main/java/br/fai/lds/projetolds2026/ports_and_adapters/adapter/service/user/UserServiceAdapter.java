@@ -2,11 +2,13 @@ package br.fai.lds.projetolds2026.ports_and_adapters.adapter.service.user;
 
 import br.fai.lds.projetolds2026.domain.pet.PetModel;
 import br.fai.lds.projetolds2026.domain.user.UserModel;
+import br.fai.lds.projetolds2026.ports_and_adapters.port.dao.pet.PetDao;
 import br.fai.lds.projetolds2026.ports_and_adapters.port.dao.user.UserDao;
 import br.fai.lds.projetolds2026.ports_and_adapters.port.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -14,6 +16,8 @@ public class UserServiceAdapter implements UserService {
 
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private PetDao petDao;
 
     @Override
     public int create(UserModel userModel) {
@@ -67,16 +71,34 @@ public class UserServiceAdapter implements UserService {
 
     @Override
     public UserModel findById(int id) {
+
+
         if (isIdInvalid(id)) {
             return null;
         }
-        return userDao.readyById(id);
+
+
+        UserModel userModel = userDao.readyById(id);
+        userModel.setPets(showALlPetsByOwnerId(id));
+
+        return userModel;
     }
 
     @Override
     public List<UserModel> findALl() {
-        return userDao.readAll();
+
+        List<UserModel> userModels = userDao.readAll();
+
+
+        for (UserModel userModel : userModels) {
+            userModel.setPets(showALlPetsByOwnerId(userModel.getId()));
+
+        }
+
+
+        return userModels;
     }
+
 
     @Override
     public UserModel findByEmail(String email) {
@@ -121,32 +143,51 @@ public class UserServiceAdapter implements UserService {
         return password.length() < 2 ? true : false;
     }
 
-    @Override
-    public PetModel findByIndex(int idOwner, int indexPet) {
-        if (isIdInvalid(idOwner)) {
-            return null;
-        }
-        UserModel userModel = userDao.readyById(idOwner);
-        if (userModel == null) {
-            return null;
-        }
-
-
-        return userModel.getPets().get(indexPet);
-    }
-
-    @Override
-    public List<PetModel> showALl(int idOwner) {
-        UserModel userModel = userDao.readyById(idOwner);
-
-        if (userModel == null) {
-            return null;
-        }
-
-        return userModel.getPets();
-    }
 
     boolean isIdInvalid(int id) {
         return id < 0 ? true : false;
+    }
+
+    @Override
+    public PetModel findPetByOwnerId(int idOwner, int idPet) {
+
+        if (isIdInvalid(idPet) || isIdInvalid(idOwner)) {
+            return null;
+        }
+
+        UserModel userModel = userDao.readyById(idOwner);
+
+        PetModel petModel = petDao.readyById(idPet);
+
+        if (petModel.getIdOwner() != idOwner) {
+            return null;
+        }
+
+
+        return petModel;
+    }
+
+    @Override
+    public List<PetModel> showALlPetsByOwnerId(int idOwner) {
+
+        if (isIdInvalid(idOwner)) {
+            return List.of();
+        }
+
+        UserModel userModel = userDao.readyById(idOwner);
+        if (userModel == null) {
+            return List.of();
+        }
+
+        List<PetModel> petsDoDono = new ArrayList<>();
+
+        for (PetModel pet : petDao.readAll()) {
+            if (pet.getIdOwner() == idOwner) {
+                petsDoDono.add(pet);
+            }
+        }
+
+
+        return petsDoDono;
     }
 }

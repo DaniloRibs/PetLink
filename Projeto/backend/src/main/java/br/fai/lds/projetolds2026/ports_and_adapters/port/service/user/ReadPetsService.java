@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface ReadPetsService {
 
-    PetModel findByIndex(final int idOwner, final int indexPet);
+    PetModel findPetByOwnerId(final int idOwner, final int idPet);
 
-    List<PetModel> showALl(final int idOwner);
+    List<PetModel> showALlPetsByOwnerId(final int idOwner);
 
 }

@@ -136,31 +136,5 @@ public class UserFakeDaoAdapter implements UserDao {
         return response;
     }
 
-    @Override
-    public PetModel findByIndex(int idOwner, int indexPet) {
-        UserModel user = readyById(idOwner);
-
-        if (user == null) {
-            return null;
-        }
-
-        if (indexPet < 0 || indexPet >= user.getPets().size()) {
-            return null;
-        }
-
-        return user.getPets().get(indexPet);
-    }
-
-    @Override
-    public List<PetModel> showALl(int idOwner) {
-        UserModel user = readyById(idOwner);
-
-        if (user == null) {
-            return List.of();
-        }
-
-        return user.getPets();
-    }
-
 
 }

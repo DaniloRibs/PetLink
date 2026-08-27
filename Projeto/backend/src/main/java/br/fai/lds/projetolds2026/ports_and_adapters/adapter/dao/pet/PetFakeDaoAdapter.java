@@ -107,33 +107,7 @@ public class PetFakeDaoAdapter implements PetDao {
         data.setRace(entity.getRace());
         data.setEspecie(entity.getEspecie());
         data.setAnoNasc(entity.getAnoNasc());
+        data.setIdOwner(entity.getIdOwner());
     }
 
-    @Override
-    public boolean setOwner(int id, int owner) {
-
-        PetModel pet = readyById(id);
-
-        if (pet == null) {
-            return false;
-        }
-
-        pet.setIdOwner(owner);
-
-        return true;
-    }
-
-    @Override
-    public boolean updateOwner(int id, int owner) {
-
-        PetModel pet = readyById(id);
-
-        if (pet == null) {
-            return false;
-        }
-
-        pet.setIdOwner(owner);
-
-        return true;
-    }
 }

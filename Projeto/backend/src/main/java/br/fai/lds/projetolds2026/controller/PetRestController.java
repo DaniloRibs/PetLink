@@ -72,17 +72,6 @@ public class PetRestController {
         return response ? ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
     }
 
-    // FORÇAR NOVO DONO
-    @PutMapping("/{id}/{owner}")
-    public ResponseEntity<Void> setOwner(
-            @PathVariable final int id,
-            @PathVariable final int owner) {
-
-        boolean response = petService.setOwner(id, owner);
-        return response ? ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
-    }
-
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable final int id) {
         PetModel petModel = petService.findById(id);
