@@ -88,6 +88,7 @@ import { PetCreate } from './views/pages/pet/pet-create/pet-create';
 
 import { NotFound } from './views/not-found/not-found';
 import { authenticationGuard } from './services/security/guard/athentication.guard';
+import { AnnouncementListComponent } from './views/pages/announcement/announcement-list.component';
 
 export const routes: Routes = [
 
@@ -118,6 +119,10 @@ export const routes: Routes = [
             {
                 path: 'pets/novo',
                 component: PetCreate,
+            },
+            {
+                path: 'pages/announcement',
+                component: AnnouncementListComponent
             },
         ],
     },

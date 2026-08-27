@@ -1,0 +1,41 @@
+<div class="announcement-grid">
+  @for (announcement of announcements; track $index) {
+    <mat-card class="announcement-card mat-elevation-z3">
+      
+      <!-- Cabeçalho do Anúncio -->
+      <mat-card-header>
+        <div mat-card-avatar class="vaccine-icon-header">
+          <mat-icon color="primary">vaccines</mat-icon>
+        </div>
+        <mat-card-title class="fw-bold">{{ announcement.title }}</mat-card-title>
+        
+        <!-- Subtítulo atualizado para idUser -->
+        <mat-card-subtitle>
+          Anunciado pelo Usuário #{{ announcement.idUser }}
+        </mat-card-subtitle>
+      </mat-card-header>
+
+      <!-- Conteúdo com Descrição e Data -->
+      <mat-card-content class="mt-3">
+        <p class="description-text">
+          {{ announcement.description }}
+        </p>
+
+        <div class="date-badge mt-3">
+          <mat-icon class="me-1">event</mat-icon>
+          <span><strong>Data do Evento:</strong> {{ announcement.dateAnnouncement | date:'dd/MM/yyyy' }}</span>
+        </div>
+      </mat-card-content>
+
+      <!-- Ações do Card -->
+      <mat-card-actions align="end">
+        <button mat-flat-button color="primary" (click)="verDetalhes(announcement)">
+          Saber Mais
+        </button>
+      </mat-card-actions>
+
+    </mat-card>
+  } @empty {
+    <p class="text-center w-100">Nenhum anúncio de vacinação disponível no momento.</p>
+  }
+</div>
