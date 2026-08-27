@@ -1,0 +1,27 @@
+<section class="menu-footer-card content-area">
+  <div class="content-form-card">
+    <p class="footer-title">ANÚNCIOS DE VACINA</p>
+    <h2>Fique de olho na saúde dos seus pets</h2>
+
+    @if (loading) {
+      <p>Carregando...</p>
+    } @else if (announcements.length === 0) {
+      <p>Nenhum aviso por enquanto — as vacinas dos seus pets estão em dia. 🎉</p>
+    } @else {
+      <div class="announcement-list">
+        @for (item of announcements; track item.petId + item.message) {
+          <article
+            class="announcement-item"
+            [class.is-overdue]="item.status === 'overdue'"
+            [class.is-missing]="item.status === 'missing'">
+            <span class="announcement-icon">
+              {{ item.status === 'overdue' ? '⚠️' : item.status === 'missing' ? '📋' : '🔔' }}
+            </span>
+            <p><strong>{{ item.petName }}</strong> {{ item.message }}</p>
+            <a class="menu-link" routerLink="/painel/pets/{{ item.petId }}">Ver pet</a>
+          </article>
+        }
+      </div>
+    }
+  </div>
+</section>

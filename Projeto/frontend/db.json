@@ -56,16 +56,6 @@
       "accountType": "empresa",
       "document": "12345",
       "id": "VRwCSm6KIZQ"
-    },
-    {
-      "fullname": "rodrigo ribeiro",
-      "email": "rod@rib",
-      "password": "12345",
-      "role": "USER",
-      "phone": "12345",
-      "accountType": "pessoa",
-      "document": "12345",
-      "id": "x3lK_7YsE94"
     }
   ],
   "product": [
@@ -87,13 +77,14 @@
   ],
   "pets": [
     {
-      "name": "bolao",
+      "name": "psiu",
       "species": "gato",
       "breed": "persa",
-      "birthDate": "2020-03-18",
-      "ownerEmail": "rod@rib",
-      "id": "HwdLI6XeJgI"
+      "birthDate": "2003-03-18",
+      "ownerEmail": "rod@rod",
+      "id": "sR8mB8ehmEY"
     }
   ],
+  "vaccines": [],
   "$schema": "./node_modules/json-server/schema.json"
 }

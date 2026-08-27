@@ -1,4 +1,7 @@
-.content-form-card .primary-button {
-  margin-top: 12px;
-  display: inline-flex;
+.dashboard-hero {
+  min-height: auto;
+}
+
+.dashboard-title {
+  max-width: 16ch;
 }

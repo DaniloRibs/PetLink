@@ -1,0 +1,66 @@
+<section class="menu-footer-card content-area">
+  <div class="content-form-card">
+    @if (loading) {
+      <p>Carregando...</p>
+    } @else if (!pet) {
+      <p>Pet não encontrado.</p>
+    } @else {
+      <a routerLink="/painel/pets" class="menu-link back-link">← Voltar para Meus Pets</a>
+
+      <p class="footer-title">FICHA DO PET</p>
+      <h2>{{ pet.name }}</h2>
+      <p>{{ pet.breed }} · Nascido em {{ pet.birthDate }}</p>
+
+      @if (pet.forAdoption) {
+        <span class="pet-badge">Em adoção</span>
+      }
+
+      <button class="primary-button adoption-toggle" (click)="toggleAdoption()">
+        {{ pet.forAdoption ? 'Remover da lista de adoção' : 'Colocar para adoção' }}
+      </button>
+
+      <hr>
+
+      <h3>Vacinas</h3>
+
+      @if (vaccines.length === 0) {
+        <p>Nenhuma vacina cadastrada ainda para este pet.</p>
+      } @else {
+        <ul class="vaccine-list">
+          @for (vaccine of vaccines; track vaccine.id) {
+            <li>
+              <strong>{{ vaccine.name }}</strong> — aplicada em {{ vaccine.applicationDate }}
+              @if (vaccine.nextDoseDate) {
+                <span> · próxima dose: {{ vaccine.nextDoseDate }}</span>
+              }
+            </li>
+          }
+        </ul>
+      }
+
+      <button class="secondary-button" (click)="toggleVaccineForm()">
+        {{ showVaccineForm ? 'Cancelar' : '+ Cadastrar vacina para ' + pet.name }}
+      </button>
+
+      @if (showVaccineForm) {
+        <div class="login-box vaccine-form-box">
+          <form [formGroup]="vaccineForm" (ngSubmit)="createVaccine()">
+            <input type="text" placeholder="Nome da vacina" formControlName="name">
+            <input type="date" placeholder="Data de aplicação" formControlName="applicationDate">
+            <input type="date" placeholder="Próxima dose (opcional)" formControlName="nextDoseDate">
+            <input type="text" placeholder="Observações (opcional)" formControlName="notes">
+
+            <input type="submit" value="Cadastrar Vacina" [disabled]="!validateVaccineFields()">
+
+            @if (vaccineCreateValidationFailed) {
+              <p class="text-danger">Confira os dados e tente novamente.</p>
+            }
+            @if (vaccineCreatedOk) {
+              <p class="text-success">Vacina cadastrada com sucesso!</p>
+            }
+          </form>
+        </div>
+      }
+    }
+  </div>
+</section>

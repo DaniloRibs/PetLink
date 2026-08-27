@@ -1,0 +1,59 @@
+<section class="menu-footer-card content-area">
+  <div class="content-form-card">
+    <p class="footer-title">ADOÇÕES</p>
+    <h2>Adote ou doe com carinho</h2>
+
+    <div class="adoption-tabs">
+      <button
+        class="adoption-tab"
+        [class.active]="activeTab === 'adotar'"
+        (click)="setTab('adotar')">
+        ❤️ Quero adotar
+      </button>
+      <button
+        class="adoption-tab"
+        [class.active]="activeTab === 'doar'"
+        (click)="setTab('doar')">
+        🏠 Doar um pet meu
+      </button>
+    </div>
+
+    @if (loading) {
+      <p>Carregando...</p>
+    } @else if (activeTab === 'adotar') {
+
+      @if (availableForAdoption.length === 0) {
+        <p>Ainda não há pets disponíveis para adoção. Volte mais tarde!</p>
+      } @else {
+        <div class="pet-card-grid">
+          @for (pet of availableForAdoption; track pet.id) {
+            <article class="pet-card">
+              <h3>{{ pet.name }}</h3>
+              <p>{{ pet.breed }}</p>
+              <p class="adoption-contact">Contato: {{ pet.ownerEmail }}</p>
+            </article>
+          }
+        </div>
+      }
+
+    } @else {
+
+      @if (myPets.length === 0) {
+        <p>Você ainda não tem pets cadastrados para colocar para doação.</p>
+      } @else {
+        <div class="pet-card-grid">
+          @for (pet of myPets; track pet.id) {
+            <article class="pet-card">
+              <h3>{{ pet.name }}</h3>
+              <p>{{ pet.breed }}</p>
+              <button class="secondary-button" (click)="toggleDonation(pet)">
+                {{ pet.forAdoption ? 'Remover da lista' : 'Colocar para doação' }}
+              </button>
+            </article>
+          }
+        </div>
+      }
+
+    }
+  </div>
+</section>

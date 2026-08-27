@@ -69,7 +69,8 @@ body { margin: 0; font-family: Arial, Helvetica, sans-serif; }
             color: #6b4b35;
             padding-left: 2px;
         }
-        .login-box form input[type="submit"]{
+        .login-box form input[type="submit"],
+        .login-box form input[type="button"]{
             background-color: #6F4E37;
             color: #fff;
             transition: 0.3s;
@@ -77,7 +78,8 @@ body { margin: 0; font-family: Arial, Helvetica, sans-serif; }
             border: none;
             height: 42px;
         }
-        .login-box form input[type="submit"]:hover{
+        .login-box form input[type="submit"]:hover,
+        .login-box form input[type="button"]:hover{
             background: #5C4033;
             transform:translateY(-2px);
             cursor: pointer;

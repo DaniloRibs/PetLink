@@ -85,6 +85,10 @@ import { SignUp } from './views/account/sign-up/sign-up';
 import { DashboardLayout } from './views/pages/dashboard/dashboard-layout/dashboard-layout';
 import { DashboardHome } from './views/pages/dashboard/dashboard-home/dashboard-home';
 import { PetCreate } from './views/pages/pet/pet-create/pet-create';
+import { PetList } from './views/pages/pet/pet-list/pet-list';
+import { PetDetail } from './views/pages/pet/pet-detail/pet-detail';
+import { AnnouncementList } from './views/pages/announcement/announcement-list/announcement-list';
+import { AdoptionHub } from './views/pages/adoption/adoption-hub/adoption-hub';
 
 import { NotFound } from './views/not-found/not-found';
 import { authenticationGuard } from './services/security/guard/athentication.guard';
@@ -116,8 +120,24 @@ export const routes: Routes = [
                 component: DashboardHome,
             },
             {
+                path: 'pets',
+                component: PetList,
+            },
+            {
                 path: 'pets/novo',
                 component: PetCreate,
+            },
+            {
+                path: 'pets/:id',
+                component: PetDetail,
+            },
+            {
+                path: 'anuncios',
+                component: AnnouncementList,
+            },
+            {
+                path: 'adocoes',
+                component: AdoptionHub,
             },
         ],
     },

@@ -19,7 +19,7 @@
 //   ]
 // };
 
-import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
 
 import { provideRouter } from '@angular/router';
 
@@ -36,6 +36,11 @@ import { provideToastr } from 'ngx-toastr';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
+    // Sem isso o Angular nao liga automaticamente a deteccao de mudancas ao
+    // zone.js: a tela so era atualizada no proximo clique/evento em vez de
+    // assim que os dados chegavam da API (ex.: "Meus Pets" ficando preso em
+    // "Carregando..." ate um segundo clique).
+    provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideClientHydration(withEventReplay()),
     provideHttpClient(withInterceptorsFromDi(), withFetch()),

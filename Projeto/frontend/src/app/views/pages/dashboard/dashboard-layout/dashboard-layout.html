@@ -34,17 +34,21 @@
         🏠 Dashboard
       </a>
 
-      <a href="#" class="sidebar-item">🐶 Meus Pets</a>
+      <a routerLink="/painel/pets" routerLinkActive="active-link" class="sidebar-item">
+        🐾 Meus Pets
+      </a>
 
       <a routerLink="/painel/pets/novo" routerLinkActive="active-link" class="sidebar-item">
         ➕ Cadastrar Pet
       </a>
 
-      <a href="#" class="sidebar-item">📅 Agendamentos</a>
-      <a href="#" class="sidebar-item">📢 Anúncios</a>
-      <a href="#" class="sidebar-item">❤️ Adoções</a>
-      <a href="#" class="sidebar-item">💬 Mensagens</a>
-      <a href="#" class="sidebar-item">⚙️ Configurações</a>
+      <a routerLink="/painel/anuncios" routerLinkActive="active-link" class="sidebar-item">
+        📢 Anúncios
+      </a>
+
+      <a routerLink="/painel/adocoes" routerLinkActive="active-link" class="sidebar-item">
+        ❤️ Adoções
+      </a>
 
       <a href="#" class="sidebar-item" (click)="logout()">🚪 Sair</a>
     </div>

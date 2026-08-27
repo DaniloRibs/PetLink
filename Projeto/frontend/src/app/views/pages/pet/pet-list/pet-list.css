@@ -1,0 +1,47 @@
+.pet-card-grid {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.pet-card {
+  cursor: pointer;
+  border-radius: 16px;
+  padding: 20px;
+  background: #f8ede5;
+  border: 1px solid rgba(111, 78, 55, 0.12);
+  text-align: center;
+  transition: 0.2s;
+}
+
+.pet-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(94, 63, 39, 0.12);
+}
+
+.pet-card-icon {
+  font-size: 36px;
+  margin-bottom: 8px;
+}
+
+.pet-card h3 {
+  margin: 0 0 4px;
+  color: #33211a;
+}
+
+.pet-card p {
+  margin: 0;
+  color: #6b5d55;
+  font-size: 13px;
+}
+
+.pet-badge {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: #6F4E37;
+  color: #fff;
+  font-size: 11px;
+}
