@@ -1,7 +1,7 @@
-package br.fai.lds.projetolds2026.ports_and_adapters.port.service.pet;
+package br.fai.lds.projetolds2026.ports_and_adapters.port.dao.pet;
 
-public interface SetOwnerService {
+public interface SetOwnerDao {
 
-    boolean updateOwner(final int id, int owner);
-    
+    boolean setOwner(final int id, int owner);
+
 }

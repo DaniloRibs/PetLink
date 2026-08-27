@@ -1,6 +1,6 @@
 package br.fai.lds.projetolds2026.domain.vaccine;
 
-public class Vaccine {
+public class VaccineModel {
 
     private int id;
     private String name;

@@ -1,9 +1,9 @@
 package br.fai.lds.projetolds2026.controller;
 
-import br.fai.lds.projetolds2026.domain.UserModel;
-import br.fai.lds.projetolds2026.dto.CreateUserDto;
-import br.fai.lds.projetolds2026.dto.UpdatePasswordDto;
-import br.fai.lds.projetolds2026.dto.UpdateUserNameDto;
+import br.fai.lds.projetolds2026.domain.user.UserModel;
+import br.fai.lds.projetolds2026.dto.user.CreateUserDto;
+import br.fai.lds.projetolds2026.dto.user.UpdatePasswordDto;
+import br.fai.lds.projetolds2026.dto.user.UpdateUserDto;
 import br.fai.lds.projetolds2026.ports_and_adapters.port.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -23,7 +22,7 @@ public class UserRestController {
 
     // Listar usuários
     @GetMapping
-    public ResponseEntity<List<UserModel>> getEntities(){
+    public ResponseEntity<List<UserModel>> getEntities() {
         List<UserModel> entities = userService.findALl();
         return ResponseEntity.ok(entities);
     }
@@ -45,9 +44,9 @@ public class UserRestController {
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserModel> update(@PathVariable final int id, @RequestBody final UpdateUserNameDto updateUserNameDto){
+    public ResponseEntity<UserModel> update(@PathVariable final int id, @RequestBody final UpdateUserDto updateUserDto) {
 
-        final UserModel userModel = updateUserNameDto.toUserModel();
+        final UserModel userModel = updateUserDto.toUserModel();
 
         boolean response = userService.update(id, userModel);
 
@@ -61,7 +60,7 @@ public class UserRestController {
         UserModel userModel = createUserDto.toUserModel();
 
         final int id = userService.create(userModel);
-        if (id == 0){
+        if (id == 0) {
             return ResponseEntity.badRequest().build();
         }
 
@@ -72,16 +71,16 @@ public class UserRestController {
 
 
     @GetMapping("/email/{email}")
-    public ResponseEntity<UserModel> getEntityByEmail(@PathVariable final String email){
+    public ResponseEntity<UserModel> getEntityByEmail(@PathVariable final String email) {
         final UserModel entity = userService.findByEmail(email);
-        if(entity == null) {
+        if (entity == null) {
             return ResponseEntity.notFound().build();
         }
-        return  ResponseEntity.ok(entity);
+        return ResponseEntity.ok(entity);
     }
 
     @PatchMapping("/update-password")
-    public ResponseEntity<Void> updatePassword(@RequestBody final UpdatePasswordDto updatePasswordDto){
+    public ResponseEntity<Void> updatePassword(@RequestBody final UpdatePasswordDto updatePasswordDto) {
         final boolean response = userService.updatePassword(updatePasswordDto.getId(), updatePasswordDto.getOldPassword(), updatePasswordDto.getNewPassword());
 
         return response ? ResponseEntity.ok().build() : ResponseEntity.badRequest().build();

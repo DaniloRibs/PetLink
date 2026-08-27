@@ -1,6 +1,4 @@
-package br.fai.lds.projetolds2026.domain;
-
-import lombok.Data;
+package br.fai.lds.projetolds2026.domain.pet;
 
 import java.sql.Timestamp;
 
@@ -8,9 +6,11 @@ public class PetModel {
 
     private int id;
     private String name;
+    private Especie especie;
     private String race;
     private Timestamp anoNasc;
-    private UserModel User;
+    private int idOwner;
+
 
     public int getId() {
         return id;
@@ -44,11 +44,19 @@ public class PetModel {
         this.anoNasc = anoNasc;
     }
 
-    public UserModel getUser() {
-        return User;
+    public int getIdOwner() {
+        return idOwner;
     }
 
-    public void setUser(UserModel user) {
-        User = user;
+    public void setIdOwner(int idOwner) {
+        this.idOwner = idOwner;
+    }
+
+    public Especie getEspecie() {
+        return especie;
+    }
+
+    public void setEspecie(Especie especie) {
+        this.especie = especie;
     }
 }

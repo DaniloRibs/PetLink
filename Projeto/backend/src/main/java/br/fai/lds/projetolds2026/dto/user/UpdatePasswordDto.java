@@ -1,4 +1,4 @@
-package br.fai.lds.projetolds2026.dto;
+package br.fai.lds.projetolds2026.dto.user;
 
 public class UpdatePasswordDto {
 
