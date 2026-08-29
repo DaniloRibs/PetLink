@@ -4,9 +4,18 @@ import java.sql.Timestamp;
 
 public class RecordVaccineModel {
     private int id;
-    private Timestamp aplicationDate;
-    private VaccineModel vaccine;
+    private Timestamp applicationDate;
+    private Timestamp expirationDate;
+    private int idVaccine;
 
+
+    public int getIdVaccine() {
+        return idVaccine;
+    }
+
+    public void setIdVaccine(int idVaccine) {
+        this.idVaccine = idVaccine;
+    }
 
     public int getId() {
         return id;
@@ -16,19 +25,19 @@ public class RecordVaccineModel {
         this.id = id;
     }
 
-    public Timestamp getAplicationDate() {
-        return aplicationDate;
+    public Timestamp getApplicationDate() {
+        return applicationDate;
     }
 
-    public void setAplicationDate(Timestamp aplicationDate) {
-        this.aplicationDate = aplicationDate;
+    public void setApplicationDate(Timestamp applicationDate) {
+        this.applicationDate = applicationDate;
     }
 
-    public VaccineModel getVaccine() {
-        return vaccine;
+    public Timestamp getExpirationDate() {
+        return expirationDate;
     }
 
-    public void setVaccine(VaccineModel vaccine) {
-        this.vaccine = vaccine;
+    public void setExpirationDate(Timestamp expirationDate) {
+        this.expirationDate = expirationDate;
     }
 }
