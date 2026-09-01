@@ -11,7 +11,7 @@ public class PetModel {
     private int id;
     private String name;
     private Especie especie;
-    private String race;
+    private String breed;
     private Timestamp anoNasc;
     private int idOwner;
     private List<RecordVaccineModel> vaccines = new ArrayList<>();
@@ -40,12 +40,12 @@ public class PetModel {
         this.name = name;
     }
 
-    public String getRace() {
-        return race;
+    public String getBreed() {
+        return breed;
     }
 
-    public void setRace(String race) {
-        this.race = race;
+    public void setBreed(String breed) {
+        this.breed = breed;
     }
 
     public Timestamp getAnoNasc() {

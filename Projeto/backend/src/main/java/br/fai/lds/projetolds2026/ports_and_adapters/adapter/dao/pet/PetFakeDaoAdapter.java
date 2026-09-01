@@ -22,7 +22,7 @@ public class PetFakeDaoAdapter implements PetDao {
         entity1.setName("Pandora");
         entity1.setEspecie(Especie.CACHORRO);
         entity1.setIdOwner(1);
-        entity1.setRace("Lulu");
+        entity1.setBreed("Lulu");
         entity1.setAnoNasc(Timestamp.valueOf("2019-08-01 00:00:00"));
 
         PetModel entity2 = new PetModel();
@@ -30,7 +30,7 @@ public class PetFakeDaoAdapter implements PetDao {
         entity2.setName("Lucy");
         entity2.setEspecie(Especie.CACHORRO);
         entity2.setIdOwner(2);
-        entity2.setRace("ViraLata");
+        entity2.setBreed("ViraLata");
         entity2.setAnoNasc(Timestamp.valueOf("2016-05-01 00:00:00"));
 
         entities.add(entity1);
@@ -104,7 +104,7 @@ public class PetFakeDaoAdapter implements PetDao {
         }
 
         data.setName(entity.getName());
-        data.setRace(entity.getRace());
+        data.setBreed(entity.getBreed());
         data.setEspecie(entity.getEspecie());
         data.setAnoNasc(entity.getAnoNasc());
         data.setIdOwner(entity.getIdOwner());

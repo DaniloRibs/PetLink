@@ -17,7 +17,7 @@ public class CreatePetDto {
     public PetModel toPetModel() {
         final PetModel petModel = new PetModel();
         petModel.setName(name);
-        petModel.setRace(breed);
+        petModel.setBreed(breed);
         petModel.setAnoNasc(anoNasc);
         petModel.setIdOwner(idOwner);
         petModel.setEspecie(especie);

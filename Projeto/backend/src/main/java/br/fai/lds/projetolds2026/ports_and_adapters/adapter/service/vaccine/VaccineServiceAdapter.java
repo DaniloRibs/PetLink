@@ -55,9 +55,10 @@ public class VaccineServiceAdapter implements VaccineService {
     }
 
     @Override
-    public List<VaccineService> findALl() {
+    public List<VaccineService> findAll() {
         return List.of();
     }
+
 
     @Override
     public boolean update(int id, VaccineService entity) {
