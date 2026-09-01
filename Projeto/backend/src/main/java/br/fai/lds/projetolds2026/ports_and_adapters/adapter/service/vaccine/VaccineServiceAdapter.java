@@ -29,7 +29,7 @@ public class VaccineServiceAdapter implements VaccineService {
         if (vaccineModel.getName().isEmpty()) {
             return 0;
         }
-        
+
 
         return 0;
     }
@@ -40,9 +40,14 @@ public class VaccineServiceAdapter implements VaccineService {
         if (isIdInvalid(id)) {
             return;
         }
-        VaccineDao.remove(id);
+        //VaccineDao.remove(id);
 
     }
+
+    boolean isIdInvalid(int id) {
+        return id < 0 ? true : false;
+    }
+
 
     @Override
     public VaccineService findById(int id) {
