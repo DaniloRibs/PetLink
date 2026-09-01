@@ -18,10 +18,10 @@ public class PetRestController {
     @Autowired
     private PetService petService;
 
-    // BUSCAR TODOS OS PETS
+//     BUSCAR TODOS OS PETS
     @GetMapping
     public ResponseEntity<List<PetModel>> getEntities() {
-        List<PetModel> entities = petService.findALl();
+        List<PetModel> entities = petService.findAll();
         return ResponseEntity.ok(entities);
     }
 
@@ -61,16 +61,7 @@ public class PetRestController {
         return response ? ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
     }
 
-    // ATUALIZAR DONO
-    @PutMapping("/{id}/{oldOwner}/{newOwner}")
-    public ResponseEntity<Void> updateOwner(
-            @PathVariable final int id,
-            @PathVariable final int oldOwner,
-            @PathVariable final int newOwner) {
 
-        boolean response = petService.updateOwner(id, oldOwner, newOwner);
-        return response ? ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
-    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable final int id) {

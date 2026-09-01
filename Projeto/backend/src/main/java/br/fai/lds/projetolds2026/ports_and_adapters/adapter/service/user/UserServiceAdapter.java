@@ -85,7 +85,7 @@ public class UserServiceAdapter implements UserService {
     }
 
     @Override
-    public List<UserModel> findALl() {
+    public List<UserModel> findAll() {
 
         List<UserModel> userModels = userDao.readAll();
 

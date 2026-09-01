@@ -77,7 +77,7 @@ public class PetServiceAdapter implements PetService {
     }
 
     @Override
-    public List<PetModel> findALl() {
+    public List<PetModel> findAll() {
         return petDao.readAll();
     }
 

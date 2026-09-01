@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 public class CreatePetDto {
 
     private String name;
-    private String race;
+    private String breed;
     private Timestamp anoNasc;
     private Especie especie;
     private int idOwner;
@@ -17,7 +17,7 @@ public class CreatePetDto {
     public PetModel toPetModel() {
         final PetModel petModel = new PetModel();
         petModel.setName(name);
-        petModel.setRace(race);
+        petModel.setRace(breed);
         petModel.setAnoNasc(anoNasc);
         petModel.setIdOwner(idOwner);
         petModel.setEspecie(especie);
@@ -33,12 +33,12 @@ public class CreatePetDto {
         this.name = name;
     }
 
-    public String getRace() {
-        return race;
+    public String getBreed() {
+        return breed;
     }
 
-    public void setRace(String race) {
-        this.race = race;
+    public void setBreed(String breed) {
+        this.breed = breed;
     }
 
     public Timestamp getAnoNasc() {
