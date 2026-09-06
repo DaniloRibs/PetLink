@@ -20,7 +20,7 @@ public class PetFakeDaoAdapter implements PetDao {
         PetModel entity1 = new PetModel();
         entity1.setId(getNextId());
         entity1.setName("Pandora");
-        entity1.setEspecie(Especie.CACHORRO);
+        entity1.setEspecie(Especie.DOG);
         entity1.setIdOwner(1);
         entity1.setBreed("Lulu");
         entity1.setAnoNasc(Timestamp.valueOf("2019-08-01 00:00:00"));
@@ -28,13 +28,33 @@ public class PetFakeDaoAdapter implements PetDao {
         PetModel entity2 = new PetModel();
         entity2.setId(getNextId());
         entity2.setName("Lucy");
-        entity2.setEspecie(Especie.CACHORRO);
+        entity2.setEspecie(Especie.CAT);
         entity2.setIdOwner(2);
         entity2.setBreed("ViraLata");
         entity2.setAnoNasc(Timestamp.valueOf("2016-05-01 00:00:00"));
 
+        PetModel entity3 = new PetModel();
+        entity3.setId(getNextId());
+        entity3.setName("Tiririca");
+        entity3.setEspecie(Especie.BIRD);
+        entity3.setIdOwner(4);
+        entity3.setBreed("Pardal");
+        entity3.setAnoNasc(Timestamp.valueOf("2026-01-09 00:00:00"));
+
+
+        PetModel entity4 = new PetModel();
+        entity4.setId(getNextId());
+        entity4.setName("Thor");
+        entity4.setEspecie(Especie.OTHER);
+        entity4.setIdOwner(2);
+        entity4.setBreed("Peixe beta");
+        entity4.setAnoNasc(Timestamp.valueOf("2024-01-09 00:00:00"));
+
         entities.add(entity1);
         entities.add(entity2);
+        entities.add(entity3);
+        entities.add(entity4);
+
     }
 
     private int getNextId() {

@@ -5,10 +5,12 @@ import br.fai.lds.projetolds2026.domain.user.UserModel;
 import br.fai.lds.projetolds2026.domain.vaccine.VaccineModel;
 import br.fai.lds.projetolds2026.ports_and_adapters.port.dao.pet.PetDao;
 import br.fai.lds.projetolds2026.ports_and_adapters.port.dao.user.UserDao;
+import br.fai.lds.projetolds2026.ports_and_adapters.port.dao.vaccine.VaccineDao;
 import br.fai.lds.projetolds2026.ports_and_adapters.port.service.pet.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,6 +20,8 @@ public class PetServiceAdapter implements PetService {
     private PetDao petDao;
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private VaccineDao vaccineDao;
 
     @Override
     public int create(PetModel petModel) {
@@ -30,7 +34,7 @@ public class PetServiceAdapter implements PetService {
             return 0;
         }
 
-        if (petModel.getIdOwner() <= 0) {
+        if (isIdInvalid(petModel.getId())) {
             return 0;
         }
 
@@ -74,12 +78,25 @@ public class PetServiceAdapter implements PetService {
         if (isIdInvalid(id)) {
             return null;
         }
-        return petDao.readyById(id);
+        PetModel petModel = petDao.readyById(id);
+
+        petModel.setVaccines(showAllVaccineByPetId(id));
+
+        return petModel;
     }
 
     @Override
     public List<PetModel> findAll() {
-        return petDao.readAll();
+        List<PetModel> pets = petDao.readAll();
+
+
+        for (PetModel petModel : pets) {
+            petModel.setVaccines(showAllVaccineByPetId(petModel.getId()));
+
+        }
+
+
+        return pets;
     }
 
     @Override
@@ -142,11 +159,40 @@ public class PetServiceAdapter implements PetService {
 
     @Override
     public VaccineModel findVaccineByPetId(int idPet, int idVaccine) {
-        return null;
+
+        if (isIdInvalid(idPet) || isIdInvalid(idVaccine)) {
+            return null;
+        }
+
+        VaccineModel vaccineModel = vaccineDao.readyById(idVaccine);
+
+        if (vaccineModel == null) {
+            return null;
+        }
+
+        if (vaccineModel.getIdPet() != idPet) {
+            return null;
+        }
+
+        return vaccineModel;
     }
 
     @Override
     public List<VaccineModel> showAllVaccineByPetId(int idPet) {
-        return List.of();
+
+        if (isIdInvalid(idPet)) {
+            return List.of();
+        }
+
+        List<VaccineModel> vaccinesPet = new ArrayList<>();
+
+        for (VaccineModel vaccine : vaccineDao.readAll()) {
+
+            if (vaccine.getIdPet() == idPet) {
+                vaccinesPet.add(vaccine);
+            }
+        }
+
+        return vaccinesPet;
     }
 }

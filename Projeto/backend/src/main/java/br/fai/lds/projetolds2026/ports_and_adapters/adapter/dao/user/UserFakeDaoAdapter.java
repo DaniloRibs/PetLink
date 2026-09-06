@@ -1,6 +1,6 @@
 package br.fai.lds.projetolds2026.ports_and_adapters.adapter.dao.user;
 
-import br.fai.lds.projetolds2026.domain.pet.PetModel;
+import br.fai.lds.projetolds2026.domain.user.AccountType;
 import br.fai.lds.projetolds2026.domain.user.UserModel;
 import br.fai.lds.projetolds2026.ports_and_adapters.port.dao.user.UserDao;
 import org.springframework.stereotype.Repository;
@@ -18,31 +18,37 @@ public class UserFakeDaoAdapter implements UserDao {
 
         UserModel entity1 = new UserModel();
         entity1.setId(getNextId());
-        entity1.setEmail("Dab@gmail.com");
+        entity1.setEmail("Dan@gmail.com");
+        entity1.setAccountType(AccountType.PERSON);
         entity1.setPhone("912412412");
-        entity1.setFullname("dab");
+        entity1.setFullname("dadan");
         entity1.setPassword("123456");
 
         UserModel entity2 = new UserModel();
         entity2.setId(getNextId());
-        entity2.setEmail("brol@gmail.com");
+        entity2.setEmail("rod@gmail.com");
+        entity2.setAccountType(AccountType.PERSON);
         entity2.setPhone("88567221");
-        entity2.setFullname("broli");
+        entity2.setFullname("rodhero");
         entity2.setPassword("654321");
 
         UserModel entity3 = new UserModel();
         entity3.setId(getNextId());
-        entity3.setEmail("krasg@gmail.com");
+        entity3.setEmail("bolin@gmail.com");
+        entity3.setAccountType(AccountType.PERSON);
         entity3.setPhone("2358511123");
-        entity3.setFullname("kras");
+        entity3.setDocument("12345678910");
+        entity3.setFullname("bolo");
         entity3.setPassword("456789");
 
         UserModel entity4 = new UserModel();
         entity4.setId(getNextId());
-        entity4.setEmail("killer@gmail.com");
+        entity4.setEmail("braianEnterprise@gmail.com");
+        entity4.setAccountType(AccountType.ENTERPRISE);
+        entity4.setDocument("123981491");
         entity4.setPhone("912761412");
-        entity4.setFullname("mate");
-        entity4.setPassword("987654");
+        entity4.setFullname("braian");
+        entity4.setPassword("12345678910123");
 
         entities.add(entity1);
         entities.add(entity2);

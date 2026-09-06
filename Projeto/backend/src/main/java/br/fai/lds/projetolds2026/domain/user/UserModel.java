@@ -12,7 +12,7 @@ public class UserModel {
     private String password;
     private String fullname;
     private String phone;
-    private String document = "";
+    private String document;
     private AccountType accountType;
     private List<PetModel> pets = new ArrayList<>();
 
