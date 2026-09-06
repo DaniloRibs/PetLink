@@ -79,7 +79,7 @@ public class UserServiceAdapter implements UserService {
 
 
         UserModel userModel = userDao.readyById(id);
-        userModel.setPets(showALlPetsByOwnerId(id));
+        userModel.setPets(showAllPetsByOwnerId(id));
 
         return userModel;
     }
@@ -91,7 +91,7 @@ public class UserServiceAdapter implements UserService {
 
 
         for (UserModel userModel : userModels) {
-            userModel.setPets(showALlPetsByOwnerId(userModel.getId()));
+            userModel.setPets(showAllPetsByOwnerId(userModel.getId()));
 
         }
 
@@ -168,7 +168,7 @@ public class UserServiceAdapter implements UserService {
     }
 
     @Override
-    public List<PetModel> showALlPetsByOwnerId(int idOwner) {
+    public List<PetModel> showAllPetsByOwnerId(int idOwner) {
 
         if (isIdInvalid(idOwner)) {
             return List.of();

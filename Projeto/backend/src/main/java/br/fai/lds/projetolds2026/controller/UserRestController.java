@@ -16,7 +16,6 @@ import java.net.URI;
 import java.util.List;
 
 
-
 @RestController
 @RequestMapping("/api/user")
 public class UserRestController {
@@ -26,7 +25,7 @@ public class UserRestController {
     @Autowired
     private PetService petService;
 
-//USERS
+    //USERS
     // LISTAR USUARIOS
     @GetMapping
     public ResponseEntity<List<UserModel>> getEntities() {
@@ -93,17 +92,18 @@ public class UserRestController {
         return response ? ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
     }
 
-//PETS
+    //PETS
     //     BUSCAR TODOS OS PETS DO USUARIO
     @GetMapping("/{userId}/pet")
     public ResponseEntity<List<PetModel>> getEntitiesByUserId(@PathVariable final int userId) {
-        List<PetModel> entities = userService.showALlPetsByOwnerId(userId);
+        List<PetModel> entities = userService.showAllPetsByOwnerId(userId);
         return ResponseEntity.ok(entities);
     }
+
     //     BUSCAR UM DOS PETS DO USUARIO
     @GetMapping("/{userId}/pet/{petId}")
     public ResponseEntity<PetModel> getEntitiesByUserIdAndPetId(@PathVariable final int userId, @PathVariable final int petId) {
-        PetModel petModel = userService.findPetByOwnerId(userId,petId);
+        PetModel petModel = userService.findPetByOwnerId(userId, petId);
         return ResponseEntity.ok(petModel);
     }
 

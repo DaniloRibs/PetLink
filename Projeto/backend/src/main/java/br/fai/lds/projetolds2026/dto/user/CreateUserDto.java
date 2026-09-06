@@ -1,5 +1,6 @@
 package br.fai.lds.projetolds2026.dto.user;
 
+import br.fai.lds.projetolds2026.domain.user.AccountType;
 import br.fai.lds.projetolds2026.domain.user.UserModel;
 
 
@@ -9,6 +10,8 @@ public class CreateUserDto {
     private String password;
     private String fullname;
     private String phone;
+    private String document;
+    private AccountType accountType;
 
     public UserModel toUserModel() {
         final UserModel userModel = new UserModel();
@@ -16,7 +19,26 @@ public class CreateUserDto {
         userModel.setPassword(password);
         userModel.setFullname(fullname);
         userModel.setPhone(phone);
+        userModel.setDocument(document);
+        userModel.setAccountType(accountType);
+
         return userModel;
+    }
+
+    public String getDocument() {
+        return document;
+    }
+
+    public void setDocument(String document) {
+        this.document = document;
+    }
+
+    public AccountType getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(AccountType accountType) {
+        this.accountType = accountType;
     }
 
     public String getEmail() {

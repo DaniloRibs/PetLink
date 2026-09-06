@@ -2,6 +2,7 @@ package br.fai.lds.projetolds2026.ports_and_adapters.adapter.service.pet;
 
 import br.fai.lds.projetolds2026.domain.pet.PetModel;
 import br.fai.lds.projetolds2026.domain.user.UserModel;
+import br.fai.lds.projetolds2026.domain.vaccine.VaccineModel;
 import br.fai.lds.projetolds2026.ports_and_adapters.port.dao.pet.PetDao;
 import br.fai.lds.projetolds2026.ports_and_adapters.port.dao.user.UserDao;
 import br.fai.lds.projetolds2026.ports_and_adapters.port.service.pet.PetService;
@@ -137,5 +138,15 @@ public class PetServiceAdapter implements PetService {
 
     boolean isIdInvalid(int id) {
         return id < 0 ? true : false;
+    }
+
+    @Override
+    public VaccineModel findVaccineByPetId(int idPet, int idVaccine) {
+        return null;
+    }
+
+    @Override
+    public List<VaccineModel> showAllVaccineByPetId(int idPet) {
+        return List.of();
     }
 }

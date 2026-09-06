@@ -1,6 +1,6 @@
 package br.fai.lds.projetolds2026.domain.pet;
 
-import br.fai.lds.projetolds2026.domain.vaccine.RecordVaccineModel;
+import br.fai.lds.projetolds2026.domain.vaccine.VaccineModel;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -14,13 +14,13 @@ public class PetModel {
     private String breed;
     private Timestamp anoNasc;
     private int idOwner;
-    private List<RecordVaccineModel> vaccines = new ArrayList<>();
+    private List<VaccineModel> vaccines = new ArrayList<>();
 
-    public List<RecordVaccineModel> getVaccines() {
+    public List<VaccineModel> getVaccines() {
         return vaccines;
     }
 
-    public void setVaccines(List<RecordVaccineModel> vaccines) {
+    public void setVaccines(List<VaccineModel> vaccines) {
         this.vaccines = vaccines;
     }
 

@@ -12,7 +12,25 @@ public class UserModel {
     private String password;
     private String fullname;
     private String phone;
+    private String document = "";
+    private AccountType accountType;
     private List<PetModel> pets = new ArrayList<>();
+
+    public void setDocument(String document) {
+        this.document = document;
+    }
+
+    public void setAccountType(AccountType accountType) {
+        this.accountType = accountType;
+    }
+
+    public String getDocument() {
+        return document;
+    }
+
+    public AccountType getAccountType() {
+        return accountType;
+    }
 
     public int getId() {
         return id;

@@ -1,12 +1,13 @@
-package br.fai.lds.projetolds2026.ports_and_adapters.adapter.service.vaccine;
+package br.fai.lds.projetolds2026.ports_and_adapters.adapter.dao.vaccine;
 
 import br.fai.lds.projetolds2026.domain.vaccine.VaccineModel;
-import br.fai.lds.projetolds2026.ports_and_adapters.port.service.vaccine.VaccineService;
+import br.fai.lds.projetolds2026.ports_and_adapters.port.dao.vaccine.VaccineDao;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public class VaccineServiceAdapter implements VaccineService {
-    
+@Repository
+public class VaccineFakeDaoAdapter implements VaccineDao {
     @Override
     public int create(VaccineModel entity) {
         return 0;

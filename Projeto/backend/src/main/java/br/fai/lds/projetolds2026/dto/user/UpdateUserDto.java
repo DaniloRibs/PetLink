@@ -8,15 +8,25 @@ public class UpdateUserDto {
     private String fullname;
     private String email;
     private String phone;
+    private String document;
 
 
     public UserModel toUserModel() {
-        final UserModel entity = new UserModel();
-        entity.setId(id);
-        entity.setFullname(fullname);
-        entity.setEmail(email);
-        entity.setPhone(phone);
-        return entity;
+        final UserModel userModel = new UserModel();
+        userModel.setId(id);
+        userModel.setFullname(fullname);
+        userModel.setEmail(email);
+        userModel.setPhone(phone);
+        userModel.setDocument(document);
+        return userModel;
+    }
+
+    public String getDocument() {
+        return document;
+    }
+
+    public void setDocument(String document) {
+        this.document = document;
     }
 
     public int getId() {

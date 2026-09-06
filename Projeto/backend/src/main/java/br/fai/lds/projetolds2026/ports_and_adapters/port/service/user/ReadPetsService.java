@@ -8,6 +8,6 @@ public interface ReadPetsService {
 
     PetModel findPetByOwnerId(final int idOwner, final int idPet);
 
-    List<PetModel> showALlPetsByOwnerId(final int idOwner);
+    List<PetModel> showAllPetsByOwnerId(final int idOwner);
 
 }
