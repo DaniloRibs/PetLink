@@ -1,13 +1,17 @@
 import { TestBed } from '@angular/core/testing';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
-import { UserRead } from './user-read';
+import { UserReadService } from './user-read';
 
-describe('UserRead', () => {
-  let service: UserRead;
+describe('UserReadService', () => {
+  let service: UserReadService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(UserRead);
+    TestBed.configureTestingModule({
+      providers: [provideHttpClient(), provideHttpClientTesting()],
+    });
+    service = TestBed.inject(UserReadService);
   });
 
   it('should be created', () => {

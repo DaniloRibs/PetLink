@@ -1,0 +1,36 @@
+<div class="notification-bell">
+  <button type="button" class="menu-button notification-trigger" (click)="togglePanel()">
+    🔔 Notificações
+    @if (!loading && notifications.length > 0) {
+      <span class="notification-count">{{ notifications.length }}</span>
+    }
+  </button>
+
+  @if (panelOpen) {
+    <div class="notification-panel">
+      <p class="footer-title">VACINAS</p>
+
+      @if (loading) {
+        <p class="notification-empty">Carregando...</p>
+      } @else if (notifications.length === 0) {
+        <p class="notification-empty">Nenhum aviso por enquanto — as vacinas dos seus pets estão em dia. 🎉</p>
+      } @else {
+        <div class="notification-list">
+          @for (item of notifications; track item.petId + item.message) {
+            <a
+              class="notification-item"
+              [class.is-overdue]="item.status === 'overdue'"
+              [class.is-missing]="item.status === 'missing'"
+              routerLink="/painel/pets/{{ item.petId }}"
+              (click)="closePanel()">
+              <span class="notification-icon">
+                {{ item.status === 'overdue' ? '⚠️' : item.status === 'missing' ? '📋' : '🔔' }}
+              </span>
+              <span><strong>{{ item.petName }}</strong> {{ item.message }}</span>
+            </a>
+          }
+        </div>
+      }
+    </div>
+  }
+</div>

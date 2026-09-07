@@ -14,7 +14,23 @@
 
     <div class="menu-actions">
       <a routerLink="pages/announcement" class="menu-button">🔔 Notificações</a>
-      <a href="#" class="menu-link">👤 {{ userEmail || 'Minha conta' }}</a>
+      
+      <div class="user-menu">
+        <button type="button" class="menu-link user-menu-trigger" (click)="toggleUserMenu()">
+          👤 {{ currentUser?.fullname || userEmail || 'Minha conta' }}
+        </button>
+
+        @if (userMenuOpen) {
+          <div class="user-menu-dropdown">
+            <a routerLink="/painel/conta/perfil" class="user-menu-item" (click)="closeUserMenu()">
+              ⚙️ Meu perfil
+            </a>
+            <button type="button" class="user-menu-item user-menu-item-danger" (click)="logout()">
+              🚪 Sair
+            </button>
+          </div>
+        }
+      </div>
     </div>
 
   </header>
@@ -34,19 +50,21 @@
         🏠 Dashboard
       </a>
 
-      <a href="#" class="sidebar-item">🐶 Meus Pets</a>
+      <a routerLink="/painel/pets" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" class="sidebar-item">
+        🐾 Meus Pets
+      </a>
 
       <a routerLink="/painel/pets/novo" routerLinkActive="active-link" class="sidebar-item">
         ➕ Cadastrar Pet
       </a>
 
-      <a href="#" class="sidebar-item">📅 Agendamentos</a>
-      <a href="#" class="sidebar-item">📢 Anúncios</a>
-      <a href="#" class="sidebar-item">❤️ Adoções</a>
-      <a href="#" class="sidebar-item">💬 Mensagens</a>
-      <a href="#" class="sidebar-item">⚙️ Configurações</a>
+      <a routerLink="/painel/anuncios" routerLinkActive="active-link" class="sidebar-item">
+        📢 Anúncios
+      </a>
 
-      <a href="#" class="sidebar-item" (click)="logout()">🚪 Sair</a>
+      <a routerLink="/painel/adocoes" routerLinkActive="active-link" class="sidebar-item">
+        ❤️ Adoções
+      </a>
     </div>
 
   </aside>

@@ -3,34 +3,27 @@ import { Injectable } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { UserReadService } from './user-read';
 import { User } from '../../models/domain/user';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserUpdateService {
 
-constructor(
-  private http: HttpClient,
-  private readService: UserReadService,
-){
+  constructor(
+    private http: HttpClient,
+    private readService: UserReadService,
+  ) { }
 
-}
-async update(id: string, fullname: string): Promise<any>{
-  console.log(`id do usuario que será atulizado ${id}`);
+  async update(id: string, fullname: string): Promise<any> {
+    let data: User = await this.readService.findById(id);
 
-  let data : User  = await this.readService.findById(id);
+    if (data == null) {
+      throw new Error('Dados não encontrados');
+    }
 
-  if( data == null){
-    throw new Error('Dados nâo encontrados');
+    data.fullname = fullname;
+
+    return firstValueFrom(this.http.put<any>(`${environment.api_endpoint}/user/${id}`, data));
   }
-
-  data.fullname = fullname
-
-
-  return firstValueFrom(this.http.put<any>(`http://localhost:3000/user/${id}`,data));
-
-
-}
-
-
 }

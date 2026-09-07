@@ -1,10 +1,14 @@
-import { User } from './user';
-
+export enum AnnouncementType {
+    VACCINE = 'vaccine',
+    ADOPTION = 'adoption',
+}
 
 export interface Announcement {
+    id?: string;
     title: string;
     description: string;
-    dateAnnouncement: string;
-    idUser: number;
-
+    date?: string;
+    creatorName: string;
+    creatorEmail: string;
+    type: AnnouncementType;
 }

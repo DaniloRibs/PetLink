@@ -1,0 +1,68 @@
+.vaccine-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 16px;
+  border-left: 8px solid #378add; /* Destaque azul para vacinação */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15) !important;
+  }
+
+}.adoption-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 16px;
+  border-left: 8px solid #19d291; /* Destaque azul para vacinação */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15) !important;
+  }
+}
+
+.vaccine-icon-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e3f2fd;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+.adoption-icon-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #d0fbeb;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+.description-text {
+  color: #444;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.date-badge {
+  display: flex;
+  align-items: center;
+  background-color: #f5f5f5;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  color: #333;
+
+  mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+  }
+}

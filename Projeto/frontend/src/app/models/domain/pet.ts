@@ -12,4 +12,6 @@ export interface Pet {
     breed: string;
     birthDate: string;
     ownerEmail: string;
+    forAdoption?: boolean;
+    adoptionNote?: string;
 }

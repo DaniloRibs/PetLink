@@ -1,12 +1,6 @@
-/* You can add global styles to this file, and also import other style files */
 html, body { height: 100%; }
 body { margin: 0; font-family: Arial, Helvetica, sans-serif; }
 
-/* ==================== PetLink design system ====================
-   Migrado de telas-html/style.css. Classes usadas como wrapper
-   (menu-page, auth-page) agora ficam numa <div> raiz de cada
-   componente, no lugar do <body>, mas os seletores continuam
-   funcionando pois dependem so da hierarquia do DOM. */
 .login-box{
             border-radius: 16px;
             background-color: white;
@@ -69,7 +63,8 @@ body { margin: 0; font-family: Arial, Helvetica, sans-serif; }
             color: #6b4b35;
             padding-left: 2px;
         }
-        .login-box form input[type="submit"]{
+        .login-box form input[type="submit"],
+        .login-box form input[type="button"]{
             background-color: #6F4E37;
             color: #fff;
             transition: 0.3s;
@@ -77,7 +72,8 @@ body { margin: 0; font-family: Arial, Helvetica, sans-serif; }
             border: none;
             height: 42px;
         }
-        .login-box form input[type="submit"]:hover{
+        .login-box form input[type="submit"]:hover,
+        .login-box form input[type="button"]:hover{
             background: #5C4033;
             transform:translateY(-2px);
             cursor: pointer;
@@ -634,6 +630,22 @@ body { margin: 0; font-family: Arial, Helvetica, sans-serif; }
 
 .dashboard-content .feature-grid{
     margin-top: 0;
+}
+
+/* Confirmação usada antes de colocar/remover um pet da lista de adoção,
+   pra evitar que um clique acidental mude o status sem querer. */
+.confirm-text {
+    font-size: 13px;
+    color: #6b5d55;
+    margin: 4px 0;
+    text-align: center;
+}
+
+.confirm-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 

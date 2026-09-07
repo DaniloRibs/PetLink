@@ -58,41 +58,104 @@
       "id": "VRwCSm6KIZQ"
     },
     {
-      "fullname": "rodrigo ribeiro",
+      "fullname": "tim",
+      "email": "tim@tim",
+      "password": "12345",
+      "role": "USER",
+      "phone": "123",
+      "accountType": "empresa",
+      "document": "123",
+      "id": "ltkYqZtacy8"
+    },
+    {
+      "fullname": "Rodrigo",
       "email": "rod@rib",
       "password": "12345",
       "role": "USER",
-      "phone": "12345",
+      "phone": "123",
       "accountType": "pessoa",
-      "document": "12345",
-      "id": "x3lK_7YsE94"
+      "document": "123",
+      "id": "wiV5L137llA"
+    },
+    {
+      "fullname": "dada",
+      "email": "da@da",
+      "password": "1234",
+      "role": "USER",
+      "phone": "12431415",
+      "accountType": "pessoa",
+      "document": "151315123",
+      "id": "13yQfsABVSg"
     }
   ],
-  "product": [
+
+  "pets": [
+
+
+  ],
+  "vaccines": [
+    {
+      "petId": "SNGanMIm-OA",
+      "name": "raiva",
+      "applicationDate": "2003-03-20",
+      "nextDoseDate": "2004-03-20",
+      "id": "XWzgfWWnNDw"
+    }
+  ],
+  "announcements": [
     {
       "id": "1",
-      "name": "produto 1",
-      "price": 11.11
+      "title": "Campanha de Vacinação Antirrábica 2026",
+      "description": "Traga seu cão ou gato para se vacinar gratuitamente contra a raiva. Não se esqueça da carteirinha!",
+      "date": "2026-09-15",
+      "creatorName": "Bruno",
+      "creatorEmail": "bruno.neves@vidaquesegue",
+      "type": "adoption"
     },
     {
-      "id": "2",
-      "name": "produto 2qwdqwdqwdqwd",
-      "price": 22.22
+      "id": "1",
+      "title": "Campanha de Vacinação Antirrábica 2026",
+      "description": "Traga seu cão ou gato para se vacinar gratuitamente contra a raiva. Não se esqueça da carteirinha!",
+      "date": "2026-09-15",
+      "creatorName": "Bruno",
+      "creatorEmail": "bruno.neves@vidaquesegue",
+      "type": "vaccine"
     },
     {
-      "id": "3",
-      "name": "produto 3",
-      "price": 33.33
-    }
-  ],
-  "pets": [
+      "id": "1",
+      "title": "Campanha de Vacinação Antirrábica 2026",
+      "description": "Traga seu cão ou gato para se vacinar gratuitamente contra a raiva. Não se esqueça da carteirinha!",
+      "date": "2026-09-15",
+      "creatorName": "Bruno",
+      "creatorEmail": "bruno.neves@vidaquesegue",
+      "type": "adoption"
+    },
     {
-      "name": "bolao",
-      "species": "gato",
-      "breed": "persa",
-      "birthDate": "2020-03-18",
-      "ownerEmail": "rod@rib",
-      "id": "HwdLI6XeJgI"
+      "id": "1",
+      "title": "Campanha de Vacinação Antirrábica 2026",
+      "description": "Traga seu cão ou gato para se vacinar gratuitamente contra a raiva. Não se esqueça da carteirinha!",
+      "date": "2026-09-15",
+      "creatorName": "Bruno",
+      "creatorEmail": "bruno.neves@vidaquesegue",
+      "type": "adoption"
+    },
+    {
+      "id": "1",
+      "title": "Campanha de Vacinação Antirrábica 2026",
+      "description": "Traga seu cão ou gato para se vacinar gratuitamente contra a raiva. Não se esqueça da carteirinha!",
+      "date": "2026-09-15",
+      "creatorName": "Bruno",
+      "creatorEmail": "bruno.neves@vidaquesegue",
+      "type": "vaccine"
+    },
+    {
+      "id": "1",
+      "title": "Campanha de Vacinação Antirrábica 2026",
+      "description": "Traga seu cão ou gato para se vacinar gratuitamente contra a raiva. Não se esqueça da carteirinha!",
+      "date": "2026-09-15",
+      "creatorName": "Bruno",
+      "creatorEmail": "bruno.neves@vidaquesegue",
+      "type": "vaccine"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

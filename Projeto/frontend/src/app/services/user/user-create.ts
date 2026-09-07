@@ -8,11 +8,9 @@ import { environment } from '../../../environments/environment';
 })
 export class UserCreateService {
 
-  constructor(private http: HttpClient){
+  constructor(private http: HttpClient) { }
 
+  create(user: User) {
+    return this.http.post(`${environment.api_endpoint}/user`, user);
   }
-  create(user: User){
-    return this.http.post(`${environment.api_endpoint}/user`,user);
-  }
-
 }
