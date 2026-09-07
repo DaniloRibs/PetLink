@@ -8,12 +8,10 @@
 
   @if (panelOpen) {
     <div class="notification-panel">
-      <p class="footer-title">VACINAS</p>
-
       @if (loading) {
         <p class="notification-empty">Carregando...</p>
       } @else if (notifications.length === 0) {
-        <p class="notification-empty">Nenhum aviso por enquanto — as vacinas dos seus pets estão em dia. 🎉</p>
+        <p class="notification-empty">Nenhum aviso por enquanto</p>
       } @else {
         <div class="notification-list">
           @for (item of notifications; track item.petId + item.message) {

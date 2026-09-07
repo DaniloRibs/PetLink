@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: space-between;
   border-radius: 16px;
-  border-left: 8px solid #378add; /* Destaque azul para vacinação */
+  border-left: 8px solid #19d291; 
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 
   &:hover {
@@ -16,7 +16,7 @@
   flex-direction: column;
   justify-content: space-between;
   border-radius: 16px;
-  border-left: 8px solid #19d291; /* Destaque azul para vacinação */
+  border-left: 8px solid #ff4d6d;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 
   &:hover {
@@ -29,7 +29,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #e3f2fd;
+  background-color: #d0fbeb;
   border-radius: 50%;
   width: 40px;
   height: 40px;
@@ -39,7 +39,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #d0fbeb;
+  background-color: #ffe1e6;
   border-radius: 50%;
   width: 40px;
   height: 40px;

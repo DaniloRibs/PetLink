@@ -1,20 +1,25 @@
 
   <div class="content-form-card">
     <p class="footer-title">ANÚNCIOS</p>
-    <h2>Campanhas de vacinação</h2>
-    <p class="hero-text">Fique de olho nas campanhas de vacinação divulgadas por empresas parceiras.</p>
+    <h2>Campanhas de Adoção e Vacinação</h2>
+    <p class="hero-text">Fique de olho nas campanhas de vacinação!</p>
 
     @if (isCompany) {
       <button class="secondary-button" (click)="toggleForm()">
-        {{ showForm ? 'Cancelar' : '+ Publicar campanha de vacinação' }}
+        {{ showForm ? 'Cancelar' : '+ Publicar Campanha' }}
       </button>
 
       @if (showForm) {
         <div class="login-box announcement-form-box">
           <form [formGroup]="form" (ngSubmit)="createCampaign()">
             <input type="text" placeholder="Título da campanha" formControlName="title">
-            <input type="text" placeholder="Descrição" formControlName="description">
+            <select formControlName="type">
+              <option value="vaccine">Vacinação</option>
+              <option value="adoption">Adoção</option>
+            </select>
+            <textarea placeholder="Descrição" formControlName="description" rows="5"></textarea>
             <input type="date" placeholder="Data (opcional)" formControlName="date">
+            <input type="text" placeholder="Local (opcional)" formControlName="location">
 
             <input type="submit" value="Publicar" [disabled]="!validateFields()">
 
@@ -32,7 +37,7 @@
     @if (loading) {
       <p>Carregando...</p>
     } @else if (announcements.length === 0) {
-      <p>Ainda não há campanhas de vacinação publicadas.</p>
+      <p>Ainda não há campanhas publicadas.</p>
     } @else {
       <div class="announcement-list">
         @for (announcement of announcements; track announcement.id) {

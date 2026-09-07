@@ -9,7 +9,7 @@ import { AnnouncementCreateService } from '../../../../services/announcement/ann
 import { AnnouncementDeleteService } from '../../../../services/announcement/announcement-delete';
 import { CurrentUserService } from '../../../../services/security/current-user';
 
-import { AnnouncementCardComponent } from '../announcement-card';
+import { AnnouncementCardComponent } from '../announcement-card/announcement-card';
 
 @Component({
   selector: 'app-announcement-list',
@@ -38,8 +38,10 @@ export class AnnouncementList implements OnInit {
   ) {
     this.form = this.formBuilder.group({
       title: ['', [Validators.required]],
+      type: [AnnouncementType.VACCINE, [Validators.required]],
       description: ['', [Validators.required]],
       date: [''],
+      location: [''],
     });
   }
 
@@ -85,15 +87,16 @@ export class AnnouncementList implements OnInit {
       title: this.form.controls['title'].value,
       description: this.form.controls['description'].value,
       date: this.form.controls['date'].value || undefined,
+      location: this.form.controls['location'].value || undefined,
       creatorEmail: user?.email ?? this.userEmail,
       creatorName: user?.fullname ?? 'Empresa parceira',
-      type: AnnouncementType.VACCINE
+      type: this.form.controls['type'].value
     };
 
     this.announcementCreateService.create(announcement).subscribe({
       next: (created) => {
         this.announcements = [created, ...this.announcements];
-        this.form.reset();
+        this.form.reset({ type: AnnouncementType.VACCINE });
         this.showForm = false;
         this.cdr.detectChanges();
       },

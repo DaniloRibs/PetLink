@@ -86,12 +86,45 @@
       "accountType": "pessoa",
       "document": "151315123",
       "id": "13yQfsABVSg"
+    },
+    {
+      "fullname": "Teobaldo Thompson",
+      "email": "teobaldo@gmail.com",
+      "password": "1234",
+      "role": "USER",
+      "phone": "992640938",
+      "accountType": "pessoa",
+      "document": "1213141516",
+      "id": "Cy3IUZ6-K2E"
+    },
+    {
+      "fullname": "Cooper Rita",
+      "email": "cooper@rita.com",
+      "password": "1234",
+      "role": "USER",
+      "phone": "12345678",
+      "accountType": "empresa",
+      "document": "1234567890",
+      "id": "4N4zALRRSV4"
     }
   ],
-
   "pets": [
-
-
+    {
+      "name": "pililiu",
+      "species": "cachorro",
+      "breed": "lhasa",
+      "birthDate": "2003-02-18",
+      "ownerEmail": "teobaldo@gmail.com",
+      "id": "pL7nSoyPvxE"
+    },
+    {
+      "name": "amendoim ",
+      "species": "outro",
+      "breed": "cavalo",
+      "birthDate": "2004-02-18",
+      "ownerEmail": "cooper@rita.com",
+      "id": "FVf2L_mJgwM"
+    }
   ],
   "vaccines": [
     {
@@ -100,62 +133,43 @@
       "applicationDate": "2003-03-20",
       "nextDoseDate": "2004-03-20",
       "id": "XWzgfWWnNDw"
+    },
+    {
+      "petId": "pL7nSoyPvxE",
+      "name": "raiva",
+      "applicationDate": "2026-08-07",
+      "nextDoseDate": "2026-09-07",
+      "notes": "lote 12",
+      "id": "i34XF_DSI0c"
+    },
+    {
+      "petId": "pL7nSoyPvxE",
+      "name": "raiva 2",
+      "applicationDate": "2025-03-09",
+      "nextDoseDate": "2026-09-06",
+      "id": "eSv2v4UbT7o"
     }
   ],
   "announcements": [
     {
-      "id": "1",
-      "title": "Campanha de Vacinação Antirrábica 2026",
-      "description": "Traga seu cão ou gato para se vacinar gratuitamente contra a raiva. Não se esqueça da carteirinha!",
-      "date": "2026-09-15",
-      "creatorName": "Bruno",
-      "creatorEmail": "bruno.neves@vidaquesegue",
-      "type": "adoption"
+      "title": "adocao solidaria ",
+      "description": "venha adotar ",
+      "date": "2026-03-18",
+      "location": "praca santa rita ",
+      "creatorEmail": "cooper@rita.com",
+      "creatorName": "Cooper Rita",
+      "type": "adoption",
+      "id": "I0ldtTYokvY"
     },
     {
-      "id": "1",
-      "title": "Campanha de Vacinação Antirrábica 2026",
-      "description": "Traga seu cão ou gato para se vacinar gratuitamente contra a raiva. Não se esqueça da carteirinha!",
-      "date": "2026-09-15",
-      "creatorName": "Bruno",
-      "creatorEmail": "bruno.neves@vidaquesegue",
-      "type": "vaccine"
-    },
-    {
-      "id": "1",
-      "title": "Campanha de Vacinação Antirrábica 2026",
-      "description": "Traga seu cão ou gato para se vacinar gratuitamente contra a raiva. Não se esqueça da carteirinha!",
-      "date": "2026-09-15",
-      "creatorName": "Bruno",
-      "creatorEmail": "bruno.neves@vidaquesegue",
-      "type": "adoption"
-    },
-    {
-      "id": "1",
-      "title": "Campanha de Vacinação Antirrábica 2026",
-      "description": "Traga seu cão ou gato para se vacinar gratuitamente contra a raiva. Não se esqueça da carteirinha!",
-      "date": "2026-09-15",
-      "creatorName": "Bruno",
-      "creatorEmail": "bruno.neves@vidaquesegue",
-      "type": "adoption"
-    },
-    {
-      "id": "1",
-      "title": "Campanha de Vacinação Antirrábica 2026",
-      "description": "Traga seu cão ou gato para se vacinar gratuitamente contra a raiva. Não se esqueça da carteirinha!",
-      "date": "2026-09-15",
-      "creatorName": "Bruno",
-      "creatorEmail": "bruno.neves@vidaquesegue",
-      "type": "vaccine"
-    },
-    {
-      "id": "1",
-      "title": "Campanha de Vacinação Antirrábica 2026",
-      "description": "Traga seu cão ou gato para se vacinar gratuitamente contra a raiva. Não se esqueça da carteirinha!",
-      "date": "2026-09-15",
-      "creatorName": "Bruno",
-      "creatorEmail": "bruno.neves@vidaquesegue",
-      "type": "vaccine"
+      "title": "vacinacao consciente ",
+      "description": "venha vacinar ",
+      "date": "2026-03-18",
+      "location": "praça",
+      "creatorEmail": "cooper@rita.com",
+      "creatorName": "Cooper Rita",
+      "type": "vaccine",
+      "id": "6KNwyi8XuEA"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
