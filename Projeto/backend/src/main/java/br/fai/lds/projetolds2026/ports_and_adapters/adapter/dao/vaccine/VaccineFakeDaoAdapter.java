@@ -1,6 +1,5 @@
 package br.fai.lds.projetolds2026.ports_and_adapters.adapter.dao.vaccine;
 
-import br.fai.lds.projetolds2026.domain.user.UserModel;
 import br.fai.lds.projetolds2026.domain.vaccine.VaccineModel;
 import br.fai.lds.projetolds2026.ports_and_adapters.port.dao.vaccine.VaccineDao;
 import org.springframework.stereotype.Repository;
@@ -21,7 +20,7 @@ public class VaccineFakeDaoAdapter implements VaccineDao {
         vaccineModel1.setId(getNextId());
         vaccineModel1.setDescription("previne a raiva dos bicho tudo");
         vaccineModel1.setIdPet(3);
-        vaccineModel1.setLote("921");
+        vaccineModel1.setLot("921");
         vaccineModel1.setApplicationDate(Timestamp.valueOf("2019-12-11 00:00:00"));
         vaccineModel1.setExpirationDate(Timestamp.valueOf("2025-12-01 00:00:00"));
 
@@ -31,7 +30,7 @@ public class VaccineFakeDaoAdapter implements VaccineDao {
         vaccineModel2.setId(getNextId());
         vaccineModel2.setDescription("previne a raiva dos bicho tudo");
         vaccineModel2.setIdPet(3);
-        vaccineModel2.setLote("1080");
+        vaccineModel2.setLot("1080");
         vaccineModel2.setApplicationDate(Timestamp.valueOf("2025-12-05 00:00:00"));
         vaccineModel2.setExpirationDate(Timestamp.valueOf("2031-11-29 00:00:00"));
 
@@ -94,7 +93,7 @@ public class VaccineFakeDaoAdapter implements VaccineDao {
     public void updateInformation(int id, VaccineModel vaccineModel) {
         for (VaccineModel data : entities) {
             if (data.getId() == id) {
-                data.setLote(vaccineModel.getLote());
+                data.setLot(vaccineModel.getLot());
                 data.setName(vaccineModel.getName());
                 data.setDescription(vaccineModel.getDescription());
                 data.setApplicationDate(vaccineModel.getApplicationDate());

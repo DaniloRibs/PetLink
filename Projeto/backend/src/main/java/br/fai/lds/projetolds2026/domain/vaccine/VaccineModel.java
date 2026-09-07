@@ -8,7 +8,7 @@ public class VaccineModel {
     private Timestamp expirationDate;
     private String name;
     private String description;
-    private String lote;
+    private String lot;
     private int idPet;
 
     public int getId() {
@@ -51,12 +51,12 @@ public class VaccineModel {
         this.description = description;
     }
 
-    public String getLote() {
-        return lote;
+    public String getLot() {
+        return lot;
     }
 
-    public void setLote(String lote) {
-        this.lote = lote;
+    public void setLot(String lot) {
+        this.lot = lot;
     }
 
     public int getIdPet() {

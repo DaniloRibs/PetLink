@@ -76,6 +76,7 @@ public class UserServiceAdapter implements UserService {
         dataToUpdate.setFullname(userModel.getFullname());
         dataToUpdate.setPhone(userModel.getPhone());
         dataToUpdate.setEmail(userModel.getEmail());
+        dataToUpdate.setDocument(userModel.getDocument());
 
         userDao.updateInformation(id, dataToUpdate);
         return true;

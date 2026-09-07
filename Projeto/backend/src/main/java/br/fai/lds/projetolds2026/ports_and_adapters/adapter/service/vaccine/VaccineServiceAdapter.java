@@ -1,15 +1,14 @@
 package br.fai.lds.projetolds2026.ports_and_adapters.adapter.service.vaccine;
 
-import br.fai.lds.projetolds2026.domain.user.UserModel;
 import br.fai.lds.projetolds2026.domain.vaccine.VaccineModel;
-import br.fai.lds.projetolds2026.ports_and_adapters.port.dao.pet.PetDao;
-import br.fai.lds.projetolds2026.ports_and_adapters.port.dao.user.UserDao;
 import br.fai.lds.projetolds2026.ports_and_adapters.port.dao.vaccine.VaccineDao;
 import br.fai.lds.projetolds2026.ports_and_adapters.port.service.vaccine.VaccineService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class VaccineServiceAdapter implements VaccineService {
 
     @Autowired
@@ -32,7 +31,7 @@ public class VaccineServiceAdapter implements VaccineService {
         if (vaccineModel.getApplicationDate() == null) {
             return 0;
         }
-        if (vaccineModel.getLote().isEmpty()) {
+        if (vaccineModel.getLot().isEmpty()) {
             return 0;
         }
         if (isIdInvalid(vaccineModel.getIdPet())) {
@@ -82,7 +81,7 @@ public class VaccineServiceAdapter implements VaccineService {
         if (dataToUpdate == null) {
             return false;
         }
-        dataToUpdate.setLote(vaccineModel.getLote());
+        dataToUpdate.setLot(vaccineModel.getLot());
         dataToUpdate.setName(vaccineModel.getName());
         dataToUpdate.setDescription(vaccineModel.getDescription());
         dataToUpdate.setApplicationDate(vaccineModel.getApplicationDate());
