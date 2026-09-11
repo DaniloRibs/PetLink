@@ -1,0 +1,37 @@
+PetLink
+
+- Atualizar o cronograma
+-Diagrama de classe e sequencia devem estar no apêndice c
+Diagrama de Classes: 
+ - não há multiplicidades na associação Operador -Endereço:  Associação devem informar a cardinalidade
+ - Associação Operador - Anuncio:  há redundância na UML pode representar por atributo ou por associação Ex. Operador 1 -------- * Anuncio
+- Classe pet está nomeada no plural:  usar Pet e está redundante como citado anterior
+- Associação Pet - Vacina:  um pet pode receber várias vacinas e uma vacina pode ser aplicada em vários pets: n:n
+- Classe RegistroVacina:  atributos vacina deveria ser uma associação
+- Classe Adoção: 
+pet: Pets
+antigoTutor: User
+novoTutor: User
+São referencias para outras classes representa melhor por associação
+- classe AnuncioAdocao:  pode ser uma especialização de Anuncio
+-  Falta a multiplicidade em todas as associações
+
+Diagrama de Pacotes Frontend:
+ - estreriótipo <<import>> ou <<acess>>, <<use>> não é muito usado pela UML
+- Elementos internos não representam pacotes 
+- Verificar as dependências
+
+Diagrama de Pacote Backend:
+ -  Dependência circular implícita:  fortemente aclopado
+ -  Direção da dependência:  a seta deve apontar para o elemento utilizado
+
+Diagrama de Sequencia: 
+ - Nomes das lifeLines ex: ":FrontendPetLink"
+- Falta retorno das mensagens 
+- mensagens incorretas no login
+- Banco de dados não confirma dados e não deve ser representado no diagrama de sequencia
+-  Cadastro de pet sem autenticação
+- Falta o fragmento ALT
+-  Mensagem de persistencia
+
+	
