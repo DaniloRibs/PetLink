@@ -22,6 +22,7 @@
     <div class="pet-card-grid">
       @for (pet of availableForAdoption; track pet.id) {
       <article class="pet-card">
+        <div class="pet-card-icon">{{ speciesIcon(pet.species) }}</div>
         <h3>{{ pet.name }}</h3>
         <p>{{ pet.breed }}</p>
         <p class="adoption-contact">Contato: {{ ownerContact(pet) }}</p>
@@ -38,6 +39,7 @@
     <div class="pet-card-grid">
       @for (pet of myPets; track pet.id) {
       <article class="pet-card">
+        <div class="pet-card-icon">{{ speciesIcon(pet.species) }}</div>
         <h3>{{ pet.name }}</h3>
         <p>{{ pet.breed }}</p>
 

@@ -3,27 +3,25 @@
   <!-- TOPO FIXO -->
   <header class="menu-header dashboard-header">
 
-    <a routerLink="/painel" class="brand">
-      <img src="assets/images/PetLink_Logo_Marrom.png" alt="PetLink" class="brand-mark">
-    </a>
-
     <div class="menu-actions">
       <app-notification-bell></app-notification-bell>
-      
+
       <div class="user-menu">
-        <button type="button" class="menu-link user-menu-trigger" (click)="toggleUserMenu()">
-          👤 {{ currentUser?.fullname || userEmail || 'Minha conta' }}
+        <button type="button" class="user-menu-trigger" (click)="toggleUserMenu()">
+          <span class="user-avatar">{{ userInitial }}</span>
+          <span class="user-menu-name">{{ currentUser?.fullname || userEmail || 'Minha conta' }}</span>
+          <span class="user-menu-chevron">▾</span>
         </button>
 
         @if (userMenuOpen) {
-          <div class="user-menu-dropdown">
-            <a routerLink="/painel/conta/perfil" class="user-menu-item" (click)="closeUserMenu()">
-              ⚙️ Meu perfil
-            </a>
-            <button type="button" class="user-menu-item user-menu-item-danger" (click)="logout()">
-              🚪 Sair
-            </button>
-          </div>
+        <div class="user-menu-dropdown">
+          <a routerLink="/painel/conta/perfil" class="user-menu-item" (click)="closeUserMenu()">
+            ⚙️ Meu perfil
+          </a>
+          <button type="button" class="user-menu-item user-menu-item-danger" (click)="logout()">
+            🚪 Sair
+          </button>
+        </div>
         }
       </div>
     </div>
@@ -33,27 +31,35 @@
   <!-- MENU LATERAL -->
   <aside class="dashboard-sidebar">
 
-    <div class="menu-footer-card">
-      <div>
-        <h1 class="footer-title">PetLink</h1>
+    <div class="sidebar-brand">
+      <img src="assets/images/PetLink_Logo_Marrom.png" alt="PetLink" class="sidebar-brand-mark">
+      <div class="sidebar-brand-text">
+        <h1 class="sidebar-brand-title">PetLink</h1>
+        <p class="sidebar-brand-subtitle">Imunizar, Cuidar e Conectar</p>
       </div>
     </div>
 
     <div class="sidebar-links">
-      <a routerLink="/painel" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" class="sidebar-item">
-        🏠 Painel
+      <a routerLink="/painel" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}"
+        class="sidebar-item">
+        <span class="sidebar-item-icon">🏠</span>
+        <span class="sidebar-item-label">Painel</span>
       </a>
 
-      <a routerLink="/painel/pets" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" class="sidebar-item">
-        🐾 Meus Pets
+      <a routerLink="/painel/pets" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}"
+        class="sidebar-item">
+        <span class="sidebar-item-icon">🐾</span>
+        <span class="sidebar-item-label">Meus Pets</span>
       </a>
 
       <a routerLink="/painel/anuncios" routerLinkActive="active-link" class="sidebar-item">
-        📢 Anúncios
+        <span class="sidebar-item-icon">📢</span>
+        <span class="sidebar-item-label">Anúncios</span>
       </a>
 
       <a routerLink="/painel/adocoes" routerLinkActive="active-link" class="sidebar-item">
-        ❤️ Adoções
+        <span class="sidebar-item-icon">❤️</span>
+        <span class="sidebar-item-label">Adoções</span>
       </a>
     </div>
 

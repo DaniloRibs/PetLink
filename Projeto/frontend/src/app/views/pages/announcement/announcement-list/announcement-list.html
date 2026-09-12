@@ -1,48 +1,49 @@
-
+<section class="menu-footer-card content-area">
   <div class="content-form-card">
-    <p class="footer-title">ANÚNCIOS</p>
+    <p class="footer-title">📢 ANÚNCIOS</p>
     <h2>Campanhas de vacinação</h2>
     <p class="hero-text">Fique de olho nas campanhas de vacinação divulgadas por empresas parceiras.</p>
 
     @if (isCompany) {
-      <button class="secondary-button" (click)="toggleForm()">
-        {{ showForm ? 'Cancelar' : '+ Publicar campanha de vacinação' }}
-      </button>
+    <button class="primary-button announcement-cta" [class.is-cancel]="showForm" (click)="toggleForm()">
+      {{ showForm ? 'Cancelar' : '+ Publicar campanha de vacinação' }}
+    </button>
 
-      @if (showForm) {
-        <div class="login-box announcement-form-box">
-          <form [formGroup]="form" (ngSubmit)="createCampaign()">
-            <input type="text" placeholder="Título da campanha" formControlName="title">
-            <select formControlName="type">
-              <option value="vaccine">Vacinação</option>
-              <option value="adoption">Adoção</option>
-            </select>
-            <textarea placeholder="Descrição" formControlName="description" rows="5"></textarea>
-            <input type="date" placeholder="Data (opcional)" formControlName="date">
-            <input type="text" placeholder="Local (opcional)" formControlName="location">
+    @if (showForm) {
+    <div class="login-box announcement-form-box">
+      <form [formGroup]="form" (ngSubmit)="createCampaign()">
+        <input type="text" placeholder="Título da campanha" formControlName="title">
+        <select formControlName="type">
+          <option value="vaccine">Vacinação</option>
+          <option value="adoption">Adoção</option>
+        </select>
+        <textarea placeholder="Descrição" formControlName="description" rows="5"></textarea>
+        <input type="date" placeholder="Data (opcional)" formControlName="date">
+        <input type="text" placeholder="Local (opcional)" formControlName="location">
 
-            <input type="submit" value="Publicar" [disabled]="!validateFields()">
+        <input type="submit" value="Publicar" [disabled]="!validateFields()">
 
-            @if (createValidationFailed) {
-              <p class="text-danger">Confira os dados e tente novamente.</p>
-            }
-          </form>
-        </div>
-      }
+        @if (createValidationFailed) {
+        <p class="text-danger">Confira os dados e tente novamente.</p>
+        }
+      </form>
+    </div>
+    }
     } @else if (!loading) {
-      <p class="announcement-readonly-hint">
-        Você está vendo os anúncios como usuário pessoa: aqui só é possível visualizar as campanhas.
-      </p>
+    <p class="announcement-readonly-hint">
+      <span>ℹ️</span> Você está vendo os anúncios como usuário pessoa: aqui só é possível visualizar as campanhas.
+    </p>
     }
     @if (loading) {
-      <p>Carregando...</p>
+    <p>Carregando...</p>
     } @else if (announcements.length === 0) {
-      <p>Ainda não há campanhas de vacinação publicadas.</p>
+    <p>Ainda não há campanhas de vacinação publicadas.</p>
     } @else {
-      <div class="announcement-list">
-        @for (announcement of announcements; track announcement.id) {
-          <announcement-card [announcement]="announcement" />
-        }
-      </div>
+    <div class="announcement-list">
+      @for (announcement of announcements; track announcement.id) {
+      <announcement-card [announcement]="announcement" />
+      }
+    </div>
     }
   </div>
+</section>

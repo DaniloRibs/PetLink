@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: space-between;
   border-radius: 16px;
-  border-left: 8px solid #19d291; 
+  border-left: 8px solid #19d291;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 
   &:hover {
@@ -11,7 +11,9 @@
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15) !important;
   }
 
-}.adoption-card {
+}
+
+.adoption-card {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -48,15 +50,17 @@
 .description-text {
   color: #444;
   font-size: 0.95rem;
-  line-height: 1.4;
+  line-height: 1.5;
+  margin: 4px 0 14px;
 }
 
 .date-badge {
   display: flex;
   align-items: center;
+  gap: 8px;
   background-color: #f5f5f5;
-  padding: 8px 12px;
-  border-radius: 6px;
+  padding: 10px 14px;
+  border-radius: 8px;
   font-size: 0.85rem;
   color: #333;
 
@@ -65,4 +69,12 @@
     width: 18px;
     height: 18px;
   }
+}
+
+mat-card-header {
+  margin-bottom: 8px;
+}
+
+mat-card-actions {
+  margin-top: 8px;
 }

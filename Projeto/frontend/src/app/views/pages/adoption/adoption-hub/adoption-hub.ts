@@ -77,6 +77,15 @@ export class AdoptionHub implements OnInit {
     return this.ownerEmails[pet.ownerId] ?? 'Contato indisponível';
   }
 
+  speciesIcon(species: string): string {
+    switch (species) {
+      case 'cachorro': return '🐶';
+      case 'gato': return '🐱';
+      case 'passaro': return '🐦';
+      default: return '🐾';
+    }
+  }
+
 
 
   setTab(tab: 'adotar' | 'doar'): void {

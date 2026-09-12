@@ -35,10 +35,38 @@
       "accountType": "empresa",
       "document": "12345",
       "id": "SiNeiqEWRss"
+    },
+    {
+      "fullname": "banco master",
+      "email": "banco@master",
+      "password": "1234",
+      "phone": "12345",
+      "accountType": "ENTERPRISE",
+      "document": "12345",
+      "id": "IfywTxvDK1Y"
     }
   ],
-  "pets": [],
-  "vaccines": [],
+  "pets": [
+    {
+      "name": "tobias",
+      "species": "DOG",
+      "breed": "pastor alemao",
+      "birthDate": "2003-03-18",
+      "ownerId": "IfywTxvDK1Y",
+      "id": "NwZf_ml6xso",
+      "forAdoption": false
+    }
+  ],
+  "vaccines": [
+    {
+      "petId": "NwZf_ml6xso",
+      "name": "raiva",
+      "applicationDate": "2025-04-20",
+      "nextDoseDate": "2026-04-20",
+      "notes": "lote 112",
+      "id": "Cl0PP9ywDTI"
+    }
+  ],
   "announcements": [],
   "$schema": "./node_modules/json-server/schema.json"
 }

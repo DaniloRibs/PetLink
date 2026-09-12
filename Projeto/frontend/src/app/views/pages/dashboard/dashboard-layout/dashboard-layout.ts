@@ -17,6 +17,11 @@ export class DashboardLayout implements OnInit {
   currentUser: User | null = null;
   userMenuOpen: boolean = false;
 
+  get userInitial(): string {
+    const name = this.currentUser?.fullname || this.userEmail || '?';
+    return name.trim().charAt(0).toUpperCase();
+  }
+
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService,

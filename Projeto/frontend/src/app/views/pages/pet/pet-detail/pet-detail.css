@@ -4,7 +4,7 @@
 
 .pet-badge {
   display: inline-block;
-  margin: 8px 0;
+  margin: 0 0 18px;
   padding: 3px 12px;
   border-radius: 999px;
   background: #6F4E37;
@@ -12,18 +12,33 @@
   font-size: 12px;
 }
 
+.pet-meta {
+  margin: 0 0 10px;
+  color: #6b5d55;
+}
+
 .adoption-toggle {
   display: block;
-  margin: 12px 0 20px;
+  margin: 4px 0 28px;
   border: none;
   cursor: pointer;
 }
 
+.section-divider {
+  border: none;
+  border-top: 1px solid rgba(111, 78, 55, 0.15);
+  margin: 0 0 24px;
+}
+
+.section-title {
+  margin: 0 0 16px;
+}
+
 .vaccine-card-grid {
-  margin: 12px 0 20px;
+  margin: 4px 0 24px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 12px;
+  gap: 16px;
 }
 
 .vaccine-mini-card {
@@ -31,7 +46,7 @@
   border: 1px solid #19d291;
   border-left: 6px solid #19d291;
   border-radius: 12px;
-  padding: 12px 14px;
+  padding: 16px 18px;
 }
 
 .vaccine-mini-card-header {
@@ -65,7 +80,7 @@
   width: auto;
   max-width: 380px;
   min-height: 0;
-  margin: 12px 0 0;
+  margin: 20px 0 0;
 }
 
 .text-danger {

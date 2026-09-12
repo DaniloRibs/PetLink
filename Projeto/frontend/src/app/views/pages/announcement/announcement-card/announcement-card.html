@@ -1,14 +1,15 @@
-<mat-card [class]="announcement.type === AnnouncementType.ADOPTION ? 'adoption-card mat-elevation-z3' : 'vaccine-card mat-elevation-z3'">
+<mat-card
+  [class]="announcement.type === AnnouncementType.ADOPTION ? 'adoption-card mat-elevation-z3' : 'vaccine-card mat-elevation-z3'">
   <mat-card-header>
     @if (announcement.type === AnnouncementType.ADOPTION) {
     <div mat-card-avatar class="adoption-icon-header">
       <mat-icon style="color: #ff4d6d;">pets</mat-icon>
     </div>
-   } @else {
+    } @else {
     <div mat-card-avatar class="vaccine-icon-header">
       <mat-icon style="color: #19d291;">vaccines</mat-icon>
     </div>
-  }
+    }
     <mat-card-title class="fw-bold">{{ announcement.title }}</mat-card-title>
     <mat-card-subtitle>
       Anunciado por {{ announcement.creatorName }}
@@ -24,7 +25,7 @@
       <span><strong>Data do Evento:</strong> {{ announcement.date | date:'dd/MM/yyyy' }}</span>
     </div>
     @if (announcement.location) {
-    <div class="date-badge mt-2">
+    <div class="date-badge mt-3">
       <mat-icon class="me-1">place</mat-icon>
       <span><strong>Local:</strong> {{ announcement.location }}</span>
     </div>
@@ -32,12 +33,10 @@
   </mat-card-content>
 
   <mat-card-actions align="end">
-    <button
-  mat-flat-button
-  [style.background-color]="announcement.type === AnnouncementType.ADOPTION ? '#ff4d6d' : '#19d291'"
-  [style.color]="'#fff'"
-  (click)="verDetalhes()">
-  Saber Mais
-</button>
+    <button mat-flat-button
+      [style.background-color]="announcement.type === AnnouncementType.ADOPTION ? '#ff4d6d' : '#19d291'"
+      [style.color]="'#fff'" (click)="verDetalhes()">
+      Saber Mais
+    </button>
   </mat-card-actions>
 </mat-card>
