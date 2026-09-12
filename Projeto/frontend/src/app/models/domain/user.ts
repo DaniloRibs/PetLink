@@ -1,8 +1,6 @@
-import { UserRole } from "./user-role";
-
 export enum AccountType {
-    PESSOA = 'pessoa',
-    EMPRESA = 'empresa',
+    PESSOA = 'PERSON',
+    EMPRESA = 'ENTERPRISE',
 }
 
 export interface User {
@@ -10,7 +8,6 @@ export interface User {
     fullname: string,
     email: string,
     password: string,
-    role: UserRole,
     phone?: string,
     accountType?: AccountType,
     document?: string,

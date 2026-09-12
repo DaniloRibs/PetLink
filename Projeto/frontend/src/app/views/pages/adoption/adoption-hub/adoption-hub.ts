@@ -3,7 +3,8 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Pet } from '../../../../models/domain/pet';
 import { PetReadService } from '../../../../services/pet/pet-read';
 import { PetUpdateService } from '../../../../services/pet/pet-update';
-import { AuthenticationService } from '../../../../services/security/authentication';
+import { UserReadService } from '../../../../services/user/user-read';
+import { CurrentUserService } from '../../../../services/security/current-user';
 
 @Component({
   selector: 'app-adoption-hub',
@@ -18,13 +19,15 @@ export class AdoptionHub implements OnInit {
   availableForAdoption: Pet[] = [];
   myPets: Pet[] = [];
   loading: boolean = true;
-  userEmail: string = '';
+  userId: number | null = null;
+  ownerEmails: Record<number, string> = {};
   pendingConfirmationId: number | null = null;
 
   constructor(
     private petReadService: PetReadService,
     private petUpdateService: PetUpdateService,
-    private authenticationService: AuthenticationService,
+    private userReadService: UserReadService,
+    private currentUserService: CurrentUserService,
     private cdr: ChangeDetectorRef,
   ) { }
 

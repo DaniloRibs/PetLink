@@ -28,157 +28,17 @@
   },
   "user": [
     {
-      "fullname": "rodrigo",
-      "email": "rod@rod",
-      "password": "123",
-      "role": "USER",
-      "phone": "123456789",
-      "accountType": "pessoa",
-      "document": "123456789",
-      "id": "skBKympI9w0"
-    },
-    {
-      "fullname": "oi",
-      "email": "oi@oi",
-      "password": "123",
-      "role": "USER",
-      "phone": "123456789",
-      "accountType": "empresa",
-      "document": "123456789",
-      "id": "x-KqorgLXME"
-    },
-    {
-      "fullname": "Misterios SA",
-      "email": "misterios@misterios",
-      "password": "12345",
-      "role": "USER",
+      "fullname": "Cooperrita",
+      "email": "cooper@rita.com",
+      "password": "1234",
       "phone": "12345",
       "accountType": "empresa",
       "document": "12345",
-      "id": "VRwCSm6KIZQ"
-    },
-    {
-      "fullname": "tim",
-      "email": "tim@tim",
-      "password": "12345",
-      "role": "USER",
-      "phone": "123",
-      "accountType": "empresa",
-      "document": "123",
-      "id": "ltkYqZtacy8"
-    },
-    {
-      "fullname": "Rodrigo",
-      "email": "rod@rib",
-      "password": "12345",
-      "role": "USER",
-      "phone": "123",
-      "accountType": "pessoa",
-      "document": "123",
-      "id": "wiV5L137llA"
-    },
-    {
-      "fullname": "dada",
-      "email": "da@da",
-      "password": "1234",
-      "role": "USER",
-      "phone": "12431415",
-      "accountType": "pessoa",
-      "document": "151315123",
-      "id": "13yQfsABVSg"
-    },
-    {
-      "fullname": "Teobaldo Thompson",
-      "email": "teobaldo@gmail.com",
-      "password": "1234",
-      "role": "USER",
-      "phone": "992640938",
-      "accountType": "pessoa",
-      "document": "1213141516",
-      "id": "Cy3IUZ6-K2E"
-    },
-    {
-      "fullname": "Cooper Rita",
-      "email": "cooper@rita.com",
-      "password": "1234",
-      "role": "USER",
-      "phone": "12345678",
-      "accountType": "empresa",
-      "document": "1234567890",
-      "id": "4N4zALRRSV4"
+      "id": "SiNeiqEWRss"
     }
   ],
-  "pets": [
-    {
-      "name": "pililiu",
-      "species": "cachorro",
-      "breed": "lhasa",
-      "birthDate": "2003-02-18",
-      "ownerEmail": "teobaldo@gmail.com",
-      "id": "pL7nSoyPvxE"
-    },
-    {
-      "name": "amendoim ",
-      "species": "outro",
-      "breed": "cavalo",
-      "birthDate": "2004-02-18",
-      "ownerEmail": "cooper@rita.com",
-      "id": "FVf2L_mJgwM"
-    }
-  ],
-  "vaccines": [
-    {
-      "petId": "SNGanMIm-OA",
-      "name": "raiva",
-      "applicationDate": "2003-03-20",
-      "nextDoseDate": "2004-03-20",
-      "id": "XWzgfWWnNDw"
-    },
-    {
-      "petId": "pL7nSoyPvxE",
-      "name": "raiva",
-      "applicationDate": "2026-08-07",
-      "nextDoseDate": "2026-09-07",
-      "notes": "lote 12",
-      "id": "i34XF_DSI0c"
-    },
-    {
-      "petId": "pL7nSoyPvxE",
-      "name": "raiva 2",
-      "applicationDate": "2025-03-09",
-      "nextDoseDate": "2026-09-06",
-      "id": "eSv2v4UbT7o"
-    },
-    {
-      "petId": "FVf2L_mJgwM",
-      "name": "raiva ",
-      "applicationDate": "2025-03-18",
-      "nextDoseDate": "2026-03-18",
-      "notes": "lote 112",
-      "id": "NF3Z1Gp2JU4"
-    }
-  ],
-  "announcements": [
-    {
-      "title": "adocao solidaria ",
-      "description": "venha adotar ",
-      "date": "2026-03-18",
-      "location": "praca santa rita ",
-      "creatorEmail": "cooper@rita.com",
-      "creatorName": "Cooper Rita",
-      "type": "adoption",
-      "id": "I0ldtTYokvY"
-    },
-    {
-      "title": "vacinacao consciente ",
-      "description": "venha vacinar ",
-      "date": "2026-03-18",
-      "location": "praça",
-      "creatorEmail": "cooper@rita.com",
-      "creatorName": "Cooper Rita",
-      "type": "vaccine",
-      "id": "6KNwyi8XuEA"
-    }
-  ],
+  "pets": [],
+  "vaccines": [],
+  "announcements": [],
   "$schema": "./node_modules/json-server/schema.json"
 }

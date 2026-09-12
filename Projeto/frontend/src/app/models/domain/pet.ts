@@ -1,8 +1,8 @@
 export enum PetSpecies {
-    CACHORRO = 'cachorro',
-    GATO = 'gato',
-    PASSARO = 'passaro',
-    OUTRO = 'outro',
+    CACHORRO = 'DOG',
+    GATO = 'CAT',
+    PASSARO = 'BIRD',
+    OUTRO = 'OTHER',
 }
 
 export interface Pet {
@@ -11,7 +11,6 @@ export interface Pet {
     species: PetSpecies;
     breed: string;
     birthDate: string;
-    ownerEmail: string;
+    ownerId: number;
     forAdoption?: boolean;
-    adoptionNote?: string;
 }

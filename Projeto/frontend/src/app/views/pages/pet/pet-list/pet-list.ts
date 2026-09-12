@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Pet, PetSpecies } from '../../../../models/domain/pet';
 import { PetReadService } from '../../../../services/pet/pet-read';
 import { PetCreateService } from '../../../../services/pet/pet-create';
-import { AuthenticationService } from '../../../../services/security/authentication';
+import { CurrentUserService } from '../../../../services/security/current-user';
 
 @Component({
   selector: 'app-pet-list',
@@ -29,7 +29,7 @@ export class PetList implements OnInit {
     private formBuilder: FormBuilder,
     private petReadService: PetReadService,
     private petCreateService: PetCreateService,
-    private authenticationService: AuthenticationService,
+    private currentUserService: CurrentUserService,
     private cdr: ChangeDetectorRef,
   ) {
     this.form = this.formBuilder.group({
@@ -42,8 +42,11 @@ export class PetList implements OnInit {
 
   async ngOnInit(): Promise<void> {
     try {
-      const email = this.authenticationService.getAuthenticatedUserEmail();
-      this.pets = await this.petReadService.findByOwnerEmail(email);
+      const currentUser = this.currentUserService.get() ?? await this.currentUserService.load();
+      if (!currentUser?.id) {
+        throw new Error('Usuário atual não encontrado');
+      }
+      this.pets = await this.petReadService.findByOwnerId(currentUser.id);
     } catch (error) {
       console.error('Erro ao carregar seus pets', error);
     } finally {
@@ -74,10 +77,16 @@ export class PetList implements OnInit {
     return this.form.valid;
   }
 
-  createPet(): void {
+  async createPet(): Promise<void> {
     this.createValidationFailed = false;
 
     if (!this.validateFields()) {
+      this.createValidationFailed = true;
+      return;
+    }
+
+    const currentUser = this.currentUserService.get() ?? await this.currentUserService.load();
+    if (!currentUser?.id) {
       this.createValidationFailed = true;
       return;
     }
@@ -87,7 +96,7 @@ export class PetList implements OnInit {
       species: this.form.controls['species'].value,
       breed: this.form.controls['breed'].value,
       birthDate: this.form.controls['birthDate'].value,
-      ownerEmail: this.authenticationService.getAuthenticatedUserEmail(),
+      ownerId: currentUser.id,
     };
 
     this.petCreateService.create(pet).subscribe({

@@ -15,9 +15,9 @@ export class PetReadService {
     return firstValueFrom(this.http.get<Pet[]>(`${environment.api_endpoint}/pets`));
   }
 
-  findByOwnerEmail(ownerEmail: string): Promise<Pet[]> {
+  findByOwnerId(ownerId: number): Promise<Pet[]> {
     return firstValueFrom(
-      this.http.get<Pet[]>(`${environment.api_endpoint}/pets?ownerEmail=${ownerEmail}`)
+      this.http.get<Pet[]>(`${environment.api_endpoint}/pets?ownerId=${ownerId}`)
     );
   }
 

@@ -3,7 +3,7 @@ import { RouterLink } from '@angular/router';
 
 import { PetReadService } from '../../../../services/pet/pet-read';
 import { VaccineReadService } from '../../../../services/vaccine/vaccine-read';
-import { AuthenticationService } from '../../../../services/security/authentication';
+import { CurrentUserService } from '../../../../services/security/current-user';
 
 interface VaccineNotification {
   petId: string;
@@ -27,7 +27,7 @@ export class NotificationBell implements OnInit {
   constructor(
     private petReadService: PetReadService,
     private vaccineReadService: VaccineReadService,
-    private authenticationService: AuthenticationService,
+    private currentUserService: CurrentUserService,
     private elementRef: ElementRef<HTMLElement>,
     private cdr: ChangeDetectorRef,
   ) { }
