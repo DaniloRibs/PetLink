@@ -13,7 +13,7 @@ import { AnnouncementCardComponent } from '../announcement-card/announcement-car
 
 @Component({
   selector: 'app-announcement-list',
-  imports: [ReactiveFormsModule, DatePipe, AnnouncementCardComponent],
+  imports: [ReactiveFormsModule, AnnouncementCardComponent],
   templateUrl: './announcement-list.html',
   styleUrl: './announcement-list.css',
 })

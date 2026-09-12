@@ -36,16 +36,23 @@
       @if (vaccines.length === 0) {
         <p>Nenhuma vacina cadastrada ainda para este pet.</p>
       } @else {
-        <ul class="vaccine-list">
+        <div class="vaccine-card-grid">
           @for (vaccine of vaccines; track vaccine.id) {
-            <li>
-              <strong>{{ vaccine.name }}</strong> — aplicada em {{ vaccine.applicationDate | date:'dd/MM/yyyy' }}
+            <div class="vaccine-mini-card">
+              <div class="vaccine-mini-card-header">
+                <span class="vaccine-mini-icon">💉</span>
+                <strong>{{ vaccine.name }}</strong>
+              </div>
+              <p class="vaccine-mini-line">Aplicada em {{ vaccine.applicationDate | date:'dd/MM/yyyy' }}</p>
               @if (vaccine.nextDoseDate) {
-                <span> · próxima dose: {{ vaccine.nextDoseDate | date:'dd/MM/yyyy' }}</span>
+                <p class="vaccine-mini-line">Próxima dose: {{ vaccine.nextDoseDate | date:'dd/MM/yyyy' }}</p>
               }
-            </li>
+              @if (vaccine.notes) {
+                <p class="vaccine-mini-notes">{{ vaccine.notes }}</p>
+              }
+            </div>
           }
-        </ul>
+        </div>
       }
 
       <button class="secondary-button" (click)="toggleVaccineForm()">

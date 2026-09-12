@@ -19,20 +19,46 @@
   cursor: pointer;
 }
 
-.vaccine-list {
-  list-style: none;
-  padding: 0;
+.vaccine-card-grid {
   margin: 12px 0 20px;
   display: grid;
-  gap: 8px;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
 }
 
-.vaccine-list li {
-  background: #f8ede5;
-  border-radius: 10px;
-  padding: 10px 14px;
-  font-size: 14px;
+.vaccine-mini-card {
+  background: #f2fdf9;
+  border: 1px solid #19d291;
+  border-left: 6px solid #19d291;
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+
+.vaccine-mini-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #0f8a5f;
+  margin-bottom: 6px;
+}
+
+.vaccine-mini-icon {
+  font-size: 16px;
+}
+
+.vaccine-mini-line {
+  margin: 2px 0;
+  font-size: 13px;
   color: #4f3426;
+}
+
+.vaccine-mini-notes {
+  margin: 8px 0 0;
+  padding-top: 8px;
+  border-top: 1px dashed rgba(25, 210, 145, 0.35);
+  font-size: 13px;
+  font-style: italic;
+  color: #3d6b5a;
 }
 
 .vaccine-form-box {

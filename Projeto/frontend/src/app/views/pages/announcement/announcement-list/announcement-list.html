@@ -1,12 +1,12 @@
 
   <div class="content-form-card">
     <p class="footer-title">ANÚNCIOS</p>
-    <h2>Campanhas de Adoção e Vacinação</h2>
-    <p class="hero-text">Fique de olho nas campanhas de vacinação!</p>
+    <h2>Campanhas de vacinação</h2>
+    <p class="hero-text">Fique de olho nas campanhas de vacinação divulgadas por empresas parceiras.</p>
 
     @if (isCompany) {
       <button class="secondary-button" (click)="toggleForm()">
-        {{ showForm ? 'Cancelar' : '+ Publicar Campanha' }}
+        {{ showForm ? 'Cancelar' : '+ Publicar campanha de vacinação' }}
       </button>
 
       @if (showForm) {
@@ -37,7 +37,7 @@
     @if (loading) {
       <p>Carregando...</p>
     } @else if (announcements.length === 0) {
-      <p>Ainda não há campanhas publicadas.</p>
+      <p>Ainda não há campanhas de vacinação publicadas.</p>
     } @else {
       <div class="announcement-list">
         @for (announcement of announcements; track announcement.id) {

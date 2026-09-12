@@ -45,3 +45,16 @@
   color: #fff;
   font-size: 11px;
 }
+
+.pet-form-box {
+  margin: 16px 0;
+  box-shadow: none;
+  border: 1px solid rgba(111, 78, 55, 0.12);
+}
+
+.text-danger {
+  color: #c0392b;
+  font-size: 13px;
+  text-align: center;
+  margin: 0;
+}
