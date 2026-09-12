@@ -10,10 +10,10 @@ public class PetModel {
 
     private int id;
     private String name;
-    private Species species;
+    private Specie specie;
     private String breed;
     private Date birthDate;
-    private int idOwner;
+    private int ownerId;
     private List<VaccineModel> vaccines = new ArrayList<>();
 
     public List<VaccineModel> getVaccines() {
@@ -56,19 +56,19 @@ public class PetModel {
         this.birthDate = birthDate;
     }
 
-    public int getIdOwner() {
-        return idOwner;
+    public int getOwnerId() {
+        return ownerId;
     }
 
-    public void setIdOwner(int idOwner) {
-        this.idOwner = idOwner;
+    public void setOwnerId(int ownerId) {
+        this.ownerId = ownerId;
     }
 
-    public Species getSpecie() {
-        return species;
+    public Specie getSpecie() {
+        return specie;
     }
 
-    public void setSpecie(Species species) {
-        this.species = species;
+    public void setSpecie(Specie specie) {
+        this.specie = specie;
     }
 }

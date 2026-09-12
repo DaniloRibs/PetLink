@@ -172,7 +172,7 @@ public class UserServiceAdapter implements UserService {
 
         PetModel petModel = petService.findById(idPet);
 
-        if (petModel.getIdOwner() != idOwner) {
+        if (petModel.getOwnerId() != idOwner) {
             return null;
         }
 
@@ -195,7 +195,7 @@ public class UserServiceAdapter implements UserService {
         List<PetModel> petsDoDono = new ArrayList<>();
 
         for (PetModel pet : petService.findAll()) {
-            if (pet.getIdOwner() == idOwner) {
+            if (pet.getOwnerId() == idOwner) {
                 petsDoDono.add(pet);
             }
         }

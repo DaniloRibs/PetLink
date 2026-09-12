@@ -35,7 +35,7 @@ public class VaccinePostgresDaoAdapter implements VaccineDao {
             preparedStatement.setString(3, entity.getName());
             preparedStatement.setString(4, entity.getDescription());
             preparedStatement.setString(5, entity.getBatch());
-            preparedStatement.setInt(6, entity.getIdPet());
+            preparedStatement.setInt(6, entity.getPetId());
 
             preparedStatement.execute();
 
@@ -99,7 +99,7 @@ public class VaccinePostgresDaoAdapter implements VaccineDao {
                 vaccineModel.setBatch(batch);
                 vaccineModel.setApplicationDate(applicationDate);
                 vaccineModel.setExpirationDate(expirationDate);
-                vaccineModel.setIdPet(petId);
+                vaccineModel.setPetId(petId);
 
                 preparedStatement.close();
                 resultSet.close();
@@ -138,7 +138,7 @@ public class VaccinePostgresDaoAdapter implements VaccineDao {
                 vaccineModel.setBatch(batch);
                 vaccineModel.setApplicationDate(applicationDate);
                 vaccineModel.setExpirationDate(expirationDate);
-                vaccineModel.setIdPet(petId);
+                vaccineModel.setPetId(petId);
 
                 entities.add(vaccineModel);
             }

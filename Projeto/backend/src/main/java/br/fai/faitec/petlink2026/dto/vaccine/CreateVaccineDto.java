@@ -18,7 +18,7 @@ public class CreateVaccineDto {
         vaccineModel.setName(name);
         vaccineModel.setBatch(lote);
         vaccineModel.setDescription(description);
-        vaccineModel.setIdPet(idPet);
+        vaccineModel.setPetId(idPet);
         vaccineModel.setExpirationDate(expirationDate);
         vaccineModel.setApplicationDate(applicationDate);
 

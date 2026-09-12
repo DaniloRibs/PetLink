@@ -1,6 +1,6 @@
 package br.fai.faitec.petlink2026.ports_and_adapters.adapter.dao.pet;
 
-import br.fai.faitec.petlink2026.domain.pet.Species;
+import br.fai.faitec.petlink2026.domain.pet.Specie;
 import br.fai.faitec.petlink2026.domain.pet.PetModel;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.pet.PetDao;
 
@@ -9,7 +9,6 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +35,7 @@ public class PetPostgresDaoAdapter implements PetDao {
             preparedStatement.setString(2, entity.getSpecie().name());
             preparedStatement.setString(3, entity.getBreed());
             preparedStatement.setDate(4, new Date(entity.getBirthDate().getTime()));
-            preparedStatement.setInt(5, entity.getIdOwner());
+            preparedStatement.setInt(5, entity.getOwnerId());
 
             preparedStatement.execute();
 
@@ -92,15 +91,15 @@ public class PetPostgresDaoAdapter implements PetDao {
                 final int userId = resultSet.getInt("user_id");
 
                 final String auxSpecies = resultSet.getString("specie");
-                final Species species = Species.valueOf(auxSpecies);
+                final Specie specie = Specie.valueOf(auxSpecies);
 
                 final PetModel petModel = new PetModel();
                 petModel.setId(entityId);
                 petModel.setName(name);
-                petModel.setSpecie(species);
+                petModel.setSpecie(specie);
                 petModel.setBreed(breed);
                 petModel.setBirthDate(birthDate);
-                petModel.setIdOwner(userId);
+                petModel.setOwnerId(userId);
 
                 preparedStatement.close();
                 resultSet.close();
@@ -131,15 +130,15 @@ public class PetPostgresDaoAdapter implements PetDao {
                 final int userId = resultSet.getInt("user_id");
 
                 final String auxSpecies = resultSet.getString("specie");
-                final Species species = Species.valueOf(auxSpecies);
+                final Specie specie = Specie.valueOf(auxSpecies);
 
                 final PetModel petModel = new PetModel();
                 petModel.setId(entityId);
                 petModel.setName(name);
-                petModel.setSpecie(species);
+                petModel.setSpecie(specie);
                 petModel.setBreed(breed);
                 petModel.setBirthDate(birthDate);
-                petModel.setIdOwner(userId);
+                petModel.setOwnerId(userId);
 
                 entities.add(petModel);
             }
@@ -170,7 +169,7 @@ public class PetPostgresDaoAdapter implements PetDao {
             preparedStatement.setString(2, entity.getSpecie().name());
             preparedStatement.setString(3, entity.getBreed());
             preparedStatement.setDate(4, entity.getBirthDate());
-            preparedStatement.setInt(5, entity.getIdOwner());
+            preparedStatement.setInt(5, entity.getOwnerId());
             preparedStatement.setInt(6, id);
 
             preparedStatement.executeUpdate();

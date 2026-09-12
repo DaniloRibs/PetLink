@@ -34,7 +34,7 @@ public class VaccineServiceAdapter implements VaccineService {
         if (vaccineModel.getBatch().isEmpty()) {
             return 0;
         }
-        if (isIdInvalid(vaccineModel.getIdPet())) {
+        if (isIdInvalid(vaccineModel.getPetId())) {
             return 0;
         }
         if (isIdInvalid(vaccineModel.getId())) {

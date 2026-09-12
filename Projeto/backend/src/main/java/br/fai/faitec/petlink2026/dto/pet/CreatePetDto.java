@@ -1,9 +1,8 @@
 package br.fai.faitec.petlink2026.dto.pet;
 
-import br.fai.faitec.petlink2026.domain.pet.Species;
+import br.fai.faitec.petlink2026.domain.pet.Specie;
 import br.fai.faitec.petlink2026.domain.pet.PetModel;
 
-import java.sql.Timestamp;
 import java.sql.Date;
 
 public class CreatePetDto {
@@ -11,8 +10,8 @@ public class CreatePetDto {
     private String name;
     private String breed;
     private Date birthDate;
-    private Species species;
-    private int idOwner;
+    private Specie specie;
+    private int ownerId;
 
 
     public PetModel toPetModel() {
@@ -20,8 +19,8 @@ public class CreatePetDto {
         petModel.setName(name);
         petModel.setBreed(breed);
         petModel.setBirthDate(birthDate);
-        petModel.setIdOwner(idOwner);
-        petModel.setSpecie(species);
+        petModel.setOwnerId(ownerId);
+        petModel.setSpecie(specie);
 
         return petModel;
     }
@@ -50,19 +49,19 @@ public class CreatePetDto {
         this.birthDate = birthDate;
     }
 
-    public Species getEspecie() {
-        return species;
+    public Specie getEspecie() {
+        return specie;
     }
 
-    public void setEspecie(Species species) {
-        this.species = species;
+    public void setEspecie(Specie specie) {
+        this.specie = specie;
     }
 
-    public int getIdOwner() {
-        return idOwner;
+    public int getOwnerId() {
+        return ownerId;
     }
 
-    public void setIdOwner(int idOwner) {
-        this.idOwner = idOwner;
+    public void setOwnerId(int ownerId) {
+        this.ownerId = ownerId;
     }
 }

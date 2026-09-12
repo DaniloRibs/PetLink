@@ -1,7 +1,6 @@
 package br.fai.faitec.petlink2026.domain.vaccine;
 
 import java.sql.Date;
-import java.sql.Timestamp;
 
 public class VaccineModel {
     private int id;
@@ -10,7 +9,7 @@ public class VaccineModel {
     private String name;
     private String description;
     private String batch;
-    private int idPet;
+    private int petId;
 
     public int getId() {
         return id;
@@ -60,11 +59,11 @@ public class VaccineModel {
         this.batch = batch;
     }
 
-    public int getIdPet() {
-        return idPet;
+    public int getPetId() {
+        return petId;
     }
 
-    public void setIdPet(int idPet) {
-        this.idPet = idPet;
+    public void setPetId(int petId) {
+        this.petId = petId;
     }
 }

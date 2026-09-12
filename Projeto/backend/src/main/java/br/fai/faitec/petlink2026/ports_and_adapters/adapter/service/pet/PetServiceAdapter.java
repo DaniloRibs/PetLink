@@ -38,7 +38,7 @@ public class PetServiceAdapter implements PetService {
             return 0;
         }
 
-        UserModel owner = userDao.readyById(petModel.getIdOwner());
+        UserModel owner = userDao.readyById(petModel.getOwnerId());
 
         if (owner == null) {
             return 0;
@@ -63,7 +63,7 @@ public class PetServiceAdapter implements PetService {
             return;
         }
 
-        UserModel owner = userDao.readyById(pet.getIdOwner());
+        UserModel owner = userDao.readyById(pet.getOwnerId());
 
         if (owner != null) {
             owner.getPets().remove(pet);
@@ -133,7 +133,7 @@ public class PetServiceAdapter implements PetService {
 
         PetModel pet = petDao.readyById(id);
 
-        if (pet == null || pet.getIdOwner() != oldOwner) {
+        if (pet == null || pet.getOwnerId() != oldOwner) {
             return false;
         }
 
@@ -146,7 +146,7 @@ public class PetServiceAdapter implements PetService {
 
         oldOwnerUser.getPets().remove(pet);
 
-        pet.setIdOwner(newOwner);
+        pet.setOwnerId(newOwner);
         petDao.updateInformation(id, pet);
 
         return true;
@@ -170,7 +170,7 @@ public class PetServiceAdapter implements PetService {
             return null;
         }
 
-        if (vaccineModel.getIdPet() != idPet) {
+        if (vaccineModel.getPetId() != idPet) {
             return null;
         }
 
@@ -188,7 +188,7 @@ public class PetServiceAdapter implements PetService {
 
         for (VaccineModel vaccine : vaccineDao.readAll()) {
 
-            if (vaccine.getIdPet() == idPet) {
+            if (vaccine.getPetId() == idPet) {
                 vaccinesPet.add(vaccine);
             }
         }

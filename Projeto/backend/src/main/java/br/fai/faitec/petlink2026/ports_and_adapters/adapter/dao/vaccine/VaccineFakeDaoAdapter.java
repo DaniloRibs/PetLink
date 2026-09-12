@@ -2,7 +2,6 @@ package br.fai.faitec.petlink2026.ports_and_adapters.adapter.dao.vaccine;
 
 import br.fai.faitec.petlink2026.domain.vaccine.VaccineModel;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.vaccine.VaccineDao;
-import org.springframework.stereotype.Repository;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -18,7 +17,7 @@ public class VaccineFakeDaoAdapter implements VaccineDao {
         vaccineModel1.setName("raiva");
         vaccineModel1.setId(getNextId());
         vaccineModel1.setDescription("previne a raiva dos bicho tudo");
-        vaccineModel1.setIdPet(3);
+        vaccineModel1.setPetId(3);
         vaccineModel1.setBatch("921");
         vaccineModel1.setApplicationDate(new Date(2020, 10, 12));
         vaccineModel1.setExpirationDate(new Date(2030, 10, 12));
@@ -28,7 +27,7 @@ public class VaccineFakeDaoAdapter implements VaccineDao {
         vaccineModel2.setName("raiva");
         vaccineModel2.setId(getNextId());
         vaccineModel2.setDescription("previne a raiva dos bicho tudo");
-        vaccineModel2.setIdPet(3);
+        vaccineModel2.setPetId(3);
         vaccineModel2.setBatch("1080");
         vaccineModel2.setApplicationDate(new Date(2010, 10, 12));
         vaccineModel2.setExpirationDate(new Date(2022, 10, 12));
