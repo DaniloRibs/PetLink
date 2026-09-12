@@ -2,12 +2,12 @@ package br.fai.faitec.petlink2026.dto.vaccine;
 
 import br.fai.faitec.petlink2026.domain.vaccine.VaccineModel;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 public class CreateVaccineDto {
 
-    private Timestamp applicationDate;
-    private Timestamp expirationDate;
+    private Date applicationDate;
+    private Date expirationDate;
     private String name;
     private String description;
     private String lote;
@@ -57,19 +57,19 @@ public class CreateVaccineDto {
         this.name = name;
     }
 
-    public Timestamp getExpirationDate() {
+    public Date getExpirationDate() {
         return expirationDate;
     }
 
-    public void setExpirationDate(Timestamp expirationDate) {
+    public void setExpirationDate(Date expirationDate) {
         this.expirationDate = expirationDate;
     }
 
-    public Timestamp getApplicationDate() {
+    public Date getApplicationDate() {
         return applicationDate;
     }
 
-    public void setApplicationDate(Timestamp applicationDate) {
+    public void setApplicationDate(Date applicationDate) {
         this.applicationDate = applicationDate;
     }
 

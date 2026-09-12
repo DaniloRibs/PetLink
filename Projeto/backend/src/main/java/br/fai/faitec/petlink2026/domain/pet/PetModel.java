@@ -2,9 +2,9 @@ package br.fai.faitec.petlink2026.domain.pet;
 
 import br.fai.faitec.petlink2026.domain.vaccine.VaccineModel;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.Date;
 
 public class PetModel {
 
@@ -12,7 +12,7 @@ public class PetModel {
     private String name;
     private Species species;
     private String breed;
-    private Timestamp birthDate;
+    private Date birthDate;
     private int idOwner;
     private List<VaccineModel> vaccines = new ArrayList<>();
 
@@ -48,11 +48,11 @@ public class PetModel {
         this.breed = breed;
     }
 
-    public Timestamp getBirthDate() {
+    public Date getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Timestamp birthDate) {
+    public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
 
@@ -64,11 +64,11 @@ public class PetModel {
         this.idOwner = idOwner;
     }
 
-    public Species getEspecie() {
+    public Species getSpecie() {
         return species;
     }
 
-    public void setEspecie(Species species) {
+    public void setSpecie(Species species) {
         this.species = species;
     }
 }

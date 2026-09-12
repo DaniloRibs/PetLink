@@ -116,7 +116,7 @@ public class PetServiceAdapter implements PetService {
         }
 
         dataToUpdate.setName(petModel.getName());
-        dataToUpdate.setEspecie(petModel.getEspecie());
+        dataToUpdate.setSpecie(petModel.getSpecie());
         dataToUpdate.setBirthDate(petModel.getBirthDate());
         dataToUpdate.setBreed(petModel.getBreed());
 

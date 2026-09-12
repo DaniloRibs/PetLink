@@ -5,11 +5,11 @@ import br.fai.faitec.petlink2026.domain.pet.PetModel;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.pet.PetDao;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository
 public class PetFakeDaoAdapter implements PetDao {
 
     private static final List<PetModel> entities = new ArrayList<>();
@@ -20,35 +20,35 @@ public class PetFakeDaoAdapter implements PetDao {
         PetModel entity1 = new PetModel();
         entity1.setId(getNextId());
         entity1.setName("Pandora");
-        entity1.setEspecie(Species.DOG);
+        entity1.setSpecie(Species.DOG);
         entity1.setIdOwner(1);
         entity1.setBreed("Lulu");
-        entity1.setBirthDate(Timestamp.valueOf("2019-08-01 00:00:00"));
+        entity1.setBirthDate(new Date(2026, 10, 12));
 
         PetModel entity2 = new PetModel();
         entity2.setId(getNextId());
         entity2.setName("Lucy");
-        entity2.setEspecie(Species.CAT);
+        entity2.setSpecie(Species.CAT);
         entity2.setIdOwner(2);
         entity2.setBreed("ViraLata");
-        entity2.setBirthDate(Timestamp.valueOf("2016-05-01 00:00:00"));
+        entity2.setBirthDate(new Date(2026, 10, 12));
 
         PetModel entity3 = new PetModel();
         entity3.setId(getNextId());
         entity3.setName("Tiririca");
-        entity3.setEspecie(Species.BIRD);
+        entity3.setSpecie(Species.BIRD);
         entity3.setIdOwner(4);
         entity3.setBreed("Pardal");
-        entity3.setBirthDate(Timestamp.valueOf("2026-01-09 00:00:00"));
+        entity3.setBirthDate(new Date(2016, 03, 17));
 
 
         PetModel entity4 = new PetModel();
         entity4.setId(getNextId());
         entity4.setName("Thor");
-        entity4.setEspecie(Species.OTHER);
+        entity4.setSpecie(Species.OTHER);
         entity4.setIdOwner(2);
         entity4.setBreed("Peixe beta");
-        entity4.setBirthDate(Timestamp.valueOf("2024-01-09 00:00:00"));
+        entity4.setBirthDate(new Date(2022, 11, 22));
 
         entities.add(entity1);
         entities.add(entity2);
@@ -125,7 +125,7 @@ public class PetFakeDaoAdapter implements PetDao {
 
         data.setName(entity.getName());
         data.setBreed(entity.getBreed());
-        data.setEspecie(entity.getEspecie());
+        data.setSpecie(entity.getSpecie());
         data.setBirthDate(entity.getBirthDate());
         data.setIdOwner(entity.getIdOwner());
     }

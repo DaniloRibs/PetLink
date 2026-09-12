@@ -4,11 +4,10 @@ import br.fai.faitec.petlink2026.domain.vaccine.VaccineModel;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.vaccine.VaccineDao;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository
 public class VaccineFakeDaoAdapter implements VaccineDao {
 
     private static final List<VaccineModel> entities = new ArrayList<>();
@@ -21,8 +20,8 @@ public class VaccineFakeDaoAdapter implements VaccineDao {
         vaccineModel1.setDescription("previne a raiva dos bicho tudo");
         vaccineModel1.setIdPet(3);
         vaccineModel1.setBatch("921");
-        vaccineModel1.setApplicationDate(Timestamp.valueOf("2019-12-11 00:00:00"));
-        vaccineModel1.setExpirationDate(Timestamp.valueOf("2025-12-01 00:00:00"));
+        vaccineModel1.setApplicationDate(new Date(2020, 10, 12));
+        vaccineModel1.setExpirationDate(new Date(2030, 10, 12));
 
 
         VaccineModel vaccineModel2 = new VaccineModel();
@@ -31,8 +30,8 @@ public class VaccineFakeDaoAdapter implements VaccineDao {
         vaccineModel2.setDescription("previne a raiva dos bicho tudo");
         vaccineModel2.setIdPet(3);
         vaccineModel2.setBatch("1080");
-        vaccineModel2.setApplicationDate(Timestamp.valueOf("2025-12-05 00:00:00"));
-        vaccineModel2.setExpirationDate(Timestamp.valueOf("2031-11-29 00:00:00"));
+        vaccineModel2.setApplicationDate(new Date(2010, 10, 12));
+        vaccineModel2.setExpirationDate(new Date(2022, 10, 12));
 
         entities.add(vaccineModel1);
         entities.add(vaccineModel2);

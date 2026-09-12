@@ -17,7 +17,7 @@ CREATE TABLE pet_model
 (
     id SERIAL PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
-    species VARCHAR(15) NOT NULL,
+    specie VARCHAR(15) NOT NULL,
     breed VARCHAR(50) NOT NULL,
     birth_date DATE NOT NULL,
     user_id INT NOT NULL,

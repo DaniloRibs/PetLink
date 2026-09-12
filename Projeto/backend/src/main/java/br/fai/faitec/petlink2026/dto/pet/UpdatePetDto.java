@@ -4,6 +4,7 @@ import br.fai.faitec.petlink2026.domain.pet.Species;
 import br.fai.faitec.petlink2026.domain.pet.PetModel;
 
 import java.sql.Timestamp;
+import java.sql.Date;
 
 public class UpdatePetDto {
 
@@ -11,7 +12,7 @@ public class UpdatePetDto {
     private String name;
     private Species species;
     private String breed;
-    private Timestamp anoNasc;
+    private Date birthDate;
 
 
     public PetModel toPetModel() {
@@ -19,8 +20,8 @@ public class UpdatePetDto {
         petModel.setId(id);
         petModel.setName(name);
         petModel.setBreed(breed);
-        petModel.setBirthDate(anoNasc);
-        petModel.setEspecie(species);
+        petModel.setBirthDate(birthDate);
+        petModel.setSpecie(species);
 
         return petModel;
     }
@@ -57,11 +58,11 @@ public class UpdatePetDto {
         this.breed = breed;
     }
 
-    public Timestamp getAnoNasc() {
-        return anoNasc;
+    public Date getBirthDate() {
+        return birthDate;
     }
 
-    public void setAnoNasc(Timestamp anoNasc) {
-        this.anoNasc = anoNasc;
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
     }
 }

@@ -1,11 +1,12 @@
 package br.fai.faitec.petlink2026.domain.vaccine;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 public class VaccineModel {
     private int id;
-    private Timestamp applicationDate;
-    private Timestamp expirationDate;
+    private Date applicationDate;
+    private Date expirationDate;
     private String name;
     private String description;
     private String batch;
@@ -19,19 +20,19 @@ public class VaccineModel {
         this.id = id;
     }
 
-    public Timestamp getApplicationDate() {
+    public Date getApplicationDate() {
         return applicationDate;
     }
 
-    public void setApplicationDate(Timestamp applicationDate) {
+    public void setApplicationDate(Date applicationDate) {
         this.applicationDate = applicationDate;
     }
 
-    public Timestamp getExpirationDate() {
+    public Date getExpirationDate() {
         return expirationDate;
     }
 
-    public void setExpirationDate(Timestamp expirationDate) {
+    public void setExpirationDate(Date expirationDate) {
         this.expirationDate = expirationDate;
     }
 
