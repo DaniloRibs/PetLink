@@ -44,11 +44,13 @@ export class NotificationBell implements OnInit {
       const items: VaccineNotification[] = [];
 
       for (const pet of pets) {
-        const petVaccines = vaccines.filter(v => v.petId === pet.id);
+        const petVaccines = pet.id === undefined
+          ? []
+          : vaccines.filter(v => String(v.petId) === String(pet.id));
 
         if (petVaccines.length === 0) {
           items.push({
-            petId: pet.id!,
+            petId: String(pet.id),
             petName: pet.name,
             message: 'ainda não tem nenhuma vacina cadastrada.',
             status: 'missing',
@@ -66,14 +68,14 @@ export class NotificationBell implements OnInit {
 
           if (diffDays < 0) {
             items.push({
-              petId: pet.id!,
+              petId: String(pet.id),
               petName: pet.name,
               message: `está com a dose de ${vaccine.name} atrasada.`,
               status: 'overdue',
             });
           } else if (diffDays <= 30) {
             items.push({
-              petId: pet.id!,
+              petId: String(pet.id),
               petName: pet.name,
               message: `tem dose de ${vaccine.name} prevista para daqui a ${diffDays} dia(s).`,
               status: 'soon',
@@ -99,8 +101,6 @@ export class NotificationBell implements OnInit {
     this.panelOpen = false;
   }
 
-  // Fecha o painel ao clicar fora dele, pra não ficar aberto atrapalhando
-  // o resto do painel.
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent): void {
     if (!this.panelOpen) {

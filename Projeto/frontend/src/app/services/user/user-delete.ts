@@ -10,7 +10,7 @@ export class UserDeleteService {
 
   constructor(private http: HttpClient) { }
 
-  delete(id: string) {
+  delete(id: number) {
     return firstValueFrom(
       this.http.delete(`${environment.api_endpoint}/user/${id}`)
     );

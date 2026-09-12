@@ -6,7 +6,7 @@ export enum PetSpecies {
 }
 
 export interface Pet {
-    id?: string;
+    id?: number;
     name: string;
     species: PetSpecies;
     breed: string;

@@ -15,7 +15,7 @@ export class UserUpdateService {
     private readService: UserReadService,
   ) { }
 
-  async update(id: string, fullname: string): Promise<any> {
+  async update(id: number, fullname: string): Promise<any> {
     let data: User = await this.readService.findById(id);
 
     if (data == null) {

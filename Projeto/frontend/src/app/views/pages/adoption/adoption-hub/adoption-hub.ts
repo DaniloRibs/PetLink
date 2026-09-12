@@ -19,7 +19,7 @@ export class AdoptionHub implements OnInit {
   myPets: Pet[] = [];
   loading: boolean = true;
   userEmail: string = '';
-  pendingConfirmationId: string | null = null;
+  pendingConfirmationId: number | null = null;
 
   constructor(
     private petReadService: PetReadService,

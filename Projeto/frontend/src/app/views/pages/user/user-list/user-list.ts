@@ -58,7 +58,7 @@ export class UserList implements OnInit {
   try{
     console.log(`Removido a entiddade com o id ${identity}`);
 
-    await this.deleteService.delete(entityId)
+    await this.deleteService.delete(Number(entityId))
     this.toastrService.success(`Removido com sucesso!`)
     this.loadEntities();
 

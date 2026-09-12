@@ -6,7 +6,7 @@ export enum AccountType {
 }
 
 export interface User {
-    id?: string,
+    id?: number,
     fullname: string,
     email: string,
     password: string,
