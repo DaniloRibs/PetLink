@@ -1,6 +1,6 @@
 export enum AccountType {
-    PESSOA = 'PERSON',
-    EMPRESA = 'ENTERPRISE',
+    PERSON = 'PERSON',
+    ENTERPRISE = 'ENTERPRISE',
 }
 
 export interface User {

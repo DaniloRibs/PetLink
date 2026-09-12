@@ -28,7 +28,7 @@ export class SignUp {
     private createService: UserCreateService,
   ) {
     this.form = this.formBuilder.group({
-      accountType: [AccountType.PESSOA, [Validators.required]],
+      accountType: [AccountType.PERSON, [Validators.required]],
       fullname: ['', [
         Validators.required,
         Validators.minLength(this.fullnameMiniLength),
@@ -55,7 +55,7 @@ export class SignUp {
   }
 
   get isEmpresa() {
-    return this.form.controls['accountType'].value === AccountType.EMPRESA;
+    return this.form.controls['accountType'].value === AccountType.ENTERPRISE;
   }
 
   passwordsMatch() {

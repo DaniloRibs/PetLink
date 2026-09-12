@@ -1,8 +1,8 @@
 export enum PetSpecies {
-    CACHORRO = 'DOG',
-    GATO = 'CAT',
-    PASSARO = 'BIRD',
-    OUTRO = 'OTHER',
+    DOG = 'DOG',
+    CAT = 'CAT',
+    BIRD = 'BIRD',
+    OTHER = 'OTHER',
 }
 
 export interface Pet {

@@ -8,48 +8,48 @@
     </button>
 
     @if (showForm) {
-      <div class="login-box pet-form-box">
-        <form [formGroup]="form" (ngSubmit)="createPet()">
-          <input type="text" placeholder="Nome do Pet" formControlName="name">
+    <div class="login-box pet-form-box">
+      <form [formGroup]="form" (ngSubmit)="createPet()">
+        <input type="text" placeholder="Nome do Pet" formControlName="name">
 
-          <div class="field-group">
-            <select formControlName="species">
-              <option value="" disabled selected hidden>Selecione o tipo</option>
-              <option [value]="PetSpecies.CACHORRO">Cachorro</option>
-              <option [value]="PetSpecies.GATO">Gato</option>
-              <option [value]="PetSpecies.PASSARO">Pássaro</option>
-              <option [value]="PetSpecies.OUTRO">Outro</option>
-            </select>
-          </div>
+        <div class="field-group">
+          <select formControlName="species">
+            <option value="" disabled selected hidden>Selecione o tipo</option>
+            <option [value]="PetSpecies.DOG">Cachorro</option>
+            <option [value]="PetSpecies.CAT">Gato</option>
+            <option [value]="PetSpecies.BIRD">Pássaro</option>
+            <option [value]="PetSpecies.OTHER">Outro</option>
+          </select>
+        </div>
 
-          <input type="text" placeholder="Raça" formControlName="breed">
-          <input type="date" placeholder="Data de Nascimento" formControlName="birthDate">
-          <input type="submit" value="Cadastrar Pet" [disabled]="!validateFields()">
+        <input type="text" placeholder="Raça" formControlName="breed">
+        <input type="date" placeholder="Data de Nascimento" formControlName="birthDate">
+        <input type="submit" value="Cadastrar Pet" [disabled]="!validateFields()">
 
-          @if (createValidationFailed) {
-            <p class="text-danger">Confira os dados e tente novamente.</p>
-          }
-        </form>
-      </div>
+        @if (createValidationFailed) {
+        <p class="text-danger">Confira os dados e tente novamente.</p>
+        }
+      </form>
+    </div>
     }
 
     @if (loading) {
-      <p>Carregando...</p>
+    <p>Carregando...</p>
     } @else if (pets.length === 0) {
-      <p>Você ainda não cadastrou nenhum pet. Use o botão "+ Cadastrar Pet" acima.</p>
+    <p>Você ainda não cadastrou nenhum pet. Use o botão "+ Cadastrar Pet" acima.</p>
     } @else {
-      <div class="pet-card-grid">
-        @for (pet of pets; track pet.id) {
-          <article class="pet-card" (click)="openPet(pet)">
-            <div class="pet-card-icon">{{ speciesIcon(pet.species) }}</div>
-            <h3>{{ pet.name }}</h3>
-            <p>{{ pet.breed }}</p>
-            @if (pet.forAdoption) {
-              <span class="pet-badge">Em adoção</span>
-            }
-          </article>
+    <div class="pet-card-grid">
+      @for (pet of pets; track pet.id) {
+      <article class="pet-card" (click)="openPet(pet)">
+        <div class="pet-card-icon">{{ speciesIcon(pet.species) }}</div>
+        <h3>{{ pet.name }}</h3>
+        <p>{{ pet.breed }}</p>
+        @if (pet.forAdoption) {
+        <span class="pet-badge">Em adoção</span>
         }
-      </div>
+      </article>
+      }
+    </div>
     }
   </div>
 </section>

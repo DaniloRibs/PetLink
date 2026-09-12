@@ -1,6 +1,6 @@
 export enum AnnouncementType {
-    VACCINE = 'vaccine',
-    ADOPTION = 'adoption',
+    VACCINE = 'VACCINE',
+    ADOPTION = 'ADOPTION',
 }
 
 export interface Announcement {

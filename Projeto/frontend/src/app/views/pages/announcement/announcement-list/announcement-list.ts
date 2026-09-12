@@ -52,7 +52,7 @@ export class AnnouncementList implements OnInit {
         user = await this.currentUserService.load();
       }
 
-      this.isCompany = user?.accountType === AccountType.EMPRESA;
+      this.isCompany = user?.accountType === AccountType.ENTERPRISE;
       this.userEmail = user?.email ?? '';
 
       this.announcements = await this.announcementReadService.findAll();

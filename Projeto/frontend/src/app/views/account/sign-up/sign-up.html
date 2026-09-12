@@ -14,11 +14,11 @@
 
             <div class="toggle-group" role="radiogroup" aria-label="Tipo de conta">
               <label class="toggle-option">
-                <input type="radio" formControlName="accountType" [value]="AccountType.PESSOA">
+                <input type="radio" formControlName="accountType" [value]="AccountType.PERSON">
                 <span>Pessoa</span>
               </label>
               <label class="toggle-option">
-                <input type="radio" formControlName="accountType" [value]="AccountType.EMPRESA">
+                <input type="radio" formControlName="accountType" [value]="AccountType.ENTERPRISE">
                 <span>Empresa</span>
               </label>
             </div>
@@ -35,13 +35,13 @@
             <input type="password" placeholder="Confirmar Senha" formControlName="repeatPassword">
 
             @if (form.get('password')?.touched && !passwordsMatch()) {
-              <p class="text-danger">As senhas não coincidem.</p>
+            <p class="text-danger">As senhas não coincidem.</p>
             }
 
             <input type="submit" value="Cadastrar">
 
             @if (createValidationFailed) {
-              <p class="text-danger">Confira os dados informados e tente novamente.</p>
+            <p class="text-danger">Confira os dados informados e tente novamente.</p>
             }
           </form>
 
