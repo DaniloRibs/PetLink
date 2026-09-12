@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS vaccine_model CASCADE;
 DROP TABLE IF EXISTS pet_model CASCADE;
 DROP TABLE IF EXISTS user_model CASCADE;
+DROP TABLE IF EXISTS annoucement_model CASCADE;
 
 CREATE TABLE user_model
 (
@@ -34,4 +35,18 @@ CREATE TABLE vaccine_model
     batch VARCHAR(15) NOT NULL,
     pet_id INT NOT NULL,
     CONSTRAINT fk_vaccine_pet FOREIGN KEY (pet_id) REFERENCES pet_model(id) ON DELETE CASCADE
+);
+
+CREATE TABLE annoucement_model
+(
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(100) NOT NULL,
+    description TEXT NOT NULL,
+    publication_date DATE NOT NULL,
+    event_date DATE,
+    location VARCHAR(150) NOT NULL,
+    annoucement_type VARCHAR(15) NOT NULL,
+    user_id INT NOT NULL,
+
+    CONSTRAINT fk_annoucement_creator  FOREIGN KEY (user_id) REFERENCES user_model(id) ON DELETE CASCADE
 );

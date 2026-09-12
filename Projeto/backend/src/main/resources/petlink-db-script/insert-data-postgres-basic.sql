@@ -27,9 +27,6 @@ VALUES
     ('2026-02-15', '2027-02-15', 'Antirrábica',
      'Vacina contra raiva', 'RAB-2026-02', 1),
 
-    ('2026-03-20', '2027-03-20', 'V10',
-     'Vacina polivalente canina', 'V10-2026-03', 2),
-
     ('2026-04-05', '2027-04-05', 'Antirrábica',
      'Vacina contra raiva', 'RAB-2026-04', 2),
 
@@ -37,22 +34,36 @@ VALUES
      'Vacina quádrupla felina', 'V4-2026-01', 3),
 
     ('2026-02-28', '2027-02-28', 'Antirrábica',
-     'Vacina contra raiva', 'RAB-2026-02', 3),
+     'Vacina contra raiva', 'RAB-2026-02', 5);
 
-    ('2026-05-10', '2027-05-10', 'V10',
-     'Vacina polivalente canina', 'V10-2026-05', 4),
 
-    ('2026-05-10', '2027-05-10', 'Antirrábica',
-     'Vacina contra raiva', 'RAB-2026-05', 4),
-
-    ('2026-06-15', '2027-06-15', 'V4',
-     'Vacina quádrupla felina', 'V4-2026-06', 5),
-
-    ('2026-07-01', '2027-07-01', 'V10',
-     'Vacina polivalente canina', 'V10-2026-07', 6),
-
-    ('2026-07-15', '2027-07-15', 'Antirrábica',
-     'Vacina contra raiva', 'RAB-2026-07', 6),
-
-    ('2026-08-01', '2027-08-01', 'V10',
-     'Vacina polivalente canina', 'V10-2026-08', 7);
+INSERT INTO annoucement_model
+    (title, description, publication_date, event_date, location, annoucement_type, user_id)
+VALUES
+         (
+             'Feira de Adoção de Cães',
+             'Feira para adoção responsável de cães resgatados.',
+             '2026-09-01',
+             '2026-09-20',
+             'Praça Central',
+             'ADOPTION',
+             1
+         ),
+         (
+             'Campanha de Vacinação',
+             'Campanha de vacinação gratuita para cães e gatos.',
+             '2026-09-03',
+             '2026-09-25',
+             'Centro Comunitário',
+             'VACCINE',
+             2
+         ),
+         (
+             'Cachorro Perdido',
+             'Cachorro de porte médio desapareceu nas proximidades do bairro.',
+             '2026-09-05',
+             '2026-09-05',
+             'Bairro Centro',
+             'LOST',
+             1
+         );
