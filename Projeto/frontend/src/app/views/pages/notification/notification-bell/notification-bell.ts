@@ -34,9 +34,12 @@ export class NotificationBell implements OnInit {
 
   async ngOnInit(): Promise<void> {
     try {
-      const email = this.authenticationService.getAuthenticatedUserEmail();
+      const currentUser = this.currentUserService.get() ?? await this.currentUserService.load();
+      if (!currentUser?.id) {
+        throw new Error('Usuário atual não encontrado');
+      }
       const [pets, vaccines] = await Promise.all([
-        this.petReadService.findByOwnerEmail(email),
+        this.petReadService.findByOwnerId(currentUser.id),
         this.vaccineReadService.findAll(),
       ]);
 

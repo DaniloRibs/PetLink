@@ -6,35 +6,35 @@
     <h2>Meus dados</h2>
 
     @if (loading) {
-      <p>Carregando...</p>
+    <p>Carregando...</p>
     } @else {
-      <div class="login-box profile-form-box">
-        <form [formGroup]="form" (ngSubmit)="updateProfile()">
-          <div class="field-group">
-            <label>Email</label>
-            <input type="text" [value]="entity?.email" disabled>
-          </div>
+    <div class="login-box profile-form-box">
+      <form [formGroup]="form" (ngSubmit)="updateProfile()">
+        <div class="field-group">
+          <label>Email</label>
+          <input type="text" [value]="entity?.email" disabled>
+        </div>
 
-          <div class="field-group">
-            <label>Tipo de conta</label>
-            <input type="text" [value]="entity?.accountType === 'empresa' ? 'Empresa' : 'Pessoa'" disabled>
-          </div>
+        <div class="field-group">
+          <label>Tipo de conta</label>
+          <input type="text" [value]="entity?.accountType === AccountType.EMPRESA ? 'ENTERPRISE' : 'PERSON'" disabled>
+        </div>
 
-          <div class="field-group">
-            <label for="fullname">Nome completo</label>
-            <input type="text" id="fullname" placeholder="Nome completo" formControlName="fullname">
-          </div>
+        <div class="field-group">
+          <label for="fullname">Nome completo</label>
+          <input type="text" id="fullname" placeholder="Nome completo" formControlName="fullname">
+        </div>
 
-          <input type="submit" value="Salvar alterações" [disabled]="!validateFields()">
+        <input type="submit" value="Salvar alterações" [disabled]="!validateFields()">
 
-          @if (updateFailed) {
-            <p class="text-danger">Não foi possível salvar. Confira os dados e tente novamente.</p>
-          }
-          @if (updateOk) {
-            <p class="text-success">Dados atualizados com sucesso!</p>
-          }
-        </form>
-      </div>
+        @if (updateFailed) {
+        <p class="text-danger">Não foi possível salvar. Confira os dados e tente novamente.</p>
+        }
+        @if (updateOk) {
+        <p class="text-success">Dados atualizados com sucesso!</p>
+        }
+      </form>
+    </div>
     }
   </div>
 </section>

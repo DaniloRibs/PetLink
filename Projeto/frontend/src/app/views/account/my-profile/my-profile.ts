@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
-import { User } from '../../../models/domain/user';
+import { User, AccountType } from '../../../models/domain/user';
 import { UserUpdateService } from '../../../services/user/user-update';
 import { CurrentUserService } from '../../../services/security/current-user';
 
@@ -14,6 +14,7 @@ import { CurrentUserService } from '../../../services/security/current-user';
 })
 export class MyProfile implements OnInit {
 
+  readonly AccountType = AccountType;
   entity: User | null = null;
   loading: boolean = true;
 

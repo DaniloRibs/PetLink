@@ -37,7 +37,7 @@ export class PetCreate {
     return this.form.valid;
   }
 
-   async createPet() {
+  async createPet() {
     this.createValidationFailed = false;
 
     if (!this.validateFields()) {
@@ -52,12 +52,14 @@ export class PetCreate {
       return;
     }
 
+    const ownerId: number = currentUser.id;
+
     let pet: Pet = {
       name: this.form.controls['name'].value,
       species: this.form.controls['species'].value,
       breed: this.form.controls['breed'].value,
       birthDate: this.form.controls['birthDate'].value,
-      ownerId: currentUser.id,
+      ownerId: ownerId,
     };
 
     this.petCreateService.create(pet).subscribe({

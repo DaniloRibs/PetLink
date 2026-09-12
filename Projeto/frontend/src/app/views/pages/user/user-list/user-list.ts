@@ -29,7 +29,7 @@ export class UserList implements OnInit {
     private deleteService: UserDeleteService,
     private toastrService: ToastrService,
     private cdr: ChangeDetectorRef
-  ){}
+  ) { }
 
   users: User[] = [];
 
@@ -41,7 +41,7 @@ export class UserList implements OnInit {
     console.log('carregando entidades');
 
     let entities = await this.readService.findAll();
-    if(entities == null) {
+    if (entities == null) {
       console.log('nenhuma entidade encontrada');
       return;
     }
@@ -53,19 +53,19 @@ export class UserList implements OnInit {
     this.cdr.detectChanges();
   }
 
-  async deleteEntity(entityId: string) {
+  async deleteEntity(entityId: number) {
     console.log('entidade removida');
-  try{
-    console.log(`Removido a entiddade com o id ${identity}`);
+    try {
+      console.log(`Removido a entiddade com o id ${identity}`);
 
-    await this.deleteService.delete(Number(entityId))
-    this.toastrService.success(`Removido com sucesso!`)
-    this.loadEntities();
+      await this.deleteService.delete(entityId)
+      this.toastrService.success(`Removido com sucesso!`)
+      this.loadEntities();
 
-  }catch(error){
-    console.error(error);
-    this.toastrService.error(`Erro ao remover`)
-  }
+    } catch (error) {
+      console.error(error);
+      this.toastrService.error(`Erro ao remover`)
+    }
 
   }
 
