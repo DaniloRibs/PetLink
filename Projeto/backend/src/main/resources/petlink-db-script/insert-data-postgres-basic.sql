@@ -1,11 +1,11 @@
 INSERT INTO user_model
     (email, full_name, password, document, phone, account_type)
 VALUES
-    ('joao.silva@email.com', 'João Silva', '123456', '12345678901', '31999990001', 'CLIENT'),
-    ('maria.souza@email.com', 'Maria Souza', '123456', '23456789012', '31999990002', 'CLIENT'),
-    ('carlos.oliveira@email.com', 'Carlos Oliveira', '123456', '34567890123', '31999990003', 'CLIENT'),
-    ('ana.costa@email.com', 'Ana Costa', '123456', '45678901234', '31999990004', 'CLIENT'),
-    ('admin@petcare.com', 'Administrador', 'admin123', NULL, '31999990005', 'ADMIN');
+    ('joao.silva@email.com', 'João Silva', '123456', '98765432100', '31999990001', 'PERSON'),
+    ('maria.souza@email.com', 'Maria Souza', '123456', '39053344705', '31999990002', 'PERSON'),
+    ('carlos.oliveira@email.com', 'Carlos Oliveira', '123456', '11144477735', '31999990003', 'PERSON'),
+    ('ana.costa@email.com', 'Ana Costa', '123456', '52998224725', '31999990004', 'PERSON'),
+    ('bolaoGmae@petcare.com', 'bolaoEntherpriuse', 'admin123', '11222333000181', '31999990005', 'ENTERPRISE');
 
 INSERT INTO pet_model
     (name, species, breed, birth_date, user_id)

@@ -7,7 +7,7 @@ CREATE TABLE user_model
     id SERIAL PRIMARY KEY,
     email VARCHAR(100) UNIQUE NOT NULL,
     full_name VARCHAR(50) NOT NULL,
-    password VARCHAR(60) NOT NULL,
+    password VARCHAR(60),
     document VARCHAR(14),
     phone VARCHAR(15) NOT NULL,
     account_type VARCHAR(20) NOT NULL
