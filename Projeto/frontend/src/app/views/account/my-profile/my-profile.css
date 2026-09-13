@@ -1,9 +1,63 @@
+.profile-layout {
+  display: grid;
+  gap: 20px;
+  margin-top: 24px;
+  width: 100%;
+  max-width: 420px;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(111, 78, 55, 0.12);
+}
+
+.profile-avatar {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #f8ede5;
+  color: #6F4E37;
+}
+
+.profile-avatar mat-icon {
+  font-size: 30px;
+  width: 30px;
+  height: 30px;
+}
+
+.profile-header-text {
+  display: grid;
+  gap: 6px;
+}
+
+.profile-summary-name {
+  margin: 0;
+  font-size: 16px;
+  color: #33211a;
+}
+
+.profile-summary-badge {
+  display: inline-flex;
+  width: fit-content;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(111, 78, 55, 0.1);
+  color: #6F4E37;
+  font-size: 12px;
+  font-weight: 700;
+}
+
 .content-form-card .profile-form-box {
   box-shadow: none;
   padding: 0;
-  margin: 16px auto 0;
+  margin: 0;
   width: 100%;
-  max-width: 420px;
 }
 
 .back-link {
@@ -49,4 +103,13 @@
   font-size: 13px;
   text-align: center;
   margin: 4px 0 0;
+}
+
+.profile-form-box .field-group {
+  gap: 0 !important;
+}
+
+.profile-form-box .field-group label {
+  margin-bottom: -6px !important;
+  line-height: 1 !important;
 }

@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
 
 import { User, AccountType } from '../../../models/domain/user';
 import { UserUpdateService } from '../../../services/user/user-update';
@@ -9,7 +10,7 @@ import { AuthenticationService } from '../../../services/security/authentication
 
 @Component({
   selector: 'app-my-profile',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, MatIconModule],
   templateUrl: './my-profile.html',
   styleUrl: './my-profile.css',
 })
@@ -23,6 +24,11 @@ export class MyProfile implements OnInit {
   updateOk: boolean = false;
   updateFailed: boolean = false;
   emailChanged: boolean = false;
+
+  get userInitial(): string {
+    const name = this.entity?.fullname || this.entity?.email || '?';
+    return name.trim().charAt(0).toUpperCase();
+  }
 
   constructor(
     private formBuilder: FormBuilder,

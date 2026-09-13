@@ -3,35 +3,48 @@
     <a routerLink="/painel" class="back-link">← Voltar para o painel</a>
 
     <p class="footer-title">MEU PERFIL</p>
-    <h2>Meus dados</h2>
 
     @if (loading) {
     <p>Carregando...</p>
     } @else {
-    <div class="login-box profile-form-box">
-      <form [formGroup]="form" (ngSubmit)="updateProfile()">
-        <div class="field-group">
-          <label for="fullname">Nome completo</label>
-          <input type="text" id="fullname" placeholder="Nome completo" formControlName="fullname">
+    <div class="profile-layout">
+      <div class="profile-header">
+        <div class="profile-avatar">
+          <mat-icon>person</mat-icon>
         </div>
-
-        <div class="field-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" placeholder="seuemail@exemplo.com" formControlName="email">
+        <div class="profile-header-text">
+          <h3 class="profile-summary-name">{{ entity?.fullname }}</h3>
+          <span class="profile-summary-badge">
+            {{ entity?.accountType === AccountType.ENTERPRISE ? 'Empresa Parceira' : 'Tutor de Pet' }}
+          </span>
         </div>
+      </div>
 
-        <input type="submit" value="Salvar alterações" [disabled]="!validateFields()">
+      <div class="login-box form-box profile-form-box">
+        <form [formGroup]="form" (ngSubmit)="updateProfile()">
+          <div class="field-group">
+            <label for="fullname">Nome completo</label>
+            <input type="text" id="fullname" placeholder="Nome completo" formControlName="fullname">
+          </div>
 
-        @if (updateFailed) {
-        <p class="text-danger">Não foi possível salvar. Confira os dados e tente novamente.</p>
-        }
-        @if (updateOk) {
-        <p class="text-success">Dados atualizados com sucesso!</p>
-        }
-        @if (emailChanged) {
-        <p class="text-info">📧 Seu email de login foi atualizado — use o novo email na próxima vez que entrar.</p>
-        }
-      </form>
+          <div class="field-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="seuemail@exemplo.com" formControlName="email">
+          </div>
+
+          <input type="submit" value="Salvar alterações" [disabled]="!validateFields()">
+
+          @if (updateFailed) {
+          <p class="text-danger">Não foi possível salvar. Confira os dados e tente novamente.</p>
+          }
+          @if (updateOk) {
+          <p class="text-success">Dados atualizados com sucesso!</p>
+          }
+          @if (emailChanged) {
+          <p class="text-info">📧 Seu email de login foi atualizado — use o novo email na próxima vez que entrar.</p>
+          }
+        </form>
+      </div>
     </div>
     }
   </div>
