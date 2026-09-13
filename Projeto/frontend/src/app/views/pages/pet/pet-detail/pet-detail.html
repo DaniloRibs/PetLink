@@ -79,7 +79,7 @@
       <form [formGroup]="vaccineForm" (ngSubmit)="createVaccine()">
         <div class="field-group">
           <label>Nome da vacina</label>
-          <input type="text" placeholder="Ex: V10" formControlName="name">
+          <input type="text" placeholder formControlName="name">
         </div>
 
         <div class="form-row">
@@ -96,7 +96,7 @@
 
         <div class="field-group">
           <label>Observações (opcional)</label>
-          <input type="text" placeholder="Ex: reação leve, aplicar no braço..." formControlName="notes">
+          <input type="text" placeholder formControlName="notes">
         </div>
 
         <input type="submit" value="Cadastrar Vacina" [disabled]="!validateVaccineFields()">

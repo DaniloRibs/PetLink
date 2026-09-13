@@ -1051,3 +1051,24 @@ a:hover {
     font-weight: 600;
     box-shadow: 0 4px 8px rgba(94, 63, 39, 0.2);
 }
+
+.form-row {
+    min-width: 0;
+}
+
+.form-row .field-group {
+    min-width: 0;
+}
+
+.form-row input,
+.form-row select {
+    min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.login-box.form-box {
+    width: 100%;
+    max-width: 460px;
+    box-sizing: border-box;
+}
