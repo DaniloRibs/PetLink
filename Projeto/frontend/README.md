@@ -7,8 +7,12 @@
 
 
 # Para se conectar 
-
+-db.json
 ng serve --configuration=development
+
+-postgres db
+ng serve --configuration=production
+
 npx json-server db.json
 
 # Bom fazer
