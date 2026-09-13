@@ -1,10 +1,12 @@
 package br.fai.faitec.petlink2026.configuration;
 
+import br.fai.faitec.petlink2026.ports_and_adapters.adapter.dao.adoption.AdoptionPostgresDaoAdapter;
 import br.fai.faitec.petlink2026.ports_and_adapters.adapter.dao.annoucement.AnnoucementPostgresDaoAdapter;
 import br.fai.faitec.petlink2026.ports_and_adapters.adapter.dao.pet.PetPostgresDaoAdapter;
 import br.fai.faitec.petlink2026.ports_and_adapters.adapter.dao.user.UserFakeDaoAdapter;
 import br.fai.faitec.petlink2026.ports_and_adapters.adapter.dao.user.UserPostgresDaoAdapter;
 import br.fai.faitec.petlink2026.ports_and_adapters.adapter.dao.vaccine.VaccinePostgresDaoAdapter;
+import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.adoption.AdoptionDao;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.annoucement.AnnoucementDao;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.pet.PetDao;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.user.UserDao;
@@ -46,6 +48,11 @@ public class AppConfiguration {
     @Bean
     public AnnoucementDao getAnnoucementPostgresDao(final Connection connection) {
         return new AnnoucementPostgresDaoAdapter(connection);
+    }
+
+    @Bean
+    public AdoptionDao getAdoptionPostgresDao(final Connection connection) {
+        return new AdoptionPostgresDaoAdapter(connection);
     }
 
 

@@ -67,3 +67,10 @@ VALUES
              'LOST',
              1
          );
+
+INSERT INTO adoption_model
+    (pet_id, owner_id, description, contact, adopted, publication_date)
+VALUES
+    (3, 4, 'Tiririca é um passarinho bem calmo, procurando um novo lar com bastante carinho.', '(35) 99999-0000', false, '2026-02-01'),
+    (4, 2, 'Thor está disponível para adoção, muito dócil e já castrado.', 'thor.adocao@example.com', true, '2026-01-15'),
+    (2, 2, 'Lucy é uma gata tranquila, ideal para apartamento. Já vacinada.', '(35) 98888-1234', false, '2026-03-05');

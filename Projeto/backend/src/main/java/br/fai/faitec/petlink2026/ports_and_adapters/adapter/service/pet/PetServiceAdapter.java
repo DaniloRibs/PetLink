@@ -151,6 +151,7 @@ public class PetServiceAdapter implements PetService {
         oldOwnerUser.getPets().remove(pet);
 
         pet.setOwnerId(newOwner);
+        pet.setForAdoption(false);
         petDao.updateInformation(id, pet);
 
         return true;

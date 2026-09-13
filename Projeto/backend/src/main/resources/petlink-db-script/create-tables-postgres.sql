@@ -1,7 +1,8 @@
+DROP TABLE IF EXISTS annoucement_model CASCADE;
+DROP TABLE IF EXISTS adoption_model CASCADE;
 DROP TABLE IF EXISTS vaccine_model CASCADE;
 DROP TABLE IF EXISTS pet_model CASCADE;
 DROP TABLE IF EXISTS user_model CASCADE;
-DROP TABLE IF EXISTS annoucement_model CASCADE;
 
 CREATE TABLE user_model
 (
@@ -49,4 +50,18 @@ CREATE TABLE annoucement_model
     user_id INT NOT NULL,
 
     CONSTRAINT fk_annoucement_creator  FOREIGN KEY (user_id) REFERENCES user_model(id) ON DELETE CASCADE
+);
+
+CREATE TABLE adoption_model
+(
+    id SERIAL PRIMARY KEY,
+    pet_id INT NOT NULL,
+    owner_id INT NOT NULL,
+    description TEXT NOT NULL,
+    contact VARCHAR(100),
+    adopted BOOLEAN NOT NULL DEFAULT FALSE,
+    publication_date DATE NOT NULL,
+
+    CONSTRAINT fk_adoption_pet FOREIGN KEY (pet_id) REFERENCES pet_model(id) ON DELETE CASCADE,
+    CONSTRAINT fk_adoption_owner FOREIGN KEY (owner_id) REFERENCES user_model(id) ON DELETE CASCADE
 );
