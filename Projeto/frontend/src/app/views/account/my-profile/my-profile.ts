@@ -21,6 +21,7 @@ export class MyProfile implements OnInit {
   loading: boolean = true;
 
   form: FormGroup;
+  showEditForm: boolean = false;
   updateOk: boolean = false;
   updateFailed: boolean = false;
   emailChanged: boolean = false;
@@ -65,6 +66,20 @@ export class MyProfile implements OnInit {
     return this.form.valid;
   }
 
+  toggleEditForm(): void {
+    this.showEditForm = !this.showEditForm;
+    this.updateOk = false;
+    this.updateFailed = false;
+    this.emailChanged = false;
+
+    if (this.showEditForm && this.entity) {
+      this.form.patchValue({
+        fullname: this.entity.fullname,
+        email: this.entity.email,
+      });
+    }
+  }
+
   async updateProfile(): Promise<void> {
     this.updateOk = false;
     this.updateFailed = false;
@@ -90,6 +105,7 @@ export class MyProfile implements OnInit {
       }
 
       this.updateOk = true;
+      this.showEditForm = false;
     } catch (error) {
       console.error('Erro ao atualizar perfil', error);
       this.updateFailed = true;

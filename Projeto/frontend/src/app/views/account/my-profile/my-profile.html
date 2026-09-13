@@ -21,6 +21,24 @@
       </div>
 
       <div class="login-box form-box profile-form-box">
+        @if (!showEditForm) {
+        <div class="profile-view">
+          <div class="profile-view-item">
+            <span class="profile-view-label">Nome completo</span>
+            <span class="profile-view-text">{{ entity?.fullname }}</span>
+          </div>
+
+          <div class="profile-view-item">
+            <span class="profile-view-label">Email</span>
+            <span class="profile-view-text">{{ entity?.email }}</span>
+          </div>
+
+          <button class="secondary-button profile-edit-btn" (click)="toggleEditForm()">
+            <mat-icon>edit</mat-icon>
+            Editar perfil
+          </button>
+        </div>
+        } @else {
         <form [formGroup]="form" (ngSubmit)="updateProfile()">
           <div class="field-group">
             <label for="fullname">Nome completo</label>
@@ -32,19 +50,23 @@
             <input type="email" id="email" placeholder="seuemail@exemplo.com" formControlName="email">
           </div>
 
-          <input type="submit" value="Salvar alterações" [disabled]="!validateFields()">
-
-          @if (updateFailed) {
-          <p class="text-danger">Não foi possível salvar. Confira os dados e tente novamente.</p>
-          }
-          @if (updateOk) {
-          <p class="text-success">Dados atualizados com sucesso!</p>
-          }
-          @if (emailChanged) {
-          <p class="text-info"><mat-icon>email</mat-icon> Seu email de login foi atualizado — use o novo email na
-            próxima vez que entrar.</p>
-          }
+          <div class="confirm-actions profile-form-actions">
+            <input type="submit" value="Salvar alterações" [disabled]="!validateFields()">
+            <button type="button" class="secondary-button" (click)="toggleEditForm()">Cancelar</button>
+          </div>
         </form>
+        }
+
+        @if (updateFailed) {
+        <p class="text-danger">Não foi possível salvar. Confira os dados e tente novamente.</p>
+        }
+        @if (updateOk) {
+        <p class="text-success">Dados atualizados com sucesso!</p>
+        }
+        @if (emailChanged) {
+        <p class="text-info"><mat-icon>email</mat-icon> Seu email de login foi atualizado — use o novo email na
+          próxima vez que entrar.</p>
+        }
       </div>
     </div>
     }
