@@ -1,9 +1,10 @@
 import { ChangeDetectorRef, Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
 
 import { PetReadService } from '../../../../services/pet/pet-read';
 import { VaccineReadService } from '../../../../services/vaccine/vaccine-read';
-import { AuthenticationService } from '../../../../services/security/authentication';
+import { CurrentUserService } from '../../../../services/security/current-user';
 
 interface VaccineNotification {
   petId: string;
@@ -14,7 +15,7 @@ interface VaccineNotification {
 
 @Component({
   selector: 'app-notification-bell',
-  imports: [RouterLink],
+  imports: [RouterLink, MatIconModule],
   templateUrl: './notification-bell.html',
   styleUrl: './notification-bell.css',
 })
@@ -27,16 +28,19 @@ export class NotificationBell implements OnInit {
   constructor(
     private petReadService: PetReadService,
     private vaccineReadService: VaccineReadService,
-    private authenticationService: AuthenticationService,
+    private currentUserService: CurrentUserService,
     private elementRef: ElementRef<HTMLElement>,
     private cdr: ChangeDetectorRef,
   ) { }
 
   async ngOnInit(): Promise<void> {
     try {
-      const email = this.authenticationService.getAuthenticatedUserEmail();
+      const currentUser = this.currentUserService.get() ?? await this.currentUserService.load();
+      if (!currentUser?.id) {
+        throw new Error('Usuário atual não encontrado');
+      }
       const [pets, vaccines] = await Promise.all([
-        this.petReadService.findByOwnerEmail(email),
+        this.petReadService.findByOwnerId(currentUser.id),
         this.vaccineReadService.findAll(),
       ]);
 
@@ -44,11 +48,13 @@ export class NotificationBell implements OnInit {
       const items: VaccineNotification[] = [];
 
       for (const pet of pets) {
-        const petVaccines = vaccines.filter(v => v.petId === pet.id);
+        const petVaccines = pet.id === undefined
+          ? []
+          : vaccines.filter(v => String(v.petId) === String(pet.id));
 
         if (petVaccines.length === 0) {
           items.push({
-            petId: pet.id!,
+            petId: String(pet.id),
             petName: pet.name,
             message: 'ainda não tem nenhuma vacina cadastrada.',
             status: 'missing',
@@ -66,14 +72,14 @@ export class NotificationBell implements OnInit {
 
           if (diffDays < 0) {
             items.push({
-              petId: pet.id!,
+              petId: String(pet.id),
               petName: pet.name,
               message: `está com a dose de ${vaccine.name} atrasada.`,
               status: 'overdue',
             });
           } else if (diffDays <= 30) {
             items.push({
-              petId: pet.id!,
+              petId: String(pet.id),
               petName: pet.name,
               message: `tem dose de ${vaccine.name} prevista para daqui a ${diffDays} dia(s).`,
               status: 'soon',
@@ -99,8 +105,6 @@ export class NotificationBell implements OnInit {
     this.panelOpen = false;
   }
 
-  // Fecha o painel ao clicar fora dele, pra não ficar aberto atrapalhando
-  // o resto do painel.
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent): void {
     if (!this.panelOpen) {

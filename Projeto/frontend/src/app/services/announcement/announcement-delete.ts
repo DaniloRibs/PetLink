@@ -10,7 +10,7 @@ export class AnnouncementDeleteService {
 
   constructor(private http: HttpClient) { }
 
-  delete(id: string): Observable<void> {
+  delete(id: number): Observable<void> {
     return this.http.delete<void>(`${environment.api_endpoint}/announcements/${id}`);
   }
 }

@@ -1,25 +1,78 @@
 <section class="menu-footer-card content-area">
   <div class="content-form-card">
-    <p class="footer-title">MEUS PETS</p>
-    <h2>Seus pets cadastrados</h2>
+    <div class="section-header">
+      <p class="footer-title">MEUS PETS</p>
+      <h2>Seus pets cadastrados</h2>
+      <button class="primary-button action-btn" [class.is-cancel]="showForm" (click)="toggleForm()">
+        <span class="action-btn-icon"><mat-icon>{{ showForm ? 'close' : 'add' }}</mat-icon></span>
+        {{ showForm ? 'Cancelar' : 'Cadastrar Pet' }}
+      </button>
+    </div>
+
+    @if (showForm) {
+    <div class="login-box form-box">
+      <p class="form-box-title">Novo pet</p>
+
+      <form [formGroup]="form" (ngSubmit)="createPet()">
+        <div class="field-group">
+          <label>Nome do Pet</label>
+          <input type="text" placeholder formControlName="name">
+        </div>
+
+        <div class="form-row">
+          <div class="field-group">
+            <label>Espécie</label>
+            <select formControlName="species">
+              <option value="" disabled selected hidden>Selecionar</option>
+              <option [value]="PetSpecies.DOG">Cachorro</option>
+              <option [value]="PetSpecies.CAT">Gato</option>
+              <option [value]="PetSpecies.BIRD">Pássaro</option>
+              <option [value]="PetSpecies.OTHER">Outro</option>
+            </select>
+          </div>
+
+          <div class="field-group">
+            <label>Raça</label>
+            <input type="text" placeholder formControlName="breed">
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label>Data de Nascimento</label>
+          <input type="date" formControlName="birthDate">
+        </div>
+
+        <input type="submit" value="Cadastrar Pet" [disabled]="!validateFields()">
+
+        @if (createValidationFailed) {
+        <p class="text-danger">Confira os dados e tente novamente.</p>
+        }
+      </form>
+    </div>
+    }
 
     @if (loading) {
-      <p>Carregando...</p>
+    <p>Carregando...</p>
     } @else if (pets.length === 0) {
-      <p>Você ainda não cadastrou nenhum pet. Use a opção "Cadastrar Pet" no menu lateral.</p>
+    <div class="empty-state">
+      <div class="empty-state-icon"><mat-icon>pets</mat-icon></div>
+      <p class="empty-state-title">Nenhum pet cadastrado ainda</p>
+      <p class="empty-state-text">Use o botão "Cadastrar Pet" acima para adicionar o primeiro.</p>
+    </div>
     } @else {
-      <div class="pet-card-grid">
-        @for (pet of pets; track pet.id) {
-          <article class="pet-card" (click)="openPet(pet)">
-            <div class="pet-card-icon">{{ speciesIcon(pet.species) }}</div>
-            <h3>{{ pet.name }}</h3>
-            <p>{{ pet.breed }}</p>
-            @if (pet.forAdoption) {
-              <span class="pet-badge">Em adoção</span>
-            }
-          </article>
+    <div class="pet-card-grid">
+      @for (pet of pets; track pet.id) {
+      <article class="pet-card" (click)="openPet(pet)">
+        @if (pet.forAdoption) {
+        <span class="pet-badge">Em adoção</span>
         }
-      </div>
+        <div class="pet-card-icon">{{ speciesIcon(pet.species) }}</div>
+        <h3>{{ pet.name }}</h3>
+        <p>{{ pet.breed }}</p>
+        <span class="pet-card-cta">Ver detalhes →</span>
+      </article>
+      }
+    </div>
     }
   </div>
 </section>

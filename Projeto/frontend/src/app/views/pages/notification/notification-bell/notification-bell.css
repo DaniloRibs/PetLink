@@ -4,25 +4,41 @@
 
 .notification-trigger {
   position: relative;
-  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(111, 78, 55, 0.15);
+  background: #f8ede5;
   cursor: pointer;
   font-family: inherit;
+  font-size: 18px;
+  transition: 0.2s;
+}
+
+.notification-trigger:hover {
+  background: #f1e0d3;
+  border-color: rgba(111, 78, 55, 0.3);
 }
 
 .notification-count {
+  position: absolute;
+  top: -2px;
+  right: -2px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-width: 18px;
   height: 18px;
   padding: 0 5px;
-  margin-left: 8px;
   border-radius: 999px;
   background: #c0392b;
   color: #fff;
   font-size: 11px;
   font-weight: 800;
-  vertical-align: middle;
+  border: 2px solid #fff;
 }
 
 .notification-panel {
@@ -45,6 +61,13 @@
   margin: 8px 0 0;
   font-size: 13px;
   color: #6b5d55;
+}
+
+.notification-empty mat-icon {
+  vertical-align: middle;
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
 }
 
 .notification-list {
@@ -82,4 +105,27 @@
 
 .notification-icon {
   font-size: 18px;
+}
+
+.notification-trigger mat-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+  color: #6F4E37;
+}
+
+.notification-icon mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  color: #6F4E37;
+  display: block;
+}
+
+.notification-item.is-overdue .notification-icon mat-icon {
+  color: #c0392b;
+}
+
+.notification-item.is-missing .notification-icon mat-icon {
+  color: #b07b4d;
 }

@@ -1,13 +1,16 @@
+import { speciesIcon } from '../../../../shared/pet-species-icon';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
 
 import { Pet } from '../../../../models/domain/pet';
 import { PetReadService } from '../../../../services/pet/pet-read';
 import { PetUpdateService } from '../../../../services/pet/pet-update';
-import { AuthenticationService } from '../../../../services/security/authentication';
+import { UserReadService } from '../../../../services/user/user-read';
+import { CurrentUserService } from '../../../../services/security/current-user';
 
 @Component({
   selector: 'app-adoption-hub',
-  imports: [],
+  imports: [MatIconModule],
   templateUrl: './adoption-hub.html',
   styleUrl: './adoption-hub.css',
 })
@@ -18,31 +21,67 @@ export class AdoptionHub implements OnInit {
   availableForAdoption: Pet[] = [];
   myPets: Pet[] = [];
   loading: boolean = true;
-  userEmail: string = '';
-  pendingConfirmationId: string | null = null;
+  userId: number | null = null;
+  ownerEmails: Record<number, string> = {};
+  pendingConfirmationId: number | null = null;
+
+  speciesIcon(species: string): string {
+    return speciesIcon(species);
+  }
+
 
   constructor(
     private petReadService: PetReadService,
     private petUpdateService: PetUpdateService,
-    private authenticationService: AuthenticationService,
+    private userReadService: UserReadService,
+    private currentUserService: CurrentUserService,
     private cdr: ChangeDetectorRef,
   ) { }
 
   async ngOnInit(): Promise<void> {
     try {
-      this.userEmail = this.authenticationService.getAuthenticatedUserEmail();
+      const currentUser = this.currentUserService.get() ?? await this.currentUserService.load();
+      if (!currentUser?.id) {
+        throw new Error('Usuário atual não encontrado');
+      }
+      this.userId = currentUser.id;
+
       const allPets = await this.petReadService.findAll();
 
       this.availableForAdoption = allPets.filter(
-        p => p.forAdoption && p.ownerEmail !== this.userEmail
+        p => p.forAdoption && p.ownerId !== this.userId
       );
-      this.myPets = allPets.filter(p => p.ownerEmail === this.userEmail);
+      this.myPets = allPets.filter(p => p.ownerId === this.userId);
+
+      await this.loadOwnerEmails(this.availableForAdoption);
     } catch (error) {
       console.error('Erro ao carregar dados de adoção', error);
     } finally {
       this.loading = false;
       this.cdr.detectChanges();
     }
+  }
+  private async loadOwnerEmails(pets: Pet[]): Promise<void> {
+    const uniqueOwnerIds = [...new Set(pets.map(p => p.ownerId))];
+
+    const owners = await Promise.all(
+      uniqueOwnerIds.map(ownerId =>
+        this.userReadService.findById(ownerId).catch(error => {
+          console.error(`Erro ao buscar dono ${ownerId}`, error);
+          return null;
+        })
+      )
+    );
+
+    owners.forEach((owner, index) => {
+      if (owner) {
+        this.ownerEmails[uniqueOwnerIds[index]] = owner.email;
+      }
+    });
+  }
+
+  ownerContact(pet: Pet): string {
+    return this.ownerEmails[pet.ownerId] ?? 'Contato indisponível';
   }
 
   setTab(tab: 'adotar' | 'doar'): void {

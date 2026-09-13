@@ -28,134 +28,116 @@
   },
   "user": [
     {
-      "fullname": "rodrigo",
-      "email": "rod@rod",
-      "password": "123",
-      "role": "USER",
-      "phone": "123456789",
-      "accountType": "pessoa",
-      "document": "123456789",
-      "id": "skBKympI9w0"
-    },
-    {
-      "fullname": "oi",
-      "email": "oi@oi",
-      "password": "123",
-      "role": "USER",
-      "phone": "123456789",
-      "accountType": "empresa",
-      "document": "123456789",
-      "id": "x-KqorgLXME"
-    },
-    {
-      "fullname": "Misterios SA",
-      "email": "misterios@misterios",
-      "password": "12345",
-      "role": "USER",
+      "fullname": "Cooperrita",
+      "email": "cooper@rita.com",
+      "password": "1234",
       "phone": "12345",
       "accountType": "empresa",
       "document": "12345",
-      "id": "VRwCSm6KIZQ"
+      "id": "SiNeiqEWRss"
     },
     {
-      "fullname": "tim",
-      "email": "tim@tim",
-      "password": "12345",
-      "role": "USER",
-      "phone": "123",
-      "accountType": "empresa",
-      "document": "123",
-      "id": "ltkYqZtacy8"
+      "fullname": "Banco Master",
+      "email": "banco@master",
+      "password": "1234",
+      "phone": "12345",
+      "accountType": "ENTERPRISE",
+      "document": "12345",
+      "id": "IfywTxvDK1Y"
     },
     {
       "fullname": "Rodrigo",
-      "email": "rod@rib",
-      "password": "12345",
-      "role": "USER",
-      "phone": "123",
-      "accountType": "pessoa",
-      "document": "123",
-      "id": "wiV5L137llA"
+      "email": "rod@rod",
+      "password": "1234",
+      "phone": "12345",
+      "accountType": "PERSON",
+      "document": "12345",
+      "id": "tNyyVnsbdgY"
     },
     {
-      "fullname": "dada",
-      "email": "da@da",
+      "fullname": "Ro",
+      "email": "ro@ro",
       "password": "1234",
-      "role": "USER",
-      "phone": "12431415",
-      "accountType": "pessoa",
-      "document": "151315123",
-      "id": "13yQfsABVSg"
+      "phone": "12345",
+      "accountType": "PERSON",
+      "document": "12345",
+      "id": "igWUWgsM5fM"
     }
   ],
-
   "pets": [
-
-
+    {
+      "name": "tobias",
+      "species": "DOG",
+      "breed": "pastor alemao",
+      "birthDate": "2003-03-18",
+      "ownerId": "IfywTxvDK1Y",
+      "id": "NwZf_ml6xso",
+      "forAdoption": true
+    },
+    {
+      "name": "loki",
+      "species": "DOG",
+      "breed": "Husky",
+      "birthDate": "2004-04-18",
+      "ownerId": "tNyyVnsbdgY",
+      "id": "K-Ii06J1v3Y"
+    },
+    {
+      "name": "Thor",
+      "species": "CAT",
+      "breed": "Persa",
+      "birthDate": "2003-03-18",
+      "ownerId": "tNyyVnsbdgY",
+      "id": "-kKxoUe33rY"
+    }
   ],
   "vaccines": [
     {
-      "petId": "SNGanMIm-OA",
+      "petId": "NwZf_ml6xso",
       "name": "raiva",
-      "applicationDate": "2003-03-20",
-      "nextDoseDate": "2004-03-20",
-      "id": "XWzgfWWnNDw"
+      "applicationDate": "2025-04-20",
+      "nextDoseDate": "2026-04-20",
+      "notes": "lote 112",
+      "id": "Cl0PP9ywDTI"
+    },
+    {
+      "petId": "K-Ii06J1v3Y",
+      "name": "Raiva",
+      "applicationDate": "2025-09-10",
+      "nextDoseDate": "2026-09-10",
+      "notes": "Lote 112",
+      "id": "PNlgzcVLxCI"
+    },
+    {
+      "petId": "NwZf_ml6xso",
+      "name": "raiva 2",
+      "applicationDate": "2010-10-10",
+      "nextDoseDate": "2030-10-20",
+      "notes": "lote 13",
+      "id": "nhvNOh-oeVM"
     }
   ],
   "announcements": [
     {
-      "id": "1",
-      "title": "Campanha de Vacinação Antirrábica 2026",
-      "description": "Traga seu cão ou gato para se vacinar gratuitamente contra a raiva. Não se esqueça da carteirinha!",
-      "date": "2026-09-15",
-      "creatorName": "Bruno",
-      "creatorEmail": "bruno.neves@vidaquesegue",
-      "type": "adoption"
+      "title": "Adoção Legal",
+      "description": "Adote",
+      "date": "2010-10-10",
+      "location": "Praça",
+      "creatorEmail": "banco@master",
+      "creatorName": "Banco Master",
+      "type": "ADOPTION",
+      "id": "wUNryO2oTjo"
     },
     {
-      "id": "1",
-      "title": "Campanha de Vacinação Antirrábica 2026",
-      "description": "Traga seu cão ou gato para se vacinar gratuitamente contra a raiva. Não se esqueça da carteirinha!",
-      "date": "2026-09-15",
-      "creatorName": "Bruno",
-      "creatorEmail": "bruno.neves@vidaquesegue",
-      "type": "vaccine"
-    },
-    {
-      "id": "1",
-      "title": "Campanha de Vacinação Antirrábica 2026",
-      "description": "Traga seu cão ou gato para se vacinar gratuitamente contra a raiva. Não se esqueça da carteirinha!",
-      "date": "2026-09-15",
-      "creatorName": "Bruno",
-      "creatorEmail": "bruno.neves@vidaquesegue",
-      "type": "adoption"
-    },
-    {
-      "id": "1",
-      "title": "Campanha de Vacinação Antirrábica 2026",
-      "description": "Traga seu cão ou gato para se vacinar gratuitamente contra a raiva. Não se esqueça da carteirinha!",
-      "date": "2026-09-15",
-      "creatorName": "Bruno",
-      "creatorEmail": "bruno.neves@vidaquesegue",
-      "type": "adoption"
-    },
-    {
-      "id": "1",
-      "title": "Campanha de Vacinação Antirrábica 2026",
-      "description": "Traga seu cão ou gato para se vacinar gratuitamente contra a raiva. Não se esqueça da carteirinha!",
-      "date": "2026-09-15",
-      "creatorName": "Bruno",
-      "creatorEmail": "bruno.neves@vidaquesegue",
-      "type": "vaccine"
-    },
-    {
-      "id": "1",
-      "title": "Campanha de Vacinação Antirrábica 2026",
-      "description": "Traga seu cão ou gato para se vacinar gratuitamente contra a raiva. Não se esqueça da carteirinha!",
-      "date": "2026-09-15",
-      "creatorName": "Bruno",
-      "creatorEmail": "bruno.neves@vidaquesegue",
-      "type": "vaccine"
+      "title": "Vacinacao de raiva ",
+      "description": "vacine ",
+      "date": "2009-09-09",
+      "location": "rodoviaria",
+      "lot": "113",
+      "creatorEmail": "banco@master",
+      "creatorName": "Banco Master",
+      "type": "VACCINE",
+      "id": "Zhn3QWnWBU4"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

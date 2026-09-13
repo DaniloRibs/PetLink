@@ -29,7 +29,7 @@ export class UserDetail implements OnInit {
   }
 
     async loadEntityById(entityId: string){
-      this.entity = await this.readService.findById(entityId);
+      this.entity = await this.readService.findById(Number(entityId));
       console.log(this.entity);
       this.cdr.detectChanges();
 

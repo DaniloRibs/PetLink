@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 
 import { Pet, PetSpecies } from '../../../../models/domain/pet';
 import { PetCreateService } from '../../../../services/pet/pet-create';
-import { AuthenticationService } from '../../../../services/security/authentication';
+import { CurrentUserService } from '../../../../services/security/current-user';
 
 @Component({
   selector: 'app-pet-create',
@@ -23,7 +23,7 @@ export class PetCreate {
     private router: Router,
     private formBuilder: FormBuilder,
     private petCreateService: PetCreateService,
-    private authenticationService: AuthenticationService,
+    private currentUserService: CurrentUserService,
   ) {
     this.form = this.formBuilder.group({
       name: ['', [Validators.required]],
@@ -37,7 +37,7 @@ export class PetCreate {
     return this.form.valid;
   }
 
-  createPet() {
+  async createPet() {
     this.createValidationFailed = false;
 
     if (!this.validateFields()) {
@@ -45,12 +45,21 @@ export class PetCreate {
       return;
     }
 
+    const currentUser = this.currentUserService.get() ?? await this.currentUserService.load();
+    if (!currentUser?.id) {
+      console.error('Usuário atual não encontrado');
+      this.createValidationFailed = true;
+      return;
+    }
+
+    const ownerId: number = currentUser.id;
+
     let pet: Pet = {
       name: this.form.controls['name'].value,
       species: this.form.controls['species'].value,
       breed: this.form.controls['breed'].value,
       birthDate: this.form.controls['birthDate'].value,
-      ownerEmail: this.authenticationService.getAuthenticatedUserEmail(),
+      ownerId: ownerId,
     };
 
     this.petCreateService.create(pet).subscribe({

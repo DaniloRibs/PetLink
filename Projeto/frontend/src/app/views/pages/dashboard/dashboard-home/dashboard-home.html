@@ -1,33 +1,45 @@
 <section class="hero-card dashboard-hero">
   <div class="hero-copy">
-    <p class="eyebrow">Bem-vindo de volta</p>
+    <p class="eyebrow">Bem-vindo de volta{{ userName ? ', ' + userName : '' }} 👋</p>
     <h1 class="dashboard-title">Tudo pronto para cuidar do seu pet hoje.</h1>
-    <p class="hero-text">Use o menu ao lado para acompanhar pets, vacinas, anúncios e adoções. Aqui é só o seu cantinho de boas-vindas. 🐾</p>
+    <p class="hero-text">Aqui está um resumo rápido do que está rolando no seu PetLink.</p>
 
     <div class="feature-grid">
-      <article class="feature-item">
-        <div class="feature-icon">🐾</div>
-        <h3>Cada pet, seu espaço</h3>
-        <p>Um cantinho dedicado pra cada bichinho da família.</p>
-      </article>
-      <article class="feature-item">
-        <div class="feature-icon">💉</div>
-        <h3>Saúde em dia</h3>
-        <p>Vacinas organizadas sem esforço nenhum.</p>
-      </article>
-      <article class="feature-item">
-        <div class="feature-icon">❤️</div>
-        <h3>Amor que multiplica</h3>
-        <p>Adoção e doação com muito carinho.</p>
-      </article>
+      <a routerLink="/painel/pets" class="feature-item stat-card">
+        <div class="feature-icon"><mat-icon>pets</mat-icon></div>
+        <span class="stat-number">{{ loading ? '–' : petsCount }}</span>
+        <h3>Meus Pets</h3>
+        <p>Pets cadastrados na sua conta.</p>
+      </a>
+      <a routerLink="/painel/adocoes" class="feature-item stat-card">
+        <div class="feature-icon"><mat-icon>favorite</mat-icon></div>
+        <span class="stat-number">{{ loading ? '–' : adoptionCount }}</span>
+        <h3>Em adoção</h3>
+        <p>Pets seus disponíveis para adoção agora.</p>
+      </a>
+      @if (isCompany) {
+      <a routerLink="/painel/anuncios" class="feature-item stat-card">
+        <div class="feature-icon"><mat-icon>campaign</mat-icon></div>
+        <span class="stat-number">{{ loading ? '–' : campaignsCount }}</span>
+        <h3>Minhas campanhas</h3>
+        <p>Campanhas de vacinação publicadas por você.</p>
+      </a>
+      } @else {
+      <a routerLink="/painel/adocoes" class="feature-item stat-card">
+        <div class="feature-icon"><mat-icon>home</mat-icon></div>
+        <span class="stat-number">{{ loading ? '–' : adoptablePetsCount }}</span>
+        <h3>Pets para adotar</h3>
+        <p>Pets de outros tutores disponíveis para adoção agora.</p>
+      </a>
+      }
     </div>
   </div>
 
   <div class="hero-visual" aria-hidden="true">
     <img src="assets/images/golden-retriever-dog.png" alt="" class="hero-dog">
     <div class="hero-oval"></div>
-    <div class="hero-paw">🐾</div>
-    <div class="hero-heart">♡</div>
+    <div class="hero-paw"><mat-icon>pets</mat-icon></div>
+    <div class="hero-heart"><mat-icon>favorite_border</mat-icon></div>
     <div class="hero-badge">Seu pet, sua rotina, tudo no mesmo lugar.</div>
   </div>
 </section>

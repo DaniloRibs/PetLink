@@ -1,6 +1,17 @@
 .sidebar-item.active-link {
   background: #6F4E37;
   color: #fff;
+  border-color: #6F4E37;
+  box-shadow: 0 4px 10px rgba(111, 78, 55, 0.18);
+}
+
+.sidebar-item.active-link .sidebar-item-icon {
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.sidebar-item.active-link:hover {
+  background: #6F4E37;
+  color: #fff;
 }
 
 .user-menu {
@@ -8,8 +19,44 @@
 }
 
 .user-menu-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   cursor: pointer;
   font-family: inherit;
+  border: 1px solid rgba(111, 78, 55, 0.15);
+  background: #f8ede5;
+  border-radius: 999px;
+  padding: 6px 14px 6px 6px;
+  color: #33211a;
+  font-weight: 700;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.user-menu-trigger:hover {
+  background: #f1e0d3;
+  border-color: rgba(111, 78, 55, 0.3);
+}
+
+.user-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #6F4E37;
+  color: #fff;
+  font-weight: 700;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+.user-menu-chevron {
+  font-size: 11px;
+  color: #8a7364;
+  font-weight: 700;
 }
 
 .user-menu-dropdown {
@@ -51,4 +98,59 @@
 
 .user-menu-item-danger {
   color: #c0392b;
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 16px 6px 6px;
+  border-radius: 999px;
+  background: #f8ede5;
+  box-shadow: 0 4px 10px rgba(94, 63, 39, 0.1);
+}
+
+.sidebar-brand-mark {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 4px;
+  flex-shrink: 0;
+}
+
+.sidebar-brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sidebar-brand-title {
+  margin: 0;
+  color: #6F4E37;
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.sidebar-brand-subtitle {
+  margin: 0;
+  color: rgba(111, 78, 55, 0.75);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.dashboard-header {
+  justify-content: flex-end;
+}
+
+.sidebar-item:hover,
+.sidebar-item:focus,
+.sidebar-item.active-link {
+  text-decoration: none;
+}
+
+.dashboard-header {
+  justify-content: space-between;
 }

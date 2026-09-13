@@ -1,13 +1,14 @@
 export enum AnnouncementType {
-    VACCINE = 'vaccine',
-    ADOPTION = 'adoption',
+    VACCINE = 'VACCINE',
+    ADOPTION = 'ADOPTION',
 }
 
 export interface Announcement {
-    id?: string;
+    id?: number;
     title: string;
     description: string;
     date?: string;
+    location?: string;
     creatorName: string;
     creatorEmail: string;
     type: AnnouncementType;

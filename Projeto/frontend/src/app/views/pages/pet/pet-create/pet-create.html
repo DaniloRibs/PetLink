@@ -8,10 +8,10 @@
         <div class="field-group">
           <select formControlName="species">
             <option value="" disabled selected hidden>Selecione o tipo</option>
-            <option [value]="PetSpecies.CACHORRO">Cachorro</option>
-            <option [value]="PetSpecies.GATO">Gato</option>
-            <option [value]="PetSpecies.PASSARO">Pássaro</option>
-            <option [value]="PetSpecies.OUTRO">Outro</option>
+            <option [value]="PetSpecies.DOG">Cachorro</option>
+            <option [value]="PetSpecies.CAT">Gato</option>
+            <option [value]="PetSpecies.BIRD">Pássaro</option>
+            <option [value]="PetSpecies.OTHER">Outro</option>
           </select>
         </div>
 
@@ -20,7 +20,7 @@
         <input type="submit" value="Cadastrar Pet" [disabled]="!validateFields()">
 
         @if (createValidationFailed) {
-          <p class="text-danger">Confira os dados e tente novamente.</p>
+        <p class="text-danger">Confira os dados e tente novamente.</p>
         }
       </form>
     </div>

@@ -15,7 +15,7 @@ export class UserReadService {
     return firstValueFrom(this.http.get<any>(`${environment.api_endpoint}/user`));
   }
 
-  findById(id: string): Promise<User> {
+  findById(id: number): Promise<User> {
     return firstValueFrom(this.http.get<any>(`${environment.api_endpoint}/user/${id}`));
   }
 

@@ -18,7 +18,7 @@ import { UserUpdateService } from '../../../../services/user/user-update';
 })
 export class UserEdit implements OnInit {
 
-entityId: string = '-1';
+entityId: number = 1;
 form: FormGroup;
 fullnameMiniLength: number = 2;
 fullnameMaxLength: number = 14;
@@ -55,13 +55,13 @@ constructor(
       console.log('ID invalido');
       return;
     }
-    this.entityId = id;
-    console.log(`ID da entidade: ${id!}`);
+    this.entityId = Number(id);
+    console.log(`ID da entidade: ${this.entityId}`);
 
-    this.loadEntityById(id);
+    this.loadEntityById(this.entityId);
   }
 
-  async loadEntityById(id: string){
+  async loadEntityById(id: number){
     let entity = await this.readService.findById(id);
     console.log(entity);
 

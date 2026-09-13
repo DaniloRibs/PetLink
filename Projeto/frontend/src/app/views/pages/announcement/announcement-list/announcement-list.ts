@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
 
 import { AccountType } from '../../../../models/domain/user';
 import { Announcement, AnnouncementType } from '../../../../models/domain/announcement';
@@ -9,15 +10,17 @@ import { AnnouncementCreateService } from '../../../../services/announcement/ann
 import { AnnouncementDeleteService } from '../../../../services/announcement/announcement-delete';
 import { CurrentUserService } from '../../../../services/security/current-user';
 
-import { AnnouncementCardComponent } from '../announcement-card';
+import { AnnouncementCardComponent } from '../announcement-card/announcement-card';
 
 @Component({
   selector: 'app-announcement-list',
-  imports: [ReactiveFormsModule, DatePipe, AnnouncementCardComponent],
+  imports: [ReactiveFormsModule, AnnouncementCardComponent, MatIconModule],
   templateUrl: './announcement-list.html',
   styleUrl: './announcement-list.css',
 })
 export class AnnouncementList implements OnInit {
+
+  AnnouncementType = AnnouncementType;
 
   announcements: Announcement[] = [];
   loading: boolean = true;
@@ -38,8 +41,10 @@ export class AnnouncementList implements OnInit {
   ) {
     this.form = this.formBuilder.group({
       title: ['', [Validators.required]],
+      type: ['', [Validators.required]],
       description: ['', [Validators.required]],
       date: [''],
+      location: [''],
     });
   }
 
@@ -50,7 +55,7 @@ export class AnnouncementList implements OnInit {
         user = await this.currentUserService.load();
       }
 
-      this.isCompany = user?.accountType === AccountType.EMPRESA;
+      this.isCompany = user?.accountType === AccountType.ENTERPRISE;
       this.userEmail = user?.email ?? '';
 
       this.announcements = await this.announcementReadService.findAll();
@@ -85,15 +90,16 @@ export class AnnouncementList implements OnInit {
       title: this.form.controls['title'].value,
       description: this.form.controls['description'].value,
       date: this.form.controls['date'].value || undefined,
+      location: this.form.controls['location'].value || undefined,
       creatorEmail: user?.email ?? this.userEmail,
       creatorName: user?.fullname ?? 'Empresa parceira',
-      type: AnnouncementType.VACCINE
+      type: this.form.controls['type'].value
     };
 
     this.announcementCreateService.create(announcement).subscribe({
       next: (created) => {
         this.announcements = [created, ...this.announcements];
-        this.form.reset();
+        this.form.reset({ type: '' });
         this.showForm = false;
         this.cdr.detectChanges();
       },
@@ -109,7 +115,6 @@ export class AnnouncementList implements OnInit {
     if (!announcement.id) {
       return;
     }
-
     this.announcementDeleteService.delete(announcement.id).subscribe({
       next: () => {
         this.announcements = this.announcements.filter(c => c.id !== announcement.id);
@@ -117,5 +122,10 @@ export class AnnouncementList implements OnInit {
       },
       error: (error) => console.error('Erro ao remover campanha', error),
     });
+  }
+
+  onAnnouncementUpdated(updated: Announcement): void {
+    this.announcements = this.announcements.map(a => a.id === updated.id ? updated : a);
+    this.cdr.detectChanges();
   }
 }

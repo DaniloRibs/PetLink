@@ -1,5 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
 import { AuthenticationService } from '../../../../services/security/authentication';
 import { CurrentUserService } from '../../../../services/security/current-user';
 import { User } from '../../../../models/domain/user';
@@ -7,7 +8,7 @@ import { NotificationBell } from '../../notification/notification-bell/notificat
 
 @Component({
   selector: 'app-dashboard-layout',
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, NotificationBell],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, NotificationBell, MatIconModule],
   templateUrl: './dashboard-layout.html',
   styleUrl: './dashboard-layout.css',
 })
@@ -16,6 +17,11 @@ export class DashboardLayout implements OnInit {
   userEmail: string = '';
   currentUser: User | null = null;
   userMenuOpen: boolean = false;
+
+  get userInitial(): string {
+    const name = this.currentUser?.fullname || this.userEmail || '?';
+    return name.trim().charAt(0).toUpperCase();
+  }
 
   constructor(
     private router: Router,

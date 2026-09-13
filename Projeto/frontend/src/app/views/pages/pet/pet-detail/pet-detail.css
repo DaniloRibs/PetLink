@@ -1,45 +1,177 @@
 .back-link {
-  margin-bottom: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 20px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(111, 78, 55, 0.25);
+  background: #fff;
+  color: #6F4E37;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: 0.2s;
 }
 
-.pet-badge {
-  display: inline-block;
-  margin: 8px 0;
-  padding: 3px 12px;
-  border-radius: 999px;
-  background: #6F4E37;
-  color: #fff;
-  font-size: 12px;
+.back-link:hover {
+  background: #f8ede5;
+  border-color: rgba(111, 78, 55, 0.4);
+}
+
+.empty-state+.action-btn,
+.vaccine-card-grid+.action-btn {
+  margin-top: 20px;
+}
+
+.pet-hero {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 20px;
+}
+
+.pet-hero-icon {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #f8ede5;
+  box-shadow: 0 4px 10px rgba(94, 63, 39, 0.08);
+  font-size: 30px;
+  flex-shrink: 0;
+}
+
+.pet-hero-info {
+  min-width: 0;
+}
+
+.pet-hero-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.pet-hero-title-row h2 {
+  margin: 0;
+  text-align: left;
+}
+
+.pet-meta {
+  margin: 4px 0 0;
+  color: #6b5d55;
 }
 
 .adoption-toggle {
-  display: block;
-  margin: 12px 0 20px;
+  display: inline-flex;
+  margin: 0;
+}
+
+.pet-actions-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 28px;
+}
+
+.section-divider {
   border: none;
-  cursor: pointer;
+  border-top: 1px solid rgba(111, 78, 55, 0.15);
+  margin: 0 0 24px;
 }
 
-.vaccine-list {
-  list-style: none;
-  padding: 0;
-  margin: 12px 0 20px;
+.section-title {
+  margin: 0 0 16px;
+}
+
+.vaccine-card-grid {
+  margin: 4px 0 24px;
   display: grid;
-  gap: 8px;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
 }
 
-.vaccine-list li {
-  background: #f8ede5;
-  border-radius: 10px;
-  padding: 10px 14px;
-  font-size: 14px;
+.vaccine-mini-card {
+  background: #fff;
+  border: 1px solid rgba(111, 78, 55, 0.12);
+  border-left: 4px solid #19d291;
+  border-radius: 14px;
+  padding: 16px 18px;
+  transition: 0.2s;
+}
+
+.vaccine-mini-card:hover {
+  box-shadow: 0 10px 20px rgba(94, 63, 39, 0.08);
+  transform: translateY(-2px);
+}
+
+.vaccine-mini-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #0f8a5f;
+  margin-bottom: 6px;
+}
+
+.vaccine-mini-icon {
+  display: inline-flex;
+}
+
+.vaccine-mini-icon mat-icon {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+  color: #19d291;
+}
+
+.vaccine-mini-line {
+  margin: 2px 0;
+  font-size: 13px;
   color: #4f3426;
 }
 
+.vaccine-mini-notes {
+  margin: 8px 0 0;
+  padding-top: 8px;
+  border-top: 1px dashed rgba(25, 210, 145, 0.35);
+  font-size: 13px;
+  font-style: italic;
+  color: #3d6b5a;
+}
+
 .vaccine-form-box {
-  width: auto;
-  max-width: 380px;
-  min-height: 0;
-  margin: 12px 0 0;
+  margin: 20px 0 0;
+}
+
+.vaccine-mini-delete {
+  margin-top: 10px;
+  padding: 6px 10px;
+  font-size: 12px;
+}
+
+.vaccine-mini-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.vaccine-mini-actions .vaccine-mini-delete,
+.vaccine-mini-actions .vaccine-mini-edit {
+  margin-top: 0;
+  padding: 6px 10px;
+  font-size: 12px;
+}
+
+.vaccine-edit-form {
+  margin-top: 10px;
+}
+
+.vaccine-edit-form .form-row {
+  grid-template-columns: 1fr;
+  gap: 12px;
 }
 
 .text-danger {
@@ -54,4 +186,18 @@
   font-size: 13px;
   text-align: center;
   margin: 0;
+}
+
+.pet-manage-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 0 0 28px;
+}
+
+@media (max-width: 480px) {
+  .pet-hero {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }

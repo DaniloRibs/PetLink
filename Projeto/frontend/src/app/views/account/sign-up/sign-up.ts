@@ -3,7 +3,6 @@ import { Router, RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { User, AccountType } from '../../../models/domain/user';
-import { UserRole } from '../../../models/domain/user-role';
 import { UserCreateService } from '../../../services/user/user-create';
 
 @Component({
@@ -29,7 +28,7 @@ export class SignUp {
     private createService: UserCreateService,
   ) {
     this.form = this.formBuilder.group({
-      accountType: [AccountType.PESSOA, [Validators.required]],
+      accountType: [AccountType.PERSON, [Validators.required]],
       fullname: ['', [
         Validators.required,
         Validators.minLength(this.fullnameMiniLength),
@@ -56,7 +55,7 @@ export class SignUp {
   }
 
   get isEmpresa() {
-    return this.form.controls['accountType'].value === AccountType.EMPRESA;
+    return this.form.controls['accountType'].value === AccountType.ENTERPRISE;
   }
 
   passwordsMatch() {
@@ -79,7 +78,6 @@ export class SignUp {
       fullname: this.form.controls['fullname'].value,
       email: this.form.controls['email'].value,
       password: this.form.controls['password'].value,
-      role: UserRole.USER,
       phone: this.form.controls['phone'].value,
       accountType: this.form.controls['accountType'].value,
       document: this.form.controls['document'].value,
