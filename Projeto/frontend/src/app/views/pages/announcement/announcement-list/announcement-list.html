@@ -1,7 +1,7 @@
 <section class="menu-footer-card content-area">
   <div class="content-form-card">
     <div class="section-header">
-      <p class="footer-title">📢 ANÚNCIOS</p>
+      <p class="footer-title">ANÚNCIOS</p>
       <h2>Campanhas de vacinação</h2>
     </div>
     <p class="hero-text">Fique de olho nas campanhas de vacinação divulgadas por empresas parceiras.</p>
@@ -19,20 +19,21 @@
       <form [formGroup]="form" (ngSubmit)="createCampaign()">
         <div class="field-group">
           <label>Título da campanha</label>
-          <input type="text" placeholder="Ex: Vacinação antirrábica gratuita" formControlName="title">
+          <input type="text" placeholder formControlName="title">
         </div>
 
         <div class="field-group">
           <label>Tipo</label>
           <select formControlName="type">
-            <option value="vaccine">Vacinação</option>
-            <option value="adoption">Adoção</option>
+            <option value="" disabled selected hidden>Selecionar</option>
+            <option [value]="AnnouncementType.VACCINE">Vacinação</option>
+            <option [value]="AnnouncementType.ADOPTION">Adoção</option>
           </select>
         </div>
 
         <div class="field-group">
           <label>Descrição</label>
-          <textarea placeholder="Descreva a campanha" formControlName="description" rows="5"></textarea>
+          <textarea placeholder formControlName="description" rows="5"></textarea>
         </div>
 
         <div class="form-row">
@@ -43,9 +44,16 @@
 
           <div class="field-group">
             <label>Local (opcional)</label>
-            <input type="text" placeholder="Ex: Praça Central" formControlName="location">
+            <input type="text" placeholder formControlName="location">
           </div>
         </div>
+
+        @if (form.controls['type'].value === AnnouncementType.VACCINE) {
+        <div class="field-group">
+          <label>Lote da vacina (opcional)</label>
+          <input type="text" placeholder formControlName="lot">
+        </div>
+        }
 
         <input type="submit" value="Publicar" [disabled]="!validateFields()">
 

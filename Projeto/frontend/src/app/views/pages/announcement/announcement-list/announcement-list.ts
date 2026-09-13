@@ -19,6 +19,8 @@ import { AnnouncementCardComponent } from '../announcement-card/announcement-car
 })
 export class AnnouncementList implements OnInit {
 
+  AnnouncementType = AnnouncementType;
+
   announcements: Announcement[] = [];
   loading: boolean = true;
   isCompany: boolean = false;
@@ -38,10 +40,11 @@ export class AnnouncementList implements OnInit {
   ) {
     this.form = this.formBuilder.group({
       title: ['', [Validators.required]],
-      type: [AnnouncementType.VACCINE, [Validators.required]],
+      type: ['', [Validators.required]],
       description: ['', [Validators.required]],
       date: [''],
       location: [''],
+      lot: [''],
     });
   }
 
@@ -88,6 +91,7 @@ export class AnnouncementList implements OnInit {
       description: this.form.controls['description'].value,
       date: this.form.controls['date'].value || undefined,
       location: this.form.controls['location'].value || undefined,
+      lot: this.form.controls['lot'].value || undefined,
       creatorEmail: user?.email ?? this.userEmail,
       creatorName: user?.fullname ?? 'Empresa parceira',
       type: this.form.controls['type'].value
@@ -96,7 +100,7 @@ export class AnnouncementList implements OnInit {
     this.announcementCreateService.create(announcement).subscribe({
       next: (created) => {
         this.announcements = [created, ...this.announcements];
-        this.form.reset({ type: AnnouncementType.VACCINE });
+        this.form.reset({ type: '' });
         this.showForm = false;
         this.cdr.detectChanges();
       },

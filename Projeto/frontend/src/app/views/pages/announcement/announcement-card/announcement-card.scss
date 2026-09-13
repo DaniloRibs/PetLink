@@ -1,30 +1,26 @@
-.vaccine-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  border-radius: 16px;
-  border-left: 8px solid #19d291;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15) !important;
-  }
-
-}
-
+.vaccine-card,
 .adoption-card {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border-radius: 16px;
-  border-left: 8px solid #ff4d6d;
+  border-radius: 18px !important;
+  background-color: #fffaf5 !important;
+  border-left: 8px solid transparent;
+  box-shadow: 0 10px 22px rgba(94, 63, 39, 0.10) !important;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 
   &:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15) !important;
+    box-shadow: 0 14px 28px rgba(94, 63, 39, 0.16) !important;
   }
+}
+
+.vaccine-card {
+  border-left-color: #19d291;
+}
+
+.adoption-card {
+  border-left-color: #ff4d6d;
 }
 
 .vaccine-icon-header {
@@ -48,10 +44,14 @@
 }
 
 .description-text {
-  color: #444;
+  color: #4f3426;
   font-size: 0.95rem;
-  line-height: 1.5;
+  line-height: 1.6;
   margin: 4px 0 14px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(111, 78, 55, 0.05);
+  border: 1px solid rgba(111, 78, 55, 0.08);
 }
 
 .date-badge {
@@ -77,4 +77,20 @@ mat-card-header {
 
 mat-card-actions {
   margin-top: 8px;
+}
+
+.contact-badge {
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

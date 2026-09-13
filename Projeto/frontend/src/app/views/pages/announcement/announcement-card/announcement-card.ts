@@ -19,14 +19,16 @@ import { Announcement, AnnouncementType } from '../../../../models/domain/announ
   templateUrl: './announcement-card.html',
   styleUrl: './announcement-card.scss'
 })
+
 export class AnnouncementCardComponent {
 
   @Input({ required: true }) announcement!: Announcement;
 
   AnnouncementType = AnnouncementType;
+  expanded = false;
 
-  verDetalhes(): void {
-    console.log('Detalhes do anúncio selecionado:', this.announcement);
+  toggleDetails(): void {
+    this.expanded = !this.expanded;
   }
 
 }

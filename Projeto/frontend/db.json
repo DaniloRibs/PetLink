@@ -37,7 +37,7 @@
       "id": "SiNeiqEWRss"
     },
     {
-      "fullname": "banco master",
+      "fullname": "Banco Master",
       "email": "banco@master",
       "password": "1234",
       "phone": "12345",
@@ -63,7 +63,7 @@
       "birthDate": "2003-03-18",
       "ownerId": "IfywTxvDK1Y",
       "id": "NwZf_ml6xso",
-      "forAdoption": false
+      "forAdoption": true
     },
     {
       "name": "loki",
@@ -100,6 +100,17 @@
       "id": "PNlgzcVLxCI"
     }
   ],
-  "announcements": [],
+  "announcements": [
+    {
+      "title": "Vacinacao",
+      "description": "venha vacinar ",
+      "date": "2026-10-20",
+      "location": "Praça",
+      "creatorEmail": "banco@master",
+      "creatorName": "Banco Master",
+      "type": "vaccine",
+      "id": "O8K8ZYTQBjw"
+    }
+  ],
   "$schema": "./node_modules/json-server/schema.json"
 }

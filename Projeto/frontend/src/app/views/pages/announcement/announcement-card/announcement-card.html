@@ -30,13 +30,26 @@
       <span><strong>Local:</strong> {{ announcement.location }}</span>
     </div>
     }
+
+    @if (announcement.lot) {
+    <div class="date-badge mt-3">
+      <mat-icon class="me-1">inventory_2</mat-icon>
+      <span><strong>Lote:</strong> {{ announcement.lot }}</span>
+    </div>
+    }
+
+    @if (expanded) {
+    <div class="date-badge mt-3 contact-badge">
+      <mat-icon class="me-1">mail</mat-icon>
+      <span><strong>Contato:</strong> {{ announcement.creatorEmail }}</span>
+    </div>
+    }
   </mat-card-content>
 
   <mat-card-actions align="end">
     <button mat-flat-button
       [style.background-color]="announcement.type === AnnouncementType.ADOPTION ? '#ff4d6d' : '#19d291'"
-      [style.color]="'#fff'" (click)="verDetalhes()">
-      Saber Mais
+      [style.color]="'#fff'" (click)="toggleDetails()">
+      {{ expanded ? 'Ver menos' : 'Saber Mais' }}
     </button>
   </mat-card-actions>
-</mat-card>
