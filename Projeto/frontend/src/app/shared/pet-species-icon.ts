@@ -1,8 +1,10 @@
+import { PetSpecies } from '../models/domain/pet';
+
 export function speciesIcon(species: string): string {
     switch (species) {
-        case 'cachorro': return '🐶';
-        case 'gato': return '🐱';
-        case 'passaro': return '🐦';
+        case PetSpecies.DOG: return '🐶';
+        case PetSpecies.CAT: return '🐱';
+        case PetSpecies.BIRD: return '🐦';
         default: return '🐾';
     }
 }

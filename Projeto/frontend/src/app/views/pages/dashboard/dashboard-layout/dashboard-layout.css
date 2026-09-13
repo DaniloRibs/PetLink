@@ -144,3 +144,9 @@
 .dashboard-header {
   justify-content: flex-end;
 }
+
+.sidebar-item:hover,
+.sidebar-item:focus,
+.sidebar-item.active-link {
+  text-decoration: none;
+}

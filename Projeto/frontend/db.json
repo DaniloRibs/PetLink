@@ -46,7 +46,7 @@
       "id": "IfywTxvDK1Y"
     },
     {
-      "fullname": "rodrigo",
+      "fullname": "Rodrigo",
       "email": "rod@rod",
       "password": "1234",
       "phone": "12345",
@@ -72,6 +72,14 @@
       "birthDate": "2004-04-18",
       "ownerId": "tNyyVnsbdgY",
       "id": "K-Ii06J1v3Y"
+    },
+    {
+      "name": "Thor",
+      "species": "CAT",
+      "breed": "Persa",
+      "birthDate": "2003-03-18",
+      "ownerId": "tNyyVnsbdgY",
+      "id": "-kKxoUe33rY"
     }
   ],
   "vaccines": [
@@ -82,6 +90,14 @@
       "nextDoseDate": "2026-04-20",
       "notes": "lote 112",
       "id": "Cl0PP9ywDTI"
+    },
+    {
+      "petId": "K-Ii06J1v3Y",
+      "name": "Raiva",
+      "applicationDate": "2025-09-10",
+      "nextDoseDate": "2026-09-10",
+      "notes": "Lote 112",
+      "id": "PNlgzcVLxCI"
     }
   ],
   "announcements": [],
