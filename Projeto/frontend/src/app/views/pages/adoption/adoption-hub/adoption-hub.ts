@@ -1,5 +1,6 @@
 import { speciesIcon } from '../../../../shared/pet-species-icon';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
 
 import { Pet } from '../../../../models/domain/pet';
 import { PetReadService } from '../../../../services/pet/pet-read';
@@ -9,7 +10,7 @@ import { CurrentUserService } from '../../../../services/security/current-user';
 
 @Component({
   selector: 'app-adoption-hub',
-  imports: [],
+  imports: [MatIconModule],
   templateUrl: './adoption-hub.html',
   styleUrl: './adoption-hub.css',
 })

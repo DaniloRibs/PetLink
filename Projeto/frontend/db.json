@@ -53,6 +53,15 @@
       "accountType": "PERSON",
       "document": "12345",
       "id": "tNyyVnsbdgY"
+    },
+    {
+      "fullname": "Ro",
+      "email": "ro@ro",
+      "password": "1234",
+      "phone": "12345",
+      "accountType": "PERSON",
+      "document": "12345",
+      "id": "igWUWgsM5fM"
     }
   ],
   "pets": [
@@ -110,6 +119,16 @@
       "creatorName": "Banco Master",
       "type": "vaccine",
       "id": "O8K8ZYTQBjw"
+    },
+    {
+      "title": "Adoção Legal",
+      "description": "Adote",
+      "date": "2010-10-10",
+      "location": "Praça",
+      "creatorEmail": "banco@master",
+      "creatorName": "Banco Master",
+      "type": "ADOPTION",
+      "id": "wUNryO2oTjo"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
 
 import { Pet } from '../../../../models/domain/pet';
 import { AccountType } from '../../../../models/domain/user';
@@ -9,7 +10,7 @@ import { CurrentUserService } from '../../../../services/security/current-user';
 
 @Component({
   selector: 'app-dashboard-home',
-  imports: [RouterLink],
+  imports: [RouterLink, MatIconModule],
   templateUrl: './dashboard-home.html',
   styleUrl: './dashboard-home.css',
 })

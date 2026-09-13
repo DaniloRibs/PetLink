@@ -11,7 +11,7 @@
   height: 42px;
   border-radius: 50%;
   border: 1px solid rgba(111, 78, 55, 0.15);
-  background: rgba(255, 255, 255, 0.85);
+  background: #f8ede5;
   cursor: pointer;
   font-family: inherit;
   font-size: 18px;
@@ -19,7 +19,7 @@
 }
 
 .notification-trigger:hover {
-  background: #fff;
+  background: #f1e0d3;
   border-color: rgba(111, 78, 55, 0.3);
 }
 
@@ -63,6 +63,13 @@
   color: #6b5d55;
 }
 
+.notification-empty mat-icon {
+  vertical-align: middle;
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
 .notification-list {
   margin-top: 12px;
   display: grid;
@@ -98,4 +105,27 @@
 
 .notification-icon {
   font-size: 18px;
+}
+
+.notification-trigger mat-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+  color: #6F4E37;
+}
+
+.notification-icon mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  color: #6F4E37;
+  display: block;
+}
+
+.notification-item.is-overdue .notification-icon mat-icon {
+  color: #c0392b;
+}
+
+.notification-item.is-missing .notification-icon mat-icon {
+  color: #b07b4d;
 }

@@ -95,3 +95,10 @@
   text-align: center;
   margin: 0;
 }
+
+.action-btn-icon mat-icon {
+  vertical-align: middle;
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}

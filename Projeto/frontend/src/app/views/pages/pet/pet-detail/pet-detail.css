@@ -109,7 +109,14 @@
 }
 
 .vaccine-mini-icon {
+  display: inline-flex;
+}
+
+.vaccine-mini-icon mat-icon {
   font-size: 16px;
+  width: 16px;
+  height: 16px;
+  color: #19d291;
 }
 
 .vaccine-mini-line {

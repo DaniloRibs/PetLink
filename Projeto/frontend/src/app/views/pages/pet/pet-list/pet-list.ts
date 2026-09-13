@@ -1,6 +1,7 @@
 import { speciesIcon } from '../../../../shared/pet-species-icon';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { Pet, PetSpecies } from '../../../../models/domain/pet';
@@ -10,7 +11,7 @@ import { CurrentUserService } from '../../../../services/security/current-user';
 
 @Component({
   selector: 'app-pet-list',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, MatIconModule],
   templateUrl: './pet-list.html',
   styleUrl: './pet-list.css',
 })

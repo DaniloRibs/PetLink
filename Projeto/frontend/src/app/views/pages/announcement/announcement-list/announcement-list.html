@@ -8,7 +8,9 @@
 
     @if (isCompany) {
     <button class="primary-button action-btn announcement-cta" [class.is-cancel]="showForm" (click)="toggleForm()">
-      <span class="action-btn-icon">{{ showForm ? '✕' : '+' }}</span>
+      <span class="action-btn-icon">
+        <mat-icon>{{ showForm ? 'close' : 'add' }}</mat-icon>
+      </span>
       {{ showForm ? 'Cancelar' : 'Publicar campanha' }}
     </button>
 
@@ -73,7 +75,7 @@
     <p>Carregando...</p>
     } @else if (announcements.length === 0) {
     <div class="empty-state">
-      <div class="empty-state-icon">📢</div>
+      <div class="empty-state-icon"><mat-icon>campaign</mat-icon></div>
       <p class="empty-state-title">Nenhuma campanha publicada ainda</p>
       <p class="empty-state-text">Assim que uma empresa parceira publicar, ela aparece aqui.</p>
     </div>

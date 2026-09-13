@@ -1,6 +1,6 @@
 <section class="menu-footer-card content-area">
   <div class="content-form-card">
-    <a routerLink="/painel" class="back-link">← Voltar para o painel</a>
+    <a routerLink="/painel" class="back-link primary-button"><mat-icon>arrow_back</mat-icon> Voltar para o painel</a>
 
     <p class="footer-title">MEU PERFIL</p>
 
@@ -41,7 +41,8 @@
           <p class="text-success">Dados atualizados com sucesso!</p>
           }
           @if (emailChanged) {
-          <p class="text-info">📧 Seu email de login foi atualizado — use o novo email na próxima vez que entrar.</p>
+          <p class="text-info"><mat-icon>email</mat-icon> Seu email de login foi atualizado — use o novo email na
+            próxima vez que entrar.</p>
           }
         </form>
       </div>

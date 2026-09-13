@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
 
 import { PetReadService } from '../../../../services/pet/pet-read';
 import { VaccineReadService } from '../../../../services/vaccine/vaccine-read';
@@ -14,7 +15,7 @@ interface VaccineNotification {
 
 @Component({
   selector: 'app-notification-bell',
-  imports: [RouterLink],
+  imports: [RouterLink, MatIconModule],
   templateUrl: './notification-bell.html',
   styleUrl: './notification-bell.css',
 })

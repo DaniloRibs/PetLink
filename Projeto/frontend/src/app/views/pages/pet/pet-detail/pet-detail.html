@@ -6,7 +6,8 @@
     <p>Pet não encontrado.</p>
     } @else {
 
-    <a routerLink="/painel/pets" class="back-link">← Voltar para Meus Pets</a>
+    <a routerLink="/painel/pets" class="back-link primary-button"><mat-icon>arrow_back</mat-icon> Voltar para Meus
+      Pets</a>
 
     <div class="pet-hero">
       <div class="pet-hero-icon">{{ speciesIcon(pet.species) }}</div>
@@ -32,8 +33,9 @@
       <button class="secondary-button" (click)="cancelToggleAdoption()">Cancelar</button>
     </div>
     } @else {
-    <button class="secondary-button adoption-toggle" (click)="requestToggleAdoption()">
-      {{ pet.forAdoption ? '💔 Remover da lista de adoção' : '❤️ Colocar para adoção' }}
+    <button class="primary-button adoption-toggle" (click)="requestToggleAdoption()">
+      <mat-icon>{{ pet.forAdoption ? 'favorite' : 'favorite_border' }}</mat-icon>
+      {{ pet.forAdoption ? 'Remover da lista de adoção' : 'Colocar para adoção' }}
     </button>
     }
 
@@ -43,7 +45,7 @@
 
     @if (vaccines.length === 0) {
     <div class="empty-state">
-      <div class="empty-state-icon">💉</div>
+      <div class="empty-state-icon"><mat-icon>vaccines</mat-icon></div>
       <p class="empty-state-title">Nenhuma vacina cadastrada ainda</p>
       <p class="empty-state-text">Use o botão abaixo para registrar a primeira vacina de {{ pet.name }}.</p>
     </div>
@@ -52,7 +54,7 @@
       @for (vaccine of vaccines; track vaccine.id) {
       <div class="vaccine-mini-card">
         <div class="vaccine-mini-card-header">
-          <span class="vaccine-mini-icon">💉</span>
+          <span class="vaccine-mini-icon"><mat-icon>vaccines</mat-icon></span>
           <strong>{{ vaccine.name }}</strong>
         </div>
         <p class="vaccine-mini-line">Aplicada em {{ vaccine.applicationDate | date:'dd/MM/yyyy' }}</p>
@@ -67,8 +69,8 @@
     </div>
     }
 
-    <button class="secondary-button action-btn" (click)="toggleVaccineForm()">
-      <span class="action-btn-icon">{{ showVaccineForm ? '✕' : '+' }}</span>
+    <button class="primary-button action-btn" [class.is-cancel]="showVaccineForm" (click)="toggleVaccineForm()">
+      <span class="action-btn-icon"><mat-icon>{{ showVaccineForm ? 'close' : 'add' }}</mat-icon></span>
       {{ showVaccineForm ? 'Cancelar' : 'Cadastrar vacina' }}
     </button>
 

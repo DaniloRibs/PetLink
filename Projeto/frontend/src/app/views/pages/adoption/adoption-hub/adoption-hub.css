@@ -42,3 +42,9 @@
   font-weight: 600;
   color: #6F4E37 !important;
 }
+
+.adoption-tab mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}

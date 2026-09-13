@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
 
 import { AccountType } from '../../../../models/domain/user';
 import { Announcement, AnnouncementType } from '../../../../models/domain/announcement';
@@ -13,7 +14,7 @@ import { AnnouncementCardComponent } from '../announcement-card/announcement-car
 
 @Component({
   selector: 'app-announcement-list',
-  imports: [ReactiveFormsModule, AnnouncementCardComponent],
+  imports: [ReactiveFormsModule, AnnouncementCardComponent, MatIconModule],
   templateUrl: './announcement-list.html',
   styleUrl: './announcement-list.css',
 })

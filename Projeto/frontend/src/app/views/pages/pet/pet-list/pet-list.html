@@ -3,8 +3,8 @@
     <div class="section-header">
       <p class="footer-title">MEUS PETS</p>
       <h2>Seus pets cadastrados</h2>
-      <button class="secondary-button action-btn" (click)="toggleForm()">
-        <span class="action-btn-icon">{{ showForm ? '✕' : '+' }}</span>
+      <button class="primary-button action-btn" [class.is-cancel]="showForm" (click)="toggleForm()">
+        <span class="action-btn-icon"><mat-icon>{{ showForm ? 'close' : 'add' }}</mat-icon></span>
         {{ showForm ? 'Cancelar' : 'Cadastrar Pet' }}
       </button>
     </div>
@@ -55,7 +55,7 @@
     <p>Carregando...</p>
     } @else if (pets.length === 0) {
     <div class="empty-state">
-      <div class="empty-state-icon">🐾</div>
+      <div class="empty-state-icon"><mat-icon>pets</mat-icon></div>
       <p class="empty-state-title">Nenhum pet cadastrado ainda</p>
       <p class="empty-state-text">Use o botão "Cadastrar Pet" acima para adicionar o primeiro.</p>
     </div>

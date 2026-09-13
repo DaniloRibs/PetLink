@@ -1,6 +1,6 @@
 <div class="notification-bell">
   <button type="button" class="notification-trigger" (click)="togglePanel()">
-    🔔
+    <mat-icon>notifications</mat-icon>
     @if (!loading && notifications.length > 0) {
     <span class="notification-count">{{ notifications.length }}</span>
     }
@@ -13,7 +13,9 @@
     @if (loading) {
     <p class="notification-empty">Carregando...</p>
     } @else if (notifications.length === 0) {
-    <p class="notification-empty">Nenhum aviso por enquanto — as vacinas dos seus pets estão em dia. 🎉</p>
+    <p class="notification-empty">Nenhum aviso por enquanto — as vacinas dos seus pets estão em dia.
+      <mat-icon>check_circle</mat-icon>
+    </p>
     } @else {
     <div class="notification-list">
       @for (item of notifications; track item.petId + item.message) {
@@ -21,7 +23,8 @@
         [class.is-missing]="item.status === 'missing'" routerLink="/painel/pets/{{ item.petId }}"
         (click)="closePanel()">
         <span class="notification-icon">
-          {{ item.status === 'overdue' ? '⚠️' : item.status === 'missing' ? '📋' : '🔔' }}
+          <mat-icon>{{ item.status === 'overdue' ? 'warning' : item.status === 'missing' ? 'assignment' :
+            'notifications_active' }}</mat-icon>
         </span>
         <span><strong>{{ item.petName }}</strong> {{ item.message }}</span>
       </a>

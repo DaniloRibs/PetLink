@@ -5,10 +5,10 @@
 
     <div class="adoption-tabs">
       <button class="adoption-tab" [class.active]="activeTab === 'adotar'" (click)="setTab('adotar')">
-        ❤️ Quero adotar
+        <mat-icon>favorite</mat-icon> Quero adotar
       </button>
       <button class="adoption-tab" [class.active]="activeTab === 'doar'" (click)="setTab('doar')">
-        🏠 Doar um pet meu
+        <mat-icon>home</mat-icon> Doar um pet meu
       </button>
     </div>
 
@@ -18,7 +18,7 @@
 
     @if (availableForAdoption.length === 0) {
     <div class="empty-state">
-      <div class="empty-state-icon">❤️</div>
+      <div class="empty-state-icon"><mat-icon>favorite</mat-icon></div>
       <p class="empty-state-title">Nenhum pet disponível no momento</p>
       <p class="empty-state-text">Volte mais tarde — novos pets para adoção aparecem aqui.</p>
     </div>
@@ -39,7 +39,7 @@
 
     @if (myPets.length === 0) {
     <div class="empty-state">
-      <div class="empty-state-icon">🐾</div>
+      <div class="empty-state-icon"><mat-icon>pets</mat-icon></div>
       <p class="empty-state-title">Você ainda não tem pets cadastrados</p>
       <p class="empty-state-text">Cadastre um pet em "Meus Pets" para poder colocá-lo para doação.</p>
     </div>

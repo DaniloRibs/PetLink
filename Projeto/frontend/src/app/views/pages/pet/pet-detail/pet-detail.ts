@@ -2,6 +2,7 @@ import { speciesIcon } from '../../../../shared/pet-species-icon';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { Pet } from '../../../../models/domain/pet';
@@ -13,7 +14,7 @@ import { VaccineCreateService } from '../../../../services/vaccine/vaccine-creat
 
 @Component({
   selector: 'app-pet-detail',
-  imports: [RouterLink, ReactiveFormsModule, DatePipe],
+  imports: [RouterLink, ReactiveFormsModule, DatePipe, MatIconModule],
   templateUrl: './pet-detail.html',
   styleUrl: './pet-detail.css',
 })
