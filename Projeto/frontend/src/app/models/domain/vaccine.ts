@@ -4,5 +4,6 @@ export interface Vaccine {
     name: string;
     applicationDate: string;
     nextDoseDate?: string;
+    lot?: string;
     notes?: string;
 }

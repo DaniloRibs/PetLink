@@ -45,7 +45,6 @@ export class AnnouncementList implements OnInit {
       description: ['', [Validators.required]],
       date: [''],
       location: [''],
-      lot: [''],
     });
   }
 
@@ -92,7 +91,6 @@ export class AnnouncementList implements OnInit {
       description: this.form.controls['description'].value,
       date: this.form.controls['date'].value || undefined,
       location: this.form.controls['location'].value || undefined,
-      lot: this.form.controls['lot'].value || undefined,
       creatorEmail: user?.email ?? this.userEmail,
       creatorName: user?.fullname ?? 'Empresa parceira',
       type: this.form.controls['type'].value
@@ -117,7 +115,6 @@ export class AnnouncementList implements OnInit {
     if (!announcement.id) {
       return;
     }
-
     this.announcementDeleteService.delete(announcement.id).subscribe({
       next: () => {
         this.announcements = this.announcements.filter(c => c.id !== announcement.id);
@@ -125,5 +122,10 @@ export class AnnouncementList implements OnInit {
       },
       error: (error) => console.error('Erro ao remover campanha', error),
     });
+  }
+
+  onAnnouncementUpdated(updated: Announcement): void {
+    this.announcements = this.announcements.map(a => a.id === updated.id ? updated : a);
+    this.cdr.detectChanges();
   }
 }

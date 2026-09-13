@@ -343,6 +343,37 @@ a:hover {
     border-color: #a88467;
 }
 
+.menu-page .danger-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 42px;
+    padding: 0 18px;
+    border-radius: 12px;
+    border: 1px solid rgba(192, 57, 43, 0.35);
+    background: rgba(192, 57, 43, 0.08);
+    color: #c0392b;
+    font-weight: 700;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+.menu-page .danger-button:hover {
+    background: rgba(192, 57, 43, 0.14);
+    border-color: #c0392b;
+}
+
+.menu-page .danger-button.is-solid {
+    background: #c0392b;
+    color: #fff;
+    border-color: #c0392b;
+}
+
+.menu-page .danger-button.is-solid:hover {
+    background: #a93226;
+}
+
 .menu-page .menu-link:hover {
     background: #5C4033;
     border-color: #5C4033;

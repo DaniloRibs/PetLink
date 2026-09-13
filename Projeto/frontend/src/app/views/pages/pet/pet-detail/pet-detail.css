@@ -66,6 +66,14 @@
 
 .adoption-toggle {
   display: inline-flex;
+  margin: 0;
+}
+
+.pet-actions-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
   margin: 0 0 28px;
 }
 
@@ -136,6 +144,34 @@
 
 .vaccine-form-box {
   margin: 20px 0 0;
+}
+
+.vaccine-mini-delete {
+  margin-top: 10px;
+  padding: 6px 10px;
+  font-size: 12px;
+}
+
+.vaccine-mini-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.vaccine-mini-actions .vaccine-mini-delete,
+.vaccine-mini-actions .vaccine-mini-edit {
+  margin-top: 0;
+  padding: 6px 10px;
+  font-size: 12px;
+}
+
+.vaccine-edit-form {
+  margin-top: 10px;
+}
+
+.vaccine-edit-form .form-row {
+  grid-template-columns: 1fr;
+  gap: 12px;
 }
 
 .text-danger {

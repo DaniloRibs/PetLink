@@ -9,7 +9,6 @@ export interface Announcement {
     description: string;
     date?: string;
     location?: string;
-    lot?: string;
     creatorName: string;
     creatorEmail: string;
     type: AnnouncementType;

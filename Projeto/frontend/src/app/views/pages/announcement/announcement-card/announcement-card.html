@@ -17,6 +17,40 @@
   </mat-card-header>
 
   <mat-card-content class="mt-3">
+    @if (showEditForm) {
+    <form [formGroup]="editForm" (ngSubmit)="saveEdit()" class="announcement-edit-form">
+      <div class="field-group">
+        <label>Título da campanha</label>
+        <input type="text" formControlName="title">
+      </div>
+
+      <div class="field-group">
+        <label>Descrição</label>
+        <textarea formControlName="description" rows="4"></textarea>
+      </div>
+
+      <div class="form-row">
+        <div class="field-group">
+          <label>Data (opcional)</label>
+          <input type="date" formControlName="date">
+        </div>
+
+        <div class="field-group">
+          <label>Local (opcional)</label>
+          <input type="text" formControlName="location">
+        </div>
+      </div>
+
+      <div class="confirm-actions">
+        <input type="submit" class="primary-button" value="Salvar" [disabled]="!validateEditFields()">
+        <button type="button" class="secondary-button" (click)="toggleEditForm()">Cancelar</button>
+      </div>
+
+      @if (editValidationFailed) {
+      <p class="text-danger">Confira os dados e tente novamente.</p>
+      }
+    </form>
+    } @else {
     <p class="description-text">
       {{ announcement.description }}
     </p>
@@ -31,22 +65,24 @@
     </div>
     }
 
-    @if (announcement.lot) {
-    <div class="date-badge mt-3">
-      <mat-icon class="me-1">inventory_2</mat-icon>
-      <span><strong>Lote:</strong> {{ announcement.lot }}</span>
-    </div>
-    }
-
     @if (expanded) {
     <div class="date-badge mt-3 contact-badge">
       <mat-icon class="me-1">mail</mat-icon>
       <span><strong>Contato:</strong> {{ announcement.creatorEmail }}</span>
     </div>
     }
+    }
   </mat-card-content>
 
   <mat-card-actions align="end">
+    @if (canManage) {
+    <button mat-icon-button (click)="toggleEditForm()" aria-label="Editar campanha">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button mat-icon-button color="warn" (click)="onDelete()" aria-label="Excluir campanha">
+      <mat-icon>delete</mat-icon>
+    </button>
+    }
     <button mat-flat-button
       [style.background-color]="announcement.type === AnnouncementType.ADOPTION ? '#ff4d6d' : '#19d291'"
       [style.color]="'#fff'" (click)="toggleDetails()">

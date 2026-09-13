@@ -50,13 +50,6 @@
           </div>
         </div>
 
-        @if (form.controls['type'].value === AnnouncementType.VACCINE) {
-        <div class="field-group">
-          <label>Lote da vacina (opcional)</label>
-          <input type="text" placeholder formControlName="lot">
-        </div>
-        }
-
         <input type="submit" value="Publicar" [disabled]="!validateFields()">
 
         @if (createValidationFailed) {
@@ -82,7 +75,9 @@
     } @else {
     <div class="announcement-list">
       @for (announcement of announcements; track announcement.id) {
-      <announcement-card [announcement]="announcement" />
+      <announcement-card [announcement]="announcement"
+        [canManage]="isCompany && announcement.creatorEmail === userEmail" (delete)="removeCampaign(announcement)"
+        (updated)="onAnnouncementUpdated($event)" />
       }
     </div>
     }

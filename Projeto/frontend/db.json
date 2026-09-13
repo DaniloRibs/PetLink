@@ -107,19 +107,17 @@
       "nextDoseDate": "2026-09-10",
       "notes": "Lote 112",
       "id": "PNlgzcVLxCI"
+    },
+    {
+      "petId": "NwZf_ml6xso",
+      "name": "raiva 2",
+      "applicationDate": "2010-10-10",
+      "nextDoseDate": "2030-10-20",
+      "notes": "lote 13",
+      "id": "nhvNOh-oeVM"
     }
   ],
   "announcements": [
-    {
-      "title": "Vacinacao",
-      "description": "venha vacinar ",
-      "date": "2026-10-20",
-      "location": "Praça",
-      "creatorEmail": "banco@master",
-      "creatorName": "Banco Master",
-      "type": "vaccine",
-      "id": "O8K8ZYTQBjw"
-    },
     {
       "title": "Adoção Legal",
       "description": "Adote",
@@ -129,6 +127,17 @@
       "creatorName": "Banco Master",
       "type": "ADOPTION",
       "id": "wUNryO2oTjo"
+    },
+    {
+      "title": "Vacinacao de raiva ",
+      "description": "vacine ",
+      "date": "2009-09-09",
+      "location": "rodoviaria",
+      "lot": "113",
+      "creatorEmail": "banco@master",
+      "creatorName": "Banco Master",
+      "type": "VACCINE",
+      "id": "Zhn3QWnWBU4"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
