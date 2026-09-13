@@ -5,15 +5,23 @@
     } @else if (!pet) {
     <p>Pet não encontrado.</p>
     } @else {
-    <a routerLink="/painel/pets" class="menu-link back-link">← Voltar para Meus Pets</a>
 
-    <p class="footer-title">FICHA DO PET</p>
-    <h2>{{ pet.name }}</h2>
-    <p class="pet-meta">{{ pet.breed }} · Nascido em {{ pet.birthDate | date:'dd/MM/yyyy' }}</p>
+    <a routerLink="/painel/pets" class="back-link">← Voltar para Meus Pets</a>
 
-    @if (pet.forAdoption) {
-    <span class="pet-badge">Em adoção</span>
-    }
+    <div class="pet-hero">
+      <div class="pet-hero-icon">{{ speciesIcon(pet.species) }}</div>
+
+      <div class="pet-hero-info">
+        <p class="footer-title">FICHA DO PET</p>
+        <div class="pet-hero-title-row">
+          <h2>{{ pet.name }}</h2>
+          @if (pet.forAdoption) {
+          <span class="pet-badge">Em adoção</span>
+          }
+        </div>
+        <p class="pet-meta">{{ pet.breed }} · Nascido em {{ pet.birthDate | date:'dd/MM/yyyy' }}</p>
+      </div>
+    </div>
 
     @if (pendingAdoptionConfirmation) {
     <p class="confirm-text">
@@ -24,17 +32,21 @@
       <button class="secondary-button" (click)="cancelToggleAdoption()">Cancelar</button>
     </div>
     } @else {
-    <button class="primary-button adoption-toggle" (click)="requestToggleAdoption()">
-      {{ pet.forAdoption ? 'Remover da lista de adoção' : 'Colocar para adoção' }}
+    <button class="secondary-button adoption-toggle" (click)="requestToggleAdoption()">
+      {{ pet.forAdoption ? '💔 Remover da lista de adoção' : '❤️ Colocar para adoção' }}
     </button>
     }
 
     <hr class="section-divider">
 
-    <h3 class="section-title">Vacinas</h3>
+    <h3 class="section-title">Vacinas{{ vaccines.length > 0 ? ' (' + vaccines.length + ')' : '' }}</h3>
 
     @if (vaccines.length === 0) {
-    <p>Nenhuma vacina cadastrada ainda para este pet.</p>
+    <div class="empty-state">
+      <div class="empty-state-icon">💉</div>
+      <p class="empty-state-title">Nenhuma vacina cadastrada ainda</p>
+      <p class="empty-state-text">Use o botão abaixo para registrar a primeira vacina de {{ pet.name }}.</p>
+    </div>
     } @else {
     <div class="vaccine-card-grid">
       @for (vaccine of vaccines; track vaccine.id) {
@@ -55,17 +67,37 @@
     </div>
     }
 
-    <button class="secondary-button" (click)="toggleVaccineForm()">
-      {{ showVaccineForm ? 'Cancelar' : '+ Cadastrar vacina para ' + pet.name }}
+    <button class="secondary-button action-btn" (click)="toggleVaccineForm()">
+      <span class="action-btn-icon">{{ showVaccineForm ? '✕' : '+' }}</span>
+      {{ showVaccineForm ? 'Cancelar' : 'Cadastrar vacina' }}
     </button>
 
     @if (showVaccineForm) {
-    <div class="login-box vaccine-form-box">
+    <div class="login-box form-box vaccine-form-box">
+      <p class="form-box-title">Nova vacina</p>
+
       <form [formGroup]="vaccineForm" (ngSubmit)="createVaccine()">
-        <input type="text" placeholder="Nome da vacina" formControlName="name">
-        <input type="date" placeholder="Data de aplicação" formControlName="applicationDate">
-        <input type="date" placeholder="Próxima dose (opcional)" formControlName="nextDoseDate">
-        <input type="text" placeholder="Observações (opcional)" formControlName="notes">
+        <div class="field-group">
+          <label>Nome da vacina</label>
+          <input type="text" placeholder="Ex: V10" formControlName="name">
+        </div>
+
+        <div class="form-row">
+          <div class="field-group">
+            <label>Data de aplicação</label>
+            <input type="date" formControlName="applicationDate">
+          </div>
+
+          <div class="field-group">
+            <label>Próxima dose (opcional)</label>
+            <input type="date" formControlName="nextDoseDate">
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label>Observações (opcional)</label>
+          <input type="text" placeholder="Ex: reação leve, aplicar no braço..." formControlName="notes">
+        </div>
 
         <input type="submit" value="Cadastrar Vacina" [disabled]="!validateVaccineFields()">
 

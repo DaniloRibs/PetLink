@@ -44,6 +44,15 @@
       "accountType": "ENTERPRISE",
       "document": "12345",
       "id": "IfywTxvDK1Y"
+    },
+    {
+      "fullname": "rodrigo",
+      "email": "rod@rod",
+      "password": "1234",
+      "phone": "12345",
+      "accountType": "PERSON",
+      "document": "12345",
+      "id": "tNyyVnsbdgY"
     }
   ],
   "pets": [
@@ -55,6 +64,14 @@
       "ownerId": "IfywTxvDK1Y",
       "id": "NwZf_ml6xso",
       "forAdoption": false
+    },
+    {
+      "name": "loki",
+      "species": "DOG",
+      "breed": "Husky",
+      "birthDate": "2004-04-18",
+      "ownerId": "tNyyVnsbdgY",
+      "id": "K-Ii06J1v3Y"
     }
   ],
   "vaccines": [

@@ -1,25 +1,51 @@
 <section class="menu-footer-card content-area">
   <div class="content-form-card">
-    <p class="footer-title">📢 ANÚNCIOS</p>
-    <h2>Campanhas de vacinação</h2>
+    <div class="section-header">
+      <p class="footer-title">📢 ANÚNCIOS</p>
+      <h2>Campanhas de vacinação</h2>
+    </div>
     <p class="hero-text">Fique de olho nas campanhas de vacinação divulgadas por empresas parceiras.</p>
 
     @if (isCompany) {
-    <button class="primary-button announcement-cta" [class.is-cancel]="showForm" (click)="toggleForm()">
-      {{ showForm ? 'Cancelar' : '+ Publicar campanha de vacinação' }}
+    <button class="primary-button action-btn announcement-cta" [class.is-cancel]="showForm" (click)="toggleForm()">
+      <span class="action-btn-icon">{{ showForm ? '✕' : '+' }}</span>
+      {{ showForm ? 'Cancelar' : 'Publicar campanha' }}
     </button>
 
     @if (showForm) {
-    <div class="login-box announcement-form-box">
+    <div class="login-box form-box announcement-form-box">
+      <p class="form-box-title">Nova campanha</p>
+
       <form [formGroup]="form" (ngSubmit)="createCampaign()">
-        <input type="text" placeholder="Título da campanha" formControlName="title">
-        <select formControlName="type">
-          <option value="vaccine">Vacinação</option>
-          <option value="adoption">Adoção</option>
-        </select>
-        <textarea placeholder="Descrição" formControlName="description" rows="5"></textarea>
-        <input type="date" placeholder="Data (opcional)" formControlName="date">
-        <input type="text" placeholder="Local (opcional)" formControlName="location">
+        <div class="field-group">
+          <label>Título da campanha</label>
+          <input type="text" placeholder="Ex: Vacinação antirrábica gratuita" formControlName="title">
+        </div>
+
+        <div class="field-group">
+          <label>Tipo</label>
+          <select formControlName="type">
+            <option value="vaccine">Vacinação</option>
+            <option value="adoption">Adoção</option>
+          </select>
+        </div>
+
+        <div class="field-group">
+          <label>Descrição</label>
+          <textarea placeholder="Descreva a campanha" formControlName="description" rows="5"></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="field-group">
+            <label>Data (opcional)</label>
+            <input type="date" formControlName="date">
+          </div>
+
+          <div class="field-group">
+            <label>Local (opcional)</label>
+            <input type="text" placeholder="Ex: Praça Central" formControlName="location">
+          </div>
+        </div>
 
         <input type="submit" value="Publicar" [disabled]="!validateFields()">
 
@@ -34,10 +60,15 @@
       <span>ℹ️</span> Você está vendo os anúncios como usuário pessoa: aqui só é possível visualizar as campanhas.
     </p>
     }
+
     @if (loading) {
     <p>Carregando...</p>
     } @else if (announcements.length === 0) {
-    <p>Ainda não há campanhas de vacinação publicadas.</p>
+    <div class="empty-state">
+      <div class="empty-state-icon">📢</div>
+      <p class="empty-state-title">Nenhuma campanha publicada ainda</p>
+      <p class="empty-state-text">Assim que uma empresa parceira publicar, ela aparece aqui.</p>
+    </div>
     } @else {
     <div class="announcement-list">
       @for (announcement of announcements; track announcement.id) {

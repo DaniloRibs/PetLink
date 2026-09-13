@@ -1,25 +1,37 @@
 <section class="hero-card dashboard-hero">
   <div class="hero-copy">
-    <p class="eyebrow">Bem-vindo de volta</p>
+    <p class="eyebrow">Bem-vindo de volta{{ userName ? ', ' + userName : '' }} 👋</p>
     <h1 class="dashboard-title">Tudo pronto para cuidar do seu pet hoje.</h1>
-    <p class="hero-text">Use o menu ao lado para acompanhar pets, vacinas, anúncios e adoções. Aqui é só o seu cantinho de boas-vindas. 🐾</p>
+    <p class="hero-text">Aqui está um resumo rápido do que está rolando no seu PetLink.</p>
 
     <div class="feature-grid">
-      <article class="feature-item">
+      <a routerLink="/painel/pets" class="feature-item stat-card">
         <div class="feature-icon">🐾</div>
-        <h3>Cada pet, seu espaço</h3>
-        <p>Um cantinho dedicado pra cada bichinho da família.</p>
-      </article>
-      <article class="feature-item">
-        <div class="feature-icon">💉</div>
-        <h3>Saúde em dia</h3>
-        <p>Vacinas organizadas sem esforço nenhum.</p>
-      </article>
-      <article class="feature-item">
+        <span class="stat-number">{{ loading ? '–' : petsCount }}</span>
+        <h3>Meus Pets</h3>
+        <p>Pets cadastrados na sua conta.</p>
+      </a>
+      <a routerLink="/painel/adocoes" class="feature-item stat-card">
         <div class="feature-icon">❤️</div>
-        <h3>Amor que multiplica</h3>
-        <p>Adoção e doação com muito carinho.</p>
-      </article>
+        <span class="stat-number">{{ loading ? '–' : adoptionCount }}</span>
+        <h3>Em adoção</h3>
+        <p>Pets seus disponíveis para adoção agora.</p>
+      </a>
+      @if (isCompany) {
+      <a routerLink="/painel/anuncios" class="feature-item stat-card">
+        <div class="feature-icon">📢</div>
+        <span class="stat-number">{{ loading ? '–' : campaignsCount }}</span>
+        <h3>Minhas campanhas</h3>
+        <p>Campanhas de vacinação publicadas por você.</p>
+      </a>
+      } @else {
+      <a routerLink="/painel/adocoes" class="feature-item stat-card">
+        <div class="feature-icon">🏡</div>
+        <span class="stat-number">{{ loading ? '–' : adoptablePetsCount }}</span>
+        <h3>Pets para adotar</h3>
+        <p>Pets de outros tutores disponíveis para adoção agora.</p>
+      </a>
+      }
     </div>
   </div>
 

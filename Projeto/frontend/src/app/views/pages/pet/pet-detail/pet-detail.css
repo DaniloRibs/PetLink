@@ -1,27 +1,72 @@
 .back-link {
-  margin-bottom: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 20px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(111, 78, 55, 0.25);
+  background: #fff;
+  color: #6F4E37;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: 0.2s;
 }
 
-.pet-badge {
-  display: inline-block;
-  margin: 0 0 18px;
-  padding: 3px 12px;
-  border-radius: 999px;
-  background: #6F4E37;
-  color: #fff;
-  font-size: 12px;
+.back-link:hover {
+  background: #f8ede5;
+  border-color: rgba(111, 78, 55, 0.4);
+}
+
+.empty-state+.action-btn,
+.vaccine-card-grid+.action-btn {
+  margin-top: 20px;
+}
+
+.pet-hero {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 20px;
+}
+
+.pet-hero-icon {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #f8ede5;
+  box-shadow: 0 4px 10px rgba(94, 63, 39, 0.08);
+  font-size: 30px;
+  flex-shrink: 0;
+}
+
+.pet-hero-info {
+  min-width: 0;
+}
+
+.pet-hero-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.pet-hero-title-row h2 {
+  margin: 0;
+  text-align: left;
 }
 
 .pet-meta {
-  margin: 0 0 10px;
+  margin: 4px 0 0;
   color: #6b5d55;
 }
 
 .adoption-toggle {
-  display: block;
-  margin: 4px 0 28px;
-  border: none;
-  cursor: pointer;
+  display: inline-flex;
+  margin: 0 0 28px;
 }
 
 .section-divider {
@@ -42,11 +87,17 @@
 }
 
 .vaccine-mini-card {
-  background: #f2fdf9;
-  border: 1px solid #19d291;
-  border-left: 6px solid #19d291;
-  border-radius: 12px;
+  background: #fff;
+  border: 1px solid rgba(111, 78, 55, 0.12);
+  border-left: 4px solid #19d291;
+  border-radius: 14px;
   padding: 16px 18px;
+  transition: 0.2s;
+}
+
+.vaccine-mini-card:hover {
+  box-shadow: 0 10px 20px rgba(94, 63, 39, 0.08);
+  transform: translateY(-2px);
 }
 
 .vaccine-mini-card-header {
@@ -77,9 +128,6 @@
 }
 
 .vaccine-form-box {
-  width: auto;
-  max-width: 380px;
-  min-height: 0;
   margin: 20px 0 0;
 }
 
@@ -95,4 +143,11 @@
   font-size: 13px;
   text-align: center;
   margin: 0;
+}
+
+@media (max-width: 480px) {
+  .pet-hero {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }

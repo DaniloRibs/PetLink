@@ -1,3 +1,4 @@
+import { speciesIcon } from '../../../../shared/pet-species-icon';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -23,6 +24,10 @@ export class PetList implements OnInit {
   showForm: boolean = false;
   form: FormGroup;
   createValidationFailed: boolean = false;
+
+  speciesIcon(species: string): string {
+    return speciesIcon(species);
+  }
 
   constructor(
     private router: Router,
@@ -57,15 +62,6 @@ export class PetList implements OnInit {
 
   openPet(pet: Pet): void {
     this.router.navigate(['/painel/pets', pet.id]);
-  }
-
-  speciesIcon(species: string): string {
-    switch (species) {
-      case 'cachorro': return '🐶';
-      case 'gato': return '🐱';
-      case 'passaro': return '🐦';
-      default: return '🐾';
-    }
   }
 
   toggleForm(): void {

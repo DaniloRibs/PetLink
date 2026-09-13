@@ -37,46 +37,6 @@
   background: #6F4E37;
 }
 
-.pet-card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 16px;
-}
-
-.pet-card {
-  border-radius: 16px;
-  padding: 24px 20px;
-  background: #f8ede5;
-  border: 1px solid rgba(111, 78, 55, 0.12);
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  transition: 0.2s;
-}
-
-.pet-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 20px rgba(94, 63, 39, 0.12);
-}
-
-.pet-card-icon {
-  font-size: 36px;
-  margin-bottom: 2px;
-}
-
-.pet-card h3 {
-  margin: 0;
-  color: #33211a;
-}
-
-.pet-card p {
-  margin: 0;
-  color: #6b5d55;
-  font-size: 13px;
-}
-
 .adoption-contact {
   margin-top: 4px !important;
   font-weight: 600;

@@ -5,6 +5,7 @@ import { RouterLink } from '@angular/router';
 import { User, AccountType } from '../../../models/domain/user';
 import { UserUpdateService } from '../../../services/user/user-update';
 import { CurrentUserService } from '../../../services/security/current-user';
+import { AuthenticationService } from '../../../services/security/authentication';
 
 @Component({
   selector: 'app-my-profile',
@@ -21,15 +22,18 @@ export class MyProfile implements OnInit {
   form: FormGroup;
   updateOk: boolean = false;
   updateFailed: boolean = false;
+  emailChanged: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
     private updateService: UserUpdateService,
     private currentUserService: CurrentUserService,
+    private authenticationService: AuthenticationService,
     private cdr: ChangeDetectorRef,
   ) {
     this.form = this.formBuilder.group({
       fullname: ['', [Validators.required, Validators.minLength(2)]],
+      email: ['', [Validators.required, Validators.email]],
     });
   }
 
@@ -42,6 +46,7 @@ export class MyProfile implements OnInit {
 
       this.entity = user;
       this.form.controls['fullname'].setValue(user?.fullname ?? '');
+      this.form.controls['email'].setValue(user?.email ?? '');
     } catch (error) {
       console.error('Erro ao carregar dados do perfil', error);
     } finally {
@@ -57,6 +62,7 @@ export class MyProfile implements OnInit {
   async updateProfile(): Promise<void> {
     this.updateOk = false;
     this.updateFailed = false;
+    this.emailChanged = false;
 
     if (!this.entity?.id || !this.validateFields()) {
       this.updateFailed = true;
@@ -64,10 +70,19 @@ export class MyProfile implements OnInit {
     }
 
     const fullname = this.form.controls['fullname'].value;
+    const email = this.form.controls['email'].value;
+    const emailWasChanged = email !== this.entity.email;
 
     try {
-      await this.updateService.update(this.entity.id, fullname);
+      await this.updateService.update(this.entity.id, fullname, email);
       this.entity.fullname = fullname;
+      this.entity.email = email;
+
+      if (emailWasChanged) {
+        this.authenticationService.addDataToLocalStorage(email);
+        this.emailChanged = true;
+      }
+
       this.updateOk = true;
     } catch (error) {
       console.error('Erro ao atualizar perfil', error);

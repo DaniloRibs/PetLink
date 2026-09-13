@@ -1,3 +1,4 @@
+import { speciesIcon } from '../../../../shared/pet-species-icon';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
@@ -26,6 +27,10 @@ export class PetDetail implements OnInit {
   vaccineCreateValidationFailed: boolean = false;
   vaccineCreatedOk: boolean = false;
   pendingAdoptionConfirmation: boolean = false;
+
+  speciesIcon(species: string): string {
+    return speciesIcon(species);
+  }
 
   constructor(
     private route: ActivatedRoute,

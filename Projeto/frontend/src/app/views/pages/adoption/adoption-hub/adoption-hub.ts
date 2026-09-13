@@ -1,3 +1,4 @@
+import { speciesIcon } from '../../../../shared/pet-species-icon';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 
 import { Pet } from '../../../../models/domain/pet';
@@ -22,6 +23,11 @@ export class AdoptionHub implements OnInit {
   userId: number | null = null;
   ownerEmails: Record<number, string> = {};
   pendingConfirmationId: number | null = null;
+
+  speciesIcon(species: string): string {
+    return speciesIcon(species);
+  }
+
 
   constructor(
     private petReadService: PetReadService,
@@ -76,17 +82,6 @@ export class AdoptionHub implements OnInit {
   ownerContact(pet: Pet): string {
     return this.ownerEmails[pet.ownerId] ?? 'Contato indisponível';
   }
-
-  speciesIcon(species: string): string {
-    switch (species) {
-      case 'cachorro': return '🐶';
-      case 'gato': return '🐱';
-      case 'passaro': return '🐦';
-      default: return '🐾';
-    }
-  }
-
-
 
   setTab(tab: 'adotar' | 'doar'): void {
     this.activeTab = tab;

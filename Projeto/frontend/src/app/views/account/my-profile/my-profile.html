@@ -1,6 +1,6 @@
 <section class="menu-footer-card content-area">
   <div class="content-form-card">
-    <a routerLink="/painel" class="menu-link back-link">← Voltar para o painel</a>
+    <a routerLink="/painel" class="back-link">← Voltar para o painel</a>
 
     <p class="footer-title">MEU PERFIL</p>
     <h2>Meus dados</h2>
@@ -11,19 +11,13 @@
     <div class="login-box profile-form-box">
       <form [formGroup]="form" (ngSubmit)="updateProfile()">
         <div class="field-group">
-          <label>Email</label>
-          <input type="text" [value]="entity?.email" disabled>
-        </div>
-
-        <div class="field-group">
-          <label>Tipo de conta</label>
-          <input type="text" [value]="entity?.accountType === AccountType.ENTERPRISE ? 'ENTERPRISE' : 'PERSON'"
-            disabled>
-        </div>
-
-        <div class="field-group">
           <label for="fullname">Nome completo</label>
           <input type="text" id="fullname" placeholder="Nome completo" formControlName="fullname">
+        </div>
+
+        <div class="field-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="seuemail@exemplo.com" formControlName="email">
         </div>
 
         <input type="submit" value="Salvar alterações" [disabled]="!validateFields()">
@@ -33,6 +27,9 @@
         }
         @if (updateOk) {
         <p class="text-success">Dados atualizados com sucesso!</p>
+        }
+        @if (emailChanged) {
+        <p class="text-info">📧 Seu email de login foi atualizado — use o novo email na próxima vez que entrar.</p>
         }
       </form>
     </div>

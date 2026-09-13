@@ -17,7 +17,11 @@
     } @else if (activeTab === 'adotar') {
 
     @if (availableForAdoption.length === 0) {
-    <p>Ainda não há pets disponíveis para adoção. Volte mais tarde!</p>
+    <div class="empty-state">
+      <div class="empty-state-icon">❤️</div>
+      <p class="empty-state-title">Nenhum pet disponível no momento</p>
+      <p class="empty-state-text">Volte mais tarde — novos pets para adoção aparecem aqui.</p>
+    </div>
     } @else {
     <div class="pet-card-grid">
       @for (pet of availableForAdoption; track pet.id) {
@@ -34,11 +38,18 @@
     } @else {
 
     @if (myPets.length === 0) {
-    <p>Você ainda não tem pets cadastrados para colocar para doação.</p>
+    <div class="empty-state">
+      <div class="empty-state-icon">🐾</div>
+      <p class="empty-state-title">Você ainda não tem pets cadastrados</p>
+      <p class="empty-state-text">Cadastre um pet em "Meus Pets" para poder colocá-lo para doação.</p>
+    </div>
     } @else {
     <div class="pet-card-grid">
       @for (pet of myPets; track pet.id) {
       <article class="pet-card">
+        @if (pet.forAdoption) {
+        <span class="pet-badge">Em adoção</span>
+        }
         <div class="pet-card-icon">{{ speciesIcon(pet.species) }}</div>
         <h3>{{ pet.name }}</h3>
         <p>{{ pet.breed }}</p>
@@ -61,7 +72,6 @@
       }
     </div>
     }
-
     }
   </div>
 </section>
