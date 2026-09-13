@@ -137,6 +137,10 @@ public class PetServiceAdapter implements PetService {
             return false;
         }
 
+        if (!pet.isForAdoption()) {
+            return false;
+        }
+
         UserModel newOwnerUser = userDao.readyById(newOwner);
         UserModel oldOwnerUser = userDao.readyById(oldOwner);
 

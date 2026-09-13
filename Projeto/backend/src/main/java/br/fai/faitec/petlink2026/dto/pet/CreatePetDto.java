@@ -21,6 +21,7 @@ public class CreatePetDto {
         petModel.setBirthDate(birthDate);
         petModel.setOwnerId(ownerId);
         petModel.setSpecie(specie);
+        petModel.setForAdoption(false);
 
         return petModel;
     }

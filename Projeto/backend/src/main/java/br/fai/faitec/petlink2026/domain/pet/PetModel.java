@@ -14,7 +14,17 @@ public class PetModel {
     private String breed;
     private Date birthDate;
     private int ownerId;
+    private boolean forAdoption;
     private List<VaccineModel> vaccines = new ArrayList<>();
+
+
+    public boolean isForAdoption() {
+        return forAdoption;
+    }
+
+    public void setForAdoption(boolean forAdoption) {
+        this.forAdoption = forAdoption;
+    }
 
     public List<VaccineModel> getVaccines() {
         return vaccines;
