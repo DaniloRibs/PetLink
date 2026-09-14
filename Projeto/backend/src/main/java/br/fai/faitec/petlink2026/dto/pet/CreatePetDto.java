@@ -20,7 +20,7 @@ public class CreatePetDto {
         petModel.setBreed(breed);
         petModel.setBirthDate(birthDate);
         petModel.setOwnerId(ownerId);
-        petModel.setSpecie(specie);
+        petModel.setSpecies(specie);
         petModel.setForAdoption(false);
 
         return petModel;

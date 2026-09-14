@@ -11,13 +11,13 @@ export class VaccineReadService {
 
   constructor(private http: HttpClient) { }
 
-  findAll(): Promise<Vaccine[]> {
-    return firstValueFrom(this.http.get<Vaccine[]>(`${environment.api_endpoint}/vaccines`));
-  }
+  // findAll(): Promise<Vaccine[]> {
+  //   return firstValueFrom(this.http.get<Vaccine[]>(`${environment.api_endpoint}/pet/vaccine`));
+  // }
 
   findByPetId(petId: string): Promise<Vaccine[]> {
     return firstValueFrom(
-      this.http.get<Vaccine[]>(`${environment.api_endpoint}/vaccines?petId=${petId}`)
+      this.http.get<Vaccine[]>(`${environment.api_endpoint}/pet/${petId}/vaccine`)
     );
   }
 }

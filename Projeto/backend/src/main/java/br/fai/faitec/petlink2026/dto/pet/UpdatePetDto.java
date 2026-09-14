@@ -20,7 +20,7 @@ public class UpdatePetDto {
         petModel.setName(name);
         petModel.setBreed(breed);
         petModel.setBirthDate(birthDate);
-        petModel.setSpecie(specie);
+        petModel.setSpecies(specie);
 
         return petModel;
     }

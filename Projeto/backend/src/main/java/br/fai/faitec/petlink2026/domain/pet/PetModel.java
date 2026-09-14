@@ -10,7 +10,7 @@ public class PetModel {
 
     private int id;
     private String name;
-    private Specie specie;
+    private Specie species;
     private String breed;
     private Date birthDate;
     private int ownerId;
@@ -74,11 +74,11 @@ public class PetModel {
         this.ownerId = ownerId;
     }
 
-    public Specie getSpecie() {
-        return specie;
+    public Specie getSpecies() {
+        return species;
     }
 
-    public void setSpecie(Specie specie) {
-        this.specie = specie;
+    public void setSpecies(Specie species) {
+        this.species = species;
     }
 }

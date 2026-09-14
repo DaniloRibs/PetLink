@@ -39,18 +39,17 @@ export class NotificationBell implements OnInit {
       if (!currentUser?.id) {
         throw new Error('Usuário atual não encontrado');
       }
-      const [pets, vaccines] = await Promise.all([
-        this.petReadService.findByOwnerId(currentUser.id),
-        this.vaccineReadService.findAll(),
+      const [pets] = await Promise.all([
+        this.petReadService.findByOwnerId(currentUser.id)
       ]);
 
       const today = new Date();
       const items: VaccineNotification[] = [];
 
       for (const pet of pets) {
-        const petVaccines = pet.id === undefined
-          ? []
-          : vaccines.filter(v => String(v.petId) === String(pet.id));
+
+        const [petVaccines] = await Promise.all([
+          this.vaccineReadService.findByPetId(String(pet.id))]);
 
         if (petVaccines.length === 0) {
           items.push({

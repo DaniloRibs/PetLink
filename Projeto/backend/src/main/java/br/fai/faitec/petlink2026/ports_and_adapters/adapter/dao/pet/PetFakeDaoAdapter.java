@@ -18,7 +18,7 @@ public class PetFakeDaoAdapter implements PetDao {
         PetModel entity1 = new PetModel();
         entity1.setId(getNextId());
         entity1.setName("Pandora");
-        entity1.setSpecie(Specie.DOG);
+        entity1.setSpecies(Specie.DOG);
         entity1.setOwnerId(1);
         entity1.setBreed("Lulu");
         entity1.setBirthDate(new Date(2026, 10, 12));
@@ -26,7 +26,7 @@ public class PetFakeDaoAdapter implements PetDao {
         PetModel entity2 = new PetModel();
         entity2.setId(getNextId());
         entity2.setName("Lucy");
-        entity2.setSpecie(Specie.CAT);
+        entity2.setSpecies(Specie.CAT);
         entity2.setOwnerId(2);
         entity2.setBreed("ViraLata");
         entity2.setBirthDate(new Date(2026, 10, 12));
@@ -34,7 +34,7 @@ public class PetFakeDaoAdapter implements PetDao {
         PetModel entity3 = new PetModel();
         entity3.setId(getNextId());
         entity3.setName("Tiririca");
-        entity3.setSpecie(Specie.BIRD);
+        entity3.setSpecies(Specie.BIRD);
         entity3.setOwnerId(4);
         entity3.setBreed("Pardal");
         entity3.setBirthDate(new Date(2016, 03, 17));
@@ -43,7 +43,7 @@ public class PetFakeDaoAdapter implements PetDao {
         PetModel entity4 = new PetModel();
         entity4.setId(getNextId());
         entity4.setName("Thor");
-        entity4.setSpecie(Specie.OTHER);
+        entity4.setSpecies(Specie.OTHER);
         entity4.setOwnerId(2);
         entity4.setBreed("Peixe beta");
         entity4.setBirthDate(new Date(2022, 11, 22));
@@ -123,7 +123,7 @@ public class PetFakeDaoAdapter implements PetDao {
 
         data.setName(entity.getName());
         data.setBreed(entity.getBreed());
-        data.setSpecie(entity.getSpecie());
+        data.setSpecies(entity.getSpecies());
         data.setBirthDate(entity.getBirthDate());
         data.setOwnerId(entity.getOwnerId());
     }

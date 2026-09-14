@@ -32,7 +32,7 @@ public class PetPostgresDaoAdapter implements PetDao {
             preparedStatement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 
             preparedStatement.setString(1, entity.getName());
-            preparedStatement.setString(2, entity.getSpecie().name());
+            preparedStatement.setString(2, entity.getSpecies().name());
             preparedStatement.setString(3, entity.getBreed());
             preparedStatement.setDate(4, new Date(entity.getBirthDate().getTime()));
             preparedStatement.setInt(5, entity.getOwnerId());
@@ -91,7 +91,7 @@ public class PetPostgresDaoAdapter implements PetDao {
                 final Date birthDate = resultSet.getDate("birth_date");
                 final int userId = resultSet.getInt("user_id");
 
-                final String auxSpecies = resultSet.getString("specie");
+                final String auxSpecies = resultSet.getString("species");
                 final Specie specie = Specie.valueOf(auxSpecies);
 
                 final boolean forAdoption = resultSet.getBoolean("for_adoption");
@@ -99,7 +99,7 @@ public class PetPostgresDaoAdapter implements PetDao {
                 final PetModel petModel = new PetModel();
                 petModel.setId(entityId);
                 petModel.setName(name);
-                petModel.setSpecie(specie);
+                petModel.setSpecies(specie);
                 petModel.setBreed(breed);
                 petModel.setBirthDate(birthDate);
                 petModel.setOwnerId(userId);
@@ -133,14 +133,14 @@ public class PetPostgresDaoAdapter implements PetDao {
                 final Date birthDate = resultSet.getDate("birth_date");
                 final int userId = resultSet.getInt("user_id");
 
-                final String auxSpecies = resultSet.getString("specie");
+                final String auxSpecies = resultSet.getString("species");
                 final Specie specie = Specie.valueOf(auxSpecies);
                 final boolean forAdoption = resultSet.getBoolean("for_adoption");
 
                 final PetModel petModel = new PetModel();
                 petModel.setId(entityId);
                 petModel.setName(name);
-                petModel.setSpecie(specie);
+                petModel.setSpecies(specie);
                 petModel.setBreed(breed);
                 petModel.setBirthDate(birthDate);
                 petModel.setOwnerId(userId);
@@ -172,7 +172,7 @@ public class PetPostgresDaoAdapter implements PetDao {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
             preparedStatement.setString(1, entity.getName());
-            preparedStatement.setString(2, entity.getSpecie().name());
+            preparedStatement.setString(2, entity.getSpecies().name());
             preparedStatement.setString(3, entity.getBreed());
             preparedStatement.setDate(4, entity.getBirthDate());
             preparedStatement.setInt(5, entity.getOwnerId());

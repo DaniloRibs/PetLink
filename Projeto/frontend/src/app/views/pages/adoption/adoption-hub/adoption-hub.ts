@@ -46,7 +46,7 @@ export class AdoptionHub implements OnInit {
       }
       this.userId = currentUser.id;
 
-      const allPets = await this.petReadService.findAll();
+      const allPets = await this.petReadService.findByOwnerId(this.userId);
 
       this.availableForAdoption = allPets.filter(
         p => p.forAdoption && p.ownerId !== this.userId

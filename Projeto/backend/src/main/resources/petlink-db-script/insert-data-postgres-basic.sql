@@ -1,14 +1,14 @@
 INSERT INTO user_model
     (email, full_name, password, document, phone, account_type)
 VALUES
-    ('joao.silva@email.com', 'João Silva', '123456', '98765432100', '31999990001', 'PERSON'),
+    ('a@a.com', 'João Silva', '12345', '98765432100', '31999990001', 'PERSON'),
     ('maria.souza@email.com', 'Maria Souza', '123456', '39053344705', '31999990002', 'PERSON'),
     ('carlos.oliveira@email.com', 'Carlos Oliveira', '123456', '11144477735', '31999990003', 'PERSON'),
     ('ana.costa@email.com', 'Ana Costa', '123456', '52998224725', '31999990004', 'PERSON'),
     ('bolaoGmae@petcare.com', 'bolaoEntherpriuse', 'admin123', '11222333000181', '31999990005', 'ENTERPRISE');
 
 INSERT INTO pet_model
-    (name, specie, breed, birth_date, user_id, for_adoption)
+    (name, species, breed, birth_date, user_id, for_adoption)
 VALUES
     ('Rex', 'DOG', 'Golden Retriever', '2020-05-15', 1, false),
     ('Mel', 'DOG', 'Shih-Tzu', '2021-08-20', 1, false),

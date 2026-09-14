@@ -19,10 +19,11 @@ CREATE TABLE pet_model
 (
     id SERIAL PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
-    specie VARCHAR(15) NOT NULL,
+    species VARCHAR(15) NOT NULL,
     breed VARCHAR(50) NOT NULL,
     birth_date DATE NOT NULL,
     user_id INT NOT NULL,
+    for_adoption BOOLEAN NOT NULL,
     CONSTRAINT fk_pet_user FOREIGN KEY (user_id) REFERENCES user_model(id) ON DELETE CASCADE
 );
 

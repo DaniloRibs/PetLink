@@ -11,17 +11,17 @@ export class PetReadService {
 
   constructor(private http: HttpClient) { }
 
-  findAll(): Promise<Pet[]> {
-    return firstValueFrom(this.http.get<Pet[]>(`${environment.api_endpoint}/pets`));
-  }
+  // findAll(): Promise<Pet[]> {
+  //   return firstValueFrom(this.http.get<Pet[]>(`${environment.api_endpoint}/pet`));
+  // }
 
-  findByOwnerId(ownerId: number): Promise<Pet[]> {
+  async findByOwnerId(ownerId: number): Promise<Pet[]> {
     return firstValueFrom(
-      this.http.get<Pet[]>(`${environment.api_endpoint}/pets?ownerId=${ownerId}`)
+      this.http.get<Pet[]>(`${environment.api_endpoint}/user/${ownerId}/pet`)
     );
   }
 
-  findById(id: string): Promise<Pet> {
-    return firstValueFrom(this.http.get<Pet>(`${environment.api_endpoint}/pets/${id}`));
+  async findById(id: string): Promise<Pet> {
+    return firstValueFrom(this.http.get<Pet>(`${environment.api_endpoint}/pet/${id}`));
   }
 }

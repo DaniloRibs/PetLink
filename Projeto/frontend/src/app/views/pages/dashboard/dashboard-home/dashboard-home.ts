@@ -40,14 +40,13 @@ export class DashboardHome implements OnInit {
       this.isCompany = currentUser?.accountType === AccountType.ENTERPRISE;
 
       if (currentUser?.id) {
-        const [myPets, allPets] = await Promise.all([
+        const [myPets] = await Promise.all([
           this.petReadService.findByOwnerId(currentUser.id),
-          this.petReadService.findAll(),
         ]);
 
         this.petsCount = myPets.length;
         this.adoptionCount = myPets.filter((p: Pet) => p.forAdoption).length;
-        this.adoptablePetsCount = allPets.filter((p: Pet) => p.forAdoption && p.ownerId !== currentUser.id).length;
+        this.adoptablePetsCount = myPets.filter((p: Pet) => p.forAdoption && p.ownerId !== currentUser.id).length;
       }
 
       if (this.isCompany) {
