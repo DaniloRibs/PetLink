@@ -8,15 +8,15 @@ VALUES
     ('bolaoGmae@petcare.com', 'bolaoEntherpriuse', 'admin123', '11222333000181', '31999990005', 'ENTERPRISE');
 
 INSERT INTO pet_model
-    (name, specie, breed, birth_date, user_id)
+    (name, specie, breed, birth_date, user_id, for_adoption)
 VALUES
-    ('Rex', 'DOG', 'Golden Retriever', '2020-05-15', 1),
-    ('Mel', 'DOG', 'Shih-Tzu', '2021-08-20', 1),
-    ('Mia', 'CAT', 'Siamês', '2019-03-10', 2),
-    ('Thor', 'DOG', 'Pastor Alemão', '2018-11-05', 3),
-    ('Luna', 'CAT', 'Persa', '2022-01-25', 3),
-    ('Nina', 'DOG', 'Poodle', '2020-07-12', 4),
-    ('Bob', 'DOG', 'Beagle', '2021-02-18', 4);
+    ('Rex', 'DOG', 'Golden Retriever', '2020-05-15', 1, false),
+    ('Mel', 'DOG', 'Shih-Tzu', '2021-08-20', 1, false),
+    ('Mia', 'CAT', 'Siamês', '2019-03-10', 2, false),
+    ('Thor', 'DOG', 'Pastor Alemão', '2018-11-05', 3, false),
+    ('Luna', 'CAT', 'Persa', '2022-01-25', 3, true),
+    ('Nina', 'DOG', 'Poodle', '2020-07-12', 4, false),
+    ('Bob', 'DOG', 'Beagle', '2021-02-18', 4, false);
 
 INSERT INTO vaccine_model
     (application_date, expiration_date, name, description, batch, pet_id)
