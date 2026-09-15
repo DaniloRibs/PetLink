@@ -25,10 +25,20 @@
 
             <input type="text" [placeholder]="isEmpresa ? 'Razão Social' : 'Nome Completo'" formControlName="fullname">
             <input type="email" placeholder="E-mail" formControlName="email">
-            <input type="tel" placeholder="Telefone" formControlName="phone">
+            <input 
+              type="tel" 
+              placeholder="Telefone" 
+              formControlName="phone"
+              mask="(00) 00000-0000"
+              [dropSpecialCharacters]="true">
 
             <div class="document-field">
-              <input type="text" [placeholder]="isEmpresa ? 'CNPJ' : 'CPF'" formControlName="document">
+              <input 
+                type="text" 
+                [placeholder]="isEmpresa ? 'CNPJ' : 'CPF'" 
+                formControlName="document"
+                [mask]="isEmpresa ? '00.000.000/0000-00' : '000.000.000-00'"
+                [dropSpecialCharacters]="true">
             </div>
 
             <input type="password" placeholder="Senha (mínimo 4 caracteres)" formControlName="password">

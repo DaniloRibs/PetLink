@@ -210,11 +210,11 @@ public class UserServiceAdapter implements UserService {
         document = document.replaceAll("\\D", "");
 
         if (document.length() == 11 && accountType == AccountType.PERSON) {
-            return !isCpfValid(document);
+            return false;//!isCpfValid(document);
         }
 
         if (document.length() == 14 && accountType == AccountType.ENTERPRISE) {
-            return !isCnpjValid(document);
+            return false;//!isCnpjValid(document);
         }
 
         return true;

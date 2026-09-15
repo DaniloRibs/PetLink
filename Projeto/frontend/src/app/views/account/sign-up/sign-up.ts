@@ -1,13 +1,17 @@
 import { Component } from '@angular/core';
+import { provideNgxMask, NgxMaskDirective } from 'ngx-mask'
 import { Router, RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, ValidationErrors } from '@angular/forms';
+
 
 import { User, AccountType } from '../../../models/domain/user';
 import { UserCreateService } from '../../../services/user/user-create';
 
 @Component({
   selector: 'app-sign-up',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, NgxMaskDirective],
+  providers: [provideNgxMask()],
   templateUrl: './sign-up.html',
   styleUrl: './sign-up.css',
 })
