@@ -10,8 +10,9 @@ public class AnnoucementModel {
     private Date eventDate;
     private String location;
     private int idCreator;
-    private AnnoucementType annoucementType;
+    private AnnoucementType announcementType;
 
+    
     public int getId() {
         return id;
     }
@@ -69,10 +70,10 @@ public class AnnoucementModel {
     }
 
     public AnnoucementType getAnnoucementType() {
-        return annoucementType;
+        return announcementType;
     }
 
     public void setAnnoucementType(AnnoucementType annoucementType) {
-        this.annoucementType = annoucementType;
+        this.announcementType = annoucementType;
     }
 }

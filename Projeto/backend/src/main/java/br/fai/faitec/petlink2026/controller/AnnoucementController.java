@@ -2,6 +2,7 @@ package br.fai.faitec.petlink2026.controller;
 
 import br.fai.faitec.petlink2026.domain.annoucement.AnnoucementModel;
 import br.fai.faitec.petlink2026.dto.annoucement.CreateAnnoucementDto;
+import br.fai.faitec.petlink2026.dto.annoucement.ReadAnnouncementDto;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.service.annoucement.AnnoucementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +13,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/annoucement")
+@RequestMapping("/api/announcement")
 public class AnnoucementController {
 
     @Autowired
@@ -20,16 +21,22 @@ public class AnnoucementController {
 
     // BUSCAR TODOS OS ANUNCIOS
     @GetMapping
-    public ResponseEntity<List<AnnoucementModel>> getAnnoucements() {
-        List<AnnoucementModel> annoucements = annoucementService.findAll();
+    public ResponseEntity<List<ReadAnnouncementDto>> getAnnoucements() {
+        List<ReadAnnouncementDto> annoucements = annoucementService.getAnnouncements();
         return ResponseEntity.ok(annoucements);
     }
 
     // BUSCAR ANUNCIO PELO ID
     @GetMapping("/{id}")
-    public ResponseEntity<AnnoucementModel> getAnnoucementById(@PathVariable final int id) {
-        AnnoucementModel annoucementModel = annoucementService.findById(id);
-        return annoucementModel == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(annoucementModel);
+    public ResponseEntity<ReadAnnouncementDto> getAnnoucementById(@PathVariable final int id) {
+        ReadAnnouncementDto annoucement = annoucementService.getAnnouncementById(id);
+        return annoucement == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(annoucement);
+    }
+
+    @GetMapping("/user/{id}")
+    public ResponseEntity<List<ReadAnnouncementDto>> getAnnouncementsByUserId(@PathVariable final int userId) {
+        List<ReadAnnouncementDto> announcements = annoucementService.getAnnouncementsByUserId(userId);
+        return ResponseEntity.ok(announcements);
     }
 
     // CRIAR ANUNCIO

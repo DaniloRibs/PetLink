@@ -15,9 +15,9 @@ export class AnnouncementReadService {
     return firstValueFrom(this.http.get<Announcement[]>(`${environment.api_endpoint}/announcement`));
   }
 
-  findByCompanyEmail(companyEmail: string): Promise<Announcement[]> {
+  findByUserId(idCreator: number): Promise<Announcement[]> {
     return firstValueFrom(
-      this.http.get<Announcement[]>(`${environment.api_endpoint}/announcement?companyEmail=${companyEmail}`)
+      this.http.get<Announcement[]>(`${environment.api_endpoint}/announcement/user/${idCreator}`)
     );
   }
 }

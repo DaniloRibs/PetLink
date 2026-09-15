@@ -22,7 +22,7 @@ public class AnnoucementPostgresDaoAdapter implements AnnoucementDao {
 
     @Override
     public int add(AnnoucementModel entity) {
-        String sql = "INSERT INTO annoucement_model(title, description, publication_date, event_date, location, annoucement_type, user_id) " +
+        String sql = "INSERT INTO annoucement_model(title, description, publication_date, event_date, location, announcement_type, user_id) " +
                 " VALUES(?,?,?,?,?,?,?); ";
 
         PreparedStatement preparedStatement;
@@ -94,7 +94,7 @@ public class AnnoucementPostgresDaoAdapter implements AnnoucementDao {
                 final String location = resultSet.getString("location");
                 final int creatorId = resultSet.getInt("user_id");
 
-                final String auxType = resultSet.getString("annoucement_type");
+                final String auxType = resultSet.getString("announcement_type");
                 final AnnoucementType annoucementType = AnnoucementType.valueOf(auxType);
 
                 final AnnoucementModel annoucementModel = new AnnoucementModel();
@@ -137,7 +137,7 @@ public class AnnoucementPostgresDaoAdapter implements AnnoucementDao {
                 final String location = resultSet.getString("location");
                 final int creatorId = resultSet.getInt("user_id");
 
-                final String auxType = resultSet.getString("annoucement_type");
+                final String auxType = resultSet.getString("announcement_type");
                 final AnnoucementType annoucementType = AnnoucementType.valueOf(auxType);
 
                 final AnnoucementModel annoucementModel = new AnnoucementModel();

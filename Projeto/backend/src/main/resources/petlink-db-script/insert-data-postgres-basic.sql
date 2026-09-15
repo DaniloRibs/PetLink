@@ -5,7 +5,7 @@ VALUES
     ('maria.souza@email.com', 'Maria Souza', '123456', '39053344705', '31999990002', 'PERSON'),
     ('carlos.oliveira@email.com', 'Carlos Oliveira', '123456', '11144477735', '31999990003', 'PERSON'),
     ('ana.costa@email.com', 'Ana Costa', '123456', '52998224725', '31999990004', 'PERSON'),
-    ('bolaoGmae@petcare.com', 'bolaoEntherpriuse', 'admin123', '11222333000181', '31999990005', 'ENTERPRISE');
+    ('bolaoGames@petcare.com', 'bolaoEntherpriuse', '123123', '11222333000181', '31999990005', 'ENTERPRISE');
 
 INSERT INTO pet_model
     (name, species, breed, birth_date, user_id, for_adoption)
@@ -38,7 +38,7 @@ VALUES
 
 
 INSERT INTO annoucement_model
-    (title, description, publication_date, event_date, location, annoucement_type, user_id)
+    (title, description, publication_date, event_date, location, announcement_type, user_id)
 VALUES
          (
              'Feira de Adoção de Cães',
@@ -47,7 +47,7 @@ VALUES
              '2026-09-20',
              'Praça Central',
              'ADOPTION',
-             1
+             5
          ),
          (
              'Campanha de Vacinação',
@@ -56,7 +56,7 @@ VALUES
              '2026-09-25',
              'Centro Comunitário',
              'VACCINE',
-             2
+             5
          ),
          (
              'Cachorro Perdido',
@@ -64,8 +64,8 @@ VALUES
              '2026-09-05',
              '2026-09-05',
              'Bairro Centro',
-             'LOST',
-             1
+             'VACCINE',
+             5
          );
 
 INSERT INTO adoption_model

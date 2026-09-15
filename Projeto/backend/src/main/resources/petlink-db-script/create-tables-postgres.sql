@@ -47,7 +47,7 @@ CREATE TABLE annoucement_model
     publication_date DATE NOT NULL,
     event_date DATE,
     location VARCHAR(150) NOT NULL,
-    annoucement_type VARCHAR(15) NOT NULL,
+    announcement_type VARCHAR(15) NOT NULL,
     user_id INT NOT NULL,
 
     CONSTRAINT fk_annoucement_creator  FOREIGN KEY (user_id) REFERENCES user_model(id) ON DELETE CASCADE

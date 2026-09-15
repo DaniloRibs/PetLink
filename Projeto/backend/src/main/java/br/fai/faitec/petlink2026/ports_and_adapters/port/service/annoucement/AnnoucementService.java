@@ -5,7 +5,7 @@ import br.fai.faitec.petlink2026.ports_and_adapters.port.service.crud.CreateServ
 import br.fai.faitec.petlink2026.ports_and_adapters.port.service.crud.DeleteService;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.service.crud.FindService;
 
-public interface AnnoucementService extends CreateService<AnnoucementModel>, DeleteService, FindService<AnnoucementModel> {
+public interface AnnoucementService extends CreateService<AnnoucementModel>, DeleteService, FindService<AnnoucementModel>, ReadAnnoucementService {
 
 
 }

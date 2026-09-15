@@ -75,9 +75,11 @@
     } @else {
     <div class="announcement-list">
       @for (announcement of announcements; track announcement.id) {
-      <announcement-card [announcement]="announcement"
-        [canManage]="isCompany && announcement.creatorEmail === userEmail" (delete)="removeCampaign(announcement)"
-        (updated)="onAnnouncementUpdated($event)" />
+    <announcement-card [announcement]="announcement" [user]="user!"
+      [canManage]="isCompany && announcement.creatorEmail === user?.email"
+      (delete)="removeCampaign(announcement)"
+      (updated)="onAnnouncementUpdated($event)">
+    </announcement-card>
       }
     </div>
     }

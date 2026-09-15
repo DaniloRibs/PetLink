@@ -6,6 +6,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Announcement, AnnouncementType } from '../../../../models/domain/announcement';
 import { AnnouncementUpdateService } from '../../../../services/announcement/announcement-update';
+import { User } from '../../../../models/domain/user';
 
 @Component({
   selector: 'announcement-card',
@@ -25,6 +26,8 @@ import { AnnouncementUpdateService } from '../../../../services/announcement/ann
 export class AnnouncementCardComponent {
 
   @Input({ required: true }) announcement!: Announcement;
+  @Input({ required: true }) user!: User;
+
   @Input() canManage: boolean = false;
   @Output() delete = new EventEmitter<Announcement>();
   @Output() updated = new EventEmitter<Announcement>();
@@ -64,7 +67,7 @@ export class AnnouncementCardComponent {
       this.editForm.patchValue({
         title: this.announcement.title,
         description: this.announcement.description,
-        date: this.announcement.date || '',
+        date: this.announcement.eventDate || '',
         location: this.announcement.location || '',
       });
     }
@@ -86,7 +89,7 @@ export class AnnouncementCardComponent {
       ...this.announcement,
       title: this.editForm.controls['title'].value,
       description: this.editForm.controls['description'].value,
-      date: this.editForm.controls['date'].value || undefined,
+      eventDate: this.editForm.controls['date'].value || undefined,
       location: this.editForm.controls['location'].value || undefined,
     };
 

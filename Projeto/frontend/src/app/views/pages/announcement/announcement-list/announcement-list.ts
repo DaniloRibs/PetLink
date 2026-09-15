@@ -3,7 +3,7 @@ import { DatePipe } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 
-import { AccountType } from '../../../../models/domain/user';
+import { AccountType, User } from '../../../../models/domain/user';
 import { Announcement, AnnouncementType } from '../../../../models/domain/announcement';
 import { AnnouncementReadService } from '../../../../services/announcement/announcement-read';
 import { AnnouncementCreateService } from '../../../../services/announcement/announcement-create';
@@ -21,7 +21,7 @@ import { AnnouncementCardComponent } from '../announcement-card/announcement-car
 export class AnnouncementList implements OnInit {
 
   AnnouncementType = AnnouncementType;
-
+  user: User | null = null;
   announcements: Announcement[] = [];
   loading: boolean = true;
   isCompany: boolean = false;
@@ -49,23 +49,23 @@ export class AnnouncementList implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    try {
-      let user = this.currentUserService.get();
-      if (!user) {
-        user = await this.currentUserService.load();
-      }
-
-      this.isCompany = user?.accountType === AccountType.ENTERPRISE;
-      this.userEmail = user?.email ?? '';
-
-      this.announcements = await this.announcementReadService.findAll();
-    } catch (error) {
-      console.error('Erro ao carregar campanhas de vacinação', error);
-    } finally {
-      this.loading = false;
-      this.cdr.detectChanges();
+  try {
+    this.user = this.currentUserService.get();
+    if (!this.user) {
+      this.user = await this.currentUserService.load();
     }
+
+    this.isCompany = this.user?.accountType === AccountType.ENTERPRISE;
+    this.userEmail = this.user?.email ?? '';
+
+    this.announcements = await this.announcementReadService.findAll();
+  } catch (error) {
+    console.error('Erro ao carregar campanhas de vacinação', error);
+  } finally {
+    this.loading = false;
+    this.cdr.detectChanges();
   }
+}
 
   toggleForm(): void {
     this.showForm = !this.showForm;
@@ -86,15 +86,16 @@ export class AnnouncementList implements OnInit {
 
     const user = this.currentUserService.get();
 
-    const announcement: Announcement = {
-      title: this.form.controls['title'].value,
-      description: this.form.controls['description'].value,
-      date: this.form.controls['date'].value || undefined,
-      location: this.form.controls['location'].value || undefined,
-      creatorEmail: user?.email ?? this.userEmail,
-      creatorName: user?.fullname ?? 'Empresa parceira',
-      type: this.form.controls['type'].value
-    };
+const announcement: Announcement = {
+  title: this.form.controls['title'].value,
+  description: this.form.controls['description'].value,
+  eventDate: this.form.controls['date'].value || undefined,
+  location: this.form.controls['location'].value || undefined,
+  creatorEmail: this.userEmail,
+  creatorName: this.user?.fullname ?? '',
+  announcementType: this.form.controls['type'].value,
+  publicationDate: new Date().toISOString(),
+};
 
     this.announcementCreateService.create(announcement).subscribe({
       next: (created) => {
