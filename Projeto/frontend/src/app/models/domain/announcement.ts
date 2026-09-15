@@ -7,9 +7,9 @@ export interface Announcement {
     id?: number;
     title: string;
     description: string;
-    date?: string;
+    eventDate?: string;
+    publicationDate: string;
     location?: string;
-    creatorName: string;
-    creatorEmail: string;
+    idCreator: number;
     type: AnnouncementType;
 }

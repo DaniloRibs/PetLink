@@ -12,6 +12,6 @@ export class AnnouncementUpdateService {
     constructor(private http: HttpClient) { }
 
     update(announcement: Announcement): Observable<Announcement> {
-        return this.http.put<Announcement>(`${environment.api_endpoint}/announcements/${announcement.id}`, announcement);
+        return this.http.put<Announcement>(`${environment.api_endpoint}/announcement/${announcement.id}`, announcement);
     }
 }

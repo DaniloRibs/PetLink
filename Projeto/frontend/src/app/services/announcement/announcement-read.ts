@@ -12,12 +12,12 @@ export class AnnouncementReadService {
   constructor(private http: HttpClient) { }
 
   findAll(): Promise<Announcement[]> {
-    return firstValueFrom(this.http.get<Announcement[]>(`${environment.api_endpoint}/announcements`));
+    return firstValueFrom(this.http.get<Announcement[]>(`${environment.api_endpoint}/announcement`));
   }
 
   findByCompanyEmail(companyEmail: string): Promise<Announcement[]> {
     return firstValueFrom(
-      this.http.get<Announcement[]>(`${environment.api_endpoint}/announcements?companyEmail=${companyEmail}`)
+      this.http.get<Announcement[]>(`${environment.api_endpoint}/announcement?companyEmail=${companyEmail}`)
     );
   }
 }

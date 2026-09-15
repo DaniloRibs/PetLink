@@ -12,6 +12,6 @@ export class AnnouncementCreateService {
   constructor(private http: HttpClient) { }
 
   create(announcement: Announcement): Observable<Announcement> {
-    return this.http.post<Announcement>(`${environment.api_endpoint}/announcements`, announcement);
+    return this.http.post<Announcement>(`${environment.api_endpoint}/announcement`, announcement);
   }
 }

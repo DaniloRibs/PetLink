@@ -20,6 +20,6 @@ export class UserReadService {
   }
 
   findByEmail(email: string): Promise<User[]> {
-    return firstValueFrom(this.http.get<User[]>(`${environment.api_endpoint}/user?email=${email}`));
+    return firstValueFrom(this.http.get<User[]>(`${environment.api_endpoint}/user/email/${email}`));
   }
 }
