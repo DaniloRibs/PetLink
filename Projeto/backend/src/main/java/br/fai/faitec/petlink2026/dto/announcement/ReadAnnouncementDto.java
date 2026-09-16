@@ -1,6 +1,6 @@
-package br.fai.faitec.petlink2026.dto.annoucement;
+package br.fai.faitec.petlink2026.dto.announcement;
 
-import br.fai.faitec.petlink2026.domain.annoucement.AnnoucementType;
+import br.fai.faitec.petlink2026.domain.announcement.AnnouncementType;
 
 import java.sql.Date;
 
@@ -9,24 +9,21 @@ public class ReadAnnouncementDto {
 
     private String title;
     private String description;
-    private Date publicationDate;
     private Date eventDate;
     private String location;
     private String creatorEmail;
     private String creatorName;
-    private AnnoucementType announcementType;
+    private AnnouncementType announcementType;
 
     public ReadAnnouncementDto(String title,
                                String description,
-                               Date publicationDate,
                                Date eventDate,
                                String location,
                                String creatorEmail,
                                String creatorName,
-                               AnnoucementType announcementType) {
+                               AnnouncementType announcementType) {
         this.title = title;
         this.description = description;
-        this.publicationDate = publicationDate;
         this.eventDate = eventDate;
         this.location = location;
         this.creatorEmail = creatorEmail;
@@ -66,14 +63,6 @@ public class ReadAnnouncementDto {
         this.description = description;
     }
 
-    public Date getPublicationDate() {
-        return publicationDate;
-    }
-
-    public void setPublicationDate(Date publicationDate) {
-        this.publicationDate = publicationDate;
-    }
-
     public Date getEventDate() {
         return eventDate;
     }
@@ -90,11 +79,11 @@ public class ReadAnnouncementDto {
         this.location = location;
     }
 
-    public AnnoucementType getAnnouncementType() {
+    public AnnouncementType getAnnouncementType() {
         return announcementType;
     }
 
-    public void setAnnouncementType(AnnoucementType announcementType) {
+    public void setAnnouncementType(AnnouncementType announcementType) {
         this.announcementType = announcementType;
     }
 }

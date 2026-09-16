@@ -32,13 +32,12 @@ VALUES
      'Vacina contra raiva', 'RAB-2026-02', 4);
 
 
-INSERT INTO annoucement_model
-    (title, description, publication_date, event_date, location, announcement_type, user_id)
+INSERT INTO announcement_model
+    (title, description, event_date, location, announcement_type, user_id)
 VALUES
          (
              'Feira de Adoção de Cães',
              'Feira para adoção responsável de cães resgatados.',
-             '2026-09-01',
              '2026-09-20',
              'Praça Central',
              'ADOPTION',
@@ -47,7 +46,6 @@ VALUES
          (
              'Campanha de Vacinação',
              'Campanha de vacinação gratuita para cães e gatos.',
-             '2026-09-03',
              '2026-09-25',
              'Centro Comunitário',
              'VACCINE',
@@ -56,7 +54,6 @@ VALUES
          (
              'Cachorro Perdido',
              'Cachorro de porte médio desapareceu nas proximidades do bairro.',
-             '2026-09-05',
              '2026-09-05',
              'Bairro Centro',
              'LOST',

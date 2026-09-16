@@ -1,16 +1,15 @@
-package br.fai.faitec.petlink2026.domain.annoucement;
+package br.fai.faitec.petlink2026.domain.announcement;
 
 import java.sql.Date;
 
-public class AnnoucementModel {
+public class AnnouncementModel {
     private int id;
     private String title;
     private String description;
-    private Date publicationDate;
     private Date eventDate;
     private String location;
     private int idCreator;
-    private AnnoucementType announcementType;
+    private AnnouncementType announcementType;
 
     
     public int getId() {
@@ -37,14 +36,6 @@ public class AnnoucementModel {
         this.description = description;
     }
 
-    public Date getPublicationDate() {
-        return publicationDate;
-    }
-
-    public void setPublicationDate(Date publicationDate) {
-        this.publicationDate = publicationDate;
-    }
-
     public Date getEventDate() {
         return eventDate;
     }
@@ -69,11 +60,11 @@ public class AnnoucementModel {
         this.idCreator = idCreator;
     }
 
-    public AnnoucementType getAnnoucementType() {
+    public AnnouncementType getAnnouncementType() {
         return announcementType;
     }
 
-    public void setAnnoucementType(AnnoucementType annoucementType) {
-        this.announcementType = annoucementType;
+    public void setAnnouncementType(AnnouncementType announcementType) {
+        this.announcementType = announcementType;
     }
 }

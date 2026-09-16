@@ -1,8 +1,8 @@
-package br.fai.faitec.petlink2026.ports_and_adapters.adapter.dao.annoucement;
+package br.fai.faitec.petlink2026.ports_and_adapters.adapter.dao.announcement;
 
-import br.fai.faitec.petlink2026.domain.annoucement.AnnoucementModel;
-import br.fai.faitec.petlink2026.domain.annoucement.AnnoucementType;
-import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.annoucement.AnnoucementDao;
+import br.fai.faitec.petlink2026.domain.announcement.AnnouncementModel;
+import br.fai.faitec.petlink2026.domain.announcement.AnnouncementType;
+import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.announcement.AnnouncementDao;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -12,18 +12,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AnnoucementPostgresDaoAdapter implements AnnoucementDao {
+public class AnnouncementPostgresDaoAdapter implements AnnouncementDao {
 
     private final Connection connection;
 
-    public AnnoucementPostgresDaoAdapter(Connection connection) {
+    public AnnouncementPostgresDaoAdapter(Connection connection) {
         this.connection = connection;
     }
 
     @Override
-    public int add(AnnoucementModel entity) {
-        String sql = "INSERT INTO annoucement_model(title, description, publication_date, event_date, location, announcement_type, user_id) " +
-                " VALUES(?,?,?,?,?,?,?); ";
+    public int add(AnnouncementModel entity) {
+        String sql = "INSERT INTO announcement_model(title, description, event_date, location, announcement_type, user_id) " +
+                " VALUES(?,?,?,?,?,?); ";
 
         PreparedStatement preparedStatement;
         ResultSet resultSet;
@@ -33,11 +33,10 @@ public class AnnoucementPostgresDaoAdapter implements AnnoucementDao {
 
             preparedStatement.setString(1, entity.getTitle());
             preparedStatement.setString(2, entity.getDescription());
-            preparedStatement.setDate(3, entity.getPublicationDate());
-            preparedStatement.setDate(4, entity.getEventDate());
-            preparedStatement.setString(5, entity.getLocation());
-            preparedStatement.setString(6, entity.getAnnoucementType().name());
-            preparedStatement.setInt(7, entity.getIdCreator());
+            preparedStatement.setDate(3, entity.getEventDate());
+            preparedStatement.setString(4, entity.getLocation());
+            preparedStatement.setString(5, entity.getAnnouncementType().name());
+            preparedStatement.setInt(6, entity.getIdCreator());
 
             preparedStatement.execute();
 
@@ -63,7 +62,7 @@ public class AnnoucementPostgresDaoAdapter implements AnnoucementDao {
 
     @Override
     public void remove(int id) {
-        String sql = "DELETE FROM annoucement_model " +
+        String sql = "DELETE FROM announcement_model " +
                 "WHERE id = ? ;";
 
         try {
@@ -77,8 +76,8 @@ public class AnnoucementPostgresDaoAdapter implements AnnoucementDao {
     }
 
     @Override
-    public AnnoucementModel readyById(int id) {
-        final String sql = "SELECT * FROM annoucement_model WHERE id = ? ;";
+    public AnnouncementModel readyById(int id) {
+        final String sql = "SELECT * FROM announcement_model WHERE id = ? ;";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -89,28 +88,26 @@ public class AnnoucementPostgresDaoAdapter implements AnnoucementDao {
                 final int entityId = resultSet.getInt("id");
                 final String title = resultSet.getString("title");
                 final String description = resultSet.getString("description");
-                final Date publicationDate = resultSet.getDate("publication_date");
                 final Date eventDate = resultSet.getDate("event_date");
                 final String location = resultSet.getString("location");
                 final int creatorId = resultSet.getInt("user_id");
 
                 final String auxType = resultSet.getString("announcement_type");
-                final AnnoucementType annoucementType = AnnoucementType.valueOf(auxType);
+                final AnnouncementType announcementType = AnnouncementType.valueOf(auxType);
 
-                final AnnoucementModel annoucementModel = new AnnoucementModel();
-                annoucementModel.setId(entityId);
-                annoucementModel.setTitle(title);
-                annoucementModel.setDescription(description);
-                annoucementModel.setPublicationDate(publicationDate);
-                annoucementModel.setEventDate(eventDate);
-                annoucementModel.setLocation(location);
-                annoucementModel.setAnnoucementType(annoucementType);
-                annoucementModel.setIdCreator(creatorId);
+                final AnnouncementModel announcementModel = new AnnouncementModel();
+                announcementModel.setId(entityId);
+                announcementModel.setTitle(title);
+                announcementModel.setDescription(description);
+                announcementModel.setEventDate(eventDate);
+                announcementModel.setLocation(location);
+                announcementModel.setAnnouncementType(announcementType);
+                announcementModel.setIdCreator(creatorId);
 
                 preparedStatement.close();
                 resultSet.close();
 
-                return annoucementModel;
+                return announcementModel;
             }
             return null;
 
@@ -120,10 +117,10 @@ public class AnnoucementPostgresDaoAdapter implements AnnoucementDao {
     }
 
     @Override
-    public List<AnnoucementModel> readAll() {
-        final List<AnnoucementModel> entities = new ArrayList<>();
+    public List<AnnouncementModel> readAll() {
+        final List<AnnouncementModel> entities = new ArrayList<>();
 
-        final String sql = "SELECT * FROM annoucement_model";
+        final String sql = "SELECT * FROM announcement_model";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -132,25 +129,23 @@ public class AnnoucementPostgresDaoAdapter implements AnnoucementDao {
                 final int entityId = resultSet.getInt("id");
                 final String title = resultSet.getString("title");
                 final String description = resultSet.getString("description");
-                final Date publicationDate = resultSet.getDate("publication_date");
                 final Date eventDate = resultSet.getDate("event_date");
                 final String location = resultSet.getString("location");
                 final int creatorId = resultSet.getInt("user_id");
 
                 final String auxType = resultSet.getString("announcement_type");
-                final AnnoucementType annoucementType = AnnoucementType.valueOf(auxType);
+                final AnnouncementType announcementType = AnnouncementType.valueOf(auxType);
 
-                final AnnoucementModel annoucementModel = new AnnoucementModel();
-                annoucementModel.setId(entityId);
-                annoucementModel.setTitle(title);
-                annoucementModel.setDescription(description);
-                annoucementModel.setPublicationDate(publicationDate);
-                annoucementModel.setEventDate(eventDate);
-                annoucementModel.setLocation(location);
-                annoucementModel.setAnnoucementType(annoucementType);
-                annoucementModel.setIdCreator(creatorId);
+                final AnnouncementModel announcementModel = new AnnouncementModel();
+                announcementModel.setId(entityId);
+                announcementModel.setTitle(title);
+                announcementModel.setDescription(description);
+                announcementModel.setEventDate(eventDate);
+                announcementModel.setLocation(location);
+                announcementModel.setAnnouncementType(announcementType);
+                announcementModel.setIdCreator(creatorId);
 
-                entities.add(annoucementModel);
+                entities.add(announcementModel);
             }
 
             resultSet.close();
@@ -160,5 +155,10 @@ public class AnnoucementPostgresDaoAdapter implements AnnoucementDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public void updateInformation(int id, AnnouncementModel entity) {
+
     }
 }
