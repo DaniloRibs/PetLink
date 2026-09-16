@@ -1,9 +1,8 @@
-export interface Vaccine {
-    id?: number;
-    petId: number;
+export interface CreateVaccineDto {
+    idPet: number;
     name: string;
     description?: string;
     applicationDate: string;
     expirationDate?: string;
-    batch?: string;
+    lote?: string;
 }

@@ -24,12 +24,13 @@
     </div>
     } @else {
     <div class="pet-card-grid">
-      @for (pet of availableForAdoption; track pet.id) {
+      @for (listing of availableForAdoption; track listing.adoption.id) {
       <article class="pet-card">
-        <div class="pet-card-icon">{{ speciesIcon(pet.species) }}</div>
-        <h3>{{ pet.name }}</h3>
-        <p>{{ pet.breed }}</p>
-        <p class="adoption-contact">Contato: {{ ownerContact(pet) }}</p>
+        <div class="pet-card-icon">{{ speciesIcon(listing.pet.species) }}</div>
+        <h3>{{ listing.pet.name }}</h3>
+        <p>{{ listing.pet.breed }}</p>
+        <p class="adoption-description">{{ listing.adoption.description }}</p>
+        <p class="adoption-contact">Contato: {{ listing.adoption.contact }}</p>
       </article>
       }
     </div>
@@ -47,25 +48,56 @@
     <div class="pet-card-grid">
       @for (pet of myPets; track pet.id) {
       <article class="pet-card">
-        @if (pet.forAdoption) {
+        @if (hasActiveDonation(pet.id)) {
         <span class="pet-badge">Em adoção</span>
         }
         <div class="pet-card-icon">{{ speciesIcon(pet.species) }}</div>
         <h3>{{ pet.name }}</h3>
         <p>{{ pet.breed }}</p>
 
-        @if (pendingConfirmationId === pet.id) {
-        <p class="confirm-text">
-          {{ pet.forAdoption ? 'Remover ' + pet.name + ' da lista de adoção?' : 'Colocar ' + pet.name + ' para adoção?'
-          }}
-        </p>
+        @if (hasActiveDonation(pet.id)) {
+
+        <p class="adoption-description">{{ activeDonationFor(pet.id)?.description }}</p>
+        <p class="adoption-contact">Contato: {{ activeDonationFor(pet.id)?.contact }}</p>
+
+        @if (pendingRemovalAdoptionId === activeDonationFor(pet.id)?.id) {
+        <p class="confirm-text">Remover {{ pet.name }} da lista de adoção?</p>
         <div class="confirm-actions">
-          <button class="secondary-button" (click)="confirmToggleDonation(pet)">Confirmar</button>
-          <button class="secondary-button" (click)="cancelToggleDonation()">Cancelar</button>
+          <button class="secondary-button" (click)="confirmRemoveFromList(activeDonationFor(pet.id)!.id!)">Confirmar</button>
+          <button class="secondary-button" (click)="cancelRemoveFromList()">Cancelar</button>
         </div>
         } @else {
-        <button class="secondary-button" (click)="requestToggleDonation(pet)">
-          {{ pet.forAdoption ? 'Remover da lista' : 'Colocar para doação' }}
+        <div class="confirm-actions">
+          <button class="primary-button" (click)="requestMarkAsAdopted(activeDonationFor(pet.id)!.id!)">Marcar como adotado</button>
+          <button class="secondary-button" (click)="requestRemoveFromList(activeDonationFor(pet.id)!.id!)">Remover da lista</button>
+        </div>
+        }
+
+        } @else if (petIdBeingOffered === pet.id) {
+
+        <form [formGroup]="donationForm" (ngSubmit)="confirmOfferForAdoption(pet)" class="vaccine-edit-form">
+          <div class="field-group">
+            <label>Descrição</label>
+            <input type="text" placeholder="Conte um pouco sobre o pet" formControlName="description">
+          </div>
+          <div class="field-group">
+            <label>Contato</label>
+            <input type="text" placeholder="E-mail ou telefone para contato" formControlName="contact">
+          </div>
+
+          <div class="confirm-actions">
+            <input type="submit" class="primary-button" value="Publicar" [disabled]="!validateDonationFields()">
+            <button type="button" class="secondary-button" (click)="cancelOfferForAdoption()">Cancelar</button>
+          </div>
+
+          @if (donationValidationFailed) {
+          <p class="text-danger">Confira os dados e tente novamente.</p>
+          }
+        </form>
+
+        } @else {
+        <button class="secondary-button" (click)="requestOfferForAdoption(pet)">
+          Colocar para doação
         </button>
         }
       </article>

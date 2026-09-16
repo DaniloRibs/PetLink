@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 
 import { Pet, PetSpecies } from '../../../../models/domain/pet';
 import { Vaccine } from '../../../../models/domain/vaccine';
+import { CreateVaccineDto } from '../../../../models/dto/create-vaccine-dto';
 import { PetReadService } from '../../../../services/pet/pet-read';
 import { PetUpdateService } from '../../../../services/pet/pet-update';
 import { PetDeleteService } from '../../../../services/pet/pet-delete';
@@ -66,17 +67,17 @@ export class PetDetail implements OnInit {
     this.vaccineForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       applicationDate: ['', [Validators.required]],
-      nextDoseDate: [''],
-      lot: [''],
-      notes: [''],
+      expirationDate: [''],
+      batch: [''],
+      description: [''],
     });
 
     this.vaccineEditForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       applicationDate: ['', [Validators.required]],
-      nextDoseDate: [''],
-      lot: [''],
-      notes: [''],
+      expirationDate: [''],
+      batch: [''],
+      description: [''],
     });
 
     this.editForm = this.formBuilder.group({
@@ -246,16 +247,16 @@ export class PetDetail implements OnInit {
       return;
     }
 
-    const vaccine: Vaccine = {
-      petId: this.pet.id!,
+    const createVaccineDto: CreateVaccineDto = {
+      idPet: this.pet.id!,
       name: this.vaccineForm.controls['name'].value,
       applicationDate: this.vaccineForm.controls['applicationDate'].value,
-      nextDoseDate: this.vaccineForm.controls['nextDoseDate'].value || undefined,
-      lot: this.vaccineForm.controls['lot'].value || undefined,
-      notes: this.vaccineForm.controls['notes'].value || undefined,
+      expirationDate: this.vaccineForm.controls['expirationDate'].value || undefined,
+      lote: this.vaccineForm.controls['batch'].value || undefined,
+      description: this.vaccineForm.controls['description'].value || undefined,
     };
 
-    this.vaccineCreateService.create(vaccine).subscribe({
+    this.vaccineCreateService.create(createVaccineDto).subscribe({
       next: () => {
         this.reloadCurrentPet();
         this.zone.run(() => {
@@ -311,9 +312,9 @@ export class PetDetail implements OnInit {
     this.vaccineEditForm.patchValue({
       name: vaccine.name,
       applicationDate: vaccine.applicationDate,
-      nextDoseDate: vaccine.nextDoseDate || '',
-      lot: vaccine.lot || '',
-      notes: vaccine.notes || '',
+      expirationDate: vaccine.expirationDate || '',
+      batch: vaccine.batch || '',
+      description: vaccine.description || '',
     });
   }
 
@@ -337,9 +338,9 @@ export class PetDetail implements OnInit {
       ...vaccine,
       name: this.vaccineEditForm.controls['name'].value,
       applicationDate: this.vaccineEditForm.controls['applicationDate'].value,
-      nextDoseDate: this.vaccineEditForm.controls['nextDoseDate'].value || undefined,
-      lot: this.vaccineEditForm.controls['lot'].value || undefined,
-      notes: this.vaccineEditForm.controls['notes'].value || undefined,
+      expirationDate: this.vaccineEditForm.controls['expirationDate'].value || undefined,
+      batch: this.vaccineEditForm.controls['batch'].value || undefined,
+      description: this.vaccineEditForm.controls['description'].value || undefined,
     };
 
     this.vaccineUpdateService.update(updatedVaccine).subscribe({

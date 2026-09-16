@@ -1,17 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CreateVaccineDto } from '../../models/dto/create-vaccine-dto';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
-export class VaccineCreateService {
+export class AdoptionDeleteService {
 
   constructor(private http: HttpClient) { }
 
-  create(createVaccineDto: CreateVaccineDto): Observable<void> {
-    return this.http.post<void>(`${environment.api_endpoint}/pet/vaccine`, createVaccineDto);
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${environment.api_endpoint}/adoption/${id}`);
   }
 }

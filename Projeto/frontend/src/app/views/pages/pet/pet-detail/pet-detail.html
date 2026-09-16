@@ -136,18 +136,18 @@
 
             <div class="field-group">
               <label>Próxima dose (opcional)</label>
-              <input type="date" formControlName="nextDoseDate">
+              <input type="date" formControlName="expirationDate">
             </div>
           </div>
 
           <div class="field-group">
             <label>Lote (opcional)</label>
-            <input type="text" placeholder formControlName="lot">
+            <input type="text" placeholder formControlName="batch">
           </div>
 
           <div class="field-group">
             <label>Observações (opcional)</label>
-            <input type="text" placeholder formControlName="notes">
+            <input type="text" placeholder formControlName="description">
           </div>
 
           <div class="confirm-actions">
@@ -161,14 +161,14 @@
         </form>
         } @else {
         <p class="vaccine-mini-line">Aplicada em {{ vaccine.applicationDate | date:'dd/MM/yyyy' }}</p>
-        @if (vaccine.nextDoseDate) {
-        <p class="vaccine-mini-line">Próxima dose: {{ vaccine.nextDoseDate | date:'dd/MM/yyyy' }}</p>
+        @if (vaccine.expirationDate) {
+        <p class="vaccine-mini-line">Próxima dose: {{ vaccine.expirationDate | date:'dd/MM/yyyy' }}</p>
         }
-        @if (vaccine.lot) {
-        <p class="vaccine-mini-line">Lote: {{ vaccine.lot }}</p>
+        @if (vaccine.batch) {
+        <p class="vaccine-mini-line">Lote: {{ vaccine.batch }}</p>
         }
-        @if (vaccine.notes) {
-        <p class="vaccine-mini-notes">{{ vaccine.notes }}</p>
+        @if (vaccine.description) {
+        <p class="vaccine-mini-notes">{{ vaccine.description }}</p>
         }
 
         @if (pendingVaccineDeleteId === vaccine.id) {
@@ -218,18 +218,18 @@
 
           <div class="field-group">
             <label>Próxima dose (opcional)</label>
-            <input type="date" formControlName="nextDoseDate">
+            <input type="date" formControlName="expirationDate">
           </div>
         </div>
 
         <div class="field-group">
           <label>Lote (opcional)</label>
-          <input type="text" placeholder formControlName="lot">
+          <input type="text" placeholder formControlName="batch">
         </div>
 
         <div class="field-group">
           <label>Observações (opcional)</label>
-          <input type="text" placeholder formControlName="notes">
+          <input type="text" placeholder formControlName="description">
         </div>
 
         <input type="submit" value="Cadastrar Vacina" [disabled]="!validateVaccineFields()">

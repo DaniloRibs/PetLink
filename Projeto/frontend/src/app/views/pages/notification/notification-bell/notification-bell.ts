@@ -62,11 +62,11 @@ export class NotificationBell implements OnInit {
         }
 
         for (const vaccine of petVaccines) {
-          if (!vaccine.nextDoseDate) {
+          if (!vaccine.expirationDate) {
             continue;
           }
 
-          const nextDose = new Date(vaccine.nextDoseDate);
+          const nextDose = new Date(vaccine.expirationDate);
           const diffDays = Math.ceil((nextDose.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
 
           if (diffDays < 0) {

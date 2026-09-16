@@ -1,17 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CreateVaccineDto } from '../../models/dto/create-vaccine-dto';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
-export class VaccineCreateService {
+export class AdoptionMarkAsAdoptedService {
 
   constructor(private http: HttpClient) { }
 
-  create(createVaccineDto: CreateVaccineDto): Observable<void> {
-    return this.http.post<void>(`${environment.api_endpoint}/pet/vaccine`, createVaccineDto);
+  markAsAdopted(id: number): Observable<void> {
+    return this.http.patch<void>(`${environment.api_endpoint}/adoption/${id}/adopt`, {});
   }
 }
