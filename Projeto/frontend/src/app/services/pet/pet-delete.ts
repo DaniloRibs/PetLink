@@ -11,6 +11,6 @@ export class PetDeleteService {
     constructor(private http: HttpClient) { }
 
     delete(id: number): Observable<void> {
-        return this.http.delete<void>(`${environment.api_endpoint}/pets/${id}`);
+        return this.http.delete<void>(`${environment.api_endpoint}/pet/${id}`);
     }
 }

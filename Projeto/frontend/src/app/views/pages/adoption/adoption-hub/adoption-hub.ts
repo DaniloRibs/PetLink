@@ -99,7 +99,7 @@ export class AdoptionHub implements OnInit {
   confirmToggleDonation(pet: Pet): void {
     pet.forAdoption = !pet.forAdoption;
     this.pendingConfirmationId = null;
-
+    console.log("chegoamsos asq")
     this.petUpdateService.update(pet).subscribe({
       error: (error) => console.error('Erro ao atualizar pet', error),
     });

@@ -11,6 +11,6 @@ export class VaccineDeleteService {
     constructor(private http: HttpClient) { }
 
     delete(id: number): Observable<void> {
-        return this.http.delete<void>(`${environment.api_endpoint}/vaccines/${id}`);
+        return this.http.delete<void>(`${environment.api_endpoint}/vaccine/${id}`);
     }
 }

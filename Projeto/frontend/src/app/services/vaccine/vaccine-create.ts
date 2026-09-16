@@ -12,6 +12,6 @@ export class VaccineCreateService {
   constructor(private http: HttpClient) { }
 
   create(vaccine: Vaccine): Observable<Vaccine> {
-    return this.http.post<Vaccine>(`${environment.api_endpoint}/vaccines`, vaccine);
+    return this.http.post<Vaccine>(`${environment.api_endpoint}/vaccine`, vaccine);
   }
 }

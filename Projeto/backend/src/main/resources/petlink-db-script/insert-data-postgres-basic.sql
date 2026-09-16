@@ -16,7 +16,7 @@ VALUES
     ('Thor', 'DOG', 'Pastor Alemão', '2018-11-05', 3, false),
     ('Luna', 'CAT', 'Persa', '2022-01-25', 3, true),
     ('Nina', 'DOG', 'Poodle', '2020-07-12', 4, false),
-    ('Bob', 'DOG', 'Beagle', '2021-02-18', 4, false);
+    ('bolinho', 'DOG', 'fofinho', '2021-02-18', 5, false);
 
 INSERT INTO vaccine_model
     (application_date, expiration_date, name, description, batch, pet_id)

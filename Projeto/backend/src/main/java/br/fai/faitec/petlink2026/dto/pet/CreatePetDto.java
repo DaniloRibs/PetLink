@@ -50,11 +50,11 @@ public class CreatePetDto {
         this.birthDate = birthDate;
     }
 
-    public Specie getEspecie() {
+    public Specie getSpecies() {
         return specie;
     }
 
-    public void setEspecie(Specie specie) {
+    public void setSpecies(Specie specie) {
         this.specie = specie;
     }
 

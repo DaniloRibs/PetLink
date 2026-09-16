@@ -12,6 +12,7 @@ public class UpdatePetDto {
     private Specie specie;
     private String breed;
     private Date birthDate;
+    private boolean forAdoption;
 
 
     public PetModel toPetModel() {
@@ -21,8 +22,17 @@ public class UpdatePetDto {
         petModel.setBreed(breed);
         petModel.setBirthDate(birthDate);
         petModel.setSpecies(specie);
+        petModel.setForAdoption(forAdoption);
 
         return petModel;
+    }
+
+    public boolean isForAdoption() {
+        return forAdoption;
+    }
+
+    public void setForAdoption(boolean forAdoption) {
+        this.forAdoption = forAdoption;
     }
 
     public int getId() {
@@ -41,11 +51,11 @@ public class UpdatePetDto {
         this.name = name;
     }
 
-    public Specie getEspecie() {
+    public Specie getSpecies() {
         return specie;
     }
 
-    public void setEspecie(Specie specie) {
+    public void setSpecies(Specie specie) {
         this.specie = specie;
     }
 

@@ -12,6 +12,6 @@ export class VaccineUpdateService {
     constructor(private http: HttpClient) { }
 
     update(vaccine: Vaccine): Observable<Vaccine> {
-        return this.http.put<Vaccine>(`${environment.api_endpoint}/vaccines/${vaccine.id}`, vaccine);
+        return this.http.put<Vaccine>(`${environment.api_endpoint}/vaccine/${vaccine.id}`, vaccine);
     }
 }

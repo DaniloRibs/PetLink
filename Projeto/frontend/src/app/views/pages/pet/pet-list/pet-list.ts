@@ -1,5 +1,5 @@
 import { speciesIcon } from '../../../../shared/pet-species-icon';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef,NgZone ,Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -33,6 +33,7 @@ export class PetList implements OnInit {
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
+    private zone: NgZone,
     private petReadService: PetReadService,
     private petCreateService: PetCreateService,
     private currentUserService: CurrentUserService,
@@ -47,19 +48,29 @@ export class PetList implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    try {
-      const currentUser = this.currentUserService.get() ?? await this.currentUserService.load();
-      if (!currentUser?.id) {
-        throw new Error('Usuário atual não encontrado');
-      }
-      this.pets = await this.petReadService.findByOwnerId(currentUser.id);
-    } catch (error) {
-      console.error('Erro ao carregar seus pets', error);
-    } finally {
-      this.loading = false;
-      this.cdr.detectChanges();
-    }
+    await this.loadPets();    
   }
+
+  private async loadPets(): Promise<void> {
+   try {
+     const currentUser = this.currentUserService.get() ?? await this.currentUserService.load();
+     if (!currentUser?.id) {
+       throw new Error('Usuário atual não encontrado');
+     }
+     const pets = await this.petReadService.findByOwnerId(currentUser.id);
+     this.zone.run(() => {
+       this.pets = pets;
+       this.loading = false;
+       this.cdr.detectChanges();
+     });
+   } catch (error) {
+     console.error('Erro ao carregar seus pets', error);
+     this.zone.run(() => {
+       this.loading = false;
+      this.cdr.detectChanges();
+     });
+   }
+ }
 
   openPet(pet: Pet): void {
     this.router.navigate(['/painel/pets', pet.id]);
@@ -97,17 +108,21 @@ export class PetList implements OnInit {
     };
 
     this.petCreateService.create(pet).subscribe({
-      next: (created) => {
-        this.pets = [...this.pets, created];
-        this.form.reset();
-        this.showForm = false;
-        this.cdr.detectChanges();
-      },
-      error: (error) => {
-        console.error('Erro ao cadastrar pet', error);
-        this.createValidationFailed = true;
-        this.cdr.detectChanges();
-      },
+      next: async () => {
+       await this.loadPets();
+       this.zone.run(() => {
+         this.form.reset();
+         this.showForm = false;
+         this.cdr.detectChanges();
+       });
+     },
+     error: (error) => {
+       console.error('Erro ao cadastrar pet', error);
+       this.zone.run(() => {
+         this.createValidationFailed = true;
+         this.cdr.detectChanges();
+       });
+     },
     });
   }
 }

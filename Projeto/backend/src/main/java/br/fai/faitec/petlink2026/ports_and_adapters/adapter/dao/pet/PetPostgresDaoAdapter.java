@@ -22,7 +22,7 @@ public class PetPostgresDaoAdapter implements PetDao {
 
     @Override
     public int add(PetModel entity) {
-        String sql = "INSERT INTO pet_model(name, specie, breed, birth_date, user_id, for_adoption) " +
+        String sql = "INSERT INTO pet_model(name, species, breed, birth_date, user_id, for_adoption) " +
                 " VALUES(?,?,?,?,?,?); ";
 
         PreparedStatement preparedStatement;
@@ -161,11 +161,11 @@ public class PetPostgresDaoAdapter implements PetDao {
     public void updateInformation(int id, PetModel entity) {
         String sql = "UPDATE pet_model SET " +
                 "name = ?, " +
-                "specie = ?, " +
+                "species = ?, " +
                 "breed = ?, " +
                 "birth_date = ?, " +
-                "user_id = ? " +
-                "for_adoption = ?" +
+                "user_id = ?, " +
+                "for_adoption = ? " +
                 "WHERE id = ?;";
 
         try {

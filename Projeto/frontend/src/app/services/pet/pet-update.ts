@@ -12,6 +12,6 @@ export class PetUpdateService {
   constructor(private http: HttpClient) { }
 
   update(pet: Pet): Observable<Pet> {
-    return this.http.put<Pet>(`${environment.api_endpoint}/pets/${pet.id}`, pet);
+    return this.http.put<Pet>(`${environment.api_endpoint}/pet/${pet.id}`, pet);
   }
 }

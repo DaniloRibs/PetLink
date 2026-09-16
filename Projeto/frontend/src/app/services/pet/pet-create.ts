@@ -12,6 +12,6 @@ export class PetCreateService {
   constructor(private http: HttpClient) { }
 
   create(pet: Pet): Observable<Pet> {
-    return this.http.post<Pet>(`${environment.api_endpoint}/pets`, pet);
+    return this.http.post<Pet>(`${environment.api_endpoint}/pet`, pet);
   }
 }
