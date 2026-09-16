@@ -20,7 +20,7 @@
           <span class="pet-badge">Em adoção</span>
           }
         </div>
-        <p class="pet-meta">{{ pet.breed }} · Nascido em {{ pet.birthDate | date:'dd/MM/yyyy' }}</p>
+        <p class="pet-meta">{{ pet.breed }} · Nascido em {{ pet.birthDate | date:'dd/MM/yyyy': 'UTC' }}</p>
       </div>
     </div>
 
@@ -160,9 +160,9 @@
           }
         </form>
         } @else {
-        <p class="vaccine-mini-line">Aplicada em {{ vaccine.applicationDate | date:'dd/MM/yyyy' }}</p>
+        <p class="vaccine-mini-line">Aplicada em {{ vaccine.applicationDate | date:'dd/MM/yyyy': 'UTC' }}</p>
         @if (vaccine.expirationDate) {
-        <p class="vaccine-mini-line">Próxima dose: {{ vaccine.expirationDate | date:'dd/MM/yyyy' }}</p>
+        <p class="vaccine-mini-line">Próxima dose: {{ vaccine.expirationDate | date:'dd/MM/yyyy': 'UTC' }}</p>
         }
         @if (vaccine.batch) {
         <p class="vaccine-mini-line">Lote: {{ vaccine.batch }}</p>

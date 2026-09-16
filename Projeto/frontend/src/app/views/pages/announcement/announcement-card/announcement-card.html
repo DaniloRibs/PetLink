@@ -56,7 +56,7 @@
     </p>
     <div class="date-badge mt-3">
       <mat-icon class="me-1">event</mat-icon>
-      <span><strong>Data do Evento:</strong> {{ announcement.eventDate | date:'dd/MM/yyyy' }}</span>
+      <span><strong>Data do Evento:</strong> {{ announcement.eventDate | date:'dd/MM/yyyy': 'UTC' }}</span>
     </div>
     @if (announcement.location) {
     <div class="date-badge mt-3">
