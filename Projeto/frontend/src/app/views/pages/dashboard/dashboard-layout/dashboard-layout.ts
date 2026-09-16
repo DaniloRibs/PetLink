@@ -47,7 +47,6 @@ export class DashboardLayout implements OnInit {
     this.userMenuOpen = false;
   }
 
-  // Fecha o menu do usuário ao clicar fora dele.
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent): void {
     if (!this.userMenuOpen) {

@@ -1,5 +1,5 @@
 import { speciesIcon } from '../../../../shared/pet-species-icon';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
@@ -43,6 +43,8 @@ export class PetDetail implements OnInit {
   editValidationFailed: boolean = false;
   editSavedOk: boolean = false;
 
+  private currentPetId: string | null = null;
+
   speciesIcon(species: string): string {
     return speciesIcon(species);
   }
@@ -59,6 +61,7 @@ export class PetDetail implements OnInit {
     private vaccineDeleteService: VaccineDeleteService,
     private vaccineUpdateService: VaccineUpdateService,
     private cdr: ChangeDetectorRef,
+    private zone: NgZone,
   ) {
     this.vaccineForm = this.formBuilder.group({
       name: ['', [Validators.required]],
@@ -84,21 +87,45 @@ export class PetDetail implements OnInit {
     });
   }
 
-  async ngOnInit(): Promise<void> {
-    const id = this.route.snapshot.paramMap.get('id')!;
+  ngOnInit(): void {
+    this.route.paramMap.subscribe((params) => {
+      const id = params.get('id');
+      if (!id) {
+        return;
+      }
+      this.currentPetId = id;
+      this.loading = true;
+      this.zone.run(() => this.cdr.detectChanges());
+      void this.loadPetData(id);
+    });
+  }
 
+  private async loadPetData(id: string): Promise<void> {
     try {
       const [pet, vaccines] = await Promise.all([
         this.petReadService.findById(id),
         this.vaccineReadService.findByPetId(id),
       ]);
-      this.pet = pet;
-      this.vaccines = vaccines;
+
+      this.zone.run(() => {
+        this.pet = pet;
+        this.vaccines = vaccines;
+        this.loading = false;
+        this.cdr.detectChanges();
+      });
     } catch (error) {
       console.error('Erro ao carregar dados do pet', error);
-    } finally {
-      this.loading = false;
-      this.cdr.detectChanges();
+      this.zone.run(() => {
+        this.pet = null;
+        this.loading = false;
+        this.cdr.detectChanges();
+      });
+    }
+  }
+
+  private reloadCurrentPet(): void {
+    if (this.currentPetId) {
+      void this.loadPetData(this.currentPetId);
     }
   }
 
@@ -115,10 +142,11 @@ export class PetDetail implements OnInit {
       return;
     }
 
-    this.pet.forAdoption = !this.pet.forAdoption;
+    const updatedPet: Pet = { ...this.pet, forAdoption: !this.pet.forAdoption };
     this.pendingAdoptionConfirmation = false;
 
-    this.petUpdateService.update(this.pet).subscribe({
+    this.petUpdateService.update(updatedPet).subscribe({
+      next: () => this.reloadCurrentPet(),
       error: (error) => console.error('Erro ao atualizar pet', error),
     });
   }
@@ -160,16 +188,20 @@ export class PetDetail implements OnInit {
     };
 
     this.petUpdateService.update(updatedPet).subscribe({
-      next: (updated) => {
-        this.pet = updated;
-        this.editSavedOk = true;
-        this.showEditForm = false;
-        this.cdr.detectChanges();
+      next: async () => {
+        await this.loadPetData(updatedPet.id!.toString());
+        this.zone.run(() => {
+          this.editSavedOk = true;
+          this.showEditForm = false;
+          this.cdr.detectChanges();
+        });
       },
       error: (error) => {
         console.error('Erro ao atualizar pet', error);
-        this.editValidationFailed = true;
-        this.cdr.detectChanges();
+        this.zone.run(() => {
+          this.editValidationFailed = true;
+          this.cdr.detectChanges();
+        });
       },
     });
   }
@@ -190,7 +222,7 @@ export class PetDetail implements OnInit {
     }
 
     this.petDeleteService.delete(this.pet.id).subscribe({
-      next: () => this.router.navigate(['/painel/pets']),
+      next: () => this.zone.run(() => this.router.navigate(['/painel/pets'])),
       error: (error) => console.error('Erro ao excluir pet', error),
     });
   }
@@ -224,16 +256,20 @@ export class PetDetail implements OnInit {
     };
 
     this.vaccineCreateService.create(vaccine).subscribe({
-      next: (created) => {
-        this.vaccines = [...this.vaccines, created];
-        this.vaccineCreatedOk = true;
-        this.vaccineForm.reset();
-        this.cdr.detectChanges();
+      next: () => {
+        this.reloadCurrentPet();
+        this.zone.run(() => {
+          this.vaccineCreatedOk = true;
+          this.vaccineForm.reset();
+          this.cdr.detectChanges();
+        });
       },
       error: (error) => {
         console.error('Erro ao cadastrar vacina', error);
-        this.vaccineCreateValidationFailed = true;
-        this.cdr.detectChanges();
+        this.zone.run(() => {
+          this.vaccineCreateValidationFailed = true;
+          this.cdr.detectChanges();
+        });
       },
     });
   }
@@ -251,14 +287,18 @@ export class PetDetail implements OnInit {
   confirmDeleteVaccine(id: number): void {
     this.vaccineDeleteService.delete(id).subscribe({
       next: () => {
-        this.vaccines = this.vaccines.filter((vaccine) => vaccine.id !== id);
-        this.pendingVaccineDeleteId = null;
-        this.cdr.detectChanges();
+        this.reloadCurrentPet();
+        this.zone.run(() => {
+          this.pendingVaccineDeleteId = null;
+          this.cdr.detectChanges();
+        });
       },
       error: (error) => {
         console.error('Erro ao excluir vacina', error);
-        this.pendingVaccineDeleteId = null;
-        this.cdr.detectChanges();
+        this.zone.run(() => {
+          this.pendingVaccineDeleteId = null;
+          this.cdr.detectChanges();
+        });
       },
     });
   }
@@ -303,15 +343,19 @@ export class PetDetail implements OnInit {
     };
 
     this.vaccineUpdateService.update(updatedVaccine).subscribe({
-      next: (saved) => {
-        this.vaccines = this.vaccines.map((v) => (v.id === saved.id ? saved : v));
-        this.editingVaccineId = null;
-        this.cdr.detectChanges();
+      next: () => {
+        this.reloadCurrentPet();
+        this.zone.run(() => {
+          this.editingVaccineId = null;
+          this.cdr.detectChanges();
+        });
       },
       error: (error) => {
         console.error('Erro ao atualizar vacina', error);
-        this.vaccineEditValidationFailed = true;
-        this.cdr.detectChanges();
+        this.zone.run(() => {
+          this.vaccineEditValidationFailed = true;
+          this.cdr.detectChanges();
+        });
       },
     });
   }
