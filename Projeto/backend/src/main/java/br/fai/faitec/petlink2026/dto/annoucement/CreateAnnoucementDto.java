@@ -11,22 +11,21 @@ public class CreateAnnoucementDto {
 
     private String title;
     private String description;
-    private Date publicationDate;
     private Date eventDate;
     private String location;
     private int idCreator;
-    private AnnoucementType annoucementType;
+    private AnnoucementType announcementType;
 
 
     public AnnoucementModel toAnnoucementModel() {
         final AnnoucementModel annoucementModel = new AnnoucementModel();
         annoucementModel.setTitle(title);
         annoucementModel.setDescription(description);
-        annoucementModel.setPublicationDate(publicationDate);
         annoucementModel.setEventDate(eventDate);
         annoucementModel.setLocation(location);
         annoucementModel.setIdCreator(idCreator);
-        annoucementModel.setAnnoucementType(annoucementType);
+        annoucementModel.setAnnoucementType(announcementType);
+        annoucementModel.setPublicationDate(new Date(System.currentTimeMillis()));
 
         return annoucementModel;
     }
@@ -45,14 +44,6 @@ public class CreateAnnoucementDto {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Date getPublicationDate() {
-        return publicationDate;
-    }
-
-    public void setPublicationDate(Date publicationDate) {
-        this.publicationDate = publicationDate;
     }
 
     public Date getEventDate() {
@@ -80,11 +71,11 @@ public class CreateAnnoucementDto {
     }
 
     public AnnoucementType getAnnoucementType() {
-        return annoucementType;
+        return announcementType;
     }
 
     public void setAnnoucementType(AnnoucementType annoucementType) {
-        this.annoucementType = annoucementType;
+        this.announcementType = annoucementType;
     }
 
 

@@ -48,8 +48,6 @@ public class AnnoucementServiceAdapter implements AnnoucementService {
             return 0;
         }
 
-        annoucement.setPublicationDate(new Date(System.currentTimeMillis()));
-
         return annoucementDao.add(annoucement);
     }
 

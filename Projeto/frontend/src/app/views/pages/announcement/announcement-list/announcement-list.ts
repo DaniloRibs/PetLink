@@ -5,6 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { AccountType, User } from '../../../../models/domain/user';
 import { Announcement, AnnouncementType } from '../../../../models/domain/announcement';
+import { CreateAnnouncementDto } from '../../../../models/dto/create-announcement-dto';
 import { AnnouncementReadService } from '../../../../services/announcement/announcement-read';
 import { AnnouncementCreateService } from '../../../../services/announcement/announcement-create';
 import { AnnouncementDeleteService } from '../../../../services/announcement/announcement-delete';
@@ -79,27 +80,23 @@ export class AnnouncementList implements OnInit {
   createCampaign(): void {
     this.createValidationFailed = false;
 
-    if (!this.isCompany || !this.validateFields()) {
+    if (!this.isCompany || !this.validateFields() || !this.user?.id) {
       this.createValidationFailed = true;
       return;
     }
 
-    const user = this.currentUserService.get();
+    const createAnnouncementDto: CreateAnnouncementDto = {
+      title: this.form.controls['title'].value,
+      description: this.form.controls['description'].value,
+      eventDate: this.form.controls['date'].value || undefined,
+      location: this.form.controls['location'].value || undefined,
+      idCreator: this.user.id,
+      announcementType: this.form.controls['type'].value,
+    };
 
-const announcement: Announcement = {
-  title: this.form.controls['title'].value,
-  description: this.form.controls['description'].value,
-  eventDate: this.form.controls['date'].value || undefined,
-  location: this.form.controls['location'].value || undefined,
-  creatorEmail: this.userEmail,
-  creatorName: this.user?.fullname ?? '',
-  announcementType: this.form.controls['type'].value,
-  publicationDate: new Date().toISOString(),
-};
-
-    this.announcementCreateService.create(announcement).subscribe({
-      next: (created) => {
-        this.announcements = [created, ...this.announcements];
+    this.announcementCreateService.create(createAnnouncementDto).subscribe({
+      next: async () => {
+        this.announcements = await this.announcementReadService.findAll();
         this.form.reset({ type: '' });
         this.showForm = false;
         this.cdr.detectChanges();
