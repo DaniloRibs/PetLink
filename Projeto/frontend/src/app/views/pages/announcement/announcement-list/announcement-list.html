@@ -2,7 +2,7 @@
   <div class="content-form-card">
     <div class="section-header">
       <p class="footer-title">ANÚNCIOS</p>
-      <h2>Campanhas de vacinação</h2>
+    
     </div>
     <p class="hero-text">Fique de olho nas campanhas de vacinação divulgadas por empresas parceiras.</p>
 
@@ -11,7 +11,7 @@
       <span class="action-btn-icon">
         <mat-icon>{{ showForm ? 'close' : 'add' }}</mat-icon>
       </span>
-      {{ showForm ? 'Cancelar' : 'Publicar campanha' }}
+      {{ showForm ? 'Cancelar' : 'Publicar Anuncio' }}
     </button>
 
     @if (showForm) {
@@ -41,12 +41,12 @@
 
         <div class="form-row">
           <div class="field-group">
-            <label>Data (opcional)</label>
+            <label>Data</label>
             <input type="date" formControlName="date">
           </div>
 
           <div class="field-group">
-            <label>Local (opcional)</label>
+            <label>Local</label>
             <input type="text" placeholder formControlName="location">
           </div>
         </div>
@@ -59,10 +59,6 @@
       </form>
     </div>
     }
-    } @else if (!loading) {
-    <p class="announcement-readonly-hint">
-      <span>ℹ️</span> Você está vendo os anúncios como usuário pessoa: aqui só é possível visualizar as campanhas.
-    </p>
     }
 
     @if (loading) {
@@ -70,7 +66,7 @@
     } @else if (announcements.length === 0) {
     <div class="empty-state">
       <div class="empty-state-icon"><mat-icon>campaign</mat-icon></div>
-      <p class="empty-state-title">Nenhuma campanha publicada ainda</p>
+      <p class="empty-state-title">Nenhuma campanha ou anuncio publicado ainda</p>
       <p class="empty-state-text">Assim que uma empresa parceira publicar, ela aparece aqui.</p>
     </div>
     } @else {

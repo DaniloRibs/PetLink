@@ -9,9 +9,9 @@ CREATE TABLE user_model
     id SERIAL PRIMARY KEY,
     email VARCHAR(100) UNIQUE NOT NULL,
     full_name VARCHAR(50) NOT NULL,
-    password VARCHAR(60),
+    password VARCHAR(60) NOT NULL,
     document VARCHAR(14),
-    phone VARCHAR(15) NOT NULL,
+    phone VARCHAR(15),
     account_type VARCHAR(20) NOT NULL
 );
 

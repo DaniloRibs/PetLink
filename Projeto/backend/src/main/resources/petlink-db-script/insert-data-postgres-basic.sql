@@ -1,17 +1,17 @@
 INSERT INTO user_model
     (email, full_name, password, document, phone, account_type)
 VALUES
-    ('r@r.com', 'rod Runner', '12345', '98765432100', '31999990001', 'PERSON'),
-    ('user@user.com', 'Danilo', 'senha123', '39053344705', '31999990002', 'PERSON'),
-    ('empresa@empresa.com', 'bolaoEntherpriuse', '123123', '11222333000181', '31999990005', 'ENTERPRISE');
+    ('r@r.com', 'Rodrigo', '12345', '98765432100', '31999990001', 'PERSON'),
+    ('d@d.com', 'Danilo', '12345', '39053344705', '31999990002', 'PERSON'),
+    ('bruno@bruno.com', 'BB enterprise', '123123', '11222333000181', '31999990005', 'ENTERPRISE');
 
 INSERT INTO pet_model
     (name, species, breed, birth_date, user_id, for_adoption)
 VALUES
-    ('Rex', 'DOG', 'Golden Retriever', '2020-05-15', 1, true),
-    ('Mel', 'DOG', 'Shih-Tzu', '2021-08-20', 1, false),
+    ('Tiririca', 'BIRD', 'Cacatua', '2020-05-15', 1, true),
+    ('Thor', 'DOG', 'Shih-Tzu', '2021-08-20', 1, false),
     ('Mia', 'CAT', 'Siamês', '2019-03-10', 2, false),
-    ('bolinho', 'DOG', 'fofinho', '2021-02-18', 3, false);
+    ('Zeca', 'OTHER', 'Mangalarga Marchador', '2021-02-18', 3, false);
 
 INSERT INTO vaccine_model
     (application_date, expiration_date, name, description, batch, pet_id)
@@ -63,5 +63,4 @@ VALUES
 INSERT INTO adoption_model
     (pet_id, owner_id, description, contact, adopted, publication_date)
 VALUES
-    (1, 1, 'Tiririca é um passarinho bem calmo, procurando um novo lar com bastante carinho.', '(35) 99999-0000', false, '2026-02-01'),
-    (2, 1, 'Thor está disponível para adoção, muito dócil e já castrado.', 'thor.adocao@example.com', true, '2026-01-15');
+    (1, 1, 'Tiririca é um passarinho bem calmo, procurando um novo lar com bastante carinho.', '(35) 99999-0000', false, '2026-02-01');
