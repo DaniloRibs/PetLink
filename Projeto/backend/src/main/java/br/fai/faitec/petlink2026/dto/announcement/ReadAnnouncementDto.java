@@ -6,7 +6,7 @@ import java.sql.Date;
 
 public class ReadAnnouncementDto {
 
-
+    private int id;
     private String title;
     private String description;
     private Date eventDate;
@@ -15,13 +15,15 @@ public class ReadAnnouncementDto {
     private String creatorName;
     private AnnouncementType announcementType;
 
-    public ReadAnnouncementDto(String title,
+    public ReadAnnouncementDto(int id,
+                               String title,
                                String description,
                                Date eventDate,
                                String location,
                                String creatorEmail,
                                String creatorName,
                                AnnouncementType announcementType) {
+        this.id = id;
         this.title = title;
         this.description = description;
         this.eventDate = eventDate;
@@ -29,6 +31,14 @@ public class ReadAnnouncementDto {
         this.creatorEmail = creatorEmail;
         this.creatorName = creatorName;
         this.announcementType = announcementType;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getCreatorEmail() {

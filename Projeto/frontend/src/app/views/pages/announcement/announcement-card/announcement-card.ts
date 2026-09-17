@@ -22,7 +22,6 @@ import { User } from '../../../../models/domain/user';
   templateUrl: './announcement-card.html',
   styleUrl: './announcement-card.scss'
 })
-
 export class AnnouncementCardComponent {
 
   @Input({ required: true }) announcement!: Announcement;
@@ -64,10 +63,25 @@ export class AnnouncementCardComponent {
     this.editValidationFailed = false;
 
     if (this.showEditForm) {
+      let formattedDate = '';
+      
+      if (this.announcement.eventDate) {
+        try {
+          const dateVal = new Date(this.announcement.eventDate);
+          if (!isNaN(dateVal.getTime())) { 
+            formattedDate = dateVal.toISOString().split('T')[0];
+          } else {
+            formattedDate = String(this.announcement.eventDate).substring(0, 10);
+          }
+        } catch (error) {
+          console.error('Erro ao processar data para o formulário', error);
+        }
+      }
+
       this.editForm.patchValue({
         title: this.announcement.title,
         description: this.announcement.description,
-        date: this.announcement.eventDate || '',
+        date: formattedDate,
         location: this.announcement.location || '',
       });
     }
@@ -80,24 +94,33 @@ export class AnnouncementCardComponent {
   saveEdit(): void {
     this.editValidationFailed = false;
 
-    if (!this.validateEditFields()) {
+    if (!this.validateEditFields() || !this.announcement?.id) {
+      console.error('Falha na validação ou ID ausente no anúncio');
       this.editValidationFailed = true;
       return;
     }
 
+    const formValues = this.editForm.value;
+
     const updatedAnnouncement: Announcement = {
       ...this.announcement,
-      title: this.editForm.controls['title'].value,
-      description: this.editForm.controls['description'].value,
-      eventDate: this.editForm.controls['date'].value || undefined,
-      location: this.editForm.controls['location'].value || undefined,
+      id: this.announcement.id,
+      title: formValues.title,
+      description: formValues.description,
+      eventDate: formValues.date || undefined,
+      location: formValues.location || undefined,
     };
 
     this.announcementUpdateService.update(updatedAnnouncement).subscribe({
       next: (saved) => {
-        this.announcement = saved;
+        const finalizedResult = (saved && typeof saved === 'object') 
+          ? { ...saved, id: this.announcement.id } 
+          : updatedAnnouncement;
+
+        this.announcement = finalizedResult;
         this.showEditForm = false;
-        this.updated.emit(saved);
+        
+        this.updated.emit(finalizedResult);
       },
       error: (error) => {
         console.error('Erro ao atualizar campanha', error);

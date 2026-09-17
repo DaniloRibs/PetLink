@@ -1,5 +1,6 @@
 .vaccine-card,
-.adoption-card {
+.adoption-card,
+.lost-card {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -15,6 +16,7 @@
   }
 }
 
+/* 2. Cores das bordas laterais para cada tipo */
 .vaccine-card {
   border-left-color: #19d291;
 }
@@ -23,11 +25,25 @@
   border-left-color: #ff4d6d;
 }
 
+.lost-card {
+  border-left-color: #f59e0b; /* Borda amarela/laranja do Lost */
+}
+
 .vaccine-icon-header {
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #d0fbeb;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+.lost-icon-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff3c4;
   border-radius: 50%;
   width: 40px;
   height: 40px;

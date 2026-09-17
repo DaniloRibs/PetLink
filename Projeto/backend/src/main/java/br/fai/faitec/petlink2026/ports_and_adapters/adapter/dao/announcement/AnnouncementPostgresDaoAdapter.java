@@ -159,6 +159,29 @@ public class AnnouncementPostgresDaoAdapter implements AnnouncementDao {
 
     @Override
     public void updateInformation(int id, AnnouncementModel entity) {
+        String sql = "UPDATE announcement_model SET " +
+                "title = ?, " +
+                "description = ?, " +
+                "event_date = ?, " +
+                "location = ?, " +
+                "announcement_type = ? " +
+                "WHERE id = ?;";
 
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setString(1, entity.getTitle());
+            preparedStatement.setString(2, entity.getDescription());
+            preparedStatement.setDate(3, entity.getEventDate());
+            preparedStatement.setString(4, entity.getLocation());
+            preparedStatement.setString(5, entity.getAnnouncementType().name());
+            preparedStatement.setInt(6, id);
+
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

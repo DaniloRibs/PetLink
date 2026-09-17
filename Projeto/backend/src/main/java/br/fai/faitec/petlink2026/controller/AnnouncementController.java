@@ -58,7 +58,7 @@ public class AnnouncementController {
         return ResponseEntity.created(uri).build();
     }
 
-    // ATUALIZAR ANUNCIO (mesmos parâmetros usados na criação)
+    // ATUALIZAR ANUNCIO
     @PutMapping("/{id}")
     public ResponseEntity<Void> updateAnnouncement(
             @PathVariable final int id,

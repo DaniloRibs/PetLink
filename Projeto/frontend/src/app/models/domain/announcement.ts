@@ -1,6 +1,7 @@
 export enum AnnouncementType {
     VACCINE = 'VACCINE',
     ADOPTION = 'ADOPTION',
+    LOST = 'LOST',
 }
 
 export interface Announcement {

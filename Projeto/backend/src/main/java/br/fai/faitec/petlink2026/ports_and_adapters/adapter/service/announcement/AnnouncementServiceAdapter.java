@@ -120,7 +120,9 @@ public class AnnouncementServiceAdapter implements AnnouncementService {
             return null;
         }
 
-        return new ReadAnnouncementDto(announcementModel.getTitle(),
+        return new ReadAnnouncementDto(
+                announcementModel.getId(),
+                announcementModel.getTitle(),
                 announcementModel.getDescription(),
                 announcementModel.getEventDate(),
                 announcementModel.getLocation(),
