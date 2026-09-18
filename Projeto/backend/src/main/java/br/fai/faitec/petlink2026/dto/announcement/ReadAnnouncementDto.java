@@ -14,6 +14,7 @@ public class ReadAnnouncementDto {
     private String creatorEmail;
     private String creatorName;
     private AnnouncementType announcementType;
+    private String contact;
 
     public ReadAnnouncementDto(int id,
                                String title,
@@ -22,7 +23,8 @@ public class ReadAnnouncementDto {
                                String location,
                                String creatorEmail,
                                String creatorName,
-                               AnnouncementType announcementType) {
+                               AnnouncementType announcementType,
+                               String contact) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -31,6 +33,7 @@ public class ReadAnnouncementDto {
         this.creatorEmail = creatorEmail;
         this.creatorName = creatorName;
         this.announcementType = announcementType;
+        this.contact = contact;
     }
 
     public int getId() {
@@ -95,5 +98,13 @@ public class ReadAnnouncementDto {
 
     public void setAnnouncementType(AnnouncementType announcementType) {
         this.announcementType = announcementType;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 }

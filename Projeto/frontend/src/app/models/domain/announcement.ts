@@ -14,4 +14,5 @@ export interface Announcement {
     creatorEmail: string;
     creatorName: string;
     announcementType: AnnouncementType;
+    contact: string;
 }

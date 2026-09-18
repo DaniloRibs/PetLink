@@ -7,4 +7,5 @@ export interface CreateAnnouncementDto {
     location?: string;
     idCreator: number;
     announcementType: AnnouncementType;
+    contact: string;
 }

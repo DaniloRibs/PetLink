@@ -38,20 +38,13 @@ public class UserServiceAdapter implements UserService {
         if (userModel.getFullname().isEmpty()) {
             return 0;
         }
-        if (userModel.getPhone().isEmpty()) {
-            return 0;
-        }
 
         if (!userModel.getEmail().contains("@")) {
             return 0;
         }
-        if (userModel.getAccountType() == AccountType.ENTERPRISE && userModel.getDocument().isEmpty()) {
+
+        if (isContactInvalid(userModel.getPhone(), userModel.getDocument(), userModel.getAccountType())) {
             return 0;
-        }
-        if (!userModel.getDocument().isEmpty()) {
-            if (isDocumentInvalid(userModel.getDocument(), userModel.getAccountType())) {
-                return 0;
-            }
         }
 
         return userDao.add(userModel);
@@ -70,6 +63,10 @@ public class UserServiceAdapter implements UserService {
     public boolean update(int id, UserModel userModel) {
         UserModel dataToUpdate = findById(id);
         if (dataToUpdate == null) {
+            return false;
+        }
+
+        if (isContactInvalid(userModel.getPhone(), userModel.getDocument(), dataToUpdate.getAccountType())) {
             return false;
         }
 
@@ -205,16 +202,47 @@ public class UserServiceAdapter implements UserService {
     }
 
 
+    private boolean isBlank(String value) {
+        return value == null || value.isEmpty();
+    }
+
+    /**
+     * Telefone e documento (CPF/CNPJ) sao opcionais para PERSON.
+     * Documento e obrigatorio e deve ser um CNPJ valido para ENTERPRISE.
+     * Quando informados, telefone e documento precisam ser validos.
+     */
+    private boolean isContactInvalid(String phone, String document, AccountType accountType) {
+
+        if (!isBlank(phone) && isPhoneInvalid(phone)) {
+            return true;
+        }
+
+        if (accountType == AccountType.ENTERPRISE && isBlank(document)) {
+            return true;
+        }
+
+        if (!isBlank(document) && isDocumentInvalid(document, accountType)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private boolean isPhoneInvalid(String phone) {
+        final String digits = phone.replaceAll("\\D", "");
+        return digits.length() != 10 && digits.length() != 11;
+    }
+
     private boolean isDocumentInvalid(String document, AccountType accountType) {
 
         document = document.replaceAll("\\D", "");
 
         if (document.length() == 11 && accountType == AccountType.PERSON) {
-            return false;//!isCpfValid(document);
+            return !isCpfValid(document);
         }
 
         if (document.length() == 14 && accountType == AccountType.ENTERPRISE) {
-            return false;//!isCnpjValid(document);
+            return !isCnpjValid(document);
         }
 
         return true;

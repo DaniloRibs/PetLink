@@ -2,15 +2,19 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
+import { provideNgxMask, NgxMaskDirective } from 'ngx-mask';
 
 import { User, AccountType } from '../../../models/domain/user';
 import { UserUpdateService } from '../../../services/user/user-update';
 import { CurrentUserService } from '../../../services/security/current-user';
 import { AuthenticationService } from '../../../services/security/authentication';
+import { optionalCpfValidator, optionalPhoneValidator, requiredCnpjValidator } from '../../../shared/document-validators';
+import { strictEmailValidator } from '../../../shared/email-validator';
 
 @Component({
   selector: 'app-my-profile',
-  imports: [ReactiveFormsModule, RouterLink, MatIconModule],
+  imports: [ReactiveFormsModule, RouterLink, MatIconModule, NgxMaskDirective],
+  providers: [provideNgxMask()],
   templateUrl: './my-profile.html',
   styleUrl: './my-profile.css',
 })
@@ -31,6 +35,10 @@ export class MyProfile implements OnInit {
     return name.trim().charAt(0).toUpperCase();
   }
 
+  get isEmpresa(): boolean {
+    return this.entity?.accountType === AccountType.ENTERPRISE;
+  }
+
   constructor(
     private formBuilder: FormBuilder,
     private updateService: UserUpdateService,
@@ -40,7 +48,9 @@ export class MyProfile implements OnInit {
   ) {
     this.form = this.formBuilder.group({
       fullname: ['', [Validators.required, Validators.minLength(2)]],
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.email, strictEmailValidator()]],
+      phone: ['', [optionalPhoneValidator()]],
+      document: ['', [optionalCpfValidator()]],
     });
   }
 
@@ -54,12 +64,21 @@ export class MyProfile implements OnInit {
       this.entity = user;
       this.form.controls['fullname'].setValue(user?.fullname ?? '');
       this.form.controls['email'].setValue(user?.email ?? '');
+      this.form.controls['phone'].setValue(user?.phone ?? '');
+      this.form.controls['document'].setValue(user?.document ?? '');
+      this.applyDocumentValidator();
     } catch (error) {
       console.error('Erro ao carregar dados do perfil', error);
     } finally {
       this.loading = false;
       this.cdr.detectChanges();
     }
+  }
+
+  private applyDocumentValidator(): void {
+    const documentControl = this.form.controls['document'];
+    documentControl.setValidators(this.isEmpresa ? [requiredCnpjValidator()] : [optionalCpfValidator()]);
+    documentControl.updateValueAndValidity();
   }
 
   validateFields(): boolean {
@@ -76,7 +95,10 @@ export class MyProfile implements OnInit {
       this.form.patchValue({
         fullname: this.entity.fullname,
         email: this.entity.email,
+        phone: this.entity.phone ?? '',
+        document: this.entity.document ?? '',
       });
+      this.applyDocumentValidator();
     }
   }
 
@@ -92,12 +114,16 @@ export class MyProfile implements OnInit {
 
     const fullname = this.form.controls['fullname'].value;
     const email = this.form.controls['email'].value;
+    const phone = this.form.controls['phone'].value ?? '';
+    const document = this.form.controls['document'].value ?? '';
     const emailWasChanged = email !== this.entity.email;
 
     try {
-      await this.updateService.update(this.entity.id, fullname, email);
+      await this.updateService.update(this.entity.id, fullname, email, phone, document);
       this.entity.fullname = fullname;
       this.entity.email = email;
+      this.entity.phone = phone;
+      this.entity.document = document;
 
       if (emailWasChanged) {
         this.authenticationService.addDataToLocalStorage(email);

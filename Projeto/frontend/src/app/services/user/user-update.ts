@@ -15,7 +15,7 @@ export class UserUpdateService {
     private readService: UserReadService,
   ) { }
 
-  async update(id: number, fullname: string, email?: string): Promise<any> {
+  async update(id: number, fullname: string, email?: string, phone?: string, document?: string): Promise<any> {
     let data: User = await this.readService.findById(id);
 
     if (data == null) {
@@ -26,6 +26,14 @@ export class UserUpdateService {
 
     if (email !== undefined) {
       data.email = email;
+    }
+
+    if (phone !== undefined) {
+      data.phone = phone;
+    }
+
+    if (document !== undefined) {
+      data.document = document;
     }
 
     return firstValueFrom(this.http.put<any>(`${environment.api_endpoint}/user/${id}`, data));

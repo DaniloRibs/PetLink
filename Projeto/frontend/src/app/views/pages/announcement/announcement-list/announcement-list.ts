@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { AccountType, User } from '../../../../models/domain/user';
 import { Announcement, AnnouncementType } from '../../../../models/domain/announcement';
 import { CreateAnnouncementDto } from '../../../../models/dto/create-announcement-dto';
+import { isValidPhone } from '../../../../shared/document-validators';
 import { AnnouncementReadService } from '../../../../services/announcement/announcement-read';
 import { AnnouncementCreateService } from '../../../../services/announcement/announcement-create';
 import { AnnouncementDeleteService } from '../../../../services/announcement/announcement-delete';
@@ -46,7 +47,12 @@ export class AnnouncementList implements OnInit {
       description: ['', [Validators.required]],
       date: [''],
       location: [''],
+      contactMethod: ['email', [Validators.required]],
     });
+  }
+
+  get userHasValidPhone(): boolean {
+    return isValidPhone(this.user?.phone ?? '');
   }
 
   async ngOnInit(): Promise<void> {
@@ -85,6 +91,9 @@ export class AnnouncementList implements OnInit {
       return;
     }
 
+    const wantsPhone = this.form.controls['contactMethod'].value === 'phone';
+    const contact = (wantsPhone && this.userHasValidPhone) ? this.user.phone! : this.user.email;
+
     const createAnnouncementDto: CreateAnnouncementDto = {
       title: this.form.controls['title'].value,
       description: this.form.controls['description'].value,
@@ -92,12 +101,13 @@ export class AnnouncementList implements OnInit {
       location: this.form.controls['location'].value || undefined,
       idCreator: this.user.id,
       announcementType: this.form.controls['type'].value,
+      contact: contact,
     };
 
     this.announcementCreateService.create(createAnnouncementDto).subscribe({
       next: async () => {
         this.announcements = await this.announcementReadService.findAll();
-        this.form.reset({ type: '' });
+        this.form.reset({ type: '', contactMethod: 'email' });
         this.showForm = false;
         this.cdr.detectChanges();
       },

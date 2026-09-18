@@ -48,6 +48,7 @@ CREATE TABLE announcement_model
     location VARCHAR(150) NOT NULL,
     announcement_type VARCHAR(15) NOT NULL,
     user_id INT NOT NULL,
+    contact VARCHAR(150),
 
     CONSTRAINT fk_announcement_creator  FOREIGN KEY (user_id) REFERENCES user_model(id) ON DELETE CASCADE
 );

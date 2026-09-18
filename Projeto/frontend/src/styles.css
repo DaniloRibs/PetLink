@@ -192,6 +192,17 @@ a:hover {
     outline-offset: 2px;
 }
 
+.toggle-option.is-disabled span {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.hint-text {
+    font-size: 12px;
+    color: #8a7367;
+    margin-top: 6px;
+}
+
 .document-field.hidden {
     display: none;
 }

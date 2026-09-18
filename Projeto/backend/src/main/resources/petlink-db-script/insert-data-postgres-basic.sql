@@ -33,7 +33,7 @@ VALUES
 
 
 INSERT INTO announcement_model
-    (title, description, event_date, location, announcement_type, user_id)
+    (title, description, event_date, location, announcement_type, user_id, contact)
 VALUES
          (
              'Feira de Adoção de Cães',
@@ -41,7 +41,8 @@ VALUES
              '2026-09-20',
              'Praça Central',
              'ADOPTION',
-             3
+             3,
+             null
          ),
          (
              'Campanha de Vacinação',
@@ -49,7 +50,8 @@ VALUES
              '2026-09-25',
              'Centro Comunitário',
              'VACCINE',
-             3
+             3,
+             null
          ),
          (
              'Cachorro Perdido',
@@ -57,7 +59,8 @@ VALUES
              '2026-09-05',
              'Bairro Centro',
              'LOST',
-             3
+             3,
+             null
          );
 
 INSERT INTO adoption_model

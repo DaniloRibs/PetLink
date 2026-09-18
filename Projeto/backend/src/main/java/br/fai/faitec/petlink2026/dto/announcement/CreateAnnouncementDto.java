@@ -13,6 +13,7 @@ public class CreateAnnouncementDto {
     private String location;
     private int idCreator;
     private AnnouncementType announcementType;
+    private String contact;
 
 
     public AnnouncementModel toAnnouncementModel() {
@@ -23,6 +24,7 @@ public class CreateAnnouncementDto {
         announcementModel.setLocation(location);
         announcementModel.setIdCreator(idCreator);
         announcementModel.setAnnouncementType(announcementType);
+        announcementModel.setContact(contact);
 
         return announcementModel;
     }
@@ -73,6 +75,14 @@ public class CreateAnnouncementDto {
 
     public void setAnnouncementType(AnnouncementType announcementType) {
         this.announcementType = announcementType;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 
 

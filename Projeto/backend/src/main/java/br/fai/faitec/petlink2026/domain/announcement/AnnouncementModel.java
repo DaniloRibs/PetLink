@@ -10,6 +10,7 @@ public class AnnouncementModel {
     private String location;
     private int idCreator;
     private AnnouncementType announcementType;
+    private String contact;
 
     
     public int getId() {
@@ -66,5 +67,13 @@ public class AnnouncementModel {
 
     public void setAnnouncementType(AnnouncementType announcementType) {
         this.announcementType = announcementType;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 }

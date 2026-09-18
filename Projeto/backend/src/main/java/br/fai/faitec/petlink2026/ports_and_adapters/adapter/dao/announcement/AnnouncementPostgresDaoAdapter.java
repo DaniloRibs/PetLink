@@ -22,8 +22,8 @@ public class AnnouncementPostgresDaoAdapter implements AnnouncementDao {
 
     @Override
     public int add(AnnouncementModel entity) {
-        String sql = "INSERT INTO announcement_model(title, description, event_date, location, announcement_type, user_id) " +
-                " VALUES(?,?,?,?,?,?); ";
+        String sql = "INSERT INTO announcement_model(title, description, event_date, location, announcement_type, user_id, contact) " +
+                " VALUES(?,?,?,?,?,?,?); ";
 
         PreparedStatement preparedStatement;
         ResultSet resultSet;
@@ -37,6 +37,7 @@ public class AnnouncementPostgresDaoAdapter implements AnnouncementDao {
             preparedStatement.setString(4, entity.getLocation());
             preparedStatement.setString(5, entity.getAnnouncementType().name());
             preparedStatement.setInt(6, entity.getIdCreator());
+            preparedStatement.setString(7, entity.getContact());
 
             preparedStatement.execute();
 
@@ -103,6 +104,7 @@ public class AnnouncementPostgresDaoAdapter implements AnnouncementDao {
                 announcementModel.setLocation(location);
                 announcementModel.setAnnouncementType(announcementType);
                 announcementModel.setIdCreator(creatorId);
+                announcementModel.setContact(resultSet.getString("contact"));
 
                 preparedStatement.close();
                 resultSet.close();
@@ -144,6 +146,7 @@ public class AnnouncementPostgresDaoAdapter implements AnnouncementDao {
                 announcementModel.setLocation(location);
                 announcementModel.setAnnouncementType(announcementType);
                 announcementModel.setIdCreator(creatorId);
+                announcementModel.setContact(resultSet.getString("contact"));
 
                 entities.add(announcementModel);
             }
@@ -164,7 +167,8 @@ public class AnnouncementPostgresDaoAdapter implements AnnouncementDao {
                 "description = ?, " +
                 "event_date = ?, " +
                 "location = ?, " +
-                "announcement_type = ? " +
+                "announcement_type = ?, " +
+                "contact = ? " +
                 "WHERE id = ?;";
 
         try {
@@ -175,7 +179,8 @@ public class AnnouncementPostgresDaoAdapter implements AnnouncementDao {
             preparedStatement.setDate(3, entity.getEventDate());
             preparedStatement.setString(4, entity.getLocation());
             preparedStatement.setString(5, entity.getAnnouncementType().name());
-            preparedStatement.setInt(6, id);
+            preparedStatement.setString(6, entity.getContact());
+            preparedStatement.setInt(7, id);
 
             preparedStatement.executeUpdate();
             preparedStatement.close();

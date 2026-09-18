@@ -51,6 +51,23 @@
           </div>
         </div>
 
+        <div class="field-group">
+          <label>Contato exibido no anúncio</label>
+          <div class="toggle-group" role="radiogroup" aria-label="Contato a exibir">
+            <label class="toggle-option">
+              <input type="radio" formControlName="contactMethod" value="email">
+              <span>E-mail ({{ user?.email }})</span>
+            </label>
+            <label class="toggle-option" [class.is-disabled]="!userHasValidPhone">
+              <input type="radio" formControlName="contactMethod" value="phone" [disabled]="!userHasValidPhone">
+              <span>{{ userHasValidPhone ? 'Telefone (' + user?.phone + ')' : 'Telefone (indisponível)' }}</span>
+            </label>
+          </div>
+          @if (!userHasValidPhone) {
+          <p class="hint-text">Cadastre um telefone válido no seu perfil para poder usá-lo como contato.</p>
+          }
+        </div>
+
         <input type="submit" value="Publicar" [disabled]="!validateFields()">
 
         @if (createValidationFailed) {

@@ -7,6 +7,8 @@ import { AbstractControl, ValidationErrors } from '@angular/forms';
 
 import { User, AccountType } from '../../../models/domain/user';
 import { UserCreateService } from '../../../services/user/user-create';
+import { optionalCpfValidator, optionalPhoneValidator, requiredCnpjValidator } from '../../../shared/document-validators';
+import { strictEmailValidator } from '../../../shared/email-validator';
 
 @Component({
   selector: 'app-sign-up',
@@ -41,12 +43,13 @@ export class SignUp {
       email: ['', [
         Validators.required,
         Validators.email,
+        strictEmailValidator(),
       ]],
       phone: ['', [
-        Validators.required,
+        optionalPhoneValidator(),
       ]],
       document: ['', [
-        Validators.required,
+        optionalCpfValidator(),
       ]],
       password: ['', [
         Validators.required,
@@ -55,6 +58,14 @@ export class SignUp {
       repeatPassword: ['', [
         Validators.required,
       ]],
+    });
+
+    this.form.controls['accountType'].valueChanges.subscribe((accountType: AccountType) => {
+      const documentControl = this.form.controls['document'];
+      documentControl.setValidators(
+        accountType === AccountType.ENTERPRISE ? [requiredCnpjValidator()] : [optionalCpfValidator()]
+      );
+      documentControl.updateValueAndValidity();
     });
   }
 

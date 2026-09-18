@@ -33,6 +33,16 @@
             <span class="profile-view-text">{{ entity?.email }}</span>
           </div>
 
+          <div class="profile-view-item">
+            <span class="profile-view-label">Telefone</span>
+            <span class="profile-view-text">{{ entity?.phone || 'Não informado' }}</span>
+          </div>
+
+          <div class="profile-view-item">
+            <span class="profile-view-label">{{ isEmpresa ? 'CNPJ' : 'CPF' }}</span>
+            <span class="profile-view-text">{{ entity?.document || 'Não informado' }}</span>
+          </div>
+
           <button class="secondary-button profile-edit-btn" (click)="toggleEditForm()">
             <mat-icon>edit</mat-icon>
             Editar perfil
@@ -48,6 +58,37 @@
           <div class="field-group">
             <label for="email">Email</label>
             <input type="email" id="email" placeholder="seuemail@exemplo.com" formControlName="email">
+            @if (form.get('email')?.touched && form.get('email')?.invalid) {
+            <p class="text-danger">Digite um e-mail válido (ex: nome&#64;exemplo.com).</p>
+            }
+          </div>
+
+          <div class="field-group">
+            <label for="phone">Telefone (opcional)</label>
+            <input
+              type="tel"
+              id="phone"
+              placeholder="Telefone (opcional)"
+              formControlName="phone"
+              mask="(00) 00000-0000"
+              [dropSpecialCharacters]="true">
+            @if (form.get('phone')?.touched && form.get('phone')?.invalid) {
+            <p class="text-danger">Telefone inválido.</p>
+            }
+          </div>
+
+          <div class="field-group">
+            <label for="document">{{ isEmpresa ? 'CNPJ' : 'CPF (opcional)' }}</label>
+            <input
+              type="text"
+              id="document"
+              [placeholder]="isEmpresa ? 'CNPJ' : 'CPF (opcional)'"
+              formControlName="document"
+              [mask]="isEmpresa ? '00.000.000/0000-00' : '000.000.000-00'"
+              [dropSpecialCharacters]="true">
+            @if (form.get('document')?.touched && form.get('document')?.invalid) {
+            <p class="text-danger">{{ isEmpresa ? 'CNPJ obrigatório e deve ser válido.' : 'CPF inválido.' }}</p>
+            }
           </div>
 
           <div class="confirm-actions profile-form-actions">

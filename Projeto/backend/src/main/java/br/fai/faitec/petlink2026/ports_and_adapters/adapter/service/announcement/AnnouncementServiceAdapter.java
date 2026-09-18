@@ -36,6 +36,10 @@ public class AnnouncementServiceAdapter implements AnnouncementService {
             return 0;
         }
 
+        if (announcement.getContact() == null || announcement.getContact().isEmpty()) {
+            return 0;
+        }
+
         UserModel creator = userService.findById(announcement.getIdCreator());
 
         if (creator == null) {
@@ -128,7 +132,8 @@ public class AnnouncementServiceAdapter implements AnnouncementService {
                 announcementModel.getLocation(),
                 userModel.getEmail(),
                 userModel.getFullname(),
-                announcementModel.getAnnouncementType()
+                announcementModel.getAnnouncementType(),
+                announcementModel.getContact()
         );
 
     }
@@ -180,6 +185,10 @@ public class AnnouncementServiceAdapter implements AnnouncementService {
         dataToUpdate.setEventDate(announcementModel.getEventDate());
         dataToUpdate.setLocation(announcementModel.getLocation());
         dataToUpdate.setAnnouncementType(announcementModel.getAnnouncementType());
+
+        if (announcementModel.getContact() != null && !announcementModel.getContact().isEmpty()) {
+            dataToUpdate.setContact(announcementModel.getContact());
+        }
 
         announcementDao.updateInformation(id, dataToUpdate);
         return true;

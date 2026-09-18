@@ -80,8 +80,8 @@
 
       @if (expanded) {
         <div class="date-badge mt-3 contact-badge">
-          <mat-icon class="me-1">mail</mat-icon>
-          <span><strong>Contato:</strong> {{ announcement.creatorEmail }}</span>
+          <mat-icon class="me-1">{{ (announcement.contact || announcement.creatorEmail).includes('@') ? 'mail' : 'call' }}</mat-icon>
+          <span><strong>Contato:</strong> {{ announcement.contact || announcement.creatorEmail }}</span>
         </div>
       }
     }
