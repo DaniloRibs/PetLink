@@ -17,3 +17,9 @@ npx json-server db.json
 
 # Bom fazer
 baixe algumas extensoes para auxiliar no code do angular e no js
+
+# CPF E CNPJ FAKE para teste
+
+12.665.787/0001-90
+
+342.858.710-33
