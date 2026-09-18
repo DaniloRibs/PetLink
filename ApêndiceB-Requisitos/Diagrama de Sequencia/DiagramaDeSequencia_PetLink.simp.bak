@@ -677,7 +677,11 @@
       </meta>
       <abstract-items />
       <sub-models />
+<<<<<<< HEAD:ApêndiceB-Requisitos/Diagrama de Sequencia/DiagramaDeSequencia_PetLink.simp.bak
       <diagram type="uml-sequence" id="pa0c7caf05da1479c91603d0cd935fe0d_225612654" name="SequenceDiagram1" order-index="2" overview-order-index="0" uid="" name-style="" auto-routed-paths="false" default-line-style="default">
+=======
+      <diagram type="uml-sequence" id="pa0c7caf05da1479c91603d0cd935fe0d_225612654" name="SequenceDiagram1" order-index="2" overview-order-index="0" uid="" name-style="" auto-routed-paths="false" default-line-style="default" view-location="-51,14" zoom="0.8">
+>>>>>>> main:ApêndiceB-Requisitos/DiagramaDeSequencia_PetLink.simp
         <style>
           <background-color index="1" color="#FFFFFFFF" />
           <background-color index="2" color="#FFFFFFFF" />
@@ -730,7 +734,7 @@
           </item>
           <item id="d161a62f03ba4be695604a38b6596eda" cid="ES001" type="activation-bar" name="ExecutionSpecification1" owner="8ec1525224d34fc7ab2af8c4258635b7" creation-date="08/26/2026 10:30:12" visibility="undefined" />
           <item id="a43a33da6c484cde9d9df9296f0d8c7a" cid="SM011" type="sequence-action" name="Message11" creation-date="08/26/2026 10:43:06" from="ad2788a33319436fa93ad9a05d26b6f4" to="a08496da1f74465097b263c516905a98" visibility="package">
-            <sequence-action type="reply" message="Cadastro realizado()" is-asynchronous="false" return-value="" assign-to-variable="">
+            <sequence-action type="reply" message="cadastroRealizado" is-asynchronous="false" return-value="" assign-to-variable="">
               <parameters />
             </sequence-action>
           </item>
@@ -853,12 +857,20 @@
             <sequence-action show-sequence-number="false" />
           </item>
           <item id="a32769086e994690b1c162ab610dcbff" iid="f2379af471ae4d15bd92610d3b8aed3e" container="b072465aec124d3fa73f3e27b4a007fb" container-iid="e20f06f4f3ff4b6f8490897eae36e0a0" creation-date="08/26/2026 10:41:38" order-index="18" type="entity">
+<<<<<<< HEAD:ApêndiceB-Requisitos/Diagrama de Sequencia/DiagramaDeSequencia_PetLink.simp.bak
             <layout ax="1011.5" ay="677" awidth="20" aheight="99" x="1011.5" y="677" width="20" height="99" expanded="1011.5,677,20,99" collapsed="0,0,0,0" container-layout="simple">
+=======
+            <layout ax="1011.5" ay="671" awidth="20" aheight="85" x="1011.5" y="677" width="20" height="85" expanded="1011.5,671,20,85" collapsed="0,0,0,0" container-layout="simple">
+>>>>>>> main:ApêndiceB-Requisitos/DiagramaDeSequencia_PetLink.simp
               <container-layout padding="10,10,10,10" />
             </layout>
           </item>
           <item id="30796d1009634616a01512d2e681472c" iid="550bd5bf793940ff88a0a43ce6f8de6c" container="b072465aec124d3fa73f3e27b4a007fb" container-iid="e20f06f4f3ff4b6f8490897eae36e0a0" creation-date="08/26/2026 10:38:19" order-index="13" type="entity">
+<<<<<<< HEAD:ApêndiceB-Requisitos/Diagrama de Sequencia/DiagramaDeSequencia_PetLink.simp.bak
             <layout ax="1011.5" ay="320" awidth="20" aheight="107" x="1011.5" y="320" width="20" height="107" expanded="1011.5,320,20,107" collapsed="0,0,0,0" container-layout="simple">
+=======
+            <layout ax="1011.5" ay="330" awidth="20" aheight="85" x="1011.5" y="330" width="20" height="85" expanded="1011.5,330,20,85" collapsed="0,0,0,0" container-layout="simple">
+>>>>>>> main:ApêndiceB-Requisitos/DiagramaDeSequencia_PetLink.simp
               <container-layout padding="10,10,10,10" />
             </layout>
           </item>
@@ -913,27 +925,45 @@
             <sequence-action show-sequence-number="false" />
           </item>
           <item id="44340607ec2f475b84fb6cebec1dd8e9" iid="ecde4d056b6c4138a74ba34b939fe0b2" creation-date="08/26/2026 10:38:36" order-index="14" type="relation">
+<<<<<<< HEAD:ApêndiceB-Requisitos/Diagrama de Sequencia/DiagramaDeSequencia_PetLink.simp.bak
             <layout message-x="906" message-y="327" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="785" y1="346" x2="1012" y2="346" start-border-pos="0.33647798742138363" end-border-pos="0.9392523364485981" start-local-pos="55" end-local-pos="26" name-position="8,-19">
               <points>
                 <point x="785" y="346" />
                 <point x="1012" y="346" />
+=======
+            <layout message-x="906" message-y="337" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="785" y1="356" x2="1012" y2="356" start-border-pos="0.35220125786163525" end-border-pos="0.9235294117647059" start-local-pos="65" end-local-pos="26" name-position="8,-19">
+              <points>
+                <point x="785" y="356" />
+                <point x="1012" y="356" />
+>>>>>>> main:ApêndiceB-Requisitos/DiagramaDeSequencia_PetLink.simp
               </points>
             </layout>
             <relation from="6d4021a2ce434166a0146579c3130fe8" from-iid="9264c78cdd9f48e98c3e99c4786a997f" to="30796d1009634616a01512d2e681472c" to-iid="550bd5bf793940ff88a0a43ce6f8de6c" />
             <sequence-action show-sequence-number="false" />
           </item>
           <item id="a420beb758414c1da010c477be416d39" iid="f0e1e648d2fd4bd99bf4ae98ed67e186" creation-date="08/26/2026 10:39:07" order-index="15" type="relation">
+<<<<<<< HEAD:ApêndiceB-Requisitos/Diagrama de Sequencia/DiagramaDeSequencia_PetLink.simp.bak
             <layout message-x="896" message-y="384" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="1012" y1="404" x2="785" y2="404" start-border-pos="0.8037383177570093" end-border-pos="0.4276729559748428" start-local-pos="84" end-local-pos="113" name-position="-2,-20">
               <points>
                 <point x="1012" y="404" />
                 <point x="785" y="404" />
+=======
+            <layout message-x="896" message-y="383" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="1012" y1="403" x2="785" y2="403" start-border-pos="0.7852941176470588" end-border-pos="0.42610062893081757" start-local-pos="73" end-local-pos="112" name-position="-2,-20">
+              <points>
+                <point x="1012" y="403" />
+                <point x="785" y="403" />
+>>>>>>> main:ApêndiceB-Requisitos/DiagramaDeSequencia_PetLink.simp
               </points>
             </layout>
             <relation from="30796d1009634616a01512d2e681472c" from-iid="550bd5bf793940ff88a0a43ce6f8de6c" to="6d4021a2ce434166a0146579c3130fe8" to-iid="9264c78cdd9f48e98c3e99c4786a997f" />
             <sequence-action show-sequence-number="false" />
           </item>
           <item id="ad24f34775b4410d97b8991d63303bf3" iid="c3ecb840b8d34601aceb0d8c4c59182c" creation-date="08/26/2026 10:40:57" order-index="17" type="relation">
+<<<<<<< HEAD:ApêndiceB-Requisitos/Diagrama de Sequencia/DiagramaDeSequencia_PetLink.simp.bak
             <layout message-x="620.5" message-y="694" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="488" y1="671" x2="765" y2="671" start-border-pos="0.32303370786516855" end-border-pos="0.9385474860335196" start-local-pos="78" end-local-pos="44" name-position="-5.5,23">
+=======
+            <layout message-x="637.5" message-y="649" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="488" y1="671" x2="765" y2="671" start-border-pos="0.32303370786516855" end-border-pos="0.9385474860335196" start-local-pos="78" end-local-pos="44" name-position="11.5,-22">
+>>>>>>> main:ApêndiceB-Requisitos/DiagramaDeSequencia_PetLink.simp
               <points>
                 <point x="488" y="671" />
                 <point x="765" y="671" />
@@ -943,27 +973,45 @@
             <sequence-action show-sequence-number="false" />
           </item>
           <item id="caeb10a32a5b4e0e987f8a556aefb90b" iid="42027f42cbf14691b04dbf560c2a3144" creation-date="08/26/2026 10:41:53" order-index="19" type="relation">
+<<<<<<< HEAD:ApêndiceB-Requisitos/Diagrama de Sequencia/DiagramaDeSequencia_PetLink.simp.bak
             <layout message-x="910.5" message-y="694" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="785" y1="703" x2="1012" y2="703" start-border-pos="0.35614525139664804" end-border-pos="0.9343434343434344" start-local-pos="76" end-local-pos="26" name-position="12.5,-9">
               <points>
                 <point x="785" y="703" />
                 <point x="1012" y="703" />
+=======
+            <layout message-x="907.5" message-y="673" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="785" y1="691" x2="1012" y2="691" start-border-pos="0.3393854748603352" end-border-pos="0.9411764705882353" start-local-pos="64" end-local-pos="20" name-position="9.5,-18">
+              <points>
+                <point x="785" y="691" />
+                <point x="1012" y="691" />
+>>>>>>> main:ApêndiceB-Requisitos/DiagramaDeSequencia_PetLink.simp
               </points>
             </layout>
             <relation from="ad2788a33319436fa93ad9a05d26b6f4" from-iid="f31d0fa5f4ca4511b253498e8ae19b35" to="a32769086e994690b1c162ab610dcbff" to-iid="f2379af471ae4d15bd92610d3b8aed3e" />
             <sequence-action show-sequence-number="false" />
           </item>
           <item id="50a8a6d2e73a46a7b1a4d4a6bf77aac4" iid="29fd51e40260411f8f7f583fef06c77a" creation-date="08/26/2026 10:42:14" order-index="20" type="relation">
+<<<<<<< HEAD:ApêndiceB-Requisitos/Diagrama de Sequencia/DiagramaDeSequencia_PetLink.simp.bak
             <layout message-x="910.5" message-y="750" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="1012" y1="765" x2="785" y2="765" start-border-pos="0.7777777777777778" end-border-pos="0.44273743016759776" start-local-pos="88" end-local-pos="138" name-position="12.5,-15">
               <points>
                 <point x="1012" y="765" />
                 <point x="785" y="765" />
+=======
+            <layout message-x="910.5" message-y="729" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="1012" y1="744" x2="785" y2="744" start-border-pos="0.7852941176470588" end-border-pos="0.4134078212290503" start-local-pos="73" end-local-pos="117" name-position="12.5,-15">
+              <points>
+                <point x="1012" y="744" />
+                <point x="785" y="744" />
+>>>>>>> main:ApêndiceB-Requisitos/DiagramaDeSequencia_PetLink.simp
               </points>
             </layout>
             <relation from="a32769086e994690b1c162ab610dcbff" from-iid="f2379af471ae4d15bd92610d3b8aed3e" to="ad2788a33319436fa93ad9a05d26b6f4" to-iid="f31d0fa5f4ca4511b253498e8ae19b35" />
             <sequence-action show-sequence-number="false" />
           </item>
           <item id="a43a33da6c484cde9d9df9296f0d8c7a" iid="e79a1b57b19041b0bcc3a17dccd453c9" creation-date="08/26/2026 10:43:06" order-index="21" type="relation">
+<<<<<<< HEAD:ApêndiceB-Requisitos/Diagrama de Sequencia/DiagramaDeSequencia_PetLink.simp.bak
             <layout message-x="626" message-y="806" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="765" y1="786" x2="488" y2="786" start-border-pos="0.7779329608938548" end-border-pos="0.4307116104868914" start-local-pos="159" end-local-pos="193" name-position="0,20">
+=======
+            <layout message-x="629.5" message-y="762" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="765" y1="786" x2="488" y2="786" start-border-pos="0.7779329608938548" end-border-pos="0.4307116104868914" start-local-pos="159" end-local-pos="193" name-position="3.5,-24">
+>>>>>>> main:ApêndiceB-Requisitos/DiagramaDeSequencia_PetLink.simp
               <points>
                 <point x="765" y="786" />
                 <point x="488" y="786" />
