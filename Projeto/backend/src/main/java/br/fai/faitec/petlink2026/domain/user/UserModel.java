@@ -1,6 +1,8 @@
 package br.fai.faitec.petlink2026.domain.user;
 
-import br.fai.faitec.petlink2026.domain.pet.PetModel;
+import br.fai.faitec.petlink2026.domain.animal.AnimalModel;
+import br.fai.faitec.petlink2026.domain.animal.FarmAnimalModel;
+import br.fai.faitec.petlink2026.domain.animal.PetModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +17,15 @@ public class UserModel {
     private String document;
     private AccountType accountType;
     private List<PetModel> pets = new ArrayList<>();
+    private List<FarmAnimalModel> farmAnimalModels = new ArrayList<>();
+
+    public List<FarmAnimalModel> getFarmAnimalModels() {
+        return farmAnimalModels;
+    }
+
+    public void setFarmAnimalModels(List<FarmAnimalModel> farmAnimalModels) {
+        this.farmAnimalModels = farmAnimalModels;
+    }
 
     public void setDocument(String document) {
         this.document = document;

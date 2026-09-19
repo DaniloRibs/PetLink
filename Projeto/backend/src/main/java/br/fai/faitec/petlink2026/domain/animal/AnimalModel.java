@@ -1,12 +1,12 @@
-package br.fai.faitec.petlink2026.domain.pet;
+package br.fai.faitec.petlink2026.domain.animal;
 
 import br.fai.faitec.petlink2026.domain.vaccine.VaccineModel;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.Date;
 
-public class PetModel {
+public abstract class AnimalModel {
 
     private int id;
     private String name;
@@ -14,24 +14,16 @@ public class PetModel {
     private String breed;
     private Date birthDate;
     private int ownerId;
-    private boolean forAdoption;
+    private String gender;
     private List<VaccineModel> vaccines = new ArrayList<>();
 
 
-    public boolean isForAdoption() {
-        return forAdoption;
+    public String getGender() {
+        return gender;
     }
 
-    public void setForAdoption(boolean forAdoption) {
-        this.forAdoption = forAdoption;
-    }
-
-    public List<VaccineModel> getVaccines() {
-        return vaccines;
-    }
-
-    public void setVaccines(List<VaccineModel> vaccines) {
-        this.vaccines = vaccines;
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public int getId() {
@@ -48,6 +40,14 @@ public class PetModel {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Specie getSpecies() {
+        return species;
+    }
+
+    public void setSpecies(Specie species) {
+        this.species = species;
     }
 
     public String getBreed() {
@@ -74,11 +74,11 @@ public class PetModel {
         this.ownerId = ownerId;
     }
 
-    public Specie getSpecies() {
-        return species;
+    public List<VaccineModel> getVaccines() {
+        return vaccines;
     }
 
-    public void setSpecies(Specie species) {
-        this.species = species;
+    public void setVaccines(List<VaccineModel> vaccines) {
+        this.vaccines = vaccines;
     }
 }

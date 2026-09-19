@@ -1,4 +1,4 @@
-package br.fai.faitec.petlink2026.ports_and_adapters.port.service.pet;
+package br.fai.faitec.petlink2026.ports_and_adapters.port.service.animal;
 
 public interface UpdateOwnerService {
 

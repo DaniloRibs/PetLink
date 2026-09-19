@@ -1,11 +1,11 @@
 package br.fai.faitec.petlink2026.controller;
 
-import br.fai.faitec.petlink2026.domain.pet.PetModel;
+import br.fai.faitec.petlink2026.domain.animal.PetModel;
 import br.fai.faitec.petlink2026.domain.user.UserModel;
 import br.fai.faitec.petlink2026.dto.user.CreateUserDto;
 import br.fai.faitec.petlink2026.dto.user.UpdatePasswordDto;
 import br.fai.faitec.petlink2026.dto.user.UpdateUserDto;
-import br.fai.faitec.petlink2026.ports_and_adapters.port.service.pet.PetService;
+import br.fai.faitec.petlink2026.ports_and_adapters.port.service.animal.PetService;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

@@ -1,7 +1,9 @@
 DROP TABLE IF EXISTS announcement_model CASCADE;
 DROP TABLE IF EXISTS adoption_model CASCADE;
 DROP TABLE IF EXISTS vaccine_model CASCADE;
+DROP TABLE IF EXISTS farm_animal_model CASCADE;
 DROP TABLE IF EXISTS pet_model CASCADE;
+DROP TABLE IF EXISTS animal_model CASCADE;
 DROP TABLE IF EXISTS user_model CASCADE;
 
 CREATE TABLE user_model
@@ -15,7 +17,7 @@ CREATE TABLE user_model
     account_type VARCHAR(20) NOT NULL
 );
 
-CREATE TABLE pet_model
+CREATE TABLE animal_model
 (
     id SERIAL PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
@@ -23,9 +25,28 @@ CREATE TABLE pet_model
     breed VARCHAR(50) NOT NULL,
     birth_date DATE NOT NULL,
     user_id INT NOT NULL,
-    for_adoption BOOLEAN NOT NULL,
+    gender CHAR NOT NULL,
     CONSTRAINT fk_pet_user FOREIGN KEY (user_id) REFERENCES user_model(id) ON DELETE CASCADE
 );
+
+CREATE TABLE farm_animal_model
+(
+    id SERIAL PRIMARY KEY,
+    identifier VARCHAR(10) NOT NULL,
+    for_sell BOOLEAN NOT NULL,
+    weight NUMERIC NOT NULL,
+    animal_id INT NOT NULL,
+    CONSTRAINT fk_farm_animal_animal FOREIGN KEY (animal_id) REFERENCES animal_model(id) ON DELETE CASCADE
+);
+
+CREATE TABLE pet_model
+(
+    id SERIAL PRIMARY KEY,
+    for_adoption BOOLEAN NOT NULL,
+    animal_id INT NOT NULL,
+    CONSTRAINT fk_pet_animal FOREIGN KEY (animal_id) REFERENCES animal_model(id) ON DELETE CASCADE
+);
+
 
 CREATE TABLE vaccine_model
 (

@@ -1,16 +1,17 @@
 package br.fai.faitec.petlink2026.configuration;
 
 import br.fai.faitec.petlink2026.ports_and_adapters.adapter.dao.adoption.AdoptionPostgresDaoAdapter;
+import br.fai.faitec.petlink2026.ports_and_adapters.adapter.dao.animal.FarmAnimalPostgresDaoAdapter;
 import br.fai.faitec.petlink2026.ports_and_adapters.adapter.dao.announcement.AnnouncementPostgresDaoAdapter;
-import br.fai.faitec.petlink2026.ports_and_adapters.adapter.dao.pet.PetPostgresDaoAdapter;
-import br.fai.faitec.petlink2026.ports_and_adapters.adapter.dao.user.UserFakeDaoAdapter;
+import br.fai.faitec.petlink2026.ports_and_adapters.adapter.dao.animal.PetPostgresDaoAdapter;
 import br.fai.faitec.petlink2026.ports_and_adapters.adapter.dao.user.UserPostgresDaoAdapter;
 import br.fai.faitec.petlink2026.ports_and_adapters.adapter.dao.vaccine.VaccinePostgresDaoAdapter;
 import br.fai.faitec.petlink2026.ports_and_adapters.adapter.sucurity.BasicAuthenticationServiceAdapter;
 import br.fai.faitec.petlink2026.ports_and_adapters.adapter.sucurity.JwtAuthenticationServiceAdapter;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.adoption.AdoptionDao;
+import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.animal.FarmAnimalDao;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.announcement.AnnouncementDao;
-import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.pet.PetDao;
+import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.animal.PetDao;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.user.UserDao;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.vaccine.VaccineDao;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.service.security.AuthenticationService;
@@ -70,6 +71,12 @@ public class AppConfiguration {
     public AdoptionDao getAdoptionPostgresDao(final Connection connection) {
         return new AdoptionPostgresDaoAdapter(connection);
     }
+
+    @Bean
+    public FarmAnimalDao getFarmAnimalPostgresDao(final Connection connection) {
+        return new FarmAnimalPostgresDaoAdapter(connection);
+    }
+
 
     @Profile("basic")
     @Bean

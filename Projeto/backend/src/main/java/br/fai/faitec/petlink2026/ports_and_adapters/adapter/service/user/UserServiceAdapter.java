@@ -1,10 +1,12 @@
 package br.fai.faitec.petlink2026.ports_and_adapters.adapter.service.user;
 
-import br.fai.faitec.petlink2026.domain.pet.PetModel;
+import br.fai.faitec.petlink2026.domain.animal.FarmAnimalModel;
+import br.fai.faitec.petlink2026.domain.animal.PetModel;
 import br.fai.faitec.petlink2026.domain.user.AccountType;
 import br.fai.faitec.petlink2026.domain.user.UserModel;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.user.UserDao;
-import br.fai.faitec.petlink2026.ports_and_adapters.port.service.pet.PetService;
+import br.fai.faitec.petlink2026.ports_and_adapters.port.service.animal.FarmAnimalService;
+import br.fai.faitec.petlink2026.ports_and_adapters.port.service.animal.PetService;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,8 @@ public class UserServiceAdapter implements UserService {
     private UserDao userDao;
     @Autowired
     private PetService petService;
+    @Autowired
+    private FarmAnimalService farmAnimalService;
 
     @Override
     public int create(UserModel userModel) {
@@ -90,7 +94,7 @@ public class UserServiceAdapter implements UserService {
 
         UserModel userModel = userDao.readyById(id);
         userModel.setPets(showAllPetsByOwnerId(id));
-
+        userModel.setFarmAnimalModels(showAllAnimalByOwnerId(id));
         return userModel;
     }
 
@@ -102,6 +106,7 @@ public class UserServiceAdapter implements UserService {
 
         for (UserModel userModel : userModels) {
             userModel.setPets(showAllPetsByOwnerId(userModel.getId()));
+            userModel.setFarmAnimalModels(showAllAnimalByOwnerId(userModel.getId()));
 
         }
 
@@ -201,16 +206,53 @@ public class UserServiceAdapter implements UserService {
         return petsDoDono;
     }
 
+    @Override
+    public FarmAnimalModel findAnimalByOwnerId(int idOwner, int idPet) {
+
+        if (isIdInvalid(idPet) || isIdInvalid(idOwner)) {
+            return null;
+        }
+
+        UserModel userModel = userDao.readyById(idOwner);
+
+        FarmAnimalModel farmAnimalModel = farmAnimalService.findById(idPet);
+
+        if (farmAnimalModel.getOwnerId() != idOwner) {
+            return null;
+        }
+
+
+        return farmAnimalModel;
+    }
+
+    @Override
+    public List<FarmAnimalModel> showAllAnimalByOwnerId(int idOwner) {
+        if (isIdInvalid(idOwner)) {
+            return List.of();
+        }
+
+        UserModel userModel = userDao.readyById(idOwner);
+        if (userModel == null) {
+            return List.of();
+        }
+
+        List<FarmAnimalModel> farmAnimalModels = new ArrayList<>();
+
+        for (FarmAnimalModel FarmAnimalModel : farmAnimalService.findAll()) {
+            if (FarmAnimalModel.getOwnerId() == idOwner) {
+                farmAnimalModels.add(FarmAnimalModel);
+            }
+        }
+
+
+        return farmAnimalModels;
+    }
+
 
     private boolean isBlank(String value) {
         return value == null || value.isEmpty();
     }
 
-    /**
-     * Telefone e documento (CPF/CNPJ) sao opcionais para PERSON.
-     * Documento e obrigatorio e deve ser um CNPJ valido para ENTERPRISE.
-     * Quando informados, telefone e documento precisam ser validos.
-     */
     private boolean isContactInvalid(String phone, String document, AccountType accountType) {
 
         if (!isBlank(phone) && isPhoneInvalid(phone)) {

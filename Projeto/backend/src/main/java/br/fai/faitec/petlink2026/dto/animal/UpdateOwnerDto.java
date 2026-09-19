@@ -1,4 +1,4 @@
-package br.fai.faitec.petlink2026.dto.pet;
+package br.fai.faitec.petlink2026.dto.animal;
 
 import br.fai.faitec.petlink2026.domain.user.UserModel;
 

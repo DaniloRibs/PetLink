@@ -1,10 +1,10 @@
 package br.fai.faitec.petlink2026.ports_and_adapters.adapter.service.adoption;
 
 import br.fai.faitec.petlink2026.domain.adoption.AdoptionModel;
-import br.fai.faitec.petlink2026.domain.pet.PetModel;
+import br.fai.faitec.petlink2026.domain.animal.PetModel;
 import br.fai.faitec.petlink2026.domain.user.UserModel;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.adoption.AdoptionDao;
-import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.pet.PetDao;
+import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.animal.PetDao;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.user.UserDao;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.service.adoption.AdoptionService;
 import org.springframework.beans.factory.annotation.Autowired;

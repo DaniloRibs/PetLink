@@ -1,12 +1,12 @@
-package br.fai.faitec.petlink2026.ports_and_adapters.adapter.service.pet;
+package br.fai.faitec.petlink2026.ports_and_adapters.adapter.service.animal;
 
-import br.fai.faitec.petlink2026.domain.pet.PetModel;
+import br.fai.faitec.petlink2026.domain.animal.PetModel;
 import br.fai.faitec.petlink2026.domain.user.UserModel;
 import br.fai.faitec.petlink2026.domain.vaccine.VaccineModel;
-import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.pet.PetDao;
+import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.animal.PetDao;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.user.UserDao;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.vaccine.VaccineDao;
-import br.fai.faitec.petlink2026.ports_and_adapters.port.service.pet.PetService;
+import br.fai.faitec.petlink2026.ports_and_adapters.port.service.animal.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -80,7 +80,7 @@ public class PetServiceAdapter implements PetService {
         }
         PetModel petModel = petDao.readyById(id);
 
-        petModel.setVaccines(showAllVaccineByPetId(id));
+        petModel.setVaccines(showAllVaccineByAnimalId(id));
 
         return petModel;
     }
@@ -91,7 +91,7 @@ public class PetServiceAdapter implements PetService {
 
 
         for (PetModel petModel : pets) {
-            petModel.setVaccines(showAllVaccineByPetId(petModel.getId()));
+            petModel.setVaccines(showAllVaccineByAnimalId(petModel.getId()));
 
         }
 
@@ -115,10 +115,14 @@ public class PetServiceAdapter implements PetService {
             return false;
         }
 
+        if (petModel.getBreed() == null || petModel.getBreed().isEmpty()) {
+            return false;
+        }
+
         dataToUpdate.setName(petModel.getName());
-        dataToUpdate.setSpecies(petModel.getSpecies());
         dataToUpdate.setBirthDate(petModel.getBirthDate());
         dataToUpdate.setBreed(petModel.getBreed());
+        dataToUpdate.setForAdoption(petModel.isForAdoption());
 
         petDao.updateInformation(id, dataToUpdate);
 
@@ -163,7 +167,7 @@ public class PetServiceAdapter implements PetService {
     }
 
     @Override
-    public VaccineModel findVaccineByPetId(int idPet, int idVaccine) {
+    public VaccineModel findVaccineByAnimalId(int idPet, int idVaccine) {
 
         if (isIdInvalid(idPet) || isIdInvalid(idVaccine)) {
             return null;
@@ -183,7 +187,7 @@ public class PetServiceAdapter implements PetService {
     }
 
     @Override
-    public List<VaccineModel> showAllVaccineByPetId(int idPet) {
+    public List<VaccineModel> showAllVaccineByAnimalId(int idPet) {
 
         if (isIdInvalid(idPet)) {
             return List.of();

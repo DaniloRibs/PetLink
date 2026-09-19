@@ -1,7 +1,7 @@
-package br.fai.faitec.petlink2026.dto.pet;
+package br.fai.faitec.petlink2026.dto.animal;
 
-import br.fai.faitec.petlink2026.domain.pet.Specie;
-import br.fai.faitec.petlink2026.domain.pet.PetModel;
+import br.fai.faitec.petlink2026.domain.animal.Specie;
+import br.fai.faitec.petlink2026.domain.animal.PetModel;
 
 import java.sql.Date;
 
@@ -11,6 +11,7 @@ public class CreatePetDto {
     private String breed;
     private Date birthDate;
     private Specie specie;
+    private String gender;
     private int ownerId;
 
 
@@ -21,9 +22,18 @@ public class CreatePetDto {
         petModel.setBirthDate(birthDate);
         petModel.setOwnerId(ownerId);
         petModel.setSpecies(specie);
+        petModel.setGender(gender);
         petModel.setForAdoption(false);
 
         return petModel;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public String getName() {

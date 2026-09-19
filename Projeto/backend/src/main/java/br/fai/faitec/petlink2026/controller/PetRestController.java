@@ -1,10 +1,10 @@
 package br.fai.faitec.petlink2026.controller;
 
-import br.fai.faitec.petlink2026.domain.pet.PetModel;
+import br.fai.faitec.petlink2026.domain.animal.PetModel;
 import br.fai.faitec.petlink2026.domain.vaccine.VaccineModel;
-import br.fai.faitec.petlink2026.dto.pet.CreatePetDto;
+import br.fai.faitec.petlink2026.dto.animal.CreatePetDto;
 import br.fai.faitec.petlink2026.dto.vaccine.CreateVaccineDto;
-import br.fai.faitec.petlink2026.ports_and_adapters.port.service.pet.PetService;
+import br.fai.faitec.petlink2026.ports_and_adapters.port.service.animal.PetService;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.service.vaccine.VaccineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -83,14 +83,14 @@ public class PetRestController {
     //     BUSCAR TODAS AS VACINAS DO PET
     @GetMapping("/{petId}/vaccine")
     public ResponseEntity<List<VaccineModel>> getEntitiesByPetId(@PathVariable final int petId) {
-        List<VaccineModel> entities = petService.showAllVaccineByPetId(petId);
+        List<VaccineModel> entities = petService.showAllVaccineByAnimalId(petId);
         return ResponseEntity.ok(entities);
     }
 
     //     BUSCAR UMA DAS VACINAS DO PET
     @GetMapping("/{petId}/vaccine/{vaccineId}")
     public ResponseEntity<VaccineModel> getEntitiesByPetIdAndVaccineId(@PathVariable final int petId, @PathVariable final int vaccineId) {
-        VaccineModel vaccineModel = petService.findVaccineByPetId(petId, vaccineId);
+        VaccineModel vaccineModel = petService.findVaccineByAnimalId(petId, vaccineId);
         return ResponseEntity.ok(vaccineModel);
     }
 
