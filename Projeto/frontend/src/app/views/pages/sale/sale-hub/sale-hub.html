@@ -1,0 +1,142 @@
+<section class="menu-footer-card content-area">
+    <div class="content-form-card">
+        <p class="footer-title">VENDAS</p>
+        <h2>Compre ou venda animais de fazenda</h2>
+
+        <div class="sale-tabs">
+            <button class="sale-tab" [class.active]="activeTab === 'comprar'" (click)="setTab('comprar')">
+                <mat-icon>shopping_cart</mat-icon> Quero comprar
+            </button>
+            <button class="sale-tab" [class.active]="activeTab === 'vender'" (click)="setTab('vender')">
+                <mat-icon>sell</mat-icon> Vender meus animais
+            </button>
+        </div>
+
+        @if (loading) {
+
+        <p>Carregando...</p>
+
+        } @else if (activeTab === 'comprar') {
+
+        @if (availableSales.length === 0) {
+        <div class="empty-state">
+            <div class="empty-state-icon"><mat-icon>storefront</mat-icon></div>
+            <p class="empty-state-title">Nenhum animal à venda no momento</p>
+            <p class="empty-state-text">Volte mais tarde. Novos animais à venda aparecem aqui.</p>
+        </div>
+        } @else {
+        <div class="pet-card-grid">
+            @for (listing of availableSales; track listing.sale.id) {
+            <article class="pet-card">
+                @if (listing.animals.length > 0) {
+                <div class="pet-card-icon">{{ speciesIcon(listing.animals[0].species) }}</div>
+                }
+                <h3>{{ listing.animals.length > 1 ? 'Lote de ' + listing.animals.length + ' animais' :
+                    (listing.animals[0]?.name ?? 'Animal') }}</h3>
+
+                @for (animal of listing.animals; track animal.id) {
+                <p class="sale-animal-line">
+                    {{ animal.name }}{{ animal.identifier ? ' · ID ' + animal.identifier : '' }}{{ animal.weight ? ' · '
+                    + animal.weight + ' kg' : '' }}
+                </p>
+                }
+                @if (listing.animals.length > 1 && listingWeight(listing) > 0) {
+                <p class="sale-animal-line">Peso total: {{ listingWeight(listing).toFixed(1) }} kg</p>
+                }
+
+                <p class="sale-description">{{ listing.sale.description }}</p>
+                <p class="sale-price">R$ {{ listing.sale.price.toFixed(2) }}</p>
+                <p class="sale-price-type">{{ priceTypeLabel(listing.sale) }}</p>
+                <p class="sale-contact">Contato: {{ listing.sale.contact }}</p>
+            </article>
+            }
+        </div>
+        }
+
+        } @else if (sellableAnimals.length === 0) {
+
+        <div class="empty-state">
+            <div class="empty-state-icon"><mat-icon>agriculture</mat-icon></div>
+            <p class="empty-state-title">Nenhum animal disponível para venda</p>
+            <p class="empty-state-text">Cadastre um animal em "Meus Animais" para poder anunciá-lo aqui.</p>
+        </div>
+
+        } @else {
+
+        <div class="login-box form-box">
+            <p class="form-box-title">Nova venda</p>
+
+            <form [formGroup]="saleForm" (ngSubmit)="createSale()">
+
+                <div class="field-group">
+                    <label>Animais desta venda</label>
+                    <div class="sale-animal-list">
+                        @for (animal of sellableAnimals; track animal.id) {
+                        <label class="sale-animal-option">
+                            <input type="checkbox" [checked]="isSelected(animal.id)" (change)="toggleAnimal(animal.id)">
+                            <span>
+                                {{ speciesIcon(animal.species) }} {{ animal.name }}{{ animal.identifier ? ' · ID ' +
+                                animal.identifier : '' }}{{ animal.weight ? ' · ' + animal.weight + ' kg' : '' }}
+                            </span>
+                        </label>
+                        }
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label>Descrição</label>
+                    <input type="text" placeholder="Conte um pouco sobre o lote" formControlName="description">
+                </div>
+
+                <div class="field-group">
+                    <label>Contato</label>
+                    <input type="text" placeholder="E-mail ou telefone para contato" formControlName="contact">
+                </div>
+
+                <div class="form-row">
+                    <div class="field-group">
+                        <label>Tipo de preço</label>
+                        <select formControlName="priceType">
+                            <option [value]="PriceType.FIXED">Valor fechado</option>
+                            <option [value]="PriceType.PER_ARROBA">Por arroba</option>
+                        </select>
+                    </div>
+
+                    @if (selectedPriceType === PriceType.PER_ARROBA) {
+                    <div class="field-group">
+                        <label>Valor da arroba (R$)</label>
+                        <input type="number" min="0" step="0.01" formControlName="pricePerArroba">
+                    </div>
+                    }
+                </div>
+
+                @if (selectedPriceType === PriceType.PER_ARROBA) {
+                <div class="sale-hint">
+                    <p>Peso total: {{ totalWeight.toFixed(1) }} kg ({{ totalArrobas.toFixed(2) }} arrobas)</p>
+                    @if (suggestedPrice !== null) {
+                    <p>Valor sugerido: R$ {{ suggestedPrice.toFixed(2) }}</p>
+                    <button type="button" class="secondary-button" (click)="applySuggestedPrice()">Usar valor
+                        sugerido</button>
+                    }
+                </div>
+                }
+
+                <div class="field-group">
+                    <label>Preço final (R$)</label>
+                    <input type="number" min="0" step="0.01" formControlName="price">
+                </div>
+
+                <input type="submit" value="Publicar venda" [disabled]="!validateSaleFields()">
+
+                @if (saleValidationFailed) {
+                <p class="text-danger">Confira os dados e tente novamente.</p>
+                }
+                @if (saleCreatedOk) {
+                <p class="text-success">Venda publicada com sucesso!</p>
+                }
+            </form>
+        </div>
+
+        }
+    </div>
+</section>

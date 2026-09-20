@@ -26,7 +26,8 @@
 }
 
 .lost-card {
-  border-left-color: #f59e0b; /* Borda amarela/laranja do Lost */
+  border-left-color: #f59e0b;
+  /* Borda amarela/laranja do Lost */
 }
 
 .vaccine-icon-header {
@@ -66,8 +67,8 @@
   margin: 4px 0 14px;
   padding: 12px 14px;
   border-radius: 12px;
-  background: rgba(111, 78, 55, 0.05);
-  border: 1px solid rgba(111, 78, 55, 0.08);
+  background: rgba(var(--primary-rgb), 0.05);
+  border: 1px solid rgba(var(--primary-rgb), 0.08);
 }
 
 .date-badge {

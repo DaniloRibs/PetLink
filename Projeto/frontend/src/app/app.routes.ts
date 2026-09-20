@@ -11,6 +11,7 @@ import { PetList } from './views/pages/pet/pet-list/pet-list';
 import { PetDetail } from './views/pages/pet/pet-detail/pet-detail';
 import { AnnouncementList } from './views/pages/announcement/announcement-list/announcement-list';
 import { AdoptionHub } from './views/pages/adoption/adoption-hub/adoption-hub';
+import { SaleHub } from './views/pages/sale/sale-hub/sale-hub';
 
 import { NotFound } from './views/not-found/not-found';
 
@@ -61,6 +62,10 @@ export const routes: Routes = [
                 path: 'adocoes',
                 component: AdoptionHub,
 
+            },
+            {
+                path: 'vendas',
+                component: SaleHub,
             },
         ],
     },

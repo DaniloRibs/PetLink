@@ -21,7 +21,14 @@
   display: block;
   font-size: 28px;
   font-weight: 700;
-  color: #6F4E37;
+  color: var(--primary);
   line-height: 1;
   margin: 2px 0 4px;
+}
+
+.hero-horseshoe {
+  display: block;
+  width: 34px;
+  height: 34px;
+  transform: rotate(-12deg);
 }

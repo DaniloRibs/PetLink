@@ -5,6 +5,10 @@ export function speciesIcon(species: string): string {
         case PetSpecies.DOG: return '🐶';
         case PetSpecies.CAT: return '🐱';
         case PetSpecies.BIRD: return '🐦';
+        case PetSpecies.HORSE: return '🐴';
+        case PetSpecies.COW: return '🐄';
+        case PetSpecies.PIG: return '🐷';
+        case PetSpecies.SHEEP: return '🐑';
         default: return '🐾';
     }
 }

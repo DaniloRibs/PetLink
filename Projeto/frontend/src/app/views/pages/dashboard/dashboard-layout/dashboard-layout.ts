@@ -5,6 +5,8 @@ import { AuthenticationService } from '../../../../services/security/authenticat
 import { CurrentUserService } from '../../../../services/security/current-user';
 import { User } from '../../../../models/domain/user';
 import { NotificationBell } from '../../notification/notification-bell/notification-bell';
+import { AnimalMode } from '../../../../models/domain/animalMode';
+import { AnimalModeService } from '../../../../services/animalMode/animalMode';
 
 @Component({
   selector: 'app-dashboard-layout',
@@ -18,6 +20,12 @@ export class DashboardLayout implements OnInit {
   currentUser: User | null = null;
   userMenuOpen: boolean = false;
 
+  readonly AnimalMode = AnimalMode;
+
+  get isFarm(): boolean {
+    return this.animalModeService.get() === AnimalMode.FARM;
+  }
+
   get userInitial(): string {
     const name = this.currentUser?.fullname || this.userEmail || '?';
     return name.trim().charAt(0).toUpperCase();
@@ -27,6 +35,7 @@ export class DashboardLayout implements OnInit {
     private router: Router,
     private authenticationService: AuthenticationService,
     private currentUserService: CurrentUserService,
+    private animalModeService: AnimalModeService,
   ) {
     try {
       this.userEmail = this.authenticationService.getAuthenticatedUserEmail();
@@ -37,6 +46,15 @@ export class DashboardLayout implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.currentUser = await this.currentUserService.load();
+  }
+
+  setMode(mode: AnimalMode): void {
+    this.animalModeService.set(mode);
+
+    const url = this.router.url;
+    if (mode === AnimalMode.FARM && (url.startsWith('/painel/anuncios') || url.startsWith('/painel/adocoes'))) {
+      this.router.navigate(['/painel']);
+    }
   }
 
   toggleUserMenu(): void {

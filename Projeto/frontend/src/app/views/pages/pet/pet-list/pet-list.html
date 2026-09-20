@@ -1,21 +1,21 @@
 <section class="menu-footer-card content-area">
   <div class="content-form-card">
     <div class="section-header">
-      <p class="footer-title">MEUS PETS</p>
-      <h2>Seus pets cadastrados</h2>
+      <p class="footer-title">{{ isFarm ? 'MEUS ANIMAIS' : 'MEUS PETS' }}</p>
+      <h2>{{ isFarm ? 'Seus animais cadastrados' : 'Seus pets cadastrados' }}</h2>
       <button class="primary-button action-btn" [class.is-cancel]="showForm" (click)="toggleForm()">
         <span class="action-btn-icon"><mat-icon>{{ showForm ? 'close' : 'add' }}</mat-icon></span>
-        {{ showForm ? 'Cancelar' : 'Cadastrar Pet' }}
+        {{ showForm ? 'Cancelar' : (isFarm ? 'Cadastrar Animal' : 'Cadastrar Pet') }}
       </button>
     </div>
 
     @if (showForm) {
     <div class="login-box form-box">
-      <p class="form-box-title">Novo pet</p>
+      <p class="form-box-title">{{ isFarm ? 'Novo animal' : 'Novo pet' }}</p>
 
       <form [formGroup]="form" (ngSubmit)="createPet()">
         <div class="field-group">
-          <label>Nome do Pet</label>
+          <label>{{ isFarm ? 'Nome do Animal' : 'Nome do Pet' }}</label>
           <input type="text" placeholder formControlName="name">
         </div>
 
@@ -24,10 +24,9 @@
             <label>Espécie</label>
             <select formControlName="species">
               <option value="" disabled selected hidden>Selecionar</option>
-              <option [value]="PetSpecies.DOG">Cachorro</option>
-              <option [value]="PetSpecies.CAT">Gato</option>
-              <option [value]="PetSpecies.BIRD">Pássaro</option>
-              <option [value]="PetSpecies.OTHER">Outro</option>
+              @for (option of speciesOptions; track option.value) {
+              <option [value]="option.value">{{ option.label }}</option>
+              }
             </select>
           </div>
 
@@ -37,12 +36,36 @@
           </div>
         </div>
 
-        <div class="field-group">
-          <label>Data de Nascimento</label>
-          <input type="date" formControlName="birthDate">
-        </div>
+        <div class="form-row">
+          <div class="field-group">
+            <label>Gênero</label>
+            <select formControlName="gender">
+              <option value="" disabled selected hidden>Selecionar</option>
+              <option [value]="PetGender.MALE">Macho</option>
+              <option [value]="PetGender.FEMALE">Fêmea</option>
+            </select>
+          </div>
 
-        <input type="submit" value="Cadastrar Pet" [disabled]="!validateFields()">
+          <div class="field-group">
+            <label>Data de Nascimento</label>
+            <input type="date" formControlName="birthDate">
+          </div>
+        </div>
+        @if (isFarm) {
+        <div class="form-row">
+          <div class="field-group">
+            <label>Identificador</label>
+            <input type="text" placeholder formControlName="identifier">
+          </div>
+
+          <div class="field-group">
+            <label>Peso (kg)</label>
+            <input type="number" min="0" step="0.1" placeholder formControlName="weight">
+          </div>
+        </div>
+        }
+
+        <input type="submit" [value]="isFarm ? 'Cadastrar Animal' : 'Cadastrar Pet'" [disabled]="!validateFields()">
 
         @if (createValidationFailed) {
         <p class="text-danger">Confira os dados e tente novamente.</p>
@@ -56,8 +79,9 @@
     } @else if (pets.length === 0) {
     <div class="empty-state">
       <div class="empty-state-icon"><mat-icon>pets</mat-icon></div>
-      <p class="empty-state-title">Nenhum pet cadastrado ainda</p>
-      <p class="empty-state-text">Use o botão "Cadastrar Pet" acima para adicionar o primeiro.</p>
+      <p class="empty-state-title">{{ isFarm ? 'Nenhum animal cadastrado ainda' : 'Nenhum pet cadastrado ainda' }}</p>
+      <p class="empty-state-text">{{ isFarm ? 'Use o botão "Cadastrar Animal" acima para adicionar o primeiro.' : 'Use o
+        botão "Cadastrar Pet" acima para adicionar o primeiro.' }}</p>
     </div>
     } @else {
     <div class="pet-card-grid">
@@ -68,7 +92,13 @@
         }
         <div class="pet-card-icon">{{ speciesIcon(pet.species) }}</div>
         <h3>{{ pet.name }}</h3>
-        <p>{{ pet.breed }}</p>
+        <p>{{ pet.breed }}{{ pet.gender ? ' · ' + genderLabel(pet.gender) : '' }}</p>
+        @if (isFarm && (pet.identifier || pet.weight)) {
+        <p>
+          {{ pet.identifier ? 'ID: ' + pet.identifier : '' }}{{ pet.identifier && pet.weight ? ' · ' : '' }}{{
+          pet.weight ? pet.weight + ' kg' : '' }}
+        </p>
+        }
         <span class="pet-card-cta">Ver detalhes →</span>
       </article>
       }

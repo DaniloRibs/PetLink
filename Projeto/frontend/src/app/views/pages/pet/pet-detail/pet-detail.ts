@@ -4,8 +4,6 @@ import { DatePipe } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-
-import { Pet, PetSpecies } from '../../../../models/domain/pet';
 import { Vaccine } from '../../../../models/domain/vaccine';
 import { CreateVaccineDto } from '../../../../models/dto/create-vaccine-dto';
 import { PetReadService } from '../../../../services/pet/pet-read';
@@ -15,6 +13,10 @@ import { VaccineReadService } from '../../../../services/vaccine/vaccine-read';
 import { VaccineCreateService } from '../../../../services/vaccine/vaccine-create';
 import { VaccineDeleteService } from '../../../../services/vaccine/vaccine-delete';
 import { VaccineUpdateService } from '../../../../services/vaccine/vaccine-update';
+import { Pet, PetGender, PetSpecies } from '../../../../models/domain/pet';
+import { AnimalMode } from '../../../../models/domain/animalMode';
+import { AnimalModeService } from '../../../../services/animalMode/animalMode';
+import { FARM_SPECIES_OPTIONS, PET_SPECIES_OPTIONS, SpeciesOption, genderLabel } from '../../../../shared/pet-options';
 
 @Component({
   selector: 'app-pet-detail',
@@ -25,6 +27,20 @@ import { VaccineUpdateService } from '../../../../services/vaccine/vaccine-updat
 export class PetDetail implements OnInit {
 
   readonly PetSpecies = PetSpecies;
+
+  readonly PetGender = PetGender;
+
+  get isFarm(): boolean {
+    return this.animalModeService.get() === AnimalMode.FARM;
+  }
+
+  get speciesOptions(): SpeciesOption[] {
+    return this.isFarm ? FARM_SPECIES_OPTIONS : PET_SPECIES_OPTIONS;
+  }
+
+  genderLabel(gender?: string): string {
+    return genderLabel(gender);
+  }
 
   pet: Pet | null = null;
   vaccines: Vaccine[] = [];
@@ -61,6 +77,7 @@ export class PetDetail implements OnInit {
     private vaccineCreateService: VaccineCreateService,
     private vaccineDeleteService: VaccineDeleteService,
     private vaccineUpdateService: VaccineUpdateService,
+    private animalModeService: AnimalModeService,
     private cdr: ChangeDetectorRef,
     private zone: NgZone,
   ) {
@@ -83,8 +100,11 @@ export class PetDetail implements OnInit {
     this.editForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       species: ['', [Validators.required]],
+      gender: ['', [Validators.required]],
       breed: ['', [Validators.required]],
       birthDate: ['', [Validators.required]],
+      identifier: [''],
+      weight: [null, [Validators.min(0.1)]],
     });
   }
 
@@ -161,19 +181,31 @@ export class PetDetail implements OnInit {
       this.editForm.patchValue({
         name: this.pet.name,
         species: this.pet.species,
+        gender: this.pet.gender ?? '',
         breed: this.pet.breed,
         birthDate: this.pet.birthDate,
+        identifier: this.pet.identifier ?? '',
+        weight: this.pet.weight ?? null,
       });
     }
   }
 
   validateEditFields(): boolean {
-    return this.editForm.valid;
+    if (!this.editForm.valid) {
+      return false;
+    }
+    if (!this.isFarm) {
+      return true;
+    }
+    const identifier = (this.editForm.controls['identifier'].value ?? '').trim();
+    const weight = Number(this.editForm.controls['weight'].value);
+    return identifier.length > 0 && weight > 0;
   }
 
   saveEdit(): void {
     this.editValidationFailed = false;
     this.editSavedOk = false;
+
 
     if (!this.pet || !this.validateEditFields()) {
       this.editValidationFailed = true;
@@ -185,8 +217,14 @@ export class PetDetail implements OnInit {
       name: this.editForm.controls['name'].value,
       species: this.editForm.controls['species'].value,
       breed: this.editForm.controls['breed'].value,
+      gender: this.editForm.controls['gender'].value,
       birthDate: this.editForm.controls['birthDate'].value,
     };
+
+    if (this.isFarm) {
+      updatedPet.identifier = this.editForm.controls['identifier'].value.trim();
+      updatedPet.weight = Number(this.editForm.controls['weight'].value);
+    }
 
     this.petUpdateService.update(updatedPet).subscribe({
       next: async () => {
