@@ -20,6 +20,11 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(withEventReplay()),
     provideHttpClient(withInterceptorsFromDi(), withFetch()),
     provideAnimationsAsync(),
-    provideToastr(),
+    provideToastr({
+      positionClass: 'toast-bottom-right',
+      timeOut: 3500,
+      progressBar: true,
+      preventDuplicates: true,
+    }),
   ]
 };

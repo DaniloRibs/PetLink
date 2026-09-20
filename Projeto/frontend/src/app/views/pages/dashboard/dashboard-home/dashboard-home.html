@@ -3,15 +3,33 @@
     <h1 class="dashboard-title">Tudo pronto para cuidar do seu animal hoje.</h1>
     <p class="hero-text">Aqui está um resumo rápido do que está rolando no seu PetLink.</p>
 
+    @if (isFarm) {
     <div class="feature-grid">
       <a routerLink="/painel/pets" class="feature-item stat-card">
-        <div class="feature-icon">
-          @if (isFarm) {
-          <span class="horseshoe-icon" aria-hidden="true"></span>
-          } @else {
-          <mat-icon>pets</mat-icon>
-          }
-        </div>
+        <div class="feature-icon"><i class="horseshoe-icon" aria-hidden="true"></i></div>
+        <span class="stat-number">{{ loading ? '–' : farmAnimals.length }}</span>
+        <h3>Animais cadastrados</h3>
+        <p>Animais cadastrados na sua fazenda.</p>
+      </a>
+      <a routerLink="/painel/vendas" class="feature-item stat-card">
+        <div class="feature-icon"><mat-icon>sell</mat-icon></div>
+        <span class="stat-number">{{ loading ? '–' : farmForSaleCount }}</span>
+        <h3>À venda</h3>
+        <p>Animais seus anunciados agora.</p>
+      </a>
+      <a routerLink="/painel/pets" class="feature-item stat-card">
+        <div class="feature-icon"><mat-icon>scale</mat-icon></div>
+        <span class="stat-number">{{ loading ? '–' : farmTotalWeight.toLocaleString('pt-BR', { maximumFractionDigits: 0
+          }) + ' kg' }}</span>
+        <h3>Peso total</h3>
+        <p>{{ loading ? '' : '≈ ' + farmTotalArrobas.toLocaleString('pt-BR', { maximumFractionDigits: 1 }) + ' arrobas
+          somando todos os animais.' }}</p>
+      </a>
+    </div>
+    } @else {
+    <div class="feature-grid">
+      <a routerLink="/painel/pets" class="feature-item stat-card">
+        <div class="feature-icon"><mat-icon>pets</mat-icon></div>
         <span class="stat-number">{{ loading ? '–' : petsCount }}</span>
         <h3>Meus Pets</h3>
         <p>Pets cadastrados na sua conta.</p>
@@ -38,6 +56,7 @@
       </a>
       }
     </div>
+    }
   </div>
 
   <div class="hero-visual" aria-hidden="true">

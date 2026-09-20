@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, HostListener, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -8,7 +8,12 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.css'
 })
 export class App {
-  valorInteiro:number = 20
-  protected readonly title = signal('Projeto Faitec'+this.valorInteiro);
+  valorInteiro: number = 20
+  protected readonly title = signal('Projeto Faitec' + this.valorInteiro);
 
-}
+  @HostListener('document:keydown.escape')
+  closeTopModal(): void {
+    const overlays = document.querySelectorAll<HTMLElement>('.modal-overlay, .sale-modal-overlay');
+    overlays[overlays.length - 1]?.click();
+  }
+} 

@@ -1,63 +1,126 @@
-<div class="menu-page">
+<div class="menu-page landing-page" [class.theme-farm]="isFarm">
   <div class="menu-shell">
     <header class="menu-header">
       <a class="brand" routerLink="/" aria-label="PetLink início">
-        <img src="assets/images/PetLink_Logo_Marrom.png" alt="PetLink" class="brand-mark">
+        <img src="assets/images/PetLink_Logo_Marrom.png" alt="" class="brand-mark">
+        <span class="brand-divider"></span>
+        <img src="assets/images/PetLink_Logo_Verde.png" alt="PetLink" class="brand-mark">
       </a>
 
       <div class="menu-actions">
-        <a class="menu-link" routerLink="/account/sign-in">Entrar</a>
-        <a class="menu-button" routerLink="/account/sign-up">Cadastrar</a>
+        <a class="menu-link" routerLink="/account/sign-in" (click)="rememberMode()">Entrar</a>
+        <a class="menu-button" routerLink="/account/sign-up" (click)="rememberMode()">Cadastrar</a>
       </div>
     </header>
 
     <main class="hero-card" id="inicio">
       <section class="hero-copy">
         <p class="eyebrow">Bem-vindo ao PetLink</p>
-        <h1>Cuidar do seu pet nunca foi tão fácil.</h1>
+        <h1>Cuidar dos seus animais nunca foi tão fácil.</h1>
+
+        @if (isFarm) {
+        <p class="hero-text">Cadastre seus animais, acompanhe as vacinas e anuncie para venda em um só lugar, do jeito
+          do campo.</p>
+        } @else {
         <p class="hero-text">Organize vacinas, receba lembretes, encontre amigos para seu pet e faça parte de uma
           comunidade que ama animais.</p>
+        }
 
-        <div class="hero-buttons">
-          <a class="primary-button" routerLink="/account/sign-up">Começar agora</a>
-          <a class="secondary-button" href="#recursos">Saiba mais</a>
+        <div class="toggle-group landing-toggle" role="radiogroup" aria-label="Tipo de animal">
+          <label class="toggle-option">
+            <input type="radio" name="landingMode" [checked]="!isFarm" (change)="setMode(AnimalMode.PET)">
+            <span><mat-icon>pets</mat-icon> Animais de Estimação</span>
+          </label>
+          <label class="toggle-option">
+            <input type="radio" name="landingMode" [checked]="isFarm" (change)="setMode(AnimalMode.FARM)">
+            <span><i class="horseshoe-icon" aria-hidden="true"></i> Animais de Fazenda</span>
+          </label>
         </div>
 
-        <div class="feature-grid" id="recursos">
-          <article class="feature-item">
-            <div class="feature-icon"><mat-icon>vaccines</mat-icon></div>
-            <h3>Vacinas e saúde</h3>
-            <p>Acompanhe vacinas e consultas.</p>
-          </article>
-          <article class="feature-item">
-            <div class="feature-icon"><mat-icon>notifications</mat-icon></div>
-            <h3>Lembretes</h3>
-            <p>Receba avisos de vacinas e cuidados.</p>
-          </article>
-          <article class="feature-item">
-            <div class="feature-icon"><mat-icon>pets</mat-icon></div>
-            <h3>Conexão</h3>
-            <p>Encontre pares compatíveis.</p>
-          </article>
+        <div class="hero-buttons">
+          <a class="primary-button" routerLink="/account/sign-up" (click)="rememberMode()">Começar agora</a>
+          <a class="secondary-button" href="#modos">Saiba mais</a>
         </div>
       </section>
 
       <section class="hero-visual" aria-label="Ilustração do PetLink">
+        @if (isFarm) {
+        <img src="assets/images/Vaca.png" alt="Vaca do PetLink" class="hero-dog">
+        } @else {
         <img src="assets/images/golden-retriever-dog.png" alt="Cachorro feliz do PetLink" class="hero-dog">
+        }
         <div class="hero-oval"></div>
-        <div class="hero-paw"><mat-icon>pets</mat-icon></div>
-        <div class="hero-heart"><mat-icon>favorite_border</mat-icon></div>
-        <div class="hero-badge">Seu pet, sua rotina, tudo no mesmo lugar.</div>
+        <div class="hero-paw">
+          @if (isFarm) {
+          <i class="horseshoe-icon" aria-hidden="true"></i>
+          } @else {
+          <mat-icon>pets</mat-icon>
+          }
+        </div>
+        <div class="hero-heart"><mat-icon>{{ isFarm ? 'eco' : 'favorite_border' }}</mat-icon></div>
+        <div class="hero-badge">
+          {{ isFarm ? 'Seus animais, suas vacinas, tudo no mesmo lugar.' : 'Seu pet, sua rotina, tudo no mesmo lugar.'
+          }}
+        </div>
       </section>
     </main>
+
+    <section class="modes-card" id="modos">
+      <div class="modes-heading">
+        <p class="footer-title">Dois modos, um só PetLink</p>
+        <h2>Escolha como você cuida dos seus animais</h2>
+      </div>
+
+      <div class="modes-grid">
+        <article class="mode-card mode-pet">
+          <div class="mode-card-head">
+            <span class="mode-card-icon"><mat-icon>pets</mat-icon></span>
+            <div>
+              <h3>Animais de Estimação</h3>
+              <p>Cães, gatos, aves e companhia para a vida toda.</p>
+            </div>
+          </div>
+
+          <ul class="mode-card-list">
+            <li><mat-icon>vaccines</mat-icon> Carteira de vacinas com lembretes</li>
+            <li><mat-icon>notifications</mat-icon> Avisos de doses próximas e atrasadas</li>
+            <li><mat-icon>favorite_border</mat-icon> Adoção responsável</li>
+            <li><mat-icon>campaign</mat-icon> Campanhas de vacinação e animais perdidos</li>
+          </ul>
+
+          <a class="primary-button" routerLink="/account/sign-up" (click)="rememberMode(AnimalMode.PET)">Começar com
+            pets</a>
+        </article>
+
+        <article class="mode-card mode-farm">
+          <div class="mode-card-head">
+            <span class="mode-card-icon"><i class="horseshoe-icon" aria-hidden="true"></i></span>
+            <div>
+              <h3>Animais de Fazenda</h3>
+              <p>Bovinos, cavalos, suínos, ovinos e aves do campo.</p>
+            </div>
+          </div>
+
+          <ul class="mode-card-list">
+            <li><mat-icon>label</mat-icon> Identificador e peso de cada animal</li>
+            <li><mat-icon>vaccines</mat-icon> Vacinas dos animais com avisos</li>
+            <li><mat-icon>sell</mat-icon> Venda de animais e lotes, inclusive por arroba</li>
+            <li><mat-icon>storefront</mat-icon> Anúncios visíveis para compradores</li>
+          </ul>
+
+          <a class="primary-button" routerLink="/account/sign-up" (click)="rememberMode(AnimalMode.FARM)">Começar na
+            fazenda</a>
+        </article>
+      </div>
+    </section>
 
     <section class="menu-footer-card" id="sobre">
       <div>
         <p class="footer-title">Sobre nós</p>
-        <h2>Uma experiência simples para cuidar melhor do seu pet.</h2>
+        <h2>Uma experiência simples para cuidar melhor dos seus animais.</h2>
       </div>
-      <p>O PetLink foi pensado para reunir cadastro, saúde, lembretes e comunidade em um fluxo visual leve e fácil de
-        usar.</p>
+      <p>O PetLink reúne cadastro, saúde, lembretes e comunidade para quem cuida de pets e para quem cuida do campo,
+        em um fluxo visual leve e fácil de usar.</p>
     </section>
   </div>
 </div>

@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
-
+import { ToastrService } from 'ngx-toastr';
 import { AccountType, User } from '../../../../models/domain/user';
 import { Announcement, AnnouncementType } from '../../../../models/domain/announcement';
 import { CreateAnnouncementDto } from '../../../../models/dto/create-announcement-dto';
@@ -39,6 +39,7 @@ export class AnnouncementList implements OnInit {
     private announcementCreateService: AnnouncementCreateService,
     private announcementDeleteService: AnnouncementDeleteService,
     private currentUserService: CurrentUserService,
+    private toastrService: ToastrService,
     private cdr: ChangeDetectorRef,
   ) {
     this.form = this.formBuilder.group({
@@ -56,23 +57,23 @@ export class AnnouncementList implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-  try {
-    this.user = this.currentUserService.get();
-    if (!this.user) {
-      this.user = await this.currentUserService.load();
+    try {
+      this.user = this.currentUserService.get();
+      if (!this.user) {
+        this.user = await this.currentUserService.load();
+      }
+
+      this.isCompany = this.user?.accountType === AccountType.ENTERPRISE;
+      this.userEmail = this.user?.email ?? '';
+
+      this.announcements = await this.announcementReadService.findAll();
+    } catch (error) {
+      console.error('Erro ao carregar campanhas de vacinação', error);
+    } finally {
+      this.loading = false;
+      this.cdr.detectChanges();
     }
-
-    this.isCompany = this.user?.accountType === AccountType.ENTERPRISE;
-    this.userEmail = this.user?.email ?? '';
-
-    this.announcements = await this.announcementReadService.findAll();
-  } catch (error) {
-    console.error('Erro ao carregar campanhas de vacinação', error);
-  } finally {
-    this.loading = false;
-    this.cdr.detectChanges();
   }
-}
 
   toggleForm(): void {
     this.showForm = !this.showForm;
@@ -109,6 +110,7 @@ export class AnnouncementList implements OnInit {
         this.announcements = await this.announcementReadService.findAll();
         this.form.reset({ type: '', contactMethod: 'email' });
         this.showForm = false;
+        this.toastrService.success('Campanha publicada com sucesso!');
         this.cdr.detectChanges();
       },
       error: (error) => {
@@ -126,9 +128,13 @@ export class AnnouncementList implements OnInit {
     this.announcementDeleteService.delete(announcement.id).subscribe({
       next: () => {
         this.announcements = this.announcements.filter(c => c.id !== announcement.id);
+        this.toastrService.success('Campanha removida.');
         this.cdr.detectChanges();
       },
-      error: (error) => console.error('Erro ao remover campanha', error),
+      error: (error) => {
+        console.error('Erro ao remover campanha', error);
+        this.toastrService.error('Não foi possível remover a campanha.');
+      },
     });
   }
 

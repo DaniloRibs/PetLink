@@ -90,8 +90,66 @@
         botão "Cadastrar Pet" acima para adicionar o primeiro.' }}</p>
     </div>
     } @else {
+    @if (isFarm) {
+    @if (speciesSummary.length > 0) {
+    <div class="species-summary">
+      @for (item of speciesSummary; track item.value) {
+      <button type="button" class="species-chip" [class.active]="speciesFilter === item.value"
+        (click)="toggleSpeciesFilter(item.value)">
+        {{ item.icon }} {{ item.label }}: <strong>{{ item.count }}</strong>
+      </button>
+      }
+    </div>
+    }
+    <div class="pet-filters">
+      <div class="pet-filter-search">
+        <mat-icon>search</mat-icon>
+        <input type="search" placeholder="Buscar por nome, identificador ou raça" aria-label="Buscar animais"
+          [value]="searchTerm" (input)="searchTerm = $any($event.target).value">
+      </div>
+
+      <select class="pet-filter-select" aria-label="Filtrar por espécie" [value]="speciesFilter"
+        (change)="speciesFilter = $any($event.target).value">
+        <option value="">Todas as espécies</option>
+        @for (option of speciesOptions; track option.value) {
+        <option [value]="option.value">{{ option.label }}</option>
+        }
+      </select>
+
+      <div class="toggle-group pet-filter-toggle" role="radiogroup" aria-label="Situação de venda">
+        <label class="toggle-option">
+          <input type="radio" name="saleFilter" [checked]="saleFilter === 'all'" (change)="saleFilter = 'all'">
+          <span>Todos</span>
+        </label>
+        <label class="toggle-option">
+          <input type="radio" name="saleFilter" [checked]="saleFilter === 'forSale'" (change)="saleFilter = 'forSale'">
+          <span>À venda</span>
+        </label>
+        <label class="toggle-option">
+          <input type="radio" name="saleFilter" [checked]="saleFilter === 'notForSale'"
+            (change)="saleFilter = 'notForSale'">
+          <span>Fora da venda</span>
+        </label>
+      </div>
+    </div>
+
+    <p class="pet-filter-count">
+      Mostrando {{ filteredPets.length }} de {{ pets.length }} animais
+      @if (hasActiveFilters) {
+      <button type="button" class="pet-filter-clear" (click)="clearFilters()">Limpar filtros</button>
+      }
+    </p>
+    }
+
+    @if (filteredPets.length === 0) {
+    <div class="empty-state">
+      <div class="empty-state-icon"><mat-icon>search_off</mat-icon></div>
+      <p class="empty-state-title">Nenhum animal encontrado</p>
+      <p class="empty-state-text">Tente outro termo ou limpe os filtros.</p>
+    </div>
+    } @else {
     <div class="pet-card-grid">
-      @for (pet of pets; track pet.id) {
+      @for (pet of filteredPets; track pet.id) {
       <article class="pet-card" (click)="openPet(pet)">
         @if (pet.forAdoption) {
         <span class="pet-badge">Em adoção</span>
@@ -120,6 +178,7 @@
       </article>
       }
     </div>
+    }
     }
   </div>
 </section>

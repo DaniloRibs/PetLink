@@ -4,6 +4,7 @@ import { ChangeDetectorRef, NgZone, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 import { Pet, PetGender } from '../../../../models/domain/pet';
 import { AnimalMode } from '../../../../models/domain/animalMode';
@@ -35,6 +36,10 @@ export class PetList implements OnInit {
   form: FormGroup;
   createValidationFailed: boolean = false;
 
+  searchTerm: string = '';
+  speciesFilter: string = '';
+  saleFilter: 'all' | 'forSale' | 'notForSale' = 'all';
+
   get isFarm(): boolean {
     return this.animalModeService.get() === AnimalMode.FARM;
   }
@@ -45,6 +50,65 @@ export class PetList implements OnInit {
 
   get pets(): Pet[] {
     return this.isFarm ? this.allFarmAnimals : filterByMode(this.allPets, false);
+  }
+
+  get filteredPets(): Pet[] {
+    if (!this.isFarm) {
+      return this.pets;
+    }
+
+
+    const term = this.normalizeText(this.searchTerm);
+
+    return this.pets.filter(pet => {
+      if (this.speciesFilter && pet.species !== this.speciesFilter) {
+        return false;
+      }
+      if (this.saleFilter === 'forSale' && !pet.forSell) {
+        return false;
+      }
+      if (this.saleFilter === 'notForSale' && pet.forSell) {
+        return false;
+      }
+      if (!term) {
+        return true;
+      }
+      const haystack = this.normalizeText(`${pet.name ?? ''} ${pet.identify ?? ''} ${pet.breed ?? ''}`);
+      return haystack.includes(term);
+    });
+  }
+
+  get speciesSummary(): { value: string; icon: string; label: string; count: number }[] {
+    return FARM_SPECIES_OPTIONS
+      .map(option => ({
+        value: option.value,
+        icon: speciesIcon(option.value),
+        label: option.label,
+        count: this.pets.filter(pet => pet.species === option.value).length,
+      }))
+      .filter(item => item.count > 0);
+  }
+
+  toggleSpeciesFilter(value: string): void {
+    this.speciesFilter = this.speciesFilter === value ? '' : value;
+  }
+
+  get hasActiveFilters(): boolean {
+    return this.searchTerm.trim() !== '' || this.speciesFilter !== '' || this.saleFilter !== 'all';
+  }
+
+  clearFilters(): void {
+    this.searchTerm = '';
+    this.speciesFilter = '';
+    this.saleFilter = 'all';
+  }
+
+  private normalizeText(value: string): string {
+    return value
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .trim();
   }
 
   speciesIcon(species: string): string {
@@ -65,6 +129,7 @@ export class PetList implements OnInit {
     private animalModeService: AnimalModeService,
     private farmAnimalCreateService: FarmAnimalCreateService,
     private farmAnimalReadService: FarmAnimalReadService,
+    private toastrService: ToastrService,
     private cdr: ChangeDetectorRef,
   ) {
     this.form = this.formBuilder.group({
@@ -187,6 +252,7 @@ export class PetList implements OnInit {
         this.zone.run(() => {
           this.form.reset();
           this.showForm = false;
+          this.toastrService.success(this.isFarm ? 'Animal cadastrado com sucesso!' : 'Pet cadastrado com sucesso!');
           this.cdr.detectChanges();
         });
       },
@@ -199,4 +265,4 @@ export class PetList implements OnInit {
       },
     });
   }
-}
+} 

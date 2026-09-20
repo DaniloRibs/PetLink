@@ -7,6 +7,7 @@ import { Pet } from '../../../../models/domain/pet';
 import { AccountType } from '../../../../models/domain/user';
 import { AnimalMode } from '../../../../models/domain/animalMode';
 import { PetReadService } from '../../../../services/pet/pet-read';
+import { FarmAnimalReadService } from '../../../../services/farm-animal/farm-animal-read';
 import { AnnouncementReadService } from '../../../../services/announcement/announcement-read';
 import { CurrentUserService } from '../../../../services/security/current-user';
 import { AnimalModeService } from '../../../../services/animalMode/animalMode';
@@ -23,6 +24,7 @@ export class DashboardHome implements OnInit {
   isCompany: boolean = false;
 
   allPets: Pet[] = [];
+  farmAnimals: Pet[] = [];
   adoptionCount: number = 0;
   campaignsCount: number = 0;
   adoptablePetsCount: number = 0;
@@ -37,8 +39,21 @@ export class DashboardHome implements OnInit {
     return filterByMode(this.allPets, this.isFarm).length;
   }
 
+  get farmForSaleCount(): number {
+    return this.farmAnimals.filter(animal => animal.forSell).length;
+  }
+
+  get farmTotalWeight(): number {
+    return this.farmAnimals.reduce((sum, animal) => sum + (animal.weight ?? 0), 0);
+  }
+
+  get farmTotalArrobas(): number {
+    return this.farmTotalWeight / 15;
+  }
+
   constructor(
     private petReadService: PetReadService,
+    private farmAnimalReadService: FarmAnimalReadService,
     private announcementReadService: AnnouncementReadService,
     private currentUserService: CurrentUserService,
     private animalModeService: AnimalModeService,
@@ -52,11 +67,13 @@ export class DashboardHome implements OnInit {
       this.isCompany = currentUser?.accountType === AccountType.ENTERPRISE;
 
       if (currentUser?.id) {
-        const [myPets] = await Promise.all([
+        const [myPets, farmAnimals] = await Promise.all([
           this.petReadService.findByOwnerId(currentUser.id),
+          this.farmAnimalReadService.findByOwnerId(currentUser.id).catch(() => [] as Pet[]),
         ]);
 
         this.allPets = myPets;
+        this.farmAnimals = farmAnimals;
         this.adoptionCount = myPets.filter((p: Pet) => p.forAdoption).length;
         this.adoptablePetsCount = myPets.filter((p: Pet) => p.forAdoption && p.ownerId !== currentUser.id).length;
       }
@@ -72,4 +89,4 @@ export class DashboardHome implements OnInit {
       this.cdr.detectChanges();
     }
   }
-}
+} 

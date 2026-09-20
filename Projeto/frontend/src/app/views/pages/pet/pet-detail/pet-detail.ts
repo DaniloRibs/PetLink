@@ -4,6 +4,7 @@ import { DatePipe } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { Vaccine } from '../../../../models/domain/vaccine';
 import { CreateVaccineDto } from '../../../../models/dto/create-vaccine-dto';
 import { PetReadService } from '../../../../services/pet/pet-read';
@@ -89,6 +90,7 @@ export class PetDetail implements OnInit {
     private farmAnimalReadService: FarmAnimalReadService,
     private farmAnimalUpdateService: FarmAnimalUpdateService,
     private farmAnimalDeleteService: FarmAnimalDeleteService,
+    private toastrService: ToastrService,
     private cdr: ChangeDetectorRef,
     private zone: NgZone,
   ) {
@@ -188,8 +190,14 @@ export class PetDetail implements OnInit {
     this.pendingAdoptionConfirmation = false;
 
     this.petUpdateService.update(updatedPet).subscribe({
-      next: () => this.reloadCurrentPet(),
-      error: (error) => console.error('Erro ao atualizar pet', error),
+      next: () => {
+        this.reloadCurrentPet();
+        this.toastrService.success(updatedPet.forAdoption ? 'Pet colocado para adoção!' : 'Pet removido da lista de adoção.');
+      },
+      error: (error) => {
+        console.error('Erro ao atualizar pet', error);
+        this.toastrService.error('Não foi possível atualizar a adoção.');
+      },
     });
   }
 
@@ -262,6 +270,7 @@ export class PetDetail implements OnInit {
         this.zone.run(() => {
           this.editSavedOk = true;
           this.showEditForm = false;
+          this.toastrService.success('Dados atualizados com sucesso!');
           this.cdr.detectChanges();
         });
       },
@@ -295,8 +304,14 @@ export class PetDetail implements OnInit {
       : this.petDeleteService.delete(this.pet.id);
 
     request$.subscribe({
-      next: () => this.zone.run(() => this.router.navigate(['/painel/pets'])),
-      error: (error) => console.error('Erro ao excluir', error),
+      next: () => this.zone.run(() => {
+        this.toastrService.success('Excluído com sucesso.');
+        this.router.navigate(['/painel/pets']);
+      }),
+      error: (error) => {
+        console.error('Erro ao excluir', error);
+        this.toastrService.error('Não foi possível excluir.');
+      },
     });
   }
 
@@ -335,6 +350,7 @@ export class PetDetail implements OnInit {
           this.vaccineCreatedOk = true;
           this.vaccineForm.reset();
           this.showVaccineForm = false;
+          this.toastrService.success('Vacina cadastrada com sucesso!');
           this.cdr.detectChanges();
         });
       },
@@ -364,6 +380,7 @@ export class PetDetail implements OnInit {
         this.reloadCurrentPet();
         this.zone.run(() => {
           this.pendingVaccineDeleteId = null;
+          this.toastrService.success('Vacina excluída.');
           this.cdr.detectChanges();
         });
       },
@@ -371,6 +388,7 @@ export class PetDetail implements OnInit {
         console.error('Erro ao excluir vacina', error);
         this.zone.run(() => {
           this.pendingVaccineDeleteId = null;
+          this.toastrService.error('Não foi possível excluir a vacina.');
           this.cdr.detectChanges();
         });
       },
@@ -421,6 +439,7 @@ export class PetDetail implements OnInit {
         this.reloadCurrentPet();
         this.zone.run(() => {
           this.editingVaccineId = null;
+          this.toastrService.success('Vacina atualizada com sucesso!');
           this.cdr.detectChanges();
         });
       },

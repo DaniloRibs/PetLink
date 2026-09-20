@@ -2,7 +2,9 @@
   <div class="auth-shell">
     <header class="auth-header">
       <a class="auth-brand" routerLink="/" aria-label="Voltar para o menu inicial">
-        <img src="assets/images/PetLink_Logo_Marrom.png" alt="PetLink" class="auth-brand-mark">
+        <img src="assets/images/PetLink_Logo_Marrom.png" alt="" class="auth-brand-mark">
+        <span class="auth-brand-divider"></span>
+        <img src="assets/images/PetLink_Logo_Verde.png" alt="" class="auth-brand-mark">
       </a>
     </header>
 
@@ -13,19 +15,19 @@
           <form>
             <input type="email" placeholder="E-mail" [formControl]="email">
             @if (email.touched && email.invalid) {
-              <p class="text-danger">Digite um e-mail válido.</p>
+            <p class="text-danger">Digite um e-mail válido.</p>
             }
 
             <input type="password" placeholder="Senha" [formControl]="password">
             @if (password.touched && password.invalid) {
-              <p class="text-danger">Digite sua senha.</p>
+            <p class="text-danger">Digite sua senha.</p>
             }
 
             <input type="button" value="Entrar" (click)="login()">
           </form>
 
           @if (loginValidationFailed) {
-            <p class="text-danger">Email e/ou senha incorretos</p>
+          <p class="text-danger">Email e/ou senha incorretos</p>
           }
 
           <div class="auth-links">

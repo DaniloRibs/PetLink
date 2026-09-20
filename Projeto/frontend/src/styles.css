@@ -258,7 +258,8 @@ a:hover {
 
 .menu-page .menu-shell {
     width: min(1280px, calc(100vw - 32px));
-    margin: 16px auto;
+    margin: 0 auto;
+    padding: 16px 0;
     display: grid;
     gap: 14px;
 }
@@ -652,10 +653,10 @@ a:hover {
 }
 
 .auth-page {
-    background: linear-gradient(315deg, var(--primary), #f5f5f5);
+    background: linear-gradient(135deg, #6F4E37 0%, #f5f5f5 50%, #3E7B3A 100%);
     min-height: 100vh;
     margin: 0;
-    display: block;
+    display: flow-root;
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -681,6 +682,7 @@ a:hover {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    gap: 10px;
     text-decoration: none;
     padding: 10px;
     border: 2px solid rgba(var(--primary-rgb), 0.3);
@@ -845,6 +847,13 @@ a:hover {
     display: block;
 }
 
+.auth-brand-divider {
+    width: 2px;
+    height: 32px;
+    border-radius: 2px;
+    background: rgba(var(--primary-rgb), 0.25);
+}
+
 .auth-content {
     display: flex;
     justify-content: center;
@@ -925,7 +934,7 @@ a:hover {
     width: 96px;
     height: 96px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(176, 123, 77, 0.12), rgba(176, 123, 77, 0));
+    background: radial-gradient(circle, rgba(62, 123, 58, 0.14), rgba(62, 123, 58, 0));
     pointer-events: none;
 }
 
@@ -1262,4 +1271,33 @@ a:hover {
     background: rgba(var(--primary-rgb), 0.08);
     color: var(--primary);
     cursor: pointer;
+}
+
+#toast-container>.toast {
+    border-radius: 12px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+    font-family: 'Poppins', Arial, sans-serif;
+    font-size: 14px;
+}
+
+body:has(.modal-overlay),
+body:has(.sale-modal-overlay) {
+    overflow: hidden;
+}
+
+.menu-page .dashboard-header {
+    background: color-mix(in srgb, #fff 86%, var(--page-bg));
+    backdrop-filter: none;
+}
+
+.menu-page:has(> .dashboard-header)::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 110px;
+    background: var(--page-bg);
+    z-index: 950;
+    pointer-events: none;
 }

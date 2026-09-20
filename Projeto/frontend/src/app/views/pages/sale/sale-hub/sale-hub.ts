@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-
+import { ToastrService } from 'ngx-toastr';
 import { Pet } from '../../../../models/domain/pet';
 import { FarmAnimalSale, KG_PER_ARROBA, PriceType } from '../../../../models/domain/farmAnimalSale';
 import { CurrentUserService } from '../../../../services/security/current-user';
@@ -49,6 +49,7 @@ export class SaleHub implements OnInit {
         private saleReadService: SaleReadService,
         private saleDeleteService: SaleDeleteService,
         private formBuilder: FormBuilder,
+        private toastrService: ToastrService,
         private cdr: ChangeDetectorRef,
     ) {
         this.saleForm = this.formBuilder.group({
@@ -67,7 +68,6 @@ export class SaleHub implements OnInit {
                 throw new Error('Usuário atual não encontrado');
             }
             this.userId = currentUser.id;
-
             const [myAnimals, allSales] = await Promise.all([
                 this.farmAnimalReadService.findByOwnerId(this.userId),
                 this.saleReadService.findAll(),
@@ -207,6 +207,7 @@ export class SaleHub implements OnInit {
         this.saleDeleteService.delete(saleId).subscribe({
             next: () => {
                 this.closeSale();
+                this.toastrService.success('Venda cancelada.');
                 void this.ngOnInit();
             },
             error: (error) => {
@@ -243,6 +244,7 @@ export class SaleHub implements OnInit {
                 this.selectedAnimalIds = [];
                 this.saleForm.reset({ priceType: PriceType.MANUAL });
                 this.saleCreatedOk = true;
+                this.toastrService.success('Venda publicada com sucesso!');
                 void this.ngOnInit();
             },
             error: (error) => {
