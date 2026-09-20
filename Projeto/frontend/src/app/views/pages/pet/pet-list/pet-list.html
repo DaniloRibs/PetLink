@@ -15,7 +15,7 @@
 
       <form [formGroup]="form" (ngSubmit)="createPet()">
         <div class="field-group">
-          <label>{{ isFarm ? 'Nome do Animal' : 'Nome do Pet' }}</label>
+          <label>{{ isFarm ? 'Nome do Animal (opcional)' : 'Nome do Pet' }}</label>
           <input type="text" placeholder formControlName="name">
         </div>
 
@@ -55,7 +55,7 @@
         <div class="form-row">
           <div class="field-group">
             <label>Identificador</label>
-            <input type="text" placeholder formControlName="identifier">
+            <input type="text" placeholder maxlength="10" formControlName="identifier">
           </div>
 
           <div class="field-group">
@@ -78,7 +78,13 @@
     <p>Carregando...</p>
     } @else if (pets.length === 0) {
     <div class="empty-state">
-      <div class="empty-state-icon"><mat-icon>pets</mat-icon></div>
+      <div class="empty-state-icon">
+        @if (isFarm) {
+        <span class="horseshoe-icon" aria-hidden="true"></span>
+        } @else {
+        <mat-icon>pets</mat-icon>
+        }
+      </div>
       <p class="empty-state-title">{{ isFarm ? 'Nenhum animal cadastrado ainda' : 'Nenhum pet cadastrado ainda' }}</p>
       <p class="empty-state-text">{{ isFarm ? 'Use o botão "Cadastrar Animal" acima para adicionar o primeiro.' : 'Use o
         botão "Cadastrar Pet" acima para adicionar o primeiro.' }}</p>
@@ -90,12 +96,23 @@
         @if (pet.forAdoption) {
         <span class="pet-badge">Em adoção</span>
         }
-        <div class="pet-card-icon">{{ speciesIcon(pet.species) }}</div>
+        @if (pet.forSell) {
+        <span class="pet-badge">À venda</span>
+        }
+        <div class="pet-card-icon">
+          @if (speciesIcon(pet.species)) {
+          {{ speciesIcon(pet.species) }}
+          } @else if (isFarm) {
+          <span class="horseshoe-icon" aria-hidden="true"></span>
+          } @else {
+          <mat-icon>pets</mat-icon>
+          }
+        </div>
         <h3>{{ pet.name }}</h3>
         <p>{{ pet.breed }}{{ pet.gender ? ' · ' + genderLabel(pet.gender) : '' }}</p>
-        @if (isFarm && (pet.identifier || pet.weight)) {
+        @if (isFarm && (pet.identify || pet.weight)) {
         <p>
-          {{ pet.identifier ? 'ID: ' + pet.identifier : '' }}{{ pet.identifier && pet.weight ? ' · ' : '' }}{{
+          {{ pet.identify ? 'ID: ' + pet.identify : '' }}{{ pet.identify && pet.weight ? ' · ' : '' }}{{
           pet.weight ? pet.weight + ' kg' : '' }}
         </p>
         }

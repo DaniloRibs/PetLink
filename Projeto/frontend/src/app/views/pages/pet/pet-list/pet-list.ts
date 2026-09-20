@@ -11,6 +11,10 @@ import { PetReadService } from '../../../../services/pet/pet-read';
 import { PetCreateService } from '../../../../services/pet/pet-create';
 import { CurrentUserService } from '../../../../services/security/current-user';
 import { AnimalModeService } from '../../../../services/animalMode/animalMode';
+import { Observable } from 'rxjs';
+import { CreateFarmAnimalDto } from '../../../../models/dto/create-farm-animal-dto';
+import { FarmAnimalCreateService } from '../../../../services/farm-animal/farm-animal-create';
+import { FarmAnimalReadService } from '../../../../services/farm-animal/farm-animal-read';
 
 @Component({
   selector: 'app-pet-list',
@@ -23,6 +27,7 @@ export class PetList implements OnInit {
   readonly PetGender = PetGender;
 
   allPets: Pet[] = [];
+  allFarmAnimals: Pet[] = [];
   loading: boolean = true;
 
   showForm: boolean = false;
@@ -38,7 +43,7 @@ export class PetList implements OnInit {
   }
 
   get pets(): Pet[] {
-    return filterByMode(this.allPets, this.isFarm);
+    return this.isFarm ? this.allFarmAnimals : filterByMode(this.allPets, false);
   }
 
   speciesIcon(species: string): string {
@@ -57,6 +62,8 @@ export class PetList implements OnInit {
     private petCreateService: PetCreateService,
     private currentUserService: CurrentUserService,
     private animalModeService: AnimalModeService,
+    private farmAnimalCreateService: FarmAnimalCreateService,
+    private farmAnimalReadService: FarmAnimalReadService,
     private cdr: ChangeDetectorRef,
   ) {
     this.form = this.formBuilder.group({
@@ -80,9 +87,18 @@ export class PetList implements OnInit {
       if (!currentUser?.id) {
         throw new Error('Usuário atual não encontrado');
       }
-      const pets = await this.petReadService.findByOwnerId(currentUser.id);
+
+      const [pets, farmAnimals] = await Promise.all([
+        this.petReadService.findByOwnerId(currentUser.id),
+        this.farmAnimalReadService.findByOwnerId(currentUser.id).catch(error => {
+          console.error('Erro ao carregar animais de fazenda', error);
+          return [] as Pet[];
+        }),
+      ]);
+
       this.zone.run(() => {
         this.allPets = pets;
+        this.allFarmAnimals = farmAnimals;
         this.loading = false;
         this.cdr.detectChanges();
       });
@@ -105,16 +121,22 @@ export class PetList implements OnInit {
   }
 
   validateFields(): boolean {
-    const species = this.form.controls['species'].value;
-    const baseValid = this.form.valid && this.speciesOptions.some(option => option.value === species);
+    const controls = this.form.controls;
+    const speciesValid = this.speciesOptions.some(option => option.value === controls['species'].value);
 
     if (!this.isFarm) {
-      return baseValid;
+      return this.form.valid && speciesValid;
     }
 
-    const identifier = (this.form.controls['identifier'].value ?? '').trim();
-    const weight = Number(this.form.controls['weight'].value);
-    return baseValid && identifier.length > 0 && weight > 0;
+    const identifier = (controls['identifier'].value ?? '').trim();
+    const weight = Number(controls['weight'].value);
+    return controls['species'].valid
+      && speciesValid
+      && controls['gender'].valid
+      && controls['breed'].valid
+      && controls['birthDate'].valid
+      && identifier.length > 0
+      && weight > 0;
   }
 
   async createPet(): Promise<void> {
@@ -131,22 +153,34 @@ export class PetList implements OnInit {
       return;
     }
 
-    const pet: Pet = {
-      name: this.form.controls['name'].value,
-      species: this.form.controls['species'].value,
-      gender: this.form.controls['gender'].value,
-      breed: this.form.controls['breed'].value,
-      birthDate: this.form.controls['birthDate'].value,
-      ownerId: currentUser.id,
-    };
+    const controls = this.form.controls;
+    let request$: Observable<unknown>;
 
     if (this.isFarm) {
-      pet.identifier = this.form.controls['identifier'].value.trim();
-      pet.weight = Number(this.form.controls['weight'].value);
-      pet.forSell = false;
+      const farmAnimal: CreateFarmAnimalDto = {
+        name: controls['name'].value?.trim() || undefined,
+        identify: controls['identifier'].value.trim(),
+        species: controls['species'].value,
+        breed: controls['breed'].value,
+        birthDate: controls['birthDate'].value,
+        gender: controls['gender'].value,
+        weight: Number(controls['weight'].value),
+        ownerId: currentUser.id,
+      };
+      request$ = this.farmAnimalCreateService.create(farmAnimal);
+    } else {
+      const pet: Pet = {
+        name: controls['name'].value,
+        species: controls['species'].value,
+        gender: controls['gender'].value,
+        breed: controls['breed'].value,
+        birthDate: controls['birthDate'].value,
+        ownerId: currentUser.id,
+      };
+      request$ = this.petCreateService.create(pet);
     }
 
-    this.petCreateService.create(pet).subscribe({
+    request$.subscribe({
       next: async () => {
         await this.loadPets();
         this.zone.run(() => {
@@ -156,7 +190,7 @@ export class PetList implements OnInit {
         });
       },
       error: (error) => {
-        console.error('Erro ao cadastrar pet', error);
+        console.error('Erro ao cadastrar', error);
         this.zone.run(() => {
           this.createValidationFailed = true;
           this.cdr.detectChanges();

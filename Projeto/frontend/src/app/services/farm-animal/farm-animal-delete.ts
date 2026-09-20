@@ -1,17 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { FarmAnimalSale } from '../../models/domain/farmAnimalSale';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
     providedIn: 'root',
 })
-export class SaleCreateService {
+export class FarmAnimalDeleteService {
 
     constructor(private http: HttpClient) { }
 
-    create(sale: FarmAnimalSale): Observable<void> {
-        return this.http.post<void>(`${environment.api_endpoint}/animal-sale`, sale);
+    delete(id: number): Observable<void> {
+        return this.http.delete<void>(`${environment.api_endpoint}/animal/${id}`);
     }
 }

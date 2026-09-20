@@ -201,3 +201,8 @@
     align-items: flex-start;
   }
 }
+
+.pet-hero-icon .horseshoe-icon,
+.pet-hero-icon mat-icon {
+  color: var(--primary);
+}

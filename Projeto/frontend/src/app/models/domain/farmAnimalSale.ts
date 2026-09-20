@@ -1,5 +1,5 @@
 export enum PriceType {
-    FIXED = 'FIXED',
+    MANUAL = 'MANUAL',
     PER_ARROBA = 'PER_ARROBA',
 }
 
@@ -12,7 +12,6 @@ export interface FarmAnimalSale {
     priceType: PriceType;
     pricePerArroba?: number | null;
     price: number;
-    saleDate?: string;
     userId: number;
     contact: string;
 }

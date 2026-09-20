@@ -17,6 +17,14 @@ import { Pet, PetGender, PetSpecies } from '../../../../models/domain/pet';
 import { AnimalMode } from '../../../../models/domain/animalMode';
 import { AnimalModeService } from '../../../../services/animalMode/animalMode';
 import { FARM_SPECIES_OPTIONS, PET_SPECIES_OPTIONS, SpeciesOption, genderLabel } from '../../../../shared/pet-options';
+import { Observable } from 'rxjs';
+import { UpdateFarmAnimalDto } from '../../../../models/dto/update-farm-animal-dto';
+import { FarmAnimalReadService } from '../../../../services/farm-animal/farm-animal-read';
+import { FarmAnimalUpdateService } from '../../../../services/farm-animal/farm-animal-update';
+import { FarmAnimalDeleteService } from '../../../../services/farm-animal/farm-animal-delete';
+
+
+
 
 @Component({
   selector: 'app-pet-detail',
@@ -78,6 +86,9 @@ export class PetDetail implements OnInit {
     private vaccineDeleteService: VaccineDeleteService,
     private vaccineUpdateService: VaccineUpdateService,
     private animalModeService: AnimalModeService,
+    private farmAnimalReadService: FarmAnimalReadService,
+    private farmAnimalUpdateService: FarmAnimalUpdateService,
+    private farmAnimalDeleteService: FarmAnimalDeleteService,
     private cdr: ChangeDetectorRef,
     private zone: NgZone,
   ) {
@@ -123,10 +134,17 @@ export class PetDetail implements OnInit {
 
   private async loadPetData(id: string): Promise<void> {
     try {
-      const [pet, vaccines] = await Promise.all([
-        this.petReadService.findById(id),
-        this.vaccineReadService.findByPetId(id),
-      ]);
+      let pet: Pet;
+      let vaccines: Vaccine[] = [];
+
+      if (this.isFarm) {
+        pet = await this.farmAnimalReadService.findById(id);
+      } else {
+        [pet, vaccines] = await Promise.all([
+          this.petReadService.findById(id),
+          this.vaccineReadService.findByPetId(id),
+        ]);
+      }
 
       this.zone.run(() => {
         this.pet = pet;
@@ -184,51 +202,60 @@ export class PetDetail implements OnInit {
         gender: this.pet.gender ?? '',
         breed: this.pet.breed,
         birthDate: this.pet.birthDate,
-        identifier: this.pet.identifier ?? '',
+        identifier: this.pet.identify ?? '',
         weight: this.pet.weight ?? null,
       });
     }
   }
 
   validateEditFields(): boolean {
-    if (!this.editForm.valid) {
-      return false;
-    }
     if (!this.isFarm) {
-      return true;
+      return this.editForm.valid;
     }
-    const identifier = (this.editForm.controls['identifier'].value ?? '').trim();
-    const weight = Number(this.editForm.controls['weight'].value);
-    return identifier.length > 0 && weight > 0;
+    const controls = this.editForm.controls;
+    return controls['breed'].valid
+      && controls['birthDate'].valid
+      && Number(controls['weight'].value) > 0;
   }
 
   saveEdit(): void {
     this.editValidationFailed = false;
     this.editSavedOk = false;
 
-
-    if (!this.pet || !this.validateEditFields()) {
+    if (!this.pet?.id || !this.validateEditFields()) {
       this.editValidationFailed = true;
       return;
     }
 
-    const updatedPet: Pet = {
-      ...this.pet,
-      name: this.editForm.controls['name'].value,
-      species: this.editForm.controls['species'].value,
-      breed: this.editForm.controls['breed'].value,
-      gender: this.editForm.controls['gender'].value,
-      birthDate: this.editForm.controls['birthDate'].value,
-    };
+    const petId = this.pet.id;
+    const controls = this.editForm.controls;
+    let request$: Observable<unknown>;
 
     if (this.isFarm) {
-      updatedPet.identifier = this.editForm.controls['identifier'].value.trim();
-      updatedPet.weight = Number(this.editForm.controls['weight'].value);
+      const farmAnimal: UpdateFarmAnimalDto = {
+        id: petId,
+        name: controls['name'].value?.trim() || undefined,
+        breed: controls['breed'].value,
+        birthDate: controls['birthDate'].value,
+        weight: Number(controls['weight'].value),
+        forSell: this.pet.forSell ?? false,
+      };
+      request$ = this.farmAnimalUpdateService.update(farmAnimal);
+    } else {
+      const updatedPet: Pet = {
+        ...this.pet,
+        name: controls['name'].value?.trim() || undefined,
+        species: controls['species'].value,
+        breed: controls['breed'].value,
+        gender: controls['gender'].value,
+        birthDate: controls['birthDate'].value,
+      };
+      request$ = this.petUpdateService.update(updatedPet);
     }
 
-    this.petUpdateService.update(updatedPet).subscribe({
+    request$.subscribe({
       next: async () => {
-        await this.loadPetData(updatedPet.id!.toString());
+        await this.loadPetData(petId.toString());
         this.zone.run(() => {
           this.editSavedOk = true;
           this.showEditForm = false;
@@ -236,7 +263,7 @@ export class PetDetail implements OnInit {
         });
       },
       error: (error) => {
-        console.error('Erro ao atualizar pet', error);
+        console.error('Erro ao atualizar', error);
         this.zone.run(() => {
           this.editValidationFailed = true;
           this.cdr.detectChanges();
@@ -260,9 +287,13 @@ export class PetDetail implements OnInit {
       return;
     }
 
-    this.petDeleteService.delete(this.pet.id).subscribe({
+    const request$: Observable<unknown> = this.isFarm
+      ? this.farmAnimalDeleteService.delete(this.pet.id)
+      : this.petDeleteService.delete(this.pet.id);
+
+    request$.subscribe({
       next: () => this.zone.run(() => this.router.navigate(['/painel/pets'])),
-      error: (error) => console.error('Erro ao excluir pet', error),
+      error: (error) => console.error('Erro ao excluir', error),
     });
   }
 

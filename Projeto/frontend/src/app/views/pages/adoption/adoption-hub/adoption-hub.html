@@ -26,7 +26,13 @@
     <div class="pet-card-grid">
       @for (listing of availableForAdoption; track listing.adoption.id) {
       <article class="pet-card">
-        <div class="pet-card-icon">{{ speciesIcon(listing.pet.species) }}</div>
+        <div class="pet-card-icon">
+          @if (speciesIcon(listing.pet.species)) {
+          {{ speciesIcon(listing.pet.species) }}
+          } @else {
+          <mat-icon>pets</mat-icon>
+          }
+        </div>
         <h3>{{ listing.pet.name }}</h3>
         <p>{{ listing.pet.breed }}</p>
         <p class="adoption-description">{{ listing.adoption.description }}</p>
@@ -35,7 +41,6 @@
       }
     </div>
     }
-
     } @else {
 
     @if (myPets.length === 0) {
@@ -51,7 +56,13 @@
         @if (hasActiveDonation(pet.id)) {
         <span class="pet-badge">Em adoção</span>
         }
-        <div class="pet-card-icon">{{ speciesIcon(pet.species) }}</div>
+        <div class="pet-card-icon">
+          @if (speciesIcon(pet.species)) {
+          {{ speciesIcon(pet.species) }}
+          } @else {
+          <mat-icon>pets</mat-icon>
+          }
+        </div>
         <h3>{{ pet.name }}</h3>
         <p>{{ pet.breed }}</p>
 
@@ -63,13 +74,16 @@
         @if (pendingRemovalAdoptionId === activeDonationFor(pet.id)?.id) {
         <p class="confirm-text">Remover {{ pet.name }} da lista de adoção?</p>
         <div class="confirm-actions">
-          <button class="secondary-button" (click)="confirmRemoveFromList(activeDonationFor(pet.id)!.id!)">Confirmar</button>
+          <button class="secondary-button"
+            (click)="confirmRemoveFromList(activeDonationFor(pet.id)!.id!)">Confirmar</button>
           <button class="secondary-button" (click)="cancelRemoveFromList()">Cancelar</button>
         </div>
         } @else {
         <div class="confirm-actions">
-          <button class="primary-button" (click)="requestMarkAsAdopted(activeDonationFor(pet.id)!.id!)">Marcar como adotado</button>
-          <button class="secondary-button" (click)="requestRemoveFromList(activeDonationFor(pet.id)!.id!)">Remover da lista</button>
+          <button class="primary-button" (click)="requestMarkAsAdopted(activeDonationFor(pet.id)!.id!)">Marcar como
+            adotado</button>
+          <button class="secondary-button" (click)="requestRemoveFromList(activeDonationFor(pet.id)!.id!)">Remover da
+            lista</button>
         </div>
         }
 

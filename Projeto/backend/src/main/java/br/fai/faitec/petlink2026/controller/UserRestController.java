@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import br.fai.faitec.petlink2026.domain.animal.FarmAnimalModel;
 
 import java.net.URI;
 import java.util.List;
@@ -97,6 +98,13 @@ public class UserRestController {
     @GetMapping("/{userId}/pet")
     public ResponseEntity<List<PetModel>> getEntitiesByUserId(@PathVariable final int userId) {
         List<PetModel> entities = userService.showAllPetsByOwnerId(userId);
+        return ResponseEntity.ok(entities);
+    }
+
+    //     BUSCAR TODOS OS ANIMAIS DE FAZENDA DO USUARIO
+    @GetMapping("/{userId}/animal")
+    public ResponseEntity<List<FarmAnimalModel>> getFarmAnimalsByUserId(@PathVariable final int userId) {
+        List<FarmAnimalModel> entities = userService.showAllAnimalByOwnerId(userId);
         return ResponseEntity.ok(entities);
     }
 

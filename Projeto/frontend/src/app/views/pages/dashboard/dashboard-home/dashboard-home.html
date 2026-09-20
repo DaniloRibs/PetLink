@@ -5,7 +5,13 @@
 
     <div class="feature-grid">
       <a routerLink="/painel/pets" class="feature-item stat-card">
-        <div class="feature-icon"><mat-icon>pets</mat-icon></div>
+        <div class="feature-icon">
+          @if (isFarm) {
+          <span class="horseshoe-icon" aria-hidden="true"></span>
+          } @else {
+          <mat-icon>pets</mat-icon>
+          }
+        </div>
         <span class="stat-number">{{ loading ? '–' : petsCount }}</span>
         <h3>Meus Pets</h3>
         <p>Pets cadastrados na sua conta.</p>

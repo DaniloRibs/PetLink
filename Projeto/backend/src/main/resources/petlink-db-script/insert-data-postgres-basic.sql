@@ -106,26 +106,26 @@ INSERT INTO farm_animal_model (identifier, for_sell, weight, animal_id) VALUES
 ('NEL-008', true, 515.0, 38),
 ('NEL-009', true, 535.0, 39),
 ('NEL-010', true, 545.0, 40),
-('NEL-011', true, 480.0, 41),
-('NEL-012', true, 490.0, 42),
-('NEL-013', true, 475.0, 43),
-('NEL-014', true, 485.0, 44),
-('NEL-015', true, 505.0, 45),
-('NEL-016', true, 495.0, 46),
-('NEL-017', true, 460.0, 47),
-('NEL-018', true, 470.0, 48),
-('NEL-019', true, 450.0, 49),
-('NEL-020', true, 465.0, 50),
-('NEL-021', true, 560.0, 51),
-('NEL-022', true, 570.0, 52),
-('NEL-023', true, 580.0, 53),
-('NEL-024', true, 590.0, 54),
-('NEL-025', true, 555.0, 55),
-('NEL-026', true, 565.0, 56),
-('NEL-027', true, 575.0, 57),
-('NEL-028', true, 585.0, 58),
-('NEL-029', true, 595.0, 59),
-('NEL-030', true, 600.0, 60);
+('NEL-011', false, 480.0, 41),
+('NEL-012', false, 490.0, 42),
+('NEL-013', false, 475.0, 43),
+('NEL-014', false, 485.0, 44),
+('NEL-015', false, 505.0, 45),
+('NEL-016', false, 495.0, 46),
+('NEL-017', false, 460.0, 47),
+('NEL-018', false, 470.0, 48),
+('NEL-019', false, 450.0, 49),
+('NEL-020', false, 465.0, 50),
+('NEL-021', false, 560.0, 51),
+('NEL-022', false, 570.0, 52),
+('NEL-023', false, 580.0, 53),
+('NEL-024', false, 590.0, 54),
+('NEL-025', false, 555.0, 55),
+('NEL-026', false, 565.0, 56),
+('NEL-027', false, 575.0, 57),
+('NEL-028', false, 585.0, 58),
+('NEL-029', false, 595.0, 59),
+('NEL-030', false, 600.0, 60);
 
 
 INSERT INTO pet_model (for_adoption, animal_id) VALUES
@@ -138,7 +138,7 @@ INSERT INTO pet_model (for_adoption, animal_id) VALUES
 (false, 13),
 (true, 15);
 
-INSERT INTO vaccine_model (application_date, expiration_date, name, description, batch, pet_id) VALUES
+INSERT INTO vaccine_model (application_date, expiration_date, name, description, batch, animal_id) VALUES
 ('2023-01-10', '2024-01-10', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-001', 1),
 ('2023-05-15', '2024-05-15', 'V10', 'Múltipla canina', 'V10-998', 1),
 ('2023-02-20', '2024-02-20', 'V4', 'Múltipla felina', 'V4-112', 2),
@@ -149,11 +149,11 @@ INSERT INTO vaccine_model (application_date, expiration_date, name, description,
 ('2023-11-20', '2024-11-20', 'V4', 'Múltipla felina', 'V4-115', 8);
 
 INSERT INTO announcement_model (title, description, event_date, location, announcement_type, user_id, contact) VALUES
-('Feira de Adoção de Cães', 'Venha adotar seu novo melhor amigo.', '2024-05-10', 'Praça Central', 'EVENT', 6, '11966660003'),
+('Feira de Adoção de Cães', 'Venha adotar seu novo melhor amigo.', '2024-05-10', 'Praça Central', 'ADOPTION', 6, '11966660003'),
 ('Procura-se Gato', 'Meu gato sumiu próximo ao centro.', NULL, 'Rua das Flores, 123', 'LOST', 4, '11988880001'),
-('Venda de Cavalos', 'Cavalos de raça para montaria.', '2024-06-15', 'Fazenda Boa Vista', 'SELL', 5, '19977770002'),
-('Encontrei um Cachorro', 'Cachorro preto, porte médio, com coleira azul.', NULL, 'Av. Paulista, 1000', 'FOUND', 9, '11933330006'),
-('Leilão de Gado', 'Excelente oportunidade para pecuaristas.', '2024-07-20', 'Agropecuária Vale', 'EVENT', 8, '19944440005'),
+('Venda de Cavalos', 'Cavalos de raça para montaria.', '2024-06-15', 'Fazenda Boa Vista', 'ADOPTION', 5, '19977770002'),
+('Encontrei um Cachorro', 'Cachorro preto, porte médio, com coleira azul.', NULL, 'Av. Paulista, 1000', 'LOST', 9, '11933330006'),
+('Leilão de Gado', 'Excelente oportunidade para pecuaristas.', '2024-07-20', 'Agropecuária Vale', 'ADOPTION', 8, '19944440005'),
 ('Gato SRD para Adoção', 'Lindo filhote de gato.', NULL, 'PetShop Cão Feliz', 'ADOPTION', 6, '11966660003');
 
 INSERT INTO adoption_model (pet_id, owner_id, description, contact, adopted, publication_date) VALUES

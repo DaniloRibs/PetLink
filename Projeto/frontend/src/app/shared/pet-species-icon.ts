@@ -9,6 +9,6 @@ export function speciesIcon(species: string): string {
         case PetSpecies.COW: return '🐄';
         case PetSpecies.PIG: return '🐷';
         case PetSpecies.SHEEP: return '🐑';
-        default: return '🐾';
+        default: return '';
     }
 }

@@ -26,7 +26,8 @@ public class FarmAnimalSalePostgresDaoAdapter implements FarmAnimalSaleDao {
         final String saleSql = "INSERT INTO farm_animal_sale(description, price_type, price_per_arroba, price, user_id, contact) " +
                 "VALUES(?,?,?,?,?,?);";
 
-        final String itemSql = "INSERT INTO farm_animal_sale_item(farm_animal_sale_id, farm_animal_id) VALUES(?,?);";
+        final String itemSql = "INSERT INTO farm_animal_sale_item(farm_animal_sale_id, farm_animal_id) " +
+                "SELECT ?, id FROM farm_animal_model WHERE animal_id = ?;";
 
         try {
             connection.setAutoCommit(false);
@@ -55,6 +56,8 @@ public class FarmAnimalSalePostgresDaoAdapter implements FarmAnimalSaleDao {
             saleStatement.close();
 
             insertSaleItems(saleId, entity.getFarmAnimalIds(), itemSql);
+            updateForSell(entity.getFarmAnimalIds(), true);
+
 
             connection.commit();
             return saleId;
@@ -66,6 +69,21 @@ public class FarmAnimalSalePostgresDaoAdapter implements FarmAnimalSaleDao {
             }
             throw new RuntimeException(e);
         }
+    }
+
+    private void updateForSell(List<Integer> farmAnimalIds, boolean forSell) throws SQLException {
+        final String sql = "UPDATE farm_animal_model SET for_sell = ? WHERE animal_id = ?;";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+
+        for (Integer farmAnimalId : farmAnimalIds) {
+            statement.setBoolean(1, forSell);
+            statement.setInt(2, farmAnimalId);
+            statement.addBatch();
+        }
+
+        statement.executeBatch();
+        statement.close();
     }
 
     private void insertSaleItems(int saleId, List<Integer> farmAnimalIds, String itemSql) throws SQLException {
@@ -162,7 +180,8 @@ public class FarmAnimalSalePostgresDaoAdapter implements FarmAnimalSaleDao {
                 "WHERE id = ?;";
 
         final String deleteItemsSql = "DELETE FROM farm_animal_sale_item WHERE farm_animal_sale_id = ?;";
-        final String itemSql = "INSERT INTO farm_animal_sale_item(farm_animal_sale_id, farm_animal_id) VALUES(?,?);";
+        final String itemSql = "INSERT INTO farm_animal_sale_item(farm_animal_sale_id, farm_animal_id) " +
+                "SELECT ?, id FROM farm_animal_model WHERE animal_id = ?;";
 
         try {
             connection.setAutoCommit(false);
@@ -205,14 +224,16 @@ public class FarmAnimalSalePostgresDaoAdapter implements FarmAnimalSaleDao {
     private List<Integer> fetchAnimalIds(int saleId) throws SQLException {
         final List<Integer> animalIds = new ArrayList<>();
 
-        final String sql = "SELECT farm_animal_id FROM farm_animal_sale_item WHERE farm_animal_sale_id = ?;";
+        final String sql = "SELECT f.animal_id FROM farm_animal_sale_item i " +
+                "JOIN farm_animal_model f ON f.id = i.farm_animal_id " +
+                "WHERE i.farm_animal_sale_id = ?;";
 
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1, saleId);
 
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
-            animalIds.add(resultSet.getInt("farm_animal_id"));
+            animalIds.add(resultSet.getInt("animal_id"));
         }
 
         resultSet.close();

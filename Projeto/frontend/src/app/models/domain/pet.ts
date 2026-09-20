@@ -10,8 +10,8 @@ export enum PetSpecies {
 }
 
 export enum PetGender {
-    MALE = 'MALE',
-    FEMALE = 'FEMALE',
+    MALE = 'M',
+    FEMALE = 'F',
 }
 
 export interface Pet {
@@ -23,7 +23,7 @@ export interface Pet {
     birthDate: string;
     ownerId: number;
     forAdoption?: boolean;
-    identifier?: string;
+    identify?: string;
     weight?: number;
     forSell?: boolean;
 }

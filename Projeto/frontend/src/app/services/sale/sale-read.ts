@@ -13,7 +13,7 @@ export class SaleReadService {
 
     findAll(): Promise<FarmAnimalSale[]> {
         return firstValueFrom(
-            this.http.get<FarmAnimalSale[]>(`${environment.api_endpoint}/farm-animal-sale`)
+            this.http.get<FarmAnimalSale[]>(`${environment.api_endpoint}/animal-sale`)
         );
     }
 }

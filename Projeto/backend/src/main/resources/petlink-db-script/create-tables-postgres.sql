@@ -58,8 +58,8 @@ CREATE TABLE vaccine_model
     name VARCHAR(30) NOT NULL,
     description VARCHAR(100) NOT NULL,
     batch VARCHAR(15) NOT NULL,
-    pet_id INT NOT NULL,
-    CONSTRAINT fk_vaccine_pet FOREIGN KEY (pet_id) REFERENCES pet_model(id) ON DELETE CASCADE
+    animal_id INT NOT NULL,
+    CONSTRAINT fk_vaccine_pet FOREIGN KEY (animal_id) REFERENCES animal_model(id) ON DELETE CASCADE
 );
 
 CREATE TABLE announcement_model

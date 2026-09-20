@@ -21,7 +21,7 @@ public class VaccinePostgresDaoAdapter implements VaccineDao {
 
     @Override
     public int add(VaccineModel entity) {
-        String sql = "INSERT INTO vaccine_model(application_date, expiration_date, name, description, batch, pet_id) " +
+        String sql = "INSERT INTO vaccine_model(application_date, expiration_date, name, description, batch, animal_id) " +
                 " VALUES(?,?,?,?,?,?); ";
 
         PreparedStatement preparedStatement;
@@ -90,7 +90,7 @@ public class VaccinePostgresDaoAdapter implements VaccineDao {
                 final String batch = resultSet.getString("batch");
                 final Date applicationDate = resultSet.getDate("application_date");
                 final Date expirationDate = resultSet.getDate("expiration_date");
-                final int petId = resultSet.getInt("pet_id");
+                final int petId = resultSet.getInt("animal_id");
 
                 final VaccineModel vaccineModel = new VaccineModel();
                 vaccineModel.setId(entityId);
@@ -129,7 +129,7 @@ public class VaccinePostgresDaoAdapter implements VaccineDao {
                 final String batch = resultSet.getString("batch");
                 final Date applicationDate = resultSet.getDate("application_date");
                 final Date expirationDate = resultSet.getDate("expiration_date");
-                final int petId = resultSet.getInt("pet_id");
+                final int petId = resultSet.getInt("animal_id");
 
                 final VaccineModel vaccineModel = new VaccineModel();
                 vaccineModel.setId(entityId);

@@ -4,12 +4,12 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 
 import { Pet } from '../../../../models/domain/pet';
 import { FarmAnimalSale, KG_PER_ARROBA, PriceType } from '../../../../models/domain/farmAnimalSale';
-import { PetReadService } from '../../../../services/pet/pet-read';
 import { CurrentUserService } from '../../../../services/security/current-user';
 import { SaleCreateService } from '../../../../services/sale/sale-create';
-import { filterByMode } from '../../../../shared/pet-options';
 import { speciesIcon } from '../../../../shared/pet-species-icon';
 import { SaleReadService } from '../../../../services/sale/sale-read';
+import { FarmAnimalReadService } from '../../../../services/farm-animal/farm-animal-read';
+import { SaleDeleteService } from '../../../../services/sale/sale-delete';
 
 
 interface SaleListing {
@@ -30,7 +30,10 @@ export class SaleHub implements OnInit {
     activeTab: 'comprar' | 'vender' = 'comprar';
     loading: boolean = true;
     userId: number | null = null;
-
+    mySales: SaleListing[] = [];
+    selectedSale: SaleListing | null = null;
+    confirmingDelete: boolean = false;
+    saleDeleteFailed: boolean = false;
     sellableAnimals: Pet[] = [];
     availableSales: SaleListing[] = [];
     selectedAnimalIds: number[] = [];
@@ -40,17 +43,18 @@ export class SaleHub implements OnInit {
     saleCreatedOk: boolean = false;
 
     constructor(
-        private petReadService: PetReadService,
+        private farmAnimalReadService: FarmAnimalReadService,
         private currentUserService: CurrentUserService,
         private saleCreateService: SaleCreateService,
         private saleReadService: SaleReadService,
+        private saleDeleteService: SaleDeleteService,
         private formBuilder: FormBuilder,
         private cdr: ChangeDetectorRef,
     ) {
         this.saleForm = this.formBuilder.group({
             description: ['', [Validators.required]],
             contact: ['', [Validators.required]],
-            priceType: [PriceType.FIXED, [Validators.required]],
+            priceType: [PriceType.MANUAL, [Validators.required]],
             pricePerArroba: [null],
             price: [null, [Validators.required, Validators.min(0.01)]],
         });
@@ -64,13 +68,14 @@ export class SaleHub implements OnInit {
             }
             this.userId = currentUser.id;
 
-            const [myPets, allSales] = await Promise.all([
-                this.petReadService.findByOwnerId(this.userId),
+            const [myAnimals, allSales] = await Promise.all([
+                this.farmAnimalReadService.findByOwnerId(this.userId),
                 this.saleReadService.findAll(),
             ]);
 
-            this.sellableAnimals = filterByMode(myPets, true).filter(animal => !animal.forSell);
+            this.sellableAnimals = myAnimals.filter(animal => !animal.forSell);
             this.availableSales = await this.loadListings(allSales.filter(sale => sale.userId !== this.userId));
+            this.mySales = await this.loadListings(allSales.filter(sale => sale.userId === this.userId));
         } catch (error) {
             console.error('Erro ao carregar animais para venda', error);
         } finally {
@@ -84,7 +89,7 @@ export class SaleHub implements OnInit {
             sales.map(async sale => {
                 try {
                     const animals = await Promise.all(
-                        sale.farmAnimalIds.map(id => this.petReadService.findById(String(id)))
+                        sale.farmAnimalIds.map(id => this.farmAnimalReadService.findById(String(id)))
                     );
                     return { sale, animals };
                 } catch (error) {
@@ -167,6 +172,51 @@ export class SaleHub implements OnInit {
         return true;
     }
 
+    saleTitle(listing: SaleListing): string {
+        return listing.animals.length > 1
+            ? 'Lote de ' + listing.animals.length + ' animais'
+            : (listing.animals[0]?.name || 'Animal');
+    }
+
+    openSale(listing: SaleListing): void {
+        this.selectedSale = listing;
+        this.confirmingDelete = false;
+        this.saleDeleteFailed = false;
+    }
+
+    closeSale(): void {
+        this.selectedSale = null;
+        this.confirmingDelete = false;
+    }
+
+    requestDeleteSale(): void {
+        this.confirmingDelete = true;
+        this.saleDeleteFailed = false;
+    }
+
+    cancelDeleteSale(): void {
+        this.confirmingDelete = false;
+    }
+
+    confirmDeleteSale(): void {
+        const saleId = this.selectedSale?.sale.id;
+        if (saleId === undefined) {
+            return;
+        }
+
+        this.saleDeleteService.delete(saleId).subscribe({
+            next: () => {
+                this.closeSale();
+                void this.ngOnInit();
+            },
+            error: (error) => {
+                console.error('Erro ao excluir venda', error);
+                this.saleDeleteFailed = true;
+                this.cdr.detectChanges();
+            },
+        });
+    }
+
     createSale(): void {
         this.saleValidationFailed = false;
         this.saleCreatedOk = false;
@@ -191,7 +241,7 @@ export class SaleHub implements OnInit {
         this.saleCreateService.create(sale).subscribe({
             next: () => {
                 this.selectedAnimalIds = [];
-                this.saleForm.reset({ priceType: PriceType.FIXED });
+                this.saleForm.reset({ priceType: PriceType.MANUAL });
                 this.saleCreatedOk = true;
                 void this.ngOnInit();
             },

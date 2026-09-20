@@ -10,7 +10,15 @@
       Pets</a>
 
     <div class="pet-hero">
-      <div class="pet-hero-icon">{{ speciesIcon(pet.species) }}</div>
+      <div class="pet-hero-icon">
+        @if (speciesIcon(pet.species)) {
+        {{ speciesIcon(pet.species) }}
+        } @else if (isFarm) {
+        <span class="horseshoe-icon" aria-hidden="true"></span>
+        } @else {
+        <mat-icon>pets</mat-icon>
+        }
+      </div>
 
       <div class="pet-hero-info">
         <p class="footer-title">FICHA DO PET</p>
@@ -22,31 +30,35 @@
         </div>
         <p class="pet-meta">{{ pet.breed }}{{ pet.gender ? ' · ' + genderLabel(pet.gender) : '' }} · Nascido em {{
           pet.birthDate | date:'dd/MM/yyyy': 'UTC' }}</p>
-        @if (isFarm && (pet.identifier || pet.weight)) {
+        @if (isFarm && (pet.identify || pet.weight)) {
         <p class="pet-meta">
-          {{ pet.identifier ? 'Identificador: ' + pet.identifier : '' }}{{ pet.identifier && pet.weight ? ' · ' : ''
+          {{ pet.identify ? 'Identificador: ' + pet.identify : '' }}{{ pet.identify && pet.weight ? ' · ' : ''
           }}{{ pet.weight ? 'Peso: ' + pet.weight + ' kg' : '' }}
         </p>
         }
       </div>
     </div>
-
+    @if (!isFarm) {
     <div class="pet-actions-row">
-      @if (pendingAdoptionConfirmation) {
-      <p class="confirm-text">
-        {{ pet.forAdoption ? 'Remover ' + pet.name + ' da lista de adoção?' : 'Colocar ' + pet.name + ' para adoção?' }}
-      </p>
-      <div class="confirm-actions">
-        <button class="primary-button" (click)="confirmToggleAdoption()">Confirmar</button>
-        <button class="secondary-button" (click)="cancelToggleAdoption()">Cancelar</button>
+      <div class="pet-actions-row">
+        @if (pendingAdoptionConfirmation) {
+        <p class="confirm-text">
+          {{ pet.forAdoption ? 'Remover ' + pet.name + ' da lista de adoção?' : 'Colocar ' + pet.name + ' para adoção?'
+          }}
+        </p>
+        <div class="confirm-actions">
+          <button class="primary-button" (click)="confirmToggleAdoption()">Confirmar</button>
+          <button class="secondary-button" (click)="cancelToggleAdoption()">Cancelar</button>
+        </div>
+        } @else {
+        <button class="primary-button adoption-toggle" (click)="requestToggleAdoption()">
+          <mat-icon>{{ pet.forAdoption ? 'favorite' : 'favorite_border' }}</mat-icon>
+          {{ pet.forAdoption ? 'Remover da lista de adoção' : 'Colocar para adoção' }}
+        </button>
+        }
       </div>
-      } @else {
-      <button class="primary-button adoption-toggle" (click)="requestToggleAdoption()">
-        <mat-icon>{{ pet.forAdoption ? 'favorite' : 'favorite_border' }}</mat-icon>
-        {{ pet.forAdoption ? 'Remover da lista de adoção' : 'Colocar para adoção' }}
-      </button>
-      }
     </div>
+    }
 
     @if (pendingDeleteConfirmation) {
     <p class="confirm-text">Remover {{ pet.name }} definitivamente? Essa ação não pode ser desfeita.</p>
@@ -69,14 +81,15 @@
 
     @if (showEditForm) {
     <div class="login-box form-box">
-      <p class="form-box-title">Editar dados do pet</p>
+      <p class="form-box-title">{{ isFarm ? 'Editar dados do animal' : 'Editar dados do pet' }}</p>
 
       <form [formGroup]="editForm" (ngSubmit)="saveEdit()">
         <div class="field-group">
-          <label>Nome do Pet</label>
+          <label>{{ isFarm ? 'Nome do Animal' : 'Nome do Pet' }}</label>
           <input type="text" formControlName="name">
         </div>
 
+        @if (!isFarm) {
         <div class="field-group">
           <label>Espécie</label>
           <select formControlName="species">
@@ -93,6 +106,7 @@
             <option [value]="PetGender.FEMALE">Fêmea</option>
           </select>
         </div>
+        }
 
         <div class="field-group">
           <label>Raça</label>
@@ -106,11 +120,6 @@
 
         @if (isFarm) {
         <div class="field-group">
-          <label>Identificador</label>
-          <input type="text" formControlName="identifier">
-        </div>
-
-        <div class="field-group">
           <label>Peso (kg)</label>
           <input type="number" min="0" step="0.1" formControlName="weight">
         </div>
@@ -122,12 +131,12 @@
         <p class="text-danger">Confira os dados e tente novamente.</p>
         }
         @if (editSavedOk) {
-        <p class="text-success">Pet atualizado com sucesso!</p>
+        <p class="text-success">Atualizado com sucesso!</p>
         }
       </form>
     </div>
     }
-
+    @if (!isFarm) {
     <hr class="section-divider">
 
     <h3 class="section-title">Vacinas{{ vaccines.length > 0 ? ' (' + vaccines.length + ')' : '' }}</h3>
@@ -268,6 +277,7 @@
         }
       </form>
     </div>
+    }
     }
     }
   </div>

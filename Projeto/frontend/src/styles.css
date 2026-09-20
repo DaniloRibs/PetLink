@@ -567,6 +567,38 @@ a:hover {
     font-size: 28px;
 }
 
+.horseshoe-icon {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    background-color: currentColor;
+    -webkit-mask: url('/assets/images/PetLink_Logo_Verde.png') center / contain no-repeat;
+    mask: url('/assets/images/PetLink_Logo_Verde.png') center / contain no-repeat;
+    vertical-align: -0.15em;
+}
+
+.pet-card-icon .horseshoe-icon,
+.pet-card-icon mat-icon {
+    color: var(--primary);
+}
+
+.sidebar-item-icon .horseshoe-icon {
+    width: 18px;
+    height: 18px;
+    color: var(--primary);
+}
+
+.empty-state-icon .horseshoe-icon {
+    width: 32px;
+    height: 32px;
+    color: var(--primary);
+}
+
+.feature-icon .horseshoe-icon {
+    width: 22px;
+    height: 22px;
+}
+
 .menu-page .hero-heart {
     right: 86px;
     bottom: 136px;

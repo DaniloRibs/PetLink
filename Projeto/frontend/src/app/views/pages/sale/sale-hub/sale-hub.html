@@ -29,14 +29,20 @@
             @for (listing of availableSales; track listing.sale.id) {
             <article class="pet-card">
                 @if (listing.animals.length > 0) {
-                <div class="pet-card-icon">{{ speciesIcon(listing.animals[0].species) }}</div>
+                <div class="pet-card-icon">
+                    @if (speciesIcon(listing.animals[0].species)) {
+                    {{ speciesIcon(listing.animals[0].species) }}
+                    } @else {
+                    <span class="horseshoe-icon" aria-hidden="true"></span>
+                    }
+                </div>
                 }
                 <h3>{{ listing.animals.length > 1 ? 'Lote de ' + listing.animals.length + ' animais' :
                     (listing.animals[0]?.name ?? 'Animal') }}</h3>
 
                 @for (animal of listing.animals; track animal.id) {
                 <p class="sale-animal-line">
-                    {{ animal.name }}{{ animal.identifier ? ' · ID ' + animal.identifier : '' }}{{ animal.weight ? ' · '
+                    {{ animal.name }}{{ animal.identify ? ' · ID ' + animal.identify : '' }}{{ animal.weight ? ' · '
                     + animal.weight + ' kg' : '' }}
                 </p>
                 }
@@ -75,8 +81,13 @@
                         <label class="sale-animal-option">
                             <input type="checkbox" [checked]="isSelected(animal.id)" (change)="toggleAnimal(animal.id)">
                             <span>
-                                {{ speciesIcon(animal.species) }} {{ animal.name }}{{ animal.identifier ? ' · ID ' +
-                                animal.identifier : '' }}{{ animal.weight ? ' · ' + animal.weight + ' kg' : '' }}
+                                @if (speciesIcon(animal.species)) {
+                                {{ speciesIcon(animal.species) }}
+                                } @else {
+                                <span class="horseshoe-icon" aria-hidden="true"></span>
+                                }
+                                {{ animal.name }}{{ animal.identify ? ' · ID ' +
+                                animal.identify : '' }}{{ animal.weight ? ' · ' + animal.weight + ' kg' : '' }}
                             </span>
                         </label>
                         }
@@ -97,7 +108,7 @@
                     <div class="field-group">
                         <label>Tipo de preço</label>
                         <select formControlName="priceType">
-                            <option [value]="PriceType.FIXED">Valor fechado</option>
+                            <option [value]="PriceType.MANUAL">Valor fechado</option>
                             <option [value]="PriceType.PER_ARROBA">Por arroba</option>
                         </select>
                     </div>
@@ -138,5 +149,90 @@
         </div>
 
         }
+        @if (!loading && activeTab === 'vender' && mySales.length > 0) {
+        <h3 class="sale-section-title">Minhas vendas publicadas</h3>
+        <div class="pet-card-grid">
+            @for (listing of mySales; track listing.sale.id) {
+            <article class="pet-card">
+                <span class="pet-badge">À venda</span>
+                @if (listing.animals.length > 0) {
+                <div class="pet-card-icon">
+                    @if (speciesIcon(listing.animals[0].species)) {
+                    {{ speciesIcon(listing.animals[0].species) }}
+                    } @else {
+                    <span class="horseshoe-icon" aria-hidden="true"></span>
+                    }
+                </div>
+                }
+                <h3>{{ saleTitle(listing) }}</h3>
+                <p class="sale-animal-line">{{ listing.animals.length }} {{ listing.animals.length === 1 ? 'animal' :
+                    'animais' }}</p>
+                <p class="sale-price">R$ {{ listing.sale.price.toFixed(2) }}</p>
+                <button type="button" class="primary-button" (click)="openSale(listing)">Saber mais</button>
+            </article>
+            }
+        </div>
+        }
     </div>
 </section>
+
+@if (selectedSale; as listing) {
+<div class="sale-modal-overlay" (click)="closeSale()">
+    <div class="sale-modal" role="dialog" aria-modal="true" (click)="$event.stopPropagation()">
+        <button type="button" class="sale-modal-close" (click)="closeSale()" aria-label="Fechar">
+            <mat-icon>close</mat-icon>
+        </button>
+
+        <p class="footer-title">SUA VENDA</p>
+        <h2>{{ saleTitle(listing) }}</h2>
+
+        <div class="sale-modal-section">
+            <p class="sale-modal-label">Animais publicados</p>
+            @for (animal of listing.animals; track animal.id) {
+            <p class="sale-animal-line">
+                {{ animal.name || ' - ' }}{{ animal.breed ? ' · ' + animal.breed : '' }}{{ animal.identify ? ' · ID
+                ' + animal.identify : '' }}{{ animal.weight ? ' · ' + animal.weight + ' kg' : '' }}
+            </p>
+            }
+            @if (listing.animals.length > 1 && listingWeight(listing) > 0) {
+            <p class="sale-animal-line">Peso total: {{ listingWeight(listing).toFixed(1) }} kg</p>
+            }
+        </div>
+
+        <div class="sale-modal-section">
+            <p class="sale-modal-label">Descrição</p>
+            <p>{{ listing.sale.description }}</p>
+        </div>
+
+        <div class="sale-modal-section">
+            <p class="sale-modal-label">Valor</p>
+            <p class="sale-modal-price">R$ {{ listing.sale.price.toFixed(2) }}</p>
+            <p>{{ priceTypeLabel(listing.sale) }}</p>
+        </div>
+
+        <div class="sale-modal-section">
+            <p class="sale-modal-label">Contato</p>
+            <p>{{ listing.sale.contact }}</p>
+        </div>
+
+        @if (confirmingDelete) {
+        <p class="confirm-text">Cancelar esta venda? Os animais deixam de aparecer para compra.</p>
+        <div class="confirm-actions">
+            <button type="button" class="danger-button is-solid" (click)="confirmDeleteSale()">Sim, cancelar
+                venda</button>
+            <button type="button" class="secondary-button" (click)="cancelDeleteSale()">Voltar</button>
+        </div>
+        @if (saleDeleteFailed) {
+        <p class="text-danger">Não foi possível cancelar. Tente novamente.</p>
+        }
+        } @else {
+        <div class="confirm-actions">
+            <button type="button" class="danger-button" (click)="requestDeleteSale()">
+                <mat-icon>delete</mat-icon> Cancelar venda
+            </button>
+            <button type="button" class="secondary-button" (click)="closeSale()">Fechar</button>
+        </div>
+        }
+    </div>
+</div>
+}

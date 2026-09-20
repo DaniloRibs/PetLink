@@ -18,7 +18,7 @@
       </label>
       <label class="toggle-option">
         <input type="radio" name="animalMode" [checked]="isFarm" (change)="setMode(AnimalMode.FARM)">
-        <span><mat-icon>agriculture</mat-icon> Animais de Fazenda</span>
+        <span><i class="horseshoe-icon" aria-hidden="true"></i> Animais de Fazenda</span>
       </label>
     </div>
 
@@ -58,7 +58,13 @@
 
       <a routerLink="/painel/pets" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}"
         class="sidebar-item">
-        <span class="sidebar-item-icon"><mat-icon>pets</mat-icon></span>
+        <span class="sidebar-item-icon">
+          @if (isFarm) {
+          <span class="horseshoe-icon" aria-hidden="true"></span>
+          } @else {
+          <mat-icon>pets</mat-icon>
+          }
+        </span>
         <span class="sidebar-item-label">{{ isFarm ? 'Meus Animais' : 'Meus Pets' }}</span>
       </a>
 

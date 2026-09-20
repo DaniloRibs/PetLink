@@ -1,17 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { FarmAnimalSale } from '../../models/domain/farmAnimalSale';
+import { UpdateFarmAnimalDto } from '../../models/dto/update-farm-animal-dto';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
     providedIn: 'root',
 })
-export class SaleCreateService {
+export class FarmAnimalUpdateService {
 
     constructor(private http: HttpClient) { }
 
-    create(sale: FarmAnimalSale): Observable<void> {
-        return this.http.post<void>(`${environment.api_endpoint}/animal-sale`, sale);
+    update(farmAnimal: UpdateFarmAnimalDto): Observable<void> {
+        return this.http.put<void>(`${environment.api_endpoint}/animal/${farmAnimal.id}`, farmAnimal);
     }
 }
