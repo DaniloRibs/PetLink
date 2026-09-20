@@ -140,3 +140,22 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+@media (max-width: 560px) {
+  .contact-toggle {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-toggle .toggle-option span {
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 4px 10px;
+    padding: 10px 14px;
+    text-align: left;
+  }
+
+  .contact-toggle small {
+    max-width: none;
+  }
+}

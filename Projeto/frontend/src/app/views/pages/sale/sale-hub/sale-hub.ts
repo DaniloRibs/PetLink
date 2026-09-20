@@ -37,6 +37,7 @@ export class SaleHub implements OnInit {
     sellableAnimals: Pet[] = [];
     availableSales: SaleListing[] = [];
     selectedAnimalIds: number[] = [];
+    showSaleForm: boolean = false;
 
     saleForm: FormGroup;
     saleValidationFailed: boolean = false;
@@ -120,6 +121,16 @@ export class SaleHub implements OnInit {
         this.activeTab = tab;
     }
 
+    openSaleForm(): void {
+        this.saleValidationFailed = false;
+        this.saleCreatedOk = false;
+        this.showSaleForm = true;
+    }
+
+    closeSaleForm(): void {
+        this.showSaleForm = false;
+    }
+
     isSelected(id: number | undefined): boolean {
         return id !== undefined && this.selectedAnimalIds.includes(id);
     }
@@ -131,6 +142,19 @@ export class SaleHub implements OnInit {
         this.selectedAnimalIds = this.selectedAnimalIds.includes(id)
             ? this.selectedAnimalIds.filter(selectedId => selectedId !== id)
             : [...this.selectedAnimalIds, id];
+    }
+
+    get allSelected(): boolean {
+        return this.sellableAnimals.length > 0
+            && this.sellableAnimals.every(animal => this.isSelected(animal.id));
+    }
+
+    toggleAll(): void {
+        this.selectedAnimalIds = this.allSelected
+            ? []
+            : this.sellableAnimals
+                .map(animal => animal.id)
+                .filter((id): id is number => id !== undefined);
     }
 
     get selectedPriceType(): PriceType {
@@ -244,6 +268,7 @@ export class SaleHub implements OnInit {
                 this.selectedAnimalIds = [];
                 this.saleForm.reset({ priceType: PriceType.MANUAL });
                 this.saleCreatedOk = true;
+                this.showSaleForm = false;
                 this.toastrService.success('Venda publicada com sucesso!');
                 void this.ngOnInit();
             },
@@ -254,4 +279,4 @@ export class SaleHub implements OnInit {
             },
         });
     }
-}
+} 

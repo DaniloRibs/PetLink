@@ -44,11 +44,10 @@
       </section>
 
       <section class="hero-visual" aria-label="Ilustração do PetLink">
-        @if (isFarm) {
-        <img src="assets/images/Vaca.png" alt="Vaca do PetLink" class="hero-dog">
-        } @else {
-        <img src="assets/images/golden-retriever-dog.png" alt="Cachorro feliz do PetLink" class="hero-dog">
-        }
+        <img src="assets/images/golden-retriever-dog.png" alt="Cachorro feliz do PetLink" class="hero-dog"
+          [class.is-hidden]="isFarm" [attr.aria-hidden]="isFarm">
+        <img src="assets/images/Vaca.png" alt="Vaca do PetLink" class="hero-dog" [class.is-hidden]="!isFarm"
+          [attr.aria-hidden]="!isFarm">
         <div class="hero-oval"></div>
         <div class="hero-paw">
           @if (isFarm) {

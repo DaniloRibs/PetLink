@@ -57,90 +57,121 @@
 
         } @else {
 
-        <div class="login-box form-box">
-            <p class="form-box-title">Nova venda</p>
+        <button type="button" class="primary-button action-btn sale-cta" (click)="openSaleForm()">
+            <span class="action-btn-icon"><mat-icon>add</mat-icon></span>
+            Nova venda
+        </button>
 
-            <form [formGroup]="saleForm" (ngSubmit)="createSale()">
+        @if (showSaleForm) {
+        <div class="modal-overlay" (click)="closeSaleForm()">
+            <div class="login-box form-box modal-form" role="dialog" aria-modal="true"
+                (click)="$event.stopPropagation()">
+                <button type="button" class="modal-close" (click)="closeSaleForm()" aria-label="Fechar">
+                    <mat-icon>close</mat-icon>
+                </button>
+                <p class="form-box-title">Nova venda</p>
 
-                <div class="field-group">
-                    <label>Animais desta venda</label>
-                    <div class="sale-animal-list">
-                        @for (animal of sellableAnimals; track animal.id) {
-                        <label class="sale-animal-option" [class.selected]="isSelected(animal.id)">
-                            <input type="checkbox" [checked]="isSelected(animal.id)" (change)="toggleAnimal(animal.id)">
-                            <span class="sale-animal-icon">
-                                @if (speciesIcon(animal.species)) {
-                                {{ speciesIcon(animal.species) }}
-                                } @else {
-                                <span class="horseshoe-icon" aria-hidden="true"></span>
-                                }
-                            </span>
-                            <span class="sale-animal-info">
-                                <strong class="sale-animal-name">{{ animal.name || 'Sem nome' }}</strong>
-                                <small class="sale-animal-meta">{{ animal.identify ? 'ID ' + animal.identify : 'Sem ID'
-                                    }}</small>
-                            </span>
-                            @if (animal.weight) {
-                            <span class="sale-animal-weight">{{ animal.weight }} kg</span>
-                            }
-                        </label>
-                        }
-                    </div>
-                </div>
+                <form [formGroup]="saleForm" (ngSubmit)="createSale()">
 
-                <div class="field-group">
-                    <label>Descrição</label>
-                    <input type="text" placeholder="Conte um pouco sobre o lote" formControlName="description">
-                </div>
-
-                <div class="field-group">
-                    <label>Contato</label>
-                    <input type="text" placeholder="E-mail ou telefone para contato" formControlName="contact">
-                </div>
-
-                <div class="form-row">
                     <div class="field-group">
-                        <label>Tipo de preço</label>
-                        <select formControlName="priceType">
-                            <option [value]="PriceType.MANUAL">Valor fechado</option>
-                            <option [value]="PriceType.PER_ARROBA">Por arroba</option>
-                        </select>
+                        <div class="sale-animal-header">
+                            <label>Animais desta venda</label>
+                            <button type="button" class="sale-select-all" (click)="toggleAll()">
+                                {{ allSelected ? 'Limpar seleção' : 'Selecionar todos' }}
+                            </button>
+                        </div>
+                        <div class="sale-animal-list">
+                            @for (animal of sellableAnimals; track animal.id) {
+                            <label class="sale-animal-option" [class.selected]="isSelected(animal.id)">
+                                <input type="checkbox" [checked]="isSelected(animal.id)"
+                                    (change)="toggleAnimal(animal.id)">
+                                <span class="sale-animal-icon">
+                                    @if (speciesIcon(animal.species)) {
+                                    {{ speciesIcon(animal.species) }}
+                                    } @else {
+                                    <span class="horseshoe-icon" aria-hidden="true"></span>
+                                    }
+                                </span>
+                                <span class="sale-animal-info">
+                                    <strong class="sale-animal-name">{{ animal.name || 'Sem nome' }}</strong>
+                                    <small class="sale-animal-meta">{{ animal.identify ? 'ID ' + animal.identify : 'Sem
+                                        ID' }}</small>
+                                </span>
+                                @if (animal.weight) {
+                                <span class="sale-animal-weight">{{ animal.weight }} kg</span>
+                                }
+                            </label>
+                            }
+                        </div>
+                        <p class="sale-animal-summary" [class.is-empty]="selectedAnimalIds.length === 0">
+                            @if (selectedAnimalIds.length === 0) {
+                            Nenhum animal selecionado
+                            } @else {
+                            <strong>{{ selectedAnimalIds.length }}</strong>
+                            {{ selectedAnimalIds.length === 1 ? 'selecionado' : 'selecionados' }}
+                            · <strong>{{ totalWeight.toFixed(1) }} kg</strong>
+                            · {{ totalArrobas.toFixed(1) }} arrobas
+                            }
+                        </p>
+
+                    </div>
+
+                    <div class="field-group">
+                        <label>Descrição</label>
+                        <input type="text" placeholder="Conte um pouco sobre o lote" formControlName="description">
+                    </div>
+
+                    <div class="field-group">
+                        <label>Contato</label>
+                        <input type="text" placeholder="E-mail ou telefone para contato" formControlName="contact">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="field-group">
+                            <label>Tipo de preço</label>
+                            <select formControlName="priceType">
+                                <option [value]="PriceType.MANUAL">Valor fechado</option>
+                                <option [value]="PriceType.PER_ARROBA">Por arroba</option>
+                            </select>
+                        </div>
+
+                        @if (selectedPriceType === PriceType.PER_ARROBA) {
+                        <div class="field-group">
+                            <label>Valor da arroba (R$)</label>
+                            <input type="number" min="0" step="0.01" formControlName="pricePerArroba">
+                        </div>
+                        }
                     </div>
 
                     @if (selectedPriceType === PriceType.PER_ARROBA) {
-                    <div class="field-group">
-                        <label>Valor da arroba (R$)</label>
-                        <input type="number" min="0" step="0.01" formControlName="pricePerArroba">
+                    <div class="sale-hint">
+                        <p>Peso total: {{ totalWeight.toFixed(1) }} kg ({{ totalArrobas.toFixed(2) }} arrobas)</p>
+                        @if (suggestedPrice !== null) {
+                        <p>Valor sugerido: R$ {{ suggestedPrice.toFixed(2) }}</p>
+                        <button type="button" class="secondary-button" (click)="applySuggestedPrice()">Usar valor
+                            sugerido</button>
+                        }
                     </div>
                     }
-                </div>
 
-                @if (selectedPriceType === PriceType.PER_ARROBA) {
-                <div class="sale-hint">
-                    <p>Peso total: {{ totalWeight.toFixed(1) }} kg ({{ totalArrobas.toFixed(2) }} arrobas)</p>
-                    @if (suggestedPrice !== null) {
-                    <p>Valor sugerido: R$ {{ suggestedPrice.toFixed(2) }}</p>
-                    <button type="button" class="secondary-button" (click)="applySuggestedPrice()">Usar valor
-                        sugerido</button>
+                    <div class="field-group">
+                        <label>Preço final (R$)</label>
+                        <input type="number" min="0" step="0.01" formControlName="price">
+                    </div>
+
+                    <input type="submit" value="Publicar venda" [disabled]="!validateSaleFields()">
+                    <button type="button" class="secondary-button" (click)="closeSaleForm()">Cancelar</button>
+
+                    @if (saleValidationFailed) {
+                    <p class="text-danger">Confira os dados e tente novamente.</p>
                     }
-                </div>
-                }
-
-                <div class="field-group">
-                    <label>Preço final (R$)</label>
-                    <input type="number" min="0" step="0.01" formControlName="price">
-                </div>
-
-                <input type="submit" value="Publicar venda" [disabled]="!validateSaleFields()">
-
-                @if (saleValidationFailed) {
-                <p class="text-danger">Confira os dados e tente novamente.</p>
-                }
-                @if (saleCreatedOk) {
-                <p class="text-success">Venda publicada com sucesso!</p>
-                }
-            </form>
+                    @if (saleCreatedOk) {
+                    <p class="text-success">Venda publicada com sucesso!</p>
+                    }
+                </form>
+            </div>
         </div>
+        }
 
         }
 

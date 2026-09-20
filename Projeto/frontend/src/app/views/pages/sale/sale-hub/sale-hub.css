@@ -43,6 +43,39 @@
     height: 18px;
 }
 
+.sale-animal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.sale-animal-header label {
+    margin-bottom: 0;
+}
+
+.sale-select-all {
+    border: none;
+    background: transparent;
+    padding: 4px 8px;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--primary);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.sale-select-all:hover {
+    background: rgba(var(--primary-rgb), 0.1);
+}
+
+.sale-select-all:focus-visible {
+    outline: 2px solid rgba(var(--primary-rgb), 0.45);
+    outline-offset: 2px;
+}
+
 .sale-animal-list {
     display: flex;
     flex-direction: column;
@@ -126,6 +159,20 @@
     padding: 4px 10px;
     border-radius: 999px;
     white-space: nowrap;
+}
+
+.sale-animal-summary {
+    margin: 4px 0 0;
+    font-size: 13px;
+    color: #6b5d55;
+}
+
+.sale-animal-summary strong {
+    color: var(--primary);
+}
+
+.sale-animal-summary.is-empty {
+    opacity: 0.7;
 }
 
 .sale-hint {
@@ -240,4 +287,8 @@
     font-size: 22px;
     font-weight: 700;
     color: var(--primary);
+}
+
+.sale-cta {
+    margin: 20px 0 8px;
 }
