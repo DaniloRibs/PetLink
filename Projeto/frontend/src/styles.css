@@ -1226,3 +1226,40 @@ a:hover {
     max-width: 460px;
     box-sizing: border-box;
 }
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    background: rgba(33, 33, 33, 0.45);
+    backdrop-filter: blur(3px);
+}
+
+.login-box.modal-form {
+    position: relative;
+    width: min(560px, 100%);
+    min-height: 0;
+    max-height: 90vh;
+    overflow-y: auto;
+    margin: 0;
+    box-sizing: border-box;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
+}
+
+.modal-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(var(--primary-rgb), 0.08);
+    color: var(--primary);
+    cursor: pointer;
+}

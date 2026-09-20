@@ -15,10 +15,11 @@ import { Observable } from 'rxjs';
 import { CreateFarmAnimalDto } from '../../../../models/dto/create-farm-animal-dto';
 import { FarmAnimalCreateService } from '../../../../services/farm-animal/farm-animal-create';
 import { FarmAnimalReadService } from '../../../../services/farm-animal/farm-animal-read';
+import { NgTemplateOutlet } from '@angular/common';
 
 @Component({
   selector: 'app-pet-list',
-  imports: [ReactiveFormsModule, MatIconModule],
+  imports: [ReactiveFormsModule, MatIconModule, NgTemplateOutlet],
   templateUrl: './pet-list.html',
   styleUrl: './pet-list.css',
 })

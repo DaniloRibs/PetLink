@@ -2,80 +2,87 @@
   <div class="content-form-card">
     <div class="section-header">
       <p class="footer-title">ANÚNCIOS</p>
-    
+
     </div>
     <p class="hero-text">Fique de olho nas campanhas de vacinação divulgadas por empresas parceiras.</p>
 
     @if (isCompany) {
-    <button class="primary-button action-btn announcement-cta" [class.is-cancel]="showForm" (click)="toggleForm()">
+    <button class="primary-button action-btn announcement-cta" (click)="toggleForm()">
       <span class="action-btn-icon">
-        <mat-icon>{{ showForm ? 'close' : 'add' }}</mat-icon>
+        <mat-icon>add</mat-icon>
       </span>
-      {{ showForm ? 'Cancelar' : 'Publicar Anuncio' }}
+      Publicar Anuncio
     </button>
+    }
+
 
     @if (showForm) {
-    <div class="login-box form-box announcement-form-box">
-      <p class="form-box-title">Nova campanha</p>
+    <div class="modal-overlay" (click)="toggleForm()">
+      <div class="login-box form-box modal-form" role="dialog" aria-modal="true" (click)="$event.stopPropagation()">
+        <button type="button" class="modal-close" (click)="toggleForm()" aria-label="Fechar">
+          <mat-icon>close</mat-icon>
+        </button>
+        <p class="form-box-title">Nova campanha</p>
 
-      <form [formGroup]="form" (ngSubmit)="createCampaign()">
-        <div class="field-group">
-          <label>Título da campanha</label>
-          <input type="text" placeholder formControlName="title">
-        </div>
-
-        <div class="field-group">
-          <label>Tipo</label>
-          <select formControlName="type">
-            <option value="" disabled selected hidden>Selecionar</option>
-            <option [value]="AnnouncementType.VACCINE">Vacinação</option>
-            <option [value]="AnnouncementType.ADOPTION">Adoção</option>
-            <option [value]="AnnouncementType.LOST">Animal Perdido</option>
-          </select>
-        </div>
-
-        <div class="field-group">
-          <label>Descrição</label>
-          <textarea placeholder formControlName="description" rows="5"></textarea>
-        </div>
-
-        <div class="form-row">
+        <form [formGroup]="form" (ngSubmit)="createCampaign()">
           <div class="field-group">
-            <label>Data</label>
-            <input type="date" formControlName="date">
+            <label>Título da campanha</label>
+            <input type="text" placeholder formControlName="title">
           </div>
 
           <div class="field-group">
-            <label>Local</label>
-            <input type="text" placeholder formControlName="location">
+            <label>Tipo</label>
+            <select formControlName="type">
+              <option value="" disabled selected hidden>Selecionar</option>
+              <option [value]="AnnouncementType.VACCINE">Vacinação</option>
+              <option [value]="AnnouncementType.ADOPTION">Adoção</option>
+              <option [value]="AnnouncementType.LOST">Animal Perdido</option>
+            </select>
           </div>
-        </div>
 
-        <div class="field-group">
-          <label>Contato exibido no anúncio</label>
-          <div class="toggle-group" role="radiogroup" aria-label="Contato a exibir">
-            <label class="toggle-option">
-              <input type="radio" formControlName="contactMethod" value="email">
-              <span>E-mail ({{ user?.email }})</span>
-            </label>
-            <label class="toggle-option" [class.is-disabled]="!userHasValidPhone">
-              <input type="radio" formControlName="contactMethod" value="phone" [disabled]="!userHasValidPhone">
-              <span>{{ userHasValidPhone ? 'Telefone (' + user?.phone + ')' : 'Telefone (indisponível)' }}</span>
-            </label>
+          <div class="field-group">
+            <label>Descrição</label>
+            <textarea placeholder formControlName="description" rows="5"></textarea>
           </div>
-          @if (!userHasValidPhone) {
-          <p class="hint-text">Cadastre um telefone válido no seu perfil para poder usá-lo como contato.</p>
+
+          <div class="form-row">
+            <div class="field-group">
+              <label>Data</label>
+              <input type="date" formControlName="date">
+            </div>
+
+            <div class="field-group">
+              <label>Local</label>
+              <input type="text" placeholder formControlName="location">
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label>Contato exibido no anúncio</label>
+            <div class="toggle-group" role="radiogroup" aria-label="Contato a exibir">
+              <label class="toggle-option">
+                <input type="radio" formControlName="contactMethod" value="email">
+                <span>E-mail ({{ user?.email }})</span>
+              </label>
+              <label class="toggle-option" [class.is-disabled]="!userHasValidPhone">
+                <input type="radio" formControlName="contactMethod" value="phone" [disabled]="!userHasValidPhone">
+                <span>{{ userHasValidPhone ? 'Telefone (' + user?.phone + ')' : 'Telefone (indisponível)' }}</span>
+              </label>
+            </div>
+            @if (!userHasValidPhone) {
+            <p class="hint-text">Cadastre um telefone válido no seu perfil para poder usá-lo como contato.</p>
+            }
+          </div>
+
+          <input type="submit" value="Publicar" [disabled]="!validateFields()">
+          <button type="button" class="secondary-button" (click)="toggleForm()">Cancelar</button>
+
+          @if (createValidationFailed) {
+          <p class="text-danger">Confira os dados e tente novamente.</p>
           }
-        </div>
-
-        <input type="submit" value="Publicar" [disabled]="!validateFields()">
-
-        @if (createValidationFailed) {
-        <p class="text-danger">Confira os dados e tente novamente.</p>
-        }
-      </form>
+        </form>
+      </div>
     </div>
-    }
     }
 
     @if (loading) {
@@ -89,11 +96,10 @@
     } @else {
     <div class="announcement-list">
       @for (announcement of announcements; track announcement.id) {
-    <announcement-card [announcement]="announcement" [user]="user!"
-      [canManage]="isCompany && announcement.creatorEmail === user?.email"
-      (delete)="removeCampaign(announcement)"
-      (updated)="onAnnouncementUpdated($event)">
-    </announcement-card>
+      <announcement-card [announcement]="announcement" [user]="user!"
+        [canManage]="isCompany && announcement.creatorEmail === user?.email" (delete)="removeCampaign(announcement)"
+        (updated)="onAnnouncementUpdated($event)">
+      </announcement-card>
       }
     </div>
     }

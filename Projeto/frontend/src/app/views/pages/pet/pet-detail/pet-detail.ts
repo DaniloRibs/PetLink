@@ -138,7 +138,10 @@ export class PetDetail implements OnInit {
       let vaccines: Vaccine[] = [];
 
       if (this.isFarm) {
-        pet = await this.farmAnimalReadService.findById(id);
+        [pet, vaccines] = await Promise.all([
+          this.farmAnimalReadService.findById(id),
+          this.vaccineReadService.findByPetId(id),
+        ]);
       } else {
         [pet, vaccines] = await Promise.all([
           this.petReadService.findById(id),
@@ -331,6 +334,7 @@ export class PetDetail implements OnInit {
         this.zone.run(() => {
           this.vaccineCreatedOk = true;
           this.vaccineForm.reset();
+          this.showVaccineForm = false;
           this.cdr.detectChanges();
         });
       },

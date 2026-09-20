@@ -28,7 +28,16 @@ export class AuthenticationService {
   }
 
   logout(): void {
+    const preserved: [string, string][] = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key && key.startsWith('petlink.keep.')) {
+        preserved.push([key, localStorage.getItem(key) ?? '']);
+      }
+    }
+
     localStorage.clear();
+    preserved.forEach(([key, value]) => localStorage.setItem(key, value));
   }
 
   addDataToLocalStorage(email: string): void {

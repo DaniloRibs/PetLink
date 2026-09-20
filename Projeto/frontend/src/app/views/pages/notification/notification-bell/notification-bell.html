@@ -8,20 +8,34 @@
 
   @if (panelOpen) {
   <div class="notification-panel">
-    <p class="footer-title">VACINAS</p>
+    <div class="notification-panel-header">
+      <p class="footer-title">VACINAS</p>
+      @if (!loading && hasClearable) {
+      <button type="button" class="notification-clear" (click)="clearNotifications()"
+        title="Avisos em vermelho (doses atrasadas) não são removidos">
+        <mat-icon>delete_sweep</mat-icon> Limpar
+      </button>
+      }
+    </div>
+
+    <p class="notification-legend">
+      <span class="notification-dot"></span> Estimação
+      <span class="notification-dot is-farm"></span> Fazenda
+    </p>
 
     @if (loading) {
     <p class="notification-empty">Carregando...</p>
     } @else if (notifications.length === 0) {
-    <p class="notification-empty">Nenhum aviso por enquanto — as vacinas dos seus pets estão em dia.
+    <p class="notification-empty">Nenhum aviso por enquanto — as vacinas dos seus animais estão em dia.
       <mat-icon>check_circle</mat-icon>
     </p>
     } @else {
     <div class="notification-list">
-      @for (item of notifications; track item.petId + item.message) {
+      @for (item of notifications; track item.key) {
       <a class="notification-item" [class.is-overdue]="item.status === 'overdue'"
         [class.is-missing]="item.status === 'missing'" routerLink="/painel/pets/{{ item.petId }}"
-        (click)="closePanel()">
+        (click)="openItem(item)">
+        <span class="notification-dot" [class.is-farm]="item.kind === 'FARM'"></span>
         <span class="notification-icon">
           <mat-icon>{{ item.status === 'overdue' ? 'warning' : item.status === 'missing' ? 'assignment' :
             'notifications_active' }}</mat-icon>

@@ -3,14 +3,13 @@
     <div class="section-header">
       <p class="footer-title">{{ isFarm ? 'MEUS ANIMAIS' : 'MEUS PETS' }}</p>
       <h2>{{ isFarm ? 'Seus animais cadastrados' : 'Seus pets cadastrados' }}</h2>
-      <button class="primary-button action-btn" [class.is-cancel]="showForm" (click)="toggleForm()">
-        <span class="action-btn-icon"><mat-icon>{{ showForm ? 'close' : 'add' }}</mat-icon></span>
-        {{ showForm ? 'Cancelar' : (isFarm ? 'Cadastrar Animal' : 'Cadastrar Pet') }}
+      <button class="primary-button action-btn" (click)="toggleForm()">
+        <span class="action-btn-icon"><mat-icon>add</mat-icon></span>
+        {{ isFarm ? 'Cadastrar Animal' : 'Cadastrar Pet' }}
       </button>
     </div>
 
-    @if (showForm) {
-    <div class="login-box form-box">
+    <ng-template #animalForm>
       <p class="form-box-title">{{ isFarm ? 'Novo animal' : 'Novo pet' }}</p>
 
       <form [formGroup]="form" (ngSubmit)="createPet()">
@@ -67,12 +66,13 @@
 
         <input type="submit" [value]="isFarm ? 'Cadastrar Animal' : 'Cadastrar Pet'" [disabled]="!validateFields()">
 
+        <button type="button" class="secondary-button" (click)="toggleForm()">Cancelar</button>
+
         @if (createValidationFailed) {
         <p class="text-danger">Confira os dados e tente novamente.</p>
         }
       </form>
-    </div>
-    }
+    </ng-template>
 
     @if (loading) {
     <p>Carregando...</p>
@@ -108,7 +108,7 @@
           <mat-icon>pets</mat-icon>
           }
         </div>
-        <h3>{{ pet.name }}</h3>
+        <h3>{{ pet.name || 'Sem nome' }}</h3>
         <p>{{ pet.breed }}{{ pet.gender ? ' · ' + genderLabel(pet.gender) : '' }}</p>
         @if (isFarm && (pet.identify || pet.weight)) {
         <p>
@@ -123,3 +123,14 @@
     }
   </div>
 </section>
+
+@if (showForm) {
+<div class="modal-overlay" (click)="toggleForm()">
+  <div class="login-box form-box modal-form" role="dialog" aria-modal="true" (click)="$event.stopPropagation()">
+    <button type="button" class="modal-close" (click)="toggleForm()" aria-label="Fechar">
+      <mat-icon>close</mat-icon>
+    </button>
+    <ng-container *ngTemplateOutlet="animalForm"></ng-container>
+  </div>
+</div>
+}
