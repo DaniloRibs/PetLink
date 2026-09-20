@@ -1,5 +1,7 @@
-import { Component, HostListener, signal } from '@angular/core';
+import { Component, HostListener, PLATFORM_ID, inject, signal } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
+import { AnimalModeService } from './services/animalMode/animalMode';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +12,12 @@ import { RouterOutlet } from '@angular/router';
 export class App {
   valorInteiro: number = 20
   protected readonly title = signal('Projeto Faitec' + this.valorInteiro);
+
+  constructor() {
+    if (isPlatformBrowser(inject(PLATFORM_ID))) {
+      inject(AnimalModeService).applyBranding();
+    }
+  }
 
   @HostListener('document:keydown.escape')
   closeTopModal(): void {

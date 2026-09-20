@@ -47,21 +47,85 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
-    max-height: 220px;
+    max-height: 240px;
     overflow-y: auto;
+    padding: 2px 6px 2px 2px;
+    margin-bottom: 4px;
 }
 
 .sale-animal-option {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
+    padding: 10px 14px;
+    border: 1.5px solid rgba(var(--primary-rgb), 0.15);
+    border-radius: 12px;
+    background: #fff;
     cursor: pointer;
-    font-weight: 500;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.sale-animal-option:hover {
+    border-color: rgba(var(--primary-rgb), 0.45);
+}
+
+.sale-animal-option.selected {
+    border-color: var(--primary);
+    background: rgba(var(--primary-rgb), 0.08);
 }
 
 .sale-animal-option input[type="checkbox"] {
-    width: auto;
+    width: 18px;
+    height: 18px;
+    padding: 0;
     margin: 0;
+    flex-shrink: 0;
+    accent-color: var(--primary);
+}
+
+.sale-animal-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    font-size: 22px;
+    flex-shrink: 0;
+}
+
+.sale-animal-icon .horseshoe-icon {
+    width: 22px;
+    height: 22px;
+}
+
+.sale-animal-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+    line-height: 1.25;
+}
+
+.sale-animal-name {
+    font-size: 15px;
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sale-animal-meta {
+    font-size: 12px;
+    opacity: 0.7;
+}
+
+.sale-animal-weight {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--primary);
+    background: rgba(var(--primary-rgb), 0.1);
+    padding: 4px 10px;
+    border-radius: 999px;
+    white-space: nowrap;
 }
 
 .sale-hint {

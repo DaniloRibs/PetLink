@@ -59,14 +59,20 @@
 
           <div class="field-group">
             <label>Contato exibido no anúncio</label>
-            <div class="toggle-group" role="radiogroup" aria-label="Contato a exibir">
+            <div class="toggle-group contact-toggle" role="radiogroup" aria-label="Contato a exibir">
               <label class="toggle-option">
                 <input type="radio" formControlName="contactMethod" value="email">
-                <span>E-mail ({{ user?.email }})</span>
+                <span>
+                  <strong><mat-icon>mail</mat-icon> E-mail</strong>
+                  <small>{{ user?.email }}</small>
+                </span>
               </label>
               <label class="toggle-option" [class.is-disabled]="!userHasValidPhone">
                 <input type="radio" formControlName="contactMethod" value="phone" [disabled]="!userHasValidPhone">
-                <span>{{ userHasValidPhone ? 'Telefone (' + user?.phone + ')' : 'Telefone (indisponível)' }}</span>
+                <span>
+                  <strong><mat-icon>call</mat-icon> Telefone</strong>
+                  <small>{{ userHasValidPhone ? user?.phone : 'Indisponível' }}</small>
+                </span>
               </label>
             </div>
             @if (!userHasValidPhone) {

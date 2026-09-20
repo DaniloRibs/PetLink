@@ -39,7 +39,7 @@ export class Landing implements OnInit, OnDestroy {
 
     this.autoRotateTimer = setInterval(() => {
       this.mode = this.isFarm ? AnimalMode.PET : AnimalMode.FARM;
-    }, 6000);
+    }, 12000);
   }
 
   ngOnDestroy(): void {

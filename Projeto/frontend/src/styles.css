@@ -1285,6 +1285,12 @@ body:has(.sale-modal-overlay) {
     overflow: hidden;
 }
 
+.menu-page .menu-header:has(.modal-overlay, .sale-modal-overlay),
+.menu-page .hero-card:has(.modal-overlay, .sale-modal-overlay),
+.menu-page .menu-footer-card:has(.modal-overlay, .sale-modal-overlay) {
+    backdrop-filter: none;
+}
+
 .menu-page .dashboard-header {
     background: color-mix(in srgb, #fff 86%, var(--page-bg));
     backdrop-filter: none;

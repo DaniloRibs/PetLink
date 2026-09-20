@@ -66,17 +66,23 @@
                     <label>Animais desta venda</label>
                     <div class="sale-animal-list">
                         @for (animal of sellableAnimals; track animal.id) {
-                        <label class="sale-animal-option">
+                        <label class="sale-animal-option" [class.selected]="isSelected(animal.id)">
                             <input type="checkbox" [checked]="isSelected(animal.id)" (change)="toggleAnimal(animal.id)">
-                            <span>
+                            <span class="sale-animal-icon">
                                 @if (speciesIcon(animal.species)) {
                                 {{ speciesIcon(animal.species) }}
                                 } @else {
                                 <span class="horseshoe-icon" aria-hidden="true"></span>
                                 }
-                                {{ animal.name || 'Sem nome' }}{{ animal.identify ? ' · ID ' +
-                                animal.identify : '' }}{{ animal.weight ? ' · ' + animal.weight + ' kg' : '' }}
                             </span>
+                            <span class="sale-animal-info">
+                                <strong class="sale-animal-name">{{ animal.name || 'Sem nome' }}</strong>
+                                <small class="sale-animal-meta">{{ animal.identify ? 'ID ' + animal.identify : 'Sem ID'
+                                    }}</small>
+                            </span>
+                            @if (animal.weight) {
+                            <span class="sale-animal-weight">{{ animal.weight }} kg</span>
+                            }
                         </label>
                         }
                     </div>

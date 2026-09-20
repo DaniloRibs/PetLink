@@ -102,3 +102,41 @@
   width: 18px;
   height: 18px;
 }
+
+.contact-toggle .toggle-option {
+  display: flex;
+  min-width: 0;
+}
+
+.contact-toggle .toggle-option span {
+  flex: 1;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  padding: 10px 12px;
+  text-align: center;
+}
+
+.contact-toggle strong {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.contact-toggle strong mat-icon {
+  width: 18px;
+  height: 18px;
+  font-size: 18px;
+}
+
+.contact-toggle small {
+  max-width: 100%;
+  font-size: 12px;
+  font-weight: 500;
+  opacity: 0.8;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
