@@ -1,6 +1,5 @@
 package br.fai.faitec.petlink2026.ports_and_adapters.adapter.dao.configuration;
 
-
 import br.fai.faitec.petlink2026.ports_and_adapters.port.service.tools.ResourceFileService;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -10,6 +9,8 @@ import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.jdbc.datasource.init.ScriptUtils;
 
 import javax.sql.DataSource;
 import java.io.IOException;
@@ -95,21 +96,14 @@ public class PostgresConnectionManagerConfiguration {
         Connection connection = getConnection();
 
         final String basePath = "petlink-db-script";
-        final String createTableSql = resourceFileService.read(basePath + "/create-tables-postgres.sql");
 
-        PreparedStatement createStatemen = connection.prepareStatement(createTableSql);
+        ClassPathResource createTablesResource = new ClassPathResource(basePath + "/create-tables-postgres.sql");
+        ScriptUtils.executeSqlScript(connection, createTablesResource);
 
-        createStatemen.execute();
-        createStatemen.executeUpdate();
+        ClassPathResource insertDataResource = new ClassPathResource(basePath + "/insert-data-postgres-basic.sql");
+        ScriptUtils.executeSqlScript(connection, insertDataResource);
 
-        final String insertDataSql = resourceFileService.read(basePath + "/insert-data-postgres-basic.sql");
-
-        final PreparedStatement insertStatement = connection.prepareStatement(insertDataSql);
-        insertStatement.execute();
-        insertStatement.close();
         return true;
-
     }
 
 }
-

@@ -1,5 +1,7 @@
 DROP TABLE IF EXISTS announcement_model CASCADE;
 DROP TABLE IF EXISTS adoption_model CASCADE;
+DROP TABLE IF EXISTS farm_animal_sale_item CASCADE;
+DROP TABLE IF EXISTS farm_animal_sale CASCADE;
 DROP TABLE IF EXISTS vaccine_model CASCADE;
 DROP TABLE IF EXISTS farm_animal_model CASCADE;
 DROP TABLE IF EXISTS pet_model CASCADE;
@@ -86,4 +88,25 @@ CREATE TABLE adoption_model
 
     CONSTRAINT fk_adoption_pet FOREIGN KEY (pet_id) REFERENCES pet_model(id) ON DELETE CASCADE,
     CONSTRAINT fk_adoption_owner FOREIGN KEY (owner_id) REFERENCES user_model(id) ON DELETE CASCADE
+);
+
+CREATE TABLE farm_animal_sale
+(
+    id SERIAL PRIMARY KEY,
+    description VARCHAR(255) NOT NULL,
+    price_type VARCHAR(15) NOT NULL,
+    price_per_arroba NUMERIC,
+    price NUMERIC NOT NULL,
+    user_id INT NOT NULL,
+    contact VARCHAR(100) NOT NULL,
+    CONSTRAINT fk_farm_animal_sale_user FOREIGN KEY (user_id) REFERENCES user_model(id) ON DELETE CASCADE
+);
+
+CREATE TABLE farm_animal_sale_item
+(
+    id SERIAL PRIMARY KEY,
+    farm_animal_sale_id INT NOT NULL,
+    farm_animal_id INT NOT NULL,
+    CONSTRAINT fk_sale_item_sale FOREIGN KEY (farm_animal_sale_id) REFERENCES farm_animal_sale(id) ON DELETE CASCADE,
+    CONSTRAINT fk_sale_item_animal FOREIGN KEY (farm_animal_id) REFERENCES farm_animal_model(id) ON DELETE CASCADE
 );

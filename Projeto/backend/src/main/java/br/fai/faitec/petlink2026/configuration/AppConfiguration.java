@@ -4,6 +4,7 @@ import br.fai.faitec.petlink2026.ports_and_adapters.adapter.dao.adoption.Adoptio
 import br.fai.faitec.petlink2026.ports_and_adapters.adapter.dao.animal.FarmAnimalPostgresDaoAdapter;
 import br.fai.faitec.petlink2026.ports_and_adapters.adapter.dao.announcement.AnnouncementPostgresDaoAdapter;
 import br.fai.faitec.petlink2026.ports_and_adapters.adapter.dao.animal.PetPostgresDaoAdapter;
+import br.fai.faitec.petlink2026.ports_and_adapters.adapter.dao.sale.FarmAnimalSalePostgresDaoAdapter;
 import br.fai.faitec.petlink2026.ports_and_adapters.adapter.dao.user.UserPostgresDaoAdapter;
 import br.fai.faitec.petlink2026.ports_and_adapters.adapter.dao.vaccine.VaccinePostgresDaoAdapter;
 import br.fai.faitec.petlink2026.ports_and_adapters.adapter.sucurity.BasicAuthenticationServiceAdapter;
@@ -12,6 +13,7 @@ import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.adoption.AdoptionDa
 import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.animal.FarmAnimalDao;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.announcement.AnnouncementDao;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.animal.PetDao;
+import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.sale.FarmAnimalSaleDao;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.user.UserDao;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.vaccine.VaccineDao;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.service.security.AuthenticationService;
@@ -76,7 +78,10 @@ public class AppConfiguration {
     public FarmAnimalDao getFarmAnimalPostgresDao(final Connection connection) {
         return new FarmAnimalPostgresDaoAdapter(connection);
     }
-
+    @Bean
+    public FarmAnimalSaleDao getFarmAnimalSalePostgresDao(final Connection connection) {
+        return new FarmAnimalSalePostgresDaoAdapter(connection);
+    }
 
     @Profile("basic")
     @Bean

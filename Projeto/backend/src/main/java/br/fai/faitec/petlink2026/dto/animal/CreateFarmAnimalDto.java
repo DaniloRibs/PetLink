@@ -19,7 +19,12 @@ public class CreateFarmAnimalDto {
 
     public FarmAnimalModel toFarmAnimalModel() {
         final FarmAnimalModel farmAnimalModel = new FarmAnimalModel();
-        farmAnimalModel.setName(name);
+        if (name == null  || name.isEmpty() ){
+            farmAnimalModel.setName("");
+        }
+        else{
+            farmAnimalModel.setName(name);
+        }
         farmAnimalModel.setIdentify(identify);
         farmAnimalModel.setBreed(breed);
         farmAnimalModel.setBirthDate(birthDate);

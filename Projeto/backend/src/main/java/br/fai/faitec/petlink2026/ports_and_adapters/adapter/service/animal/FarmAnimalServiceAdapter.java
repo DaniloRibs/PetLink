@@ -101,7 +101,7 @@ public class FarmAnimalServiceAdapter implements FarmAnimalService {
         }
 
         if (farmAnimalModel.getName() == null || farmAnimalModel.getName().isEmpty()) {
-            return 0;
+            farmAnimalModel.setName("");
         }
 
         if (farmAnimalModel.getIdentify() == null || farmAnimalModel.getIdentify().isEmpty()) {
