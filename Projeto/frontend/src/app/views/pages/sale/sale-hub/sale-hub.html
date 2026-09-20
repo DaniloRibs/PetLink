@@ -37,23 +37,11 @@
                     }
                 </div>
                 }
-                <h3>{{ listing.animals.length > 1 ? 'Lote de ' + listing.animals.length + ' animais' :
-                    (listing.animals[0]?.name ?? 'Animal') }}</h3>
-
-                @for (animal of listing.animals; track animal.id) {
-                <p class="sale-animal-line">
-                    {{ animal.name }}{{ animal.identify ? ' · ID ' + animal.identify : '' }}{{ animal.weight ? ' · '
-                    + animal.weight + ' kg' : '' }}
-                </p>
-                }
-                @if (listing.animals.length > 1 && listingWeight(listing) > 0) {
-                <p class="sale-animal-line">Peso total: {{ listingWeight(listing).toFixed(1) }} kg</p>
-                }
-
-                <p class="sale-description">{{ listing.sale.description }}</p>
+                <h3>{{ saleTitle(listing) }}</h3>
+                <p class="sale-animal-line">{{ listing.animals.length }} {{ listing.animals.length === 1 ? 'animal' :
+                    'animais' }}</p>
                 <p class="sale-price">R$ {{ listing.sale.price.toFixed(2) }}</p>
-                <p class="sale-price-type">{{ priceTypeLabel(listing.sale) }}</p>
-                <p class="sale-contact">Contato: {{ listing.sale.contact }}</p>
+                <button type="button" class="primary-button" (click)="openSale(listing)">Saber mais</button>
             </article>
             }
         </div>
@@ -86,7 +74,7 @@
                                 } @else {
                                 <span class="horseshoe-icon" aria-hidden="true"></span>
                                 }
-                                {{ animal.name }}{{ animal.identify ? ' · ID ' +
+                                {{ animal.name || 'Sem nome' }}{{ animal.identify ? ' · ID ' +
                                 animal.identify : '' }}{{ animal.weight ? ' · ' + animal.weight + ' kg' : '' }}
                             </span>
                         </label>
@@ -149,6 +137,7 @@
         </div>
 
         }
+
         @if (!loading && activeTab === 'vender' && mySales.length > 0) {
         <h3 class="sale-section-title">Minhas vendas publicadas</h3>
         <div class="pet-card-grid">
@@ -183,14 +172,14 @@
             <mat-icon>close</mat-icon>
         </button>
 
-        <p class="footer-title">SUA VENDA</p>
+        <p class="footer-title">{{ listing.sale.userId === userId ? 'SUA VENDA' : 'ANIMAIS À VENDA' }}</p>
         <h2>{{ saleTitle(listing) }}</h2>
 
         <div class="sale-modal-section">
             <p class="sale-modal-label">Animais publicados</p>
             @for (animal of listing.animals; track animal.id) {
             <p class="sale-animal-line">
-                {{ animal.name || ' - ' }}{{ animal.breed ? ' · ' + animal.breed : '' }}{{ animal.identify ? ' · ID
+                {{ animal.name || 'Sem nome' }}{{ animal.breed ? ' · ' + animal.breed : '' }}{{ animal.identify ? ' · ID
                 ' + animal.identify : '' }}{{ animal.weight ? ' · ' + animal.weight + ' kg' : '' }}
             </p>
             }
@@ -211,10 +200,11 @@
         </div>
 
         <div class="sale-modal-section">
-            <p class="sale-modal-label">Contato</p>
+            <p class="sale-modal-label">{{ listing.sale.userId === userId ? 'Contato' : 'Contato do vendedor' }}</p>
             <p>{{ listing.sale.contact }}</p>
         </div>
 
+        @if (listing.sale.userId === userId) {
         @if (confirmingDelete) {
         <p class="confirm-text">Cancelar esta venda? Os animais deixam de aparecer para compra.</p>
         <div class="confirm-actions">
@@ -230,6 +220,11 @@
             <button type="button" class="danger-button" (click)="requestDeleteSale()">
                 <mat-icon>delete</mat-icon> Cancelar venda
             </button>
+            <button type="button" class="secondary-button" (click)="closeSale()">Fechar</button>
+        </div>
+        }
+        } @else {
+        <div class="confirm-actions">
             <button type="button" class="secondary-button" (click)="closeSale()">Fechar</button>
         </div>
         }

@@ -50,11 +50,7 @@ export class DashboardLayout implements OnInit {
 
   setMode(mode: AnimalMode): void {
     this.animalModeService.set(mode);
-
-    const url = this.router.url;
-    if (mode === AnimalMode.FARM && (url.startsWith('/painel/anuncios') || url.startsWith('/painel/adocoes'))) {
-      this.router.navigate(['/painel']);
-    }
+    this.router.navigate(['/painel']);
   }
 
   toggleUserMenu(): void {
