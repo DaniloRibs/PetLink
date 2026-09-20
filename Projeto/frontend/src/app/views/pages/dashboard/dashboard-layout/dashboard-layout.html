@@ -1,13 +1,25 @@
-<div class="menu-page">
+<div class="menu-page" [class.theme-farm]="isFarm">
 
   <header class="menu-header dashboard-header">
 
     <div class="sidebar-brand">
-      <img src="assets/images/PetLink_Logo_Marrom.png" alt="PetLink" class="sidebar-brand-mark">
+      <img [src]="isFarm ? 'assets/images/PetLink_Logo_Verde.png' : 'assets/images/PetLink_Logo_Marrom.png'"
+        alt="PetLink" class="sidebar-brand-mark">
       <div class="sidebar-brand-text">
         <h1 class="sidebar-brand-title">PetLink</h1>
         <p class="sidebar-brand-subtitle">Imunizar, Cuidar e Conectar</p>
       </div>
+    </div>
+
+    <div class="toggle-group mode-toggle" role="radiogroup" aria-label="Tipo de animal">
+      <label class="toggle-option">
+        <input type="radio" name="animalMode" [checked]="!isFarm" (change)="setMode(AnimalMode.PET)">
+        <span><mat-icon>pets</mat-icon> Animais de Estimação</span>
+      </label>
+      <label class="toggle-option">
+        <input type="radio" name="animalMode" [checked]="isFarm" (change)="setMode(AnimalMode.FARM)">
+        <span><mat-icon>agriculture</mat-icon> Animais de Fazenda</span>
+      </label>
     </div>
 
     <div class="menu-actions">
@@ -47,9 +59,10 @@
       <a routerLink="/painel/pets" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}"
         class="sidebar-item">
         <span class="sidebar-item-icon"><mat-icon>pets</mat-icon></span>
-        <span class="sidebar-item-label">Meus Pets</span>
+        <span class="sidebar-item-label">{{ isFarm ? 'Meus Animais' : 'Meus Pets' }}</span>
       </a>
 
+      @if (!isFarm) {
       <a routerLink="/painel/anuncios" routerLinkActive="active-link" class="sidebar-item">
         <span class="sidebar-item-icon"><mat-icon>campaign</mat-icon></span>
         <span class="sidebar-item-label">Anúncios</span>
@@ -59,6 +72,14 @@
         <span class="sidebar-item-icon"><mat-icon>favorite</mat-icon></span>
         <span class="sidebar-item-label">Adoções</span>
       </a>
+      }
+
+      @if (isFarm) {
+      <a routerLink="/painel/vendas" routerLinkActive="active-link" class="sidebar-item">
+        <span class="sidebar-item-icon"><mat-icon>storefront</mat-icon></span>
+        <span class="sidebar-item-label">Vendas</span>
+      </a>
+      }
     </div>
 
   </aside>

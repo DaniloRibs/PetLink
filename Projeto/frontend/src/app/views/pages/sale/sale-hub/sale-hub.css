@@ -1,0 +1,108 @@
+.sale-tabs {
+    display: flex;
+    gap: 6px;
+    margin: 20px 0 28px;
+    padding: 6px;
+    background: rgba(var(--primary-rgb), 0.08);
+    border-radius: 14px;
+    width: fit-content;
+}
+
+.sale-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: none;
+    background: transparent;
+    color: var(--primary);
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.sale-tab:hover {
+    background: rgba(var(--primary-rgb), 0.12);
+}
+
+.sale-tab.active {
+    background: var(--primary);
+    color: #fff;
+    box-shadow: 0 6px 14px rgba(var(--primary-rgb), 0.25);
+}
+
+.sale-tab.active:hover {
+    background: var(--primary);
+}
+
+.sale-tab mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+}
+
+.sale-animal-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 220px;
+    overflow-y: auto;
+}
+
+.sale-animal-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.sale-animal-option input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+}
+
+.sale-hint {
+    background: rgba(var(--primary-rgb), 0.08);
+    border-radius: 12px;
+    padding: 12px 16px;
+    margin-bottom: 16px;
+}
+
+.sale-hint p {
+    margin: 4px 0;
+}
+
+.sale-hint .secondary-button {
+    margin-top: 8px;
+}
+
+.sale-animal-line {
+    margin: 2px 0 !important;
+    font-size: 14px;
+}
+
+.sale-description {
+    margin-top: 8px !important;
+}
+
+.sale-price {
+    margin-top: 10px !important;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--primary) !important;
+}
+
+.sale-price-type {
+    margin: 0 !important;
+    font-size: 13px;
+    opacity: 0.8;
+}
+
+.sale-contact {
+    margin-top: 8px !important;
+    font-weight: 600;
+    color: var(--primary) !important;
+}

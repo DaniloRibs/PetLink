@@ -20,7 +20,14 @@
           <span class="pet-badge">Em adoção</span>
           }
         </div>
-        <p class="pet-meta">{{ pet.breed }} · Nascido em {{ pet.birthDate | date:'dd/MM/yyyy': 'UTC' }}</p>
+        <p class="pet-meta">{{ pet.breed }}{{ pet.gender ? ' · ' + genderLabel(pet.gender) : '' }} · Nascido em {{
+          pet.birthDate | date:'dd/MM/yyyy': 'UTC' }}</p>
+        @if (isFarm && (pet.identifier || pet.weight)) {
+        <p class="pet-meta">
+          {{ pet.identifier ? 'Identificador: ' + pet.identifier : '' }}{{ pet.identifier && pet.weight ? ' · ' : ''
+          }}{{ pet.weight ? 'Peso: ' + pet.weight + ' kg' : '' }}
+        </p>
+        }
       </div>
     </div>
 
@@ -73,10 +80,17 @@
         <div class="field-group">
           <label>Espécie</label>
           <select formControlName="species">
-            <option [value]="PetSpecies.DOG">Cachorro</option>
-            <option [value]="PetSpecies.CAT">Gato</option>
-            <option [value]="PetSpecies.BIRD">Pássaro</option>
-            <option [value]="PetSpecies.OTHER">Outro</option>
+            @for (option of speciesOptions; track option.value) {
+            <option [value]="option.value">{{ option.label }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="field-group">
+          <label>Gênero</label>
+          <select formControlName="gender">
+            <option [value]="PetGender.MALE">Macho</option>
+            <option [value]="PetGender.FEMALE">Fêmea</option>
           </select>
         </div>
 
@@ -89,6 +103,18 @@
           <label>Data de Nascimento</label>
           <input type="date" formControlName="birthDate">
         </div>
+
+        @if (isFarm) {
+        <div class="field-group">
+          <label>Identificador</label>
+          <input type="text" formControlName="identifier">
+        </div>
+
+        <div class="field-group">
+          <label>Peso (kg)</label>
+          <input type="number" min="0" step="0.1" formControlName="weight">
+        </div>
+        }
 
         <input type="submit" value="Salvar alterações" [disabled]="!validateEditFields()">
 

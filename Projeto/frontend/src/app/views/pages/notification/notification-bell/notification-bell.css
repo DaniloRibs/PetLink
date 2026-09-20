@@ -10,8 +10,8 @@
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  border: 1px solid rgba(111, 78, 55, 0.15);
-  background: #f8ede5;
+  border: 1px solid rgba(var(--primary-rgb), 0.15);
+  background: var(--primary-soft);
   cursor: pointer;
   font-family: inherit;
   font-size: 18px;
@@ -19,8 +19,8 @@
 }
 
 .notification-trigger:hover {
-  background: #f1e0d3;
-  border-color: rgba(111, 78, 55, 0.3);
+  background: var(--primary-soft-hover);
+  border-color: rgba(var(--primary-rgb), 0.3);
 }
 
 .notification-count {
@@ -50,7 +50,7 @@
   max-height: 380px;
   overflow-y: auto;
   background: #fff;
-  border: 1px solid rgba(111, 78, 55, 0.15);
+  border: 1px solid rgba(var(--primary-rgb), 0.15);
   border-radius: 14px;
   box-shadow: 0 16px 36px rgba(94, 63, 39, 0.16);
   padding: 16px;
@@ -82,15 +82,15 @@
   gap: 10px;
   padding: 10px 12px;
   border-radius: 12px;
-  background: #f8ede5;
-  border: 1px solid rgba(111, 78, 55, 0.1);
+  background: var(--primary-soft);
+  border: 1px solid rgba(var(--primary-rgb), 0.1);
   color: #4f3426;
   font-size: 13px;
   text-decoration: none;
 }
 
 .notification-item:hover {
-  background: #f1e0d3;
+  background: var(--primary-soft-hover);
 }
 
 .notification-item.is-overdue {
@@ -111,14 +111,14 @@
   font-size: 20px;
   width: 20px;
   height: 20px;
-  color: #6F4E37;
+  color: var(--primary);
 }
 
 .notification-icon mat-icon {
   font-size: 18px;
   width: 18px;
   height: 18px;
-  color: #6F4E37;
+  color: var(--primary);
   display: block;
 }
 

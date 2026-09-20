@@ -3,7 +3,7 @@
   gap: 6px;
   margin: 20px 0 28px;
   padding: 6px;
-  background: rgba(111, 78, 55, 0.08);
+  background: rgba(var(--primary-rgb), 0.08);
   border-radius: 14px;
   width: fit-content;
 }
@@ -14,7 +14,7 @@
   gap: 8px;
   border: none;
   background: transparent;
-  color: #6F4E37;
+  color: var(--primary);
   border-radius: 10px;
   padding: 10px 20px;
   font-weight: 700;
@@ -24,23 +24,23 @@
 }
 
 .adoption-tab:hover {
-  background: rgba(111, 78, 55, 0.12);
+  background: rgba(var(--primary-rgb), 0.12);
 }
 
 .adoption-tab.active {
-  background: #6F4E37;
+  background: var(--primary);
   color: #fff;
-  box-shadow: 0 6px 14px rgba(111, 78, 55, 0.25);
+  box-shadow: 0 6px 14px rgba(var(--primary-rgb), 0.25);
 }
 
 .adoption-tab.active:hover {
-  background: #6F4E37;
+  background: var(--primary);
 }
 
 .adoption-contact {
   margin-top: 4px !important;
   font-weight: 600;
-  color: #6F4E37 !important;
+  color: var(--primary) !important;
 }
 
 .adoption-tab mat-icon {

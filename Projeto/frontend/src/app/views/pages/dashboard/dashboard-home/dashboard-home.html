@@ -1,7 +1,6 @@
 <section class="hero-card dashboard-hero">
   <div class="hero-copy">
-    <p class="eyebrow">Bem-vindo de volta{{ userName ? ', ' + userName : '' }} 👋</p>
-    <h1 class="dashboard-title">Tudo pronto para cuidar do seu pet hoje.</h1>
+    <h1 class="dashboard-title">Tudo pronto para cuidar do seu animal hoje.</h1>
     <p class="hero-text">Aqui está um resumo rápido do que está rolando no seu PetLink.</p>
 
     <div class="feature-grid">
@@ -36,10 +35,15 @@
   </div>
 
   <div class="hero-visual" aria-hidden="true">
-    <img src="assets/images/golden-retriever-dog.png" alt="" class="hero-dog">
+    <img [src]="isFarm ? 'assets/images/Vaca.png' : 'assets/images/golden-retriever-dog.png'" alt="" class="hero-dog">
     <div class="hero-oval"></div>
+    @if (isFarm) {
+    <div class="hero-paw"><img src="assets/images/PetLink_Logo_Verde.png" alt="" class="hero-horseshoe"></div>
+    <div class="hero-heart"><mat-icon>grass</mat-icon></div>
+    } @else {
     <div class="hero-paw"><mat-icon>pets</mat-icon></div>
     <div class="hero-heart"><mat-icon>favorite_border</mat-icon></div>
-    <div class="hero-badge">Seu pet, sua rotina, tudo no mesmo lugar.</div>
+    }
+    <div class="hero-badge">Seu animal, sua rotina, tudo no mesmo lugar.</div>
   </div>
 </section>
