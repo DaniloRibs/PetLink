@@ -90,7 +90,6 @@ public class VaccineNotificationServiceAdapter implements VaccineNotificationSer
         return alerts;
     }
 
-    // Agrupa as doses pelo catalogo (raiva = antirrabica) e guarda so a mais recente de cada grupo.
     private Map<String, VaccineModel> latestDosePerVaccine(final AnimalModel animal) {
         final Map<String, VaccineModel> latestByVaccine = new LinkedHashMap<>();
 

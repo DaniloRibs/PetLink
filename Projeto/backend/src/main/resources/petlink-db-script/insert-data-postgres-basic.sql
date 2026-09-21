@@ -73,6 +73,73 @@ INSERT INTO animal_model (name, species, breed, birth_date, user_id, gender) VAL
 ('', 'COW', 'Nelore', '2023-05-15', 2, 'M');
 
 
+-- Mais animais (ids 61 a 123): PetShop Cão Feliz, BB enterprise, Fazenda Boa Vista, Agropecuária Vale,
+-- d@d.com e outras contas
+INSERT INTO animal_model (name, species, breed, birth_date, user_id, gender) VALUES
+('Pipa', 'DOG', 'Golden Retriever', '2023-02-14', 6, 'F'),
+('Bidu', 'DOG', 'Beagle', '2022-07-19', 6, 'M'),
+('Nina', 'CAT', 'Ragdoll', '2023-06-01', 6, 'F'),
+('Simba', 'CAT', 'Maine Coon', '2022-10-12', 6, 'M'),
+('Lola', 'DOG', 'Shih Tzu', '2021-12-05', 6, 'F'),
+('Tobby', 'DOG', 'Bulldog Francês', '2023-09-09', 6, 'M'),
+('Cleo', 'CAT', 'Bengal', '2023-04-22', 6, 'F'),
+('Zeus', 'DOG', 'Rottweiler', '2020-11-30', 6, 'M'),
+('Kiara', 'BIRD', 'Periquito', '2024-01-18', 6, 'F'),
+('Amora', 'CAT', 'SRD', '2024-03-03', 6, 'F'),
+('Bob', 'DOG', 'Border Collie', '2022-05-25', 6, 'M'),
+('Mel', 'DOG', 'Dachshund', '2021-08-17', 6, 'F'),
+('Fred', 'DOG', 'SRD', '2022-03-03', 3, 'M'),
+('Frida', 'CAT', 'SRD', '2023-08-20', 3, 'F'),
+('Chico', 'PIG', 'Duroc', '2023-09-12', 3, 'M'),
+('Dolly', 'SHEEP', 'Texel', '2023-04-01', 3, 'F'),
+('Pintadinha', 'BIRD', 'Galinha Caipira', '2024-04-15', 3, 'F'),
+('Peru Rei', 'BIRD', 'Peru', '2023-10-10', 3, 'M'),
+('Marajó', 'HORSE', 'Crioulo', '2019-06-01', 3, 'M'),
+('Vitória', 'COW', 'Jersey', '2021-02-02', 3, 'F'),
+('Guarani', 'DOG', 'Border Collie', '2021-04-09', 5, 'M'),
+('Tigrinho', 'CAT', 'SRD', '2022-06-11', 5, 'M'),
+('Rajada', 'DOG', 'Pastor Australiano', '2022-02-28', 5, 'F'),
+('Baronesa', 'COW', 'Girolando', '2021-07-07', 5, 'F'),
+('Tempestade', 'HORSE', 'Mangalarga', '2019-01-09', 5, 'F'),
+('Torresmo', 'PIG', 'Duroc', '2024-02-02', 5, 'M'),
+('Rosinha', 'PIG', 'Landrace', '2023-12-12', 5, 'F'),
+('Merino', 'SHEEP', 'Merino', '2022-08-08', 5, 'M'),
+('Cocorico', 'BIRD', 'Galo Carijó', '2024-01-25', 5, 'M'),
+('Aurora', 'COW', 'Holandesa', '2020-05-05', 5, 'F'),
+('Faísca', 'HORSE', 'Crioulo', '2020-03-03', 5, 'M'),
+('Malhadinha', 'COW', 'Jersey', '2022-04-14', 5, 'F'),
+('Capitão', 'COW', 'Angus', '2019-09-09', 5, 'M'),
+('Sultão', 'DOG', 'Pastor Alemão', '2020-06-15', 8, 'M'),
+('Miúda', 'CAT', 'SRD', '2023-01-30', 8, 'F'),
+('Ventania', 'HORSE', 'Mangalarga Marchador', '2019-05-12', 8, 'M'),
+('Boneca', 'COW', 'Gir Leiteiro', '2020-08-08', 8, 'F'),
+('Trovoada', 'COW', 'Nelore', '2021-01-19', 8, 'F'),
+('Bravo', 'COW', 'Brahman', '2019-10-03', 8, 'M'),
+('Ovelinha', 'SHEEP', 'Suffolk', '2023-02-14', 8, 'F'),
+('Cacau', 'PIG', 'Large White', '2023-07-07', 8, 'F'),
+('Pintada', 'BIRD', 'Galinha d''Angola', '2024-01-05', 8, 'F'),
+('Valente', 'HORSE', 'Quarto de Milha', '2018-03-27', 8, 'M'),
+('Jurema', 'COW', 'Guzerá', '2020-12-12', 8, 'F'),
+('Lanzinha', 'SHEEP', 'Dorper', '2022-10-30', 8, 'F'),
+('Belinha', 'DOG', 'Golden Retriever', '2022-09-09', 2, 'F'),
+('Mingau', 'CAT', 'Persa', '2023-02-02', 2, 'M'),
+('Pingo', 'BIRD', 'Calopsita', '2024-02-14', 2, 'M'),
+('Sarará', 'DOG', 'SRD', '2024-05-05', 2, 'F'),
+('Sereia', 'COW', 'Girolando', '2021-05-21', 2, 'F'),
+('Tita', 'COW', 'Holandesa', '2020-02-20', 2, 'F'),
+('Rei', 'HORSE', 'Mangalarga', '2018-09-09', 2, 'M'),
+('Relâmpago', 'HORSE', 'Quarto de Milha', '2019-04-04', 2, 'M'),
+('Bacana', 'PIG', 'Landrace', '2023-08-08', 2, 'M'),
+('Bolota', 'PIG', 'Duroc', '2023-10-01', 2, 'F'),
+('Lã', 'SHEEP', 'Dorper', '2022-11-11', 2, 'F'),
+('Pelúcia', 'SHEEP', 'Santa Inês', '2023-01-01', 2, 'F'),
+('Cocó', 'BIRD', 'Galinha Caipira', '2024-03-03', 2, 'F'),
+('Galo Carijó', 'BIRD', 'Carijó', '2023-11-11', 2, 'M'),
+('Nala', 'CAT', 'Siamês', '2022-01-20', 4, 'F'),
+('Max', 'DOG', 'Boxer', '2021-11-11', 7, 'M'),
+('Pretinha', 'CAT', 'SRD', '2022-04-04', 9, 'F'),
+('Bella', 'DOG', 'Labrador', '2023-06-06', 10, 'F');
+
 INSERT INTO farm_animal_model (identifier, for_sell, weight, animal_id) VALUES
 ('V-001', false, 450.5, 2),
 ('H-001', true, 520.0, 3),
@@ -128,6 +195,44 @@ INSERT INTO farm_animal_model (identifier, for_sell, weight, animal_id) VALUES
 ('NEL-030', false, 600.0, 60);
 
 
+INSERT INTO farm_animal_model (identifier, for_sell, weight, animal_id) VALUES
+('BB-P01', true, 140.0, 75),
+('BB-S01', true, 58.0, 76),
+('BB-G01', true, 2.2, 77),
+('BB-G02', true, 9.5, 78),
+('BB-H01', true, 480.0, 79),
+('BB-C01', false, 410.0, 80),
+('FBV-C01', false, 455.0, 84),
+('FBV-H01', false, 510.0, 85),
+('FBV-P01', true, 105.0, 86),
+('FBV-P02', true, 118.0, 87),
+('FBV-S01', true, 72.0, 88),
+('FBV-G01', true, 3.1, 89),
+('FBV-C02', true, 520.0, 90),
+('FBV-H02', true, 470.0, 91),
+('FBV-C03', true, 400.0, 92),
+('FBV-C04', true, 760.0, 93),
+('AV-H01', true, 505.0, 96),
+('AV-C01', false, 430.0, 97),
+('AV-C02', true, 470.0, 98),
+('AV-C03', true, 720.0, 99),
+('AV-S01', true, 62.0, 100),
+('AV-P01', true, 130.0, 101),
+('AV-G01', true, 1.8, 102),
+('AV-H02', false, 530.0, 103),
+('AV-C04', false, 445.0, 104),
+('AV-S02', true, 66.0, 105),
+('DD-C01', false, 462.0, 110),
+('DD-C02', false, 505.0, 111),
+('DD-H01', false, 545.0, 112),
+('DD-H02', true, 520.0, 113),
+('DD-P01', true, 125.0, 114),
+('DD-P02', true, 118.0, 115),
+('DD-S01', true, 64.0, 116),
+('DD-S02', true, 58.0, 117),
+('DD-G01', false, 2.0, 118),
+('DD-G02', false, 3.4, 119);
+
 INSERT INTO pet_model (for_adoption, animal_id) VALUES
 (false, 1),
 (true, 4),
@@ -137,6 +242,35 @@ INSERT INTO pet_model (for_adoption, animal_id) VALUES
 (false, 12),
 (false, 13),
 (true, 15);
+
+INSERT INTO pet_model (for_adoption, animal_id) VALUES
+(true, 61),
+(true, 62),
+(true, 63),
+(false, 64),
+(true, 65),
+(true, 66),
+(false, 67),
+(false, 68),
+(true, 69),
+(true, 70),
+(true, 71),
+(false, 72),
+(false, 73),
+(true, 74),
+(false, 81),
+(true, 82),
+(false, 83),
+(false, 94),
+(true, 95),
+(false, 106),
+(false, 107),
+(false, 108),
+(true, 109),
+(false, 120),
+(false, 121),
+(true, 122),
+(false, 123);
 
 -- Vacinas coerentes com a espécie de cada animal (animal_id = animal_model.id)
 INSERT INTO vaccine_model (application_date, expiration_date, name, description, batch, animal_id) VALUES
@@ -159,7 +293,7 @@ INSERT INTO vaccine_model (application_date, expiration_date, name, description,
 -- Bolinha (cachorro)
 ('2023-06-12', '2024-06-12', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-003', 6),
 -- Pipoca (pássaro de estimação)
-('2022-12-05', '2023-12-05', 'Poliomavírus', 'Vacina para psitacídeos', 'POL-071', 7),
+('2023-03-05', '2024-03-05', 'Poliomavírus', 'Vacina para psitacídeos', 'POL-071', 7),
 -- Peppa (suíno)
 ('2023-11-20', '2024-05-20', 'Parvovirose Suína', 'Vacina reprodutiva', 'PAR-090', 8),
 -- Malhada (bovino), sem lote nem próxima dose informados
@@ -169,6 +303,770 @@ INSERT INTO vaccine_model (application_date, expiration_date, name, description,
 -- Galo Doido (ave de granja)
 ('2023-06-20', '2023-12-20', 'Newcastle', 'Vacina contra doença de Newcastle', 'NEW-330', 14);
 
+-- === Vacinas: d@d.com (Danilo) ===
+INSERT INTO vaccine_model (application_date, expiration_date, name, description, batch, animal_id) VALUES
+-- NEL-001 (fazenda, animal 31)
+('2026-08-17', '2027-02-17', 'Febre Aftosa', 'Campanha de vacinação semestral', 'AFT-113', 31),
+('2026-02-17', '2026-08-17', 'Aftosa', 'Campanha de vacinação semestral', 'AFT-123', 31),
+('2026-04-16', '2027-04-16', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-145', 31),
+('2025-04-16', '2026-04-16', 'Clostridiose', 'Vacina polivalente clostridial', 'CLO-172', 31),
+('2025-10-05', '2026-10-05', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-182', 31),
+('2024-10-05', '2025-10-05', 'Antirrábica', 'Controle da raiva dos herbívoros', 'RAI-188', 31),
+('2026-07-05', '2027-01-05', 'Clostridiose', 'Vacina reprodutiva', 'LEP-194', 31),
+('2026-07-05', '2027-01-05', 'Leptospirose', 'Vacina reprodutiva', 'LEP-200', 31),
+('2026-01-05', '2026-07-05', 'Leptospirose', 'Vacina reprodutiva', 'LEP-218', 31),
+-- NEL-002 (fazenda, animal 32)
+('2026-05-14', '2026-11-14', 'Febre Aftosa', 'Campanha de vacinação semestral', 'AFT-242', 32),
+('2025-11-14', '2026-05-14', 'Aftosa', 'Campanha de vacinação semestral', 'AFT-253', 32),
+('2026-06-19', '2027-06-19', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-267', 32),
+('2025-03-13', '2026-03-13', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-286', 32),
+-- NEL-003 (fazenda, animal 33)
+('2026-06-21', '2026-12-21', 'Febre Aftosa', 'Campanha de vacinação semestral', 'AFT-291', 33),
+('2025-12-21', '2026-06-21', 'Aftosa', 'Campanha de vacinação semestral', 'AFT-303', 33),
+('2025-10-05', '2026-10-05', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-310', 33),
+('2026-03-20', '2027-03-20', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-335', 33),
+('2025-03-20', '2026-03-20', 'Antirrábica', 'Controle da raiva dos herbívoros', 'RAI-360', 33),
+-- NEL-004 (fazenda, animal 34)
+('2026-06-14', '2026-12-14', 'Febre Aftosa', 'Campanha de vacinação semestral', 'AFT-374', 34),
+('2025-12-14', '2026-06-14', 'Aftosa', 'Campanha de vacinação semestral', 'AFT-389', 34),
+('2026-04-20', '2027-04-20', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-409', 34),
+('2025-04-20', '2026-04-20', 'Clostridiose', 'Vacina polivalente clostridial', 'CLO-425', 34),
+('2025-10-06', '2026-10-06', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-440', 34),
+('2026-07-12', '2027-01-12', 'Leptospirose', 'Vacina reprodutiva', 'LEP-456', 34),
+('2026-01-12', '2026-07-12', 'Leptospirose', 'Vacina reprodutiva', 'LEP-474', 34),
+-- NEL-005 (fazenda, animal 35)
+('2026-09-10', '2027-03-10', 'Febre Aftosa', 'Campanha de vacinação semestral', 'AFT-495', 35),
+('2026-03-10', '2026-09-10', 'Aftosa', 'Campanha de vacinação semestral', 'AFT-499', 35),
+('2026-03-20', '2027-03-20', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-518', 35),
+('2025-08-24', '2026-08-24', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-543', 35),
+-- NEL-006 (fazenda, animal 36)
+('2026-05-19', '2026-11-19', 'Febre Aftosa', 'Campanha de vacinação semestral', 'AFT-550', 36),
+('2025-11-19', '2026-05-19', 'Aftosa', 'Campanha de vacinação semestral', 'AFT-556', 36),
+('2025-10-05', '2026-10-05', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-580', 36),
+('2024-10-05', '2025-10-05', 'Clostridiose', 'Vacina polivalente clostridial', 'CLO-600', 36),
+('2026-06-06', '2027-06-06', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-624', 36),
+-- NEL-007 (fazenda, animal 37)
+('2026-05-11', '2026-11-11', 'Febre Aftosa', 'Campanha de vacinação semestral', 'AFT-649', 37),
+('2025-11-11', '2026-05-11', 'Aftosa', 'Campanha de vacinação semestral', 'AFT-665', 37),
+('2026-07-27', '2027-07-27', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-677', 37),
+('2025-09-21', '2026-09-21', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-681', 37),
+('2024-09-21', '2025-09-21', 'Antirrábica', 'Controle da raiva dos herbívoros', 'RAI-700', 37),
+('2026-05-14', '2026-11-14', 'Leptospirose', 'Vacina reprodutiva', 'LEP-714', 37),
+-- NEL-008 (fazenda, animal 38)
+('2026-07-12', '2027-01-12', 'Febre Aftosa', 'Campanha de vacinação semestral', 'AFT-739', 38),
+('2026-01-12', '2026-07-12', 'Aftosa', 'Campanha de vacinação semestral', 'AFT-755', 38),
+('2026-04-27', '2027-04-27', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-779', 38),
+('2025-02-19', '2026-02-19', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-791', 38),
+('2024-02-19', '2025-02-19', 'Antirrábica', 'Controle da raiva dos herbívoros', 'RAI-808', 38),
+-- NEL-009 (fazenda, animal 39)
+('2026-07-12', '2027-01-12', 'Febre Aftosa', 'Campanha de vacinação semestral', 'AFT-825', 39),
+('2025-09-26', '2026-09-26', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-841', 39),
+('2026-05-17', '2027-05-17', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-846', 39),
+-- NEL-010 (fazenda, animal 40)
+('2026-05-12', '2026-11-12', 'Febre Aftosa', 'Campanha de vacinação semestral', 'AFT-860', 40),
+('2025-11-12', '2026-05-12', 'Aftosa', 'Campanha de vacinação semestral', 'AFT-867', 40),
+('2026-05-24', '2027-05-24', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-870', 40),
+('2025-05-24', '2026-05-24', 'Clostridiose', 'Vacina polivalente clostridial', 'CLO-891', 40),
+('2025-09-23', '2026-09-23', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-913', 40),
+('2026-07-15', '2027-01-15', 'Leptospirose', 'Vacina reprodutiva', 'LEP-919', 40),
+-- NEL-011 (fazenda, animal 41)
+('2026-07-10', '2027-01-10', 'Febre Aftosa', 'Campanha de vacinação semestral', 'AFT-943', 41),
+('2026-06-17', '2027-06-17', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-950', 41),
+('2025-06-17', '2026-06-17', 'Clostridiose', 'Vacina polivalente clostridial', 'CLO-975', 41),
+('2025-03-19', '2026-03-19', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-982', 41),
+('2024-03-19', '2025-03-19', 'Antirrábica', 'Controle da raiva dos herbívoros', 'RAI-003', 41),
+('2023-12-11', NULL, 'Brucelose', 'Dose única para bezerras', 'BRU-010', 41),
+-- NEL-012 (fazenda, animal 42)
+('2026-05-10', '2026-11-10', 'Febre Aftosa', 'Campanha de vacinação semestral', 'AFT-022', 42),
+('2025-11-10', '2026-05-10', 'Aftosa', 'Campanha de vacinação semestral', 'AFT-029', 42),
+('2025-09-30', '2026-09-30', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-048', 42),
+('2024-09-30', '2025-09-30', 'Clostridiose', 'Vacina polivalente clostridial', 'CLO-067', 42),
+('2026-07-28', '2027-07-28', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-082', 42),
+('2025-07-28', '2026-07-28', 'Antirrábica', 'Controle da raiva dos herbívoros', 'RAI-097', 42),
+('2023-12-11', NULL, 'Brucelose', 'Dose única para bezerras', 'BRU-102', 42),
+-- NEL-013 (fazenda, animal 43)
+('2026-09-03', '2027-03-03', 'Febre Aftosa', 'Campanha de vacinação semestral', 'AFT-116', 43),
+('2026-09-10', '2027-09-10', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-119', 43),
+('2025-09-10', '2026-09-10', 'Clostridiose', 'Vacina polivalente clostridial', 'CLO-143', 43),
+('2025-09-30', '2026-09-30', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-160', 43),
+('2024-09-30', '2025-09-30', 'Antirrábica', 'Controle da raiva dos herbívoros', 'RAI-178', 43),
+('2026-05-20', '2026-11-20', 'Leptospirose', 'Vacina reprodutiva', 'LEP-199', 43),
+('2023-12-11', NULL, 'Brucelose', 'Dose única para bezerras', 'BRU-207', 43),
+-- NEL-014 (fazenda, animal 44)
+('2026-08-08', '2027-02-08', 'Febre Aftosa', 'Campanha de vacinação semestral', 'AFT-228', 44),
+('2026-02-08', '2026-08-08', 'Aftosa', 'Campanha de vacinação semestral', 'AFT-250', 44),
+('2026-06-22', '2027-06-22', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-267', 44),
+('2025-06-22', '2026-06-22', 'Clostridiose', 'Vacina polivalente clostridial', 'CLO-287', 44),
+('2025-06-09', '2026-06-09', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-291', 44),
+('2024-06-09', '2025-06-09', 'Antirrábica', 'Controle da raiva dos herbívoros', 'RAI-295', 44),
+('2023-12-11', NULL, 'Brucelose', 'Dose única para bezerras', 'BRU-318', 44),
+-- NEL-015 (fazenda, animal 45)
+('2026-09-04', '2027-03-04', 'Febre Aftosa', 'Campanha de vacinação semestral', 'AFT-335', 45),
+('2025-09-27', '2026-09-27', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-353', 45),
+('2026-09-11', '2027-09-11', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-360', 45),
+('2023-12-11', NULL, 'Brucelose', 'Dose única para bezerras', 'BRU-369', 45),
+-- NEL-016 (fazenda, animal 46)
+('2026-08-12', '2027-02-12', 'Febre Aftosa', 'Campanha de vacinação semestral', 'AFT-377', 46),
+('2026-07-31', '2027-07-31', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-392', 46),
+('2025-07-31', '2026-07-31', 'Clostridiose', 'Vacina polivalente clostridial', 'CLO-397', 46),
+('2025-10-03', '2026-10-03', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-409', 46),
+('2024-10-03', '2025-10-03', 'Antirrábica', 'Controle da raiva dos herbívoros', 'RAI-420', 46),
+('2026-05-21', '2026-11-21', 'Leptospirose', 'Vacina reprodutiva', 'LEP-438', 46),
+('2023-12-11', NULL, 'Brucelose', 'Dose única para bezerras', 'BRU-454', 46),
+-- NEL-017 (fazenda, animal 47)
+('2026-07-05', '2027-01-05', 'Febre Aftosa', 'Campanha de vacinação semestral', 'AFT-471', 47),
+('2026-01-05', '2026-07-05', 'Aftosa', 'Campanha de vacinação semestral', 'AFT-488', 47),
+('2026-08-17', '2027-08-17', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-507', 47),
+('2025-02-28', '2026-02-28', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-518', 47),
+('2023-12-11', NULL, 'Brucelose', 'Dose única para bezerras', 'BRU-527', 47),
+-- NEL-018 (fazenda, animal 48)
+('2026-07-19', '2027-01-19', 'Febre Aftosa', 'Campanha de vacinação semestral', 'AFT-530', 48),
+('2025-10-05', '2026-10-05', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-553', 48),
+('2024-10-05', '2025-10-05', 'Clostridiose', 'Vacina polivalente clostridial', 'CLO-556', 48),
+('2026-06-18', '2027-06-18', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-564', 48),
+('2025-06-18', '2026-06-18', 'Antirrábica', 'Controle da raiva dos herbívoros', 'RAI-570', 48),
+('2023-12-11', NULL, 'Brucelose', 'Dose única para bezerras', 'BRU-592', 48),
+-- NEL-019 (fazenda, animal 49)
+('2026-07-07', '2027-01-07', 'Febre Aftosa', 'Campanha de vacinação semestral', 'AFT-612', 49),
+('2026-03-13', '2027-03-13', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-621', 49),
+('2025-03-13', '2026-03-13', 'Clostridiose', 'Vacina polivalente clostridial', 'CLO-645', 49),
+('2025-09-25', '2026-09-25', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-651', 49),
+('2026-08-23', '2027-02-23', 'Leptospirose', 'Vacina reprodutiva', 'LEP-667', 49),
+('2026-02-23', '2026-08-23', 'Leptospirose', 'Vacina reprodutiva', 'LEP-691', 49),
+('2023-12-11', NULL, 'Brucelose', 'Dose única para bezerras', 'BRU-695', 49),
+-- NEL-020 (fazenda, animal 50)
+('2026-06-17', '2026-12-17', 'Febre Aftosa', 'Campanha de vacinação semestral', 'AFT-721', 50),
+('2026-04-04', '2027-04-04', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-744', 50),
+('2025-04-04', '2026-04-04', 'Clostridiose', 'Vacina polivalente clostridial', 'CLO-755', 50),
+('2025-04-22', '2026-04-22', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-760', 50),
+('2024-04-22', '2025-04-22', 'Antirrábica', 'Controle da raiva dos herbívoros', 'RAI-768', 50),
+('2023-12-11', NULL, 'Brucelose', 'Dose única para bezerras', 'BRU-779', 50),
+-- NEL-021 (fazenda, animal 51)
+('2026-07-13', '2027-01-13', 'Febre Aftosa', 'Campanha de vacinação semestral', 'AFT-784', 51),
+('2026-01-13', '2026-07-13', 'Aftosa', 'Campanha de vacinação semestral', 'AFT-800', 51),
+('2025-09-21', '2026-09-21', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-804', 51),
+('2024-09-21', '2025-09-21', 'Clostridiose', 'Vacina polivalente clostridial', 'CLO-816', 51),
+('2026-08-16', '2027-08-16', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-822', 51),
+-- NEL-022 (fazenda, animal 52)
+('2026-06-19', '2026-12-19', 'Febre Aftosa', 'Campanha de vacinação semestral', 'AFT-835', 52),
+('2026-04-14', '2027-04-14', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-858', 52),
+('2025-09-22', '2026-09-22', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-873', 52),
+('2024-09-22', '2025-09-22', 'Antirrábica', 'Controle da raiva dos herbívoros', 'RAI-895', 52),
+('2026-05-21', '2026-11-21', 'Leptospirose', 'Vacina reprodutiva', 'LEP-911', 52),
+-- NEL-023 (fazenda, animal 53)
+('2026-08-17', '2027-02-17', 'Febre Aftosa', 'Campanha de vacinação semestral', 'AFT-935', 53),
+('2026-02-17', '2026-08-17', 'Aftosa', 'Campanha de vacinação semestral', 'AFT-950', 53),
+('2026-07-04', '2027-07-04', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-964', 53),
+('2025-07-04', '2026-07-04', 'Clostridiose', 'Vacina polivalente clostridial', 'CLO-967', 53),
+('2025-07-09', '2026-07-09', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-992', 53),
+('2024-07-09', '2025-07-09', 'Antirrábica', 'Controle da raiva dos herbívoros', 'RAI-004', 53),
+-- NEL-024 (fazenda, animal 54)
+('2026-06-02', '2026-12-02', 'Febre Aftosa', 'Campanha de vacinação semestral', 'AFT-017', 54),
+('2025-12-02', '2026-06-02', 'Aftosa', 'Campanha de vacinação semestral', 'AFT-037', 54),
+('2025-10-01', '2026-10-01', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-046', 54),
+('2024-10-01', '2025-10-01', 'Clostridiose', 'Vacina polivalente clostridial', 'CLO-054', 54),
+('2026-04-11', '2027-04-11', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-060', 54),
+('2025-04-11', '2026-04-11', 'Antirrábica', 'Controle da raiva dos herbívoros', 'RAI-079', 54),
+-- NEL-025 (fazenda, animal 55)
+('2026-06-18', '2026-12-18', 'Febre Aftosa', 'Campanha de vacinação semestral', 'AFT-101', 55),
+('2026-04-02', '2027-04-02', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-113', 55),
+('2025-04-02', '2026-04-02', 'Clostridiose', 'Vacina polivalente clostridial', 'CLO-127', 55),
+('2025-10-04', '2026-10-04', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-142', 55),
+('2024-10-04', '2025-10-04', 'Antirrábica', 'Controle da raiva dos herbívoros', 'RAI-166', 55),
+('2026-07-22', '2027-01-22', 'Leptospirose', 'Vacina reprodutiva', 'LEP-193', 55),
+('2026-01-22', '2026-07-22', 'Leptospirose', 'Vacina reprodutiva', 'LEP-213', 55),
+-- NEL-026 (fazenda, animal 56)
+('2026-09-09', '2027-03-09', 'Febre Aftosa', 'Campanha de vacinação semestral', 'AFT-237', 56),
+('2026-05-01', '2027-05-01', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-261', 56),
+('2025-05-01', '2026-05-01', 'Clostridiose', 'Vacina polivalente clostridial', 'CLO-268', 56),
+('2025-07-23', '2026-07-23', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-271', 56),
+('2024-07-23', '2025-07-23', 'Antirrábica', 'Controle da raiva dos herbívoros', 'RAI-287', 56),
+-- NEL-027 (fazenda, animal 57)
+('2026-07-11', '2027-01-11', 'Febre Aftosa', 'Campanha de vacinação semestral', 'AFT-300', 57),
+('2026-01-11', '2026-07-11', 'Aftosa', 'Campanha de vacinação semestral', 'AFT-308', 57),
+('2025-09-22', '2026-09-22', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-331', 57),
+('2026-05-08', '2027-05-08', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-342', 57),
+('2025-05-08', '2026-05-08', 'Antirrábica', 'Controle da raiva dos herbívoros', 'RAI-346', 57),
+-- NEL-028 (fazenda, animal 58)
+('2026-09-14', '2027-03-14', 'Febre Aftosa', 'Campanha de vacinação semestral', 'AFT-369', 58),
+('2026-05-19', '2027-05-19', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-373', 58),
+('2025-09-25', '2026-09-25', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-399', 58),
+('2026-06-06', '2026-12-06', 'Leptospirose', 'Vacina reprodutiva', 'LEP-424', 58),
+-- NEL-029 (fazenda, animal 59)
+('2026-07-19', '2027-01-19', 'Febre Aftosa', 'Campanha de vacinação semestral', 'AFT-444', 59),
+('2026-06-21', '2027-06-21', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-453', 59),
+('2025-06-21', '2026-06-21', 'Clostridiose', 'Vacina polivalente clostridial', 'CLO-476', 59),
+('2025-05-25', '2026-05-25', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-496', 59),
+-- NEL-030 (fazenda, animal 60)
+('2026-06-29', '2026-12-29', 'Febre Aftosa', 'Campanha de vacinação semestral', 'AFT-505', 60),
+('2025-12-29', '2026-06-29', 'Aftosa', 'Campanha de vacinação semestral', 'AFT-512', 60),
+('2025-10-06', '2026-10-06', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-515', 60),
+('2026-05-06', '2027-05-06', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-540', 60),
+('2025-05-06', '2026-05-06', 'Antirrábica', 'Controle da raiva dos herbívoros', 'RAI-563', 60),
+-- Belinha (pet, animal 106)
+('2026-08-03', '2027-08-03', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-568', 106),
+('2025-08-03', '2026-08-03', 'Anti-rábica', 'Vacina anual contra a raiva', 'RAB-575', 106),
+('2026-03-18', '2027-03-18', 'V10', 'Múltipla canina', 'V10-601', 106),
+('2025-03-18', '2026-03-18', 'V8', 'Múltipla canina', 'V10-621', 106),
+('2025-09-27', '2026-09-27', 'Gripe Canina', 'Prevenção da tosse dos canis', 'GRC-646', 106),
+('2024-09-27', '2025-09-27', 'Tosse dos Canis', 'Prevenção da tosse dos canis', 'GRC-661', 106),
+('2026-06-11', '2027-06-11', 'Giárdia', 'Reforço anual', 'GIA-681', 106),
+('2026-05-07', '2027-05-07', 'Leishmaniose', 'Vacina anual', 'LEI-704', 106),
+-- Mingau (pet, animal 107)
+('2026-05-09', '2027-05-09', 'V4', 'Múltipla felina', 'V4-710', 107),
+('2025-05-09', '2026-05-09', 'Tríplice felina', 'Múltipla felina', 'V4-723', 107),
+('2025-05-02', '2026-05-02', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-734', 107),
+('2024-05-02', '2025-05-02', 'Raiva', 'Vacina anual contra a raiva', 'RAB-742', 107),
+-- Pingo (pet, animal 108)
+('2026-07-04', '2027-07-04', 'Poliomavírus', 'Vacina para psitacídeos', 'POL-754', 108),
+('2025-07-04', '2026-07-04', 'Poliomavírus', 'Vacina para psitacídeos', 'POL-768', 108),
+-- Sarará (pet, animal 109)
+('2025-09-25', '2026-09-25', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-783', 109),
+('2024-09-25', '2025-09-25', 'Raiva', 'Vacina anual contra a raiva', 'RAB-805', 109),
+('2026-04-04', '2027-04-04', 'V10', 'Múltipla canina', 'V10-823', 109),
+('2026-06-17', '2027-06-17', 'Gripe Canina', 'Prevenção da tosse dos canis', 'GRC-850', 109),
+('2026-05-02', '2027-05-02', 'Leishmaniose', 'Vacina anual', 'LEI-858', 109),
+-- Sereia (fazenda, animal 110)
+('2026-03-21', '2026-09-21', 'Febre Aftosa', 'Campanha de vacinação semestral', 'AFT-866', 110),
+('2025-09-21', '2026-03-21', 'Aftosa', 'Campanha de vacinação semestral', 'AFT-874', 110),
+('2026-09-09', '2027-09-09', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-880', 110),
+('2025-09-09', '2026-09-09', 'Clostridiose', 'Vacina polivalente clostridial', 'CLO-894', 110),
+('2026-08-31', '2027-08-31', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-908', 110),
+('2025-08-31', '2026-08-31', 'Antirrábica', 'Controle da raiva dos herbívoros', 'RAI-930', 110),
+('2021-12-17', NULL, 'Brucelose', 'Dose única para bezerras', 'BRU-952', 110),
+-- Tita (fazenda, animal 111)
+('2026-07-15', '2027-01-15', 'Febre Aftosa', 'Campanha de vacinação semestral', 'AFT-959', 111),
+('2026-01-15', '2026-07-15', 'Aftosa', 'Campanha de vacinação semestral', 'AFT-977', 111),
+('2025-08-23', '2026-08-23', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-003', 111),
+('2024-08-23', '2025-08-23', 'Clostridiose', 'Vacina polivalente clostridial', 'CLO-025', 111),
+('2026-07-01', '2027-07-01', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-048', 111),
+('2025-07-01', '2026-07-01', 'Antirrábica', 'Controle da raiva dos herbívoros', 'RAI-066', 111),
+('2020-09-17', NULL, 'Brucelose', 'Dose única para bezerras', 'BRU-072', 111),
+-- Rei (fazenda, animal 112)
+('2026-03-28', '2026-09-28', 'Influenza Equina', 'Reforço semestral', 'INF-086', 112),
+('2026-05-23', '2027-05-23', 'Tétano', 'Reforço anual', 'TET-107', 112),
+('2025-05-23', '2026-05-23', 'Antitetânica', 'Reforço anual', 'TET-134', 112),
+('2026-08-25', '2027-08-25', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-152', 112),
+('2026-07-11', '2027-07-11', 'Encefalomielite Equina', 'Prevenção de encefalomielite', 'ENC-179', 112),
+-- Relâmpago (fazenda, animal 113)
+('2026-03-26', '2026-09-26', 'Influenza Equina', 'Reforço semestral', 'INF-192', 113),
+('2025-09-26', '2026-03-26', 'Gripe Equina', 'Reforço semestral', 'INF-205', 113),
+('2026-03-15', '2027-03-15', 'Tétano', 'Reforço anual', 'TET-229', 113),
+('2026-06-05', '2027-06-05', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-242', 113),
+('2025-06-05', '2026-06-05', 'Raiva', 'Vacina anual contra a raiva', 'RAB-252', 113),
+('2026-03-24', '2027-03-24', 'Encefalomielite Equina', 'Prevenção de encefalomielite', 'ENC-266', 113),
+-- Bacana (fazenda, animal 114)
+('2025-12-22', '2026-06-22', 'Parvovirose Suína', 'Vacina reprodutiva', 'PAR-282', 114),
+('2026-06-11', '2026-12-11', 'Erisipela Suína', 'Vacina contra erisipela', 'ERI-291', 114),
+('2025-12-11', '2026-06-11', 'Erisipela Suína', 'Vacina contra erisipela', 'ERI-317', 114),
+('2025-09-25', '2026-09-25', 'Circovirose Suína', 'Prevenção de circovírus', 'CIR-333', 114),
+('2024-09-25', '2025-09-25', 'Circovirose Suína', 'Prevenção de circovírus', 'CIR-339', 114),
+-- Bolota (fazenda, animal 115)
+('2026-06-27', '2026-12-27', 'Parvovirose Suína', 'Vacina reprodutiva', 'PAR-350', 115),
+('2026-05-26', '2026-11-26', 'Erisipela Suína', 'Vacina contra erisipela', 'ERI-361', 115),
+('2025-11-26', '2026-05-26', 'Erisipela Suína', 'Vacina contra erisipela', 'ERI-384', 115),
+-- Lã (fazenda, animal 116)
+('2026-07-10', '2027-07-10', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-394', 116),
+('2025-07-10', '2026-07-10', 'Clostridiose', 'Vacina polivalente clostridial', 'CLO-414', 116),
+('2025-09-24', '2026-09-24', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-425', 116),
+('2024-09-24', '2025-09-24', 'Raiva', 'Controle da raiva dos herbívoros', 'RAI-448', 116),
+('2026-06-06', '2027-06-06', 'Ectima Contagioso', 'Vacina contra boqueira', 'ECT-463', 116),
+('2025-06-06', '2026-06-06', 'Ectima Contagioso', 'Vacina contra boqueira', 'ECT-488', 116),
+-- Pelúcia (fazenda, animal 117)
+('2026-06-24', '2027-06-24', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-512', 117),
+('2025-06-24', '2026-06-24', 'Clostridiose', 'Vacina polivalente clostridial', 'CLO-536', 117),
+('2026-05-13', '2027-05-13', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-560', 117),
+('2025-02-16', '2026-02-16', 'Ectima Contagioso', 'Vacina contra boqueira', 'ECT-584', 117),
+-- Cocó (fazenda, animal 118)
+('2026-07-25', '2027-01-25', 'Newcastle', 'Vacina contra Newcastle', 'NEW-600', 118),
+('2026-01-25', '2026-07-25', 'Doença de Newcastle', 'Vacina contra Newcastle', 'NEW-604', 118),
+('2025-10-03', '2026-10-03', 'Bouba Aviária', 'Vacina contra bouba', 'BOU-630', 118),
+('2024-10-03', '2025-10-03', 'Bouba Aviária', 'Vacina contra bouba', 'BOU-641', 118),
+('2026-04-26', '2027-04-26', 'Gumboro', 'Vacina contra doença de Gumboro', 'GUM-666', 118),
+('2025-04-26', '2026-04-26', 'Gumboro', 'Vacina contra doença de Gumboro', 'GUM-679', 118),
+-- Galo Carijó (fazenda, animal 119)
+('2026-06-02', '2026-12-02', 'Newcastle', 'Vacina contra Newcastle', 'NEW-706', 119),
+('2026-05-16', '2027-05-16', 'Bouba Aviária', 'Vacina contra bouba', 'BOU-719', 119),
+('2025-05-16', '2026-05-16', 'Bouba Aviária', 'Vacina contra bouba', 'BOU-746', 119),
+('2025-09-28', '2026-09-28', 'Gumboro', 'Vacina contra doença de Gumboro', 'GUM-769', 119),
+('2024-09-28', '2025-09-28', 'Gumboro', 'Vacina contra doença de Gumboro', 'GUM-780', 119);
+
+-- === Vacinas: BB enterprise ===
+INSERT INTO vaccine_model (application_date, expiration_date, name, description, batch, animal_id) VALUES
+-- Fred (pet, animal 73)
+('2026-06-25', '2027-06-25', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-783', 73),
+('2026-05-22', '2027-05-22', 'V10', 'Múltipla canina', 'V10-802', 73),
+('2025-05-22', '2026-05-22', 'V-10', 'Múltipla canina', 'V10-807', 73),
+('2026-04-27', '2027-04-27', 'Gripe Canina', 'Prevenção da tosse dos canis', 'GRC-832', 73),
+('2025-04-27', '2026-04-27', 'Tosse dos Canis', 'Prevenção da tosse dos canis', 'GRC-838', 73),
+('2025-08-11', '2026-08-11', 'Giárdia', 'Reforço anual', 'GIA-851', 73),
+('2026-05-21', '2027-05-21', 'Leishmaniose', 'Vacina anual', 'LEI-860', 73),
+-- Frida (pet, animal 74)
+('2025-09-26', '2026-09-26', 'V4', 'Múltipla felina', 'V4-885', 74),
+('2024-09-26', '2025-09-26', 'Tríplice felina', 'Múltipla felina', 'V4-910', 74),
+('2026-05-06', '2027-05-06', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-934', 74),
+('2025-05-06', '2026-05-06', 'Raiva', 'Vacina anual contra a raiva', 'RAB-940', 74),
+-- Chico (fazenda, animal 75)
+('2026-09-09', '2027-03-09', 'Parvovirose Suína', 'Vacina reprodutiva', 'PAR-951', 75),
+('2026-09-05', '2027-03-05', 'Erisipela Suína', 'Vacina contra erisipela', 'ERI-959', 75),
+('2026-03-05', '2026-09-05', 'Erisipela Suína', 'Vacina contra erisipela', 'ERI-978', 75),
+('2025-09-28', '2026-09-28', 'Circovirose Suína', 'Prevenção de circovírus', 'CIR-996', 75),
+-- Dolly (fazenda, animal 76)
+('2026-06-21', '2027-06-21', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-009', 76),
+('2025-06-21', '2026-06-21', 'Clostridiose', 'Vacina polivalente clostridial', 'CLO-020', 76),
+('2026-05-14', '2027-05-14', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-033', 76),
+('2026-09-07', '2027-09-07', 'Ectima Contagioso', 'Vacina contra boqueira', 'ECT-056', 76),
+('2025-09-07', '2026-09-07', 'Ectima Contagioso', 'Vacina contra boqueira', 'ECT-059', 76),
+-- Pintadinha (fazenda, animal 77)
+('2025-11-19', '2026-05-19', 'Newcastle', 'Vacina contra Newcastle', 'NEW-073', 77),
+('2025-05-19', '2025-11-19', 'Doença de Newcastle', 'Vacina contra Newcastle', 'NEW-082', 77),
+('2026-06-14', '2027-06-14', 'Bouba Aviária', 'Vacina contra bouba', 'BOU-093', 77),
+('2025-06-14', '2026-06-14', 'Bouba Aviária', 'Vacina contra bouba', 'BOU-119', 77),
+('2025-10-03', '2026-10-03', 'Gumboro', 'Vacina contra doença de Gumboro', 'GUM-131', 77),
+('2024-10-03', '2025-10-03', 'Gumboro', 'Vacina contra doença de Gumboro', 'GUM-135', 77),
+-- Peru Rei (fazenda, animal 78)
+('2026-06-03', '2026-12-03', 'Newcastle', 'Vacina contra Newcastle', 'NEW-140', 78),
+('2026-04-04', '2027-04-04', 'Bouba Aviária', 'Vacina contra bouba', 'BOU-164', 78),
+('2025-04-04', '2026-04-04', 'Bouba Aviária', 'Vacina contra bouba', 'BOU-184', 78),
+('2026-07-02', '2027-07-02', 'Gumboro', 'Vacina contra doença de Gumboro', 'GUM-202', 78),
+-- Marajó (fazenda, animal 79)
+('2026-04-01', '2026-10-01', 'Influenza Equina', 'Reforço semestral', 'INF-220', 79),
+('2025-10-01', '2026-04-01', 'Gripe Equina', 'Reforço semestral', 'INF-234', 79),
+('2026-08-01', '2027-08-01', 'Tétano', 'Reforço anual', 'TET-239', 79),
+('2026-08-03', '2027-08-03', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-266', 79),
+('2025-08-03', '2026-08-03', 'Raiva', 'Vacina anual contra a raiva', 'RAB-289', 79),
+('2026-08-20', '2027-08-20', 'Encefalomielite Equina', 'Prevenção de encefalomielite', 'ENC-311', 79),
+-- Vitória (fazenda, animal 80)
+('2026-03-12', '2026-09-12', 'Febre Aftosa', 'Campanha de vacinação semestral', 'AFT-328', 80),
+('2025-09-12', '2026-03-12', 'Aftosa', 'Campanha de vacinação semestral', 'AFT-347', 80),
+('2026-05-05', '2027-05-05', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-354', 80),
+('2025-05-05', '2026-05-05', 'Clostridiose', 'Vacina polivalente clostridial', 'CLO-381', 80),
+('2025-10-06', '2026-10-06', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-388', 80),
+('2024-10-06', '2025-10-06', 'Antirrábica', 'Controle da raiva dos herbívoros', 'RAI-402', 80),
+('2021-08-31', NULL, 'Brucelose', 'Dose única para bezerras', 'BRU-425', 80);
+
+-- === Vacinas: Fazenda Boa Vista ===
+INSERT INTO vaccine_model (application_date, expiration_date, name, description, batch, animal_id) VALUES
+-- Estrela (fazenda, animal 16)
+('2026-06-08', '2026-12-08', 'Febre Aftosa', 'Campanha de vacinação semestral', 'AFT-445', 16),
+('2026-05-01', '2027-05-01', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-454', 16),
+('2025-05-01', '2026-05-01', 'Clostridiose', 'Vacina polivalente clostridial', 'CLO-480', 16),
+('2026-08-11', '2027-08-11', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-487', 16),
+('2026-03-22', '2026-09-22', 'Leptospirose', 'Vacina reprodutiva', 'LEP-511', 16),
+('2021-10-06', NULL, 'Brucelose', 'Dose única para bezerras', 'BRU-522', 16),
+-- Mimosa II (fazenda, animal 17)
+('2026-07-02', '2027-01-02', 'Febre Aftosa', 'Campanha de vacinação semestral', 'AFT-530', 17),
+('2026-01-02', '2026-07-02', 'Aftosa', 'Campanha de vacinação semestral', 'AFT-537', 17),
+('2026-05-22', '2027-05-22', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-545', 17),
+('2025-05-22', '2026-05-22', 'Clostridiose', 'Vacina polivalente clostridial', 'CLO-572', 17),
+('2026-07-31', '2027-07-31', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-596', 17),
+('2025-07-31', '2026-07-31', 'Antirrábica', 'Controle da raiva dos herbívoros', 'RAI-616', 17),
+('2022-08-13', NULL, 'Brucelose', 'Dose única para bezerras', 'BRU-619', 17),
+-- Boiadeiro (fazenda, animal 18)
+('2026-01-05', '2026-07-05', 'Influenza Equina', 'Reforço semestral', 'INF-629', 18),
+('2025-07-05', '2026-01-05', 'Gripe Equina', 'Reforço semestral', 'INF-646', 18),
+('2026-03-26', '2027-03-26', 'Tétano', 'Reforço anual', 'TET-672', 18),
+('2025-03-26', '2026-03-26', 'Antitetânica', 'Reforço anual', 'TET-679', 18),
+('2025-09-22', '2026-09-22', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-697', 18),
+('2024-09-22', '2025-09-22', 'Raiva', 'Vacina anual contra a raiva', 'RAB-711', 18),
+('2026-04-19', '2027-04-19', 'Encefalomielite Equina', 'Prevenção de encefalomielite', 'ENC-736', 18),
+-- Bacon (fazenda, animal 19)
+('2026-07-13', '2027-01-13', 'Parvovirose Suína', 'Vacina reprodutiva', 'PAR-749', 19),
+('2026-08-06', '2027-02-06', 'Erisipela Suína', 'Vacina contra erisipela', 'ERI-768', 19),
+('2026-02-06', '2026-08-06', 'Erisipela Suína', 'Vacina contra erisipela', 'ERI-773', 19),
+-- Costelinha (fazenda, animal 20)
+('2026-04-04', '2026-10-04', 'Parvovirose Suína', 'Vacina reprodutiva', 'PAR-797', 20),
+('2025-10-04', '2026-04-04', 'Parvovirose Suína', 'Vacina reprodutiva', 'PAR-805', 20),
+('2026-07-17', '2027-01-17', 'Erisipela Suína', 'Vacina contra erisipela', 'ERI-815', 20),
+('2026-05-13', '2027-05-13', 'Circovirose Suína', 'Prevenção de circovírus', 'CIR-824', 20),
+('2025-05-13', '2026-05-13', 'Circovirose Suína', 'Prevenção de circovírus', 'CIR-844', 20),
+-- Algodão (fazenda, animal 21)
+('2026-05-31', '2027-05-31', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-870', 21),
+('2025-05-31', '2026-05-31', 'Clostridiose', 'Vacina polivalente clostridial', 'CLO-895', 21),
+('2025-07-28', '2026-07-28', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-907', 21),
+('2026-05-27', '2027-05-27', 'Ectima Contagioso', 'Vacina contra boqueira', 'ECT-927', 21),
+-- Nuvem (fazenda, animal 22)
+('2025-09-23', '2026-09-23', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-936', 22),
+('2026-08-18', '2027-08-18', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-963', 22),
+('2025-08-18', '2026-08-18', 'Raiva', 'Controle da raiva dos herbívoros', 'RAI-969', 22),
+('2026-08-03', '2027-08-03', 'Ectima Contagioso', 'Vacina contra boqueira', 'ECT-978', 22),
+-- Zeca (fazenda, animal 23)
+('2026-07-30', '2027-01-30', 'Newcastle', 'Vacina contra Newcastle', 'NEW-994', 23),
+('2026-01-30', '2026-07-30', 'Doença de Newcastle', 'Vacina contra Newcastle', 'NEW-017', 23),
+('2025-09-29', '2026-09-29', 'Bouba Aviária', 'Vacina contra bouba', 'BOU-029', 23),
+('2026-06-07', '2027-06-07', 'Gumboro', 'Vacina contra doença de Gumboro', 'GUM-032', 23),
+('2025-06-07', '2026-06-07', 'Gumboro', 'Vacina contra doença de Gumboro', 'GUM-049', 23),
+-- Fagulha (fazenda, animal 24)
+('2026-07-09', '2027-01-09', 'Influenza Equina', 'Reforço semestral', 'INF-063', 24),
+('2026-01-09', '2026-07-09', 'Gripe Equina', 'Reforço semestral', 'INF-069', 24),
+('2026-08-11', '2027-08-11', 'Tétano', 'Reforço anual', 'TET-089', 24),
+('2025-08-11', '2026-08-11', 'Antitetânica', 'Reforço anual', 'TET-106', 24),
+('2025-06-15', '2026-06-15', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-128', 24),
+('2026-09-04', '2027-09-04', 'Encefalomielite Equina', 'Prevenção de encefalomielite', 'ENC-153', 24),
+-- Imperador (fazenda, animal 25)
+('2026-04-01', '2026-10-01', 'Febre Aftosa', 'Campanha de vacinação semestral', 'AFT-180', 25),
+('2025-10-01', '2026-04-01', 'Aftosa', 'Campanha de vacinação semestral', 'AFT-197', 25),
+('2026-05-20', '2027-05-20', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-211', 25),
+('2025-05-20', '2026-05-20', 'Clostridiose', 'Vacina polivalente clostridial', 'CLO-222', 25),
+('2026-07-03', '2027-07-03', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-226', 25),
+('2025-07-03', '2026-07-03', 'Antirrábica', 'Controle da raiva dos herbívoros', 'RAI-231', 25),
+('2026-05-24', '2026-11-24', 'Leptospirose', 'Vacina reprodutiva', 'LEP-252', 25),
+('2025-11-24', '2026-05-24', 'Leptospirose', 'Vacina reprodutiva', 'LEP-275', 25),
+-- Preciosa (fazenda, animal 26)
+('2026-04-05', '2026-10-05', 'Febre Aftosa', 'Campanha de vacinação semestral', 'AFT-297', 26),
+('2025-10-05', '2026-04-05', 'Aftosa', 'Campanha de vacinação semestral', 'AFT-304', 26),
+('2026-06-27', '2027-06-27', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-311', 26),
+('2025-06-27', '2026-06-27', 'Clostridiose', 'Vacina polivalente clostridial', 'CLO-316', 26),
+('2026-08-04', '2027-08-04', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-336', 26),
+('2021-06-23', NULL, 'Brucelose', 'Dose única para bezerras', 'BRU-339', 26),
+-- Tornado (fazenda, animal 27)
+('2026-09-05', '2027-03-05', 'Influenza Equina', 'Reforço semestral', 'INF-365', 27),
+('2025-03-11', '2026-03-11', 'Tétano', 'Reforço anual', 'TET-387', 27),
+('2024-03-11', '2025-03-11', 'Antitetânica', 'Reforço anual', 'TET-412', 27),
+('2026-08-08', '2027-08-08', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-424', 27),
+('2025-09-28', '2026-09-28', 'Encefalomielite Equina', 'Prevenção de encefalomielite', 'ENC-437', 27),
+-- Chita (fazenda, animal 28)
+('2026-05-20', '2026-11-20', 'Parvovirose Suína', 'Vacina reprodutiva', 'PAR-462', 28),
+('2025-11-20', '2026-05-20', 'Parvovirose Suína', 'Vacina reprodutiva', 'PAR-472', 28),
+('2026-06-28', '2026-12-28', 'Erisipela Suína', 'Vacina contra erisipela', 'ERI-488', 28),
+('2025-12-28', '2026-06-28', 'Erisipela Suína', 'Vacina contra erisipela', 'ERI-498', 28),
+('2026-04-17', '2027-04-17', 'Circovirose Suína', 'Prevenção de circovírus', 'CIR-506', 28),
+('2025-04-17', '2026-04-17', 'Circovirose Suína', 'Prevenção de circovírus', 'CIR-533', 28),
+-- Floco (fazenda, animal 29)
+('2025-09-24', '2026-09-24', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-554', 29),
+('2024-09-24', '2025-09-24', 'Clostridiose', 'Vacina polivalente clostridial', 'CLO-572', 29),
+('2026-05-04', '2027-05-04', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-575', 29),
+('2025-05-04', '2026-05-04', 'Raiva', 'Controle da raiva dos herbívoros', 'RAI-590', 29),
+('2026-03-14', '2027-03-14', 'Ectima Contagioso', 'Vacina contra boqueira', 'ECT-594', 29),
+('2025-03-14', '2026-03-14', 'Ectima Contagioso', 'Vacina contra boqueira', 'ECT-601', 29),
+-- Garnizé (fazenda, animal 30)
+('2026-07-03', '2027-01-03', 'Newcastle', 'Vacina contra Newcastle', 'NEW-611', 30),
+('2025-07-01', '2026-07-01', 'Bouba Aviária', 'Vacina contra bouba', 'BOU-622', 30),
+('2026-03-12', '2027-03-12', 'Gumboro', 'Vacina contra doença de Gumboro', 'GUM-643', 30),
+('2025-03-12', '2026-03-12', 'Gumboro', 'Vacina contra doença de Gumboro', 'GUM-665', 30),
+-- Guarani (pet, animal 81)
+('2025-09-26', '2026-09-26', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-684', 81),
+('2024-09-26', '2025-09-26', 'Anti-rábica', 'Vacina anual contra a raiva', 'RAB-693', 81),
+('2026-04-19', '2027-04-19', 'V10', 'Múltipla canina', 'V10-698', 81),
+('2025-04-19', '2026-04-19', 'V-10', 'Múltipla canina', 'V10-713', 81),
+('2026-08-19', '2027-08-19', 'Gripe Canina', 'Prevenção da tosse dos canis', 'GRC-719', 81),
+('2026-06-02', '2027-06-02', 'Leishmaniose', 'Vacina anual', 'LEI-734', 81),
+-- Tigrinho (pet, animal 82)
+('2025-09-28', '2026-09-28', 'V4', 'Múltipla felina', 'V4-743', 82),
+('2024-09-28', '2025-09-28', 'V3', 'Múltipla felina', 'V4-762', 82),
+('2026-07-10', '2027-07-10', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-776', 82),
+('2025-07-10', '2026-07-10', 'Raiva', 'Vacina anual contra a raiva', 'RAB-780', 82),
+('2026-07-23', '2027-07-23', 'FeLV', 'Leucemia felina', 'FEL-805', 82),
+-- Rajada (pet, animal 83)
+('2026-03-18', '2027-03-18', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-825', 83),
+('2025-03-18', '2026-03-18', 'Anti-rábica', 'Vacina anual contra a raiva', 'RAB-845', 83),
+('2025-04-02', '2026-04-02', 'V10', 'Múltipla canina', 'V10-849', 83),
+('2024-04-02', '2025-04-02', 'V-10', 'Múltipla canina', 'V10-868', 83),
+('2026-04-08', '2027-04-08', 'Gripe Canina', 'Prevenção da tosse dos canis', 'GRC-872', 83),
+-- Baronesa (fazenda, animal 84)
+('2026-03-27', '2026-09-27', 'Febre Aftosa', 'Campanha de vacinação semestral', 'AFT-895', 84),
+('2026-05-16', '2027-05-16', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-899', 84),
+('2025-05-16', '2026-05-16', 'Clostridiose', 'Vacina polivalente clostridial', 'CLO-922', 84),
+('2026-08-31', '2027-08-31', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-933', 84),
+('2025-08-31', '2026-08-31', 'Antirrábica', 'Controle da raiva dos herbívoros', 'RAI-955', 84),
+('2026-09-05', '2027-03-05', 'Leptospirose', 'Vacina reprodutiva', 'LEP-973', 84),
+('2022-02-02', NULL, 'Brucelose', 'Dose única para bezerras', 'BRU-978', 84),
+-- Tempestade (fazenda, animal 85)
+('2026-03-26', '2026-09-26', 'Influenza Equina', 'Reforço semestral', 'INF-998', 85),
+('2026-04-20', '2027-04-20', 'Tétano', 'Reforço anual', 'TET-018', 85),
+('2025-04-20', '2026-04-20', 'Antitetânica', 'Reforço anual', 'TET-038', 85),
+('2026-06-18', '2027-06-18', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-048', 85),
+('2025-06-18', '2026-06-18', 'Raiva', 'Vacina anual contra a raiva', 'RAB-053', 85),
+('2026-07-16', '2027-07-16', 'Encefalomielite Equina', 'Prevenção de encefalomielite', 'ENC-057', 85),
+('2025-07-16', '2026-07-16', 'Encefalomielite Equina', 'Prevenção de encefalomielite', 'ENC-072', 85),
+-- Torresmo (fazenda, animal 86)
+('2025-10-30', '2026-04-30', 'Parvovirose Suína', 'Vacina reprodutiva', 'PAR-077', 86),
+('2025-04-30', '2025-10-30', 'Parvovirose Suína', 'Vacina reprodutiva', 'PAR-099', 86),
+('2026-08-02', '2027-02-02', 'Erisipela Suína', 'Vacina contra erisipela', 'ERI-107', 86),
+('2026-02-02', '2026-08-02', 'Erisipela Suína', 'Vacina contra erisipela', 'ERI-127', 86),
+('2025-09-27', '2026-09-27', 'Circovirose Suína', 'Prevenção de circovírus', 'CIR-146', 86),
+-- Rosinha (fazenda, animal 87)
+('2026-06-06', '2026-12-06', 'Parvovirose Suína', 'Vacina reprodutiva', 'PAR-157', 87),
+('2026-08-04', '2027-02-04', 'Erisipela Suína', 'Vacina contra erisipela', 'ERI-174', 87),
+('2026-02-04', '2026-08-04', 'Erisipela Suína', 'Vacina contra erisipela', 'ERI-188', 87),
+-- Merino (fazenda, animal 88)
+('2026-08-28', '2027-08-28', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-214', 88),
+('2025-09-28', '2026-09-28', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-232', 88),
+('2026-08-09', '2027-08-09', 'Ectima Contagioso', 'Vacina contra boqueira', 'ECT-256', 88),
+-- Cocorico (fazenda, animal 89)
+('2026-08-03', '2027-02-03', 'Newcastle', 'Vacina contra Newcastle', 'NEW-274', 89),
+('2026-02-03', '2026-08-03', 'Doença de Newcastle', 'Vacina contra Newcastle', 'NEW-277', 89),
+('2026-06-11', '2027-06-11', 'Bouba Aviária', 'Vacina contra bouba', 'BOU-282', 89),
+('2025-05-15', '2026-05-15', 'Gumboro', 'Vacina contra doença de Gumboro', 'GUM-305', 89),
+('2024-05-15', '2025-05-15', 'Gumboro', 'Vacina contra doença de Gumboro', 'GUM-326', 89),
+-- Aurora (fazenda, animal 90)
+('2026-06-22', '2026-12-22', 'Febre Aftosa', 'Campanha de vacinação semestral', 'AFT-345', 90),
+('2025-09-23', '2026-09-23', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-371', 90),
+('2026-09-11', '2027-09-11', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-394', 90),
+('2025-09-11', '2026-09-11', 'Antirrábica', 'Controle da raiva dos herbívoros', 'RAI-409', 90),
+('2026-07-16', '2027-01-16', 'Leptospirose', 'Vacina reprodutiva', 'LEP-421', 90),
+('2026-01-16', '2026-07-16', 'Leptospirose', 'Vacina reprodutiva', 'LEP-442', 90),
+('2020-12-01', NULL, 'Brucelose', 'Dose única para bezerras', 'BRU-466', 90),
+-- Faísca (fazenda, animal 91)
+('2026-08-02', '2027-02-02', 'Influenza Equina', 'Reforço semestral', 'INF-478', 91),
+('2025-09-21', '2026-09-21', 'Tétano', 'Reforço anual', 'TET-481', 91),
+('2024-09-21', '2025-09-21', 'Antitetânica', 'Reforço anual', 'TET-506', 91),
+('2026-05-22', '2027-05-22', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-527', 91),
+('2025-05-22', '2026-05-22', 'Raiva', 'Vacina anual contra a raiva', 'RAB-554', 91),
+('2026-08-07', '2027-08-07', 'Encefalomielite Equina', 'Prevenção de encefalomielite', 'ENC-576', 91),
+-- Malhadinha (fazenda, animal 92)
+('2026-05-17', '2026-11-17', 'Febre Aftosa', 'Campanha de vacinação semestral', 'AFT-582', 92),
+('2025-11-17', '2026-05-17', 'Aftosa', 'Campanha de vacinação semestral', 'AFT-604', 92),
+('2025-05-07', '2026-05-07', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-616', 92),
+('2024-05-07', '2025-05-07', 'Clostridiose', 'Vacina polivalente clostridial', 'CLO-619', 92),
+('2026-05-26', '2027-05-26', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-641', 92),
+('2025-05-26', '2026-05-26', 'Antirrábica', 'Controle da raiva dos herbívoros', 'RAI-656', 92),
+('2022-11-10', NULL, 'Brucelose', 'Dose única para bezerras', 'BRU-679', 92),
+-- Capitão (fazenda, animal 93)
+('2026-03-21', '2026-09-21', 'Febre Aftosa', 'Campanha de vacinação semestral', 'AFT-696', 93),
+('2025-09-21', '2026-03-21', 'Aftosa', 'Campanha de vacinação semestral', 'AFT-706', 93),
+('2026-06-25', '2027-06-25', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-723', 93),
+('2026-06-10', '2027-06-10', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-734', 93),
+('2025-06-10', '2026-06-10', 'Antirrábica', 'Controle da raiva dos herbívoros', 'RAI-760', 93),
+('2026-07-02', '2027-01-02', 'Leptospirose', 'Vacina reprodutiva', 'LEP-771', 93),
+('2026-01-02', '2026-07-02', 'Leptospirose', 'Vacina reprodutiva', 'LEP-793', 93);
+
+-- === Vacinas: PetShop Cão Feliz ===
+INSERT INTO vaccine_model (application_date, expiration_date, name, description, batch, animal_id) VALUES
+-- Thor (pet, animal 9)
+('2025-10-04', '2026-10-04', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-811', 9),
+('2024-10-04', '2025-10-04', 'Anti-rábica', 'Vacina anual contra a raiva', 'RAB-819', 9),
+('2026-08-21', '2027-08-21', 'V10', 'Múltipla canina', 'V10-841', 9),
+('2025-08-21', '2026-08-21', 'V8', 'Múltipla canina', 'V10-850', 9),
+('2026-03-22', '2027-03-22', 'Gripe Canina', 'Prevenção da tosse dos canis', 'GRC-862', 9),
+('2026-03-06', '2027-03-06', 'Giárdia', 'Reforço anual', 'GIA-877', 9),
+('2025-03-06', '2026-03-06', 'Giárdia', 'Reforço anual', 'GIA-902', 9),
+('2025-04-02', '2026-04-02', 'Leishmaniose', 'Vacina anual', 'LEI-915', 9),
+('2024-04-02', '2025-04-02', 'Leishmaniose', 'Vacina anual', 'LEI-921', 9),
+-- Pipa (pet, animal 61)
+('2026-07-20', '2027-07-20', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-936', 61),
+('2025-07-20', '2026-07-20', 'Anti-rábica', 'Vacina anual contra a raiva', 'RAB-959', 61),
+('2025-10-03', '2026-10-03', 'V10', 'Múltipla canina', 'V10-968', 61),
+('2026-07-01', '2027-07-01', 'Gripe Canina', 'Prevenção da tosse dos canis', 'GRC-988', 61),
+('2025-07-01', '2026-07-01', 'Tosse dos Canis', 'Prevenção da tosse dos canis', 'GRC-013', 61),
+-- Bidu (pet, animal 62)
+('2026-07-11', '2027-07-11', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-027', 62),
+('2026-05-24', '2027-05-24', 'V10', 'Múltipla canina', 'V10-037', 62),
+('2025-05-24', '2026-05-24', 'V-10', 'Múltipla canina', 'V10-041', 62),
+('2025-09-27', '2026-09-27', 'Gripe Canina', 'Prevenção da tosse dos canis', 'GRC-053', 62),
+('2024-09-27', '2025-09-27', 'Tosse dos Canis', 'Prevenção da tosse dos canis', 'GRC-077', 62),
+('2026-04-21', '2027-04-21', 'Giárdia', 'Reforço anual', 'GIA-084', 62),
+('2025-04-21', '2026-04-21', 'Giárdia', 'Reforço anual', 'GIA-099', 62),
+-- Nina (pet, animal 63)
+('2026-04-07', '2027-04-07', 'V4', 'Múltipla felina', 'V4-117', 63),
+('2026-04-13', '2027-04-13', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-129', 63),
+-- Simba (pet, animal 64)
+('2025-02-27', '2026-02-27', 'V4', 'Múltipla felina', 'V4-151', 64),
+('2024-02-27', '2025-02-27', 'Tríplice felina', 'Múltipla felina', 'V4-167', 64),
+('2026-07-21', '2027-07-21', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-192', 64),
+('2025-09-30', '2026-09-30', 'FeLV', 'Leucemia felina', 'FEL-216', 64),
+-- Lola (pet, animal 65)
+('2026-04-12', '2027-04-12', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-235', 65),
+('2025-04-12', '2026-04-12', 'Anti-rábica', 'Vacina anual contra a raiva', 'RAB-262', 65),
+('2026-06-09', '2027-06-09', 'V10', 'Múltipla canina', 'V10-281', 65),
+('2025-06-09', '2026-06-09', 'V-10', 'Múltipla canina', 'V10-300', 65),
+('2026-05-30', '2027-05-30', 'Gripe Canina', 'Prevenção da tosse dos canis', 'GRC-315', 65),
+-- Tobby (pet, animal 66)
+('2025-10-02', '2026-10-02', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-325', 66),
+('2024-10-02', '2025-10-02', 'Anti-rábica', 'Vacina anual contra a raiva', 'RAB-339', 66),
+('2026-03-10', '2027-03-10', 'V10', 'Múltipla canina', 'V10-342', 66),
+('2025-03-10', '2026-03-10', 'V8', 'Múltipla canina', 'V10-350', 66),
+('2026-05-14', '2027-05-14', 'Gripe Canina', 'Prevenção da tosse dos canis', 'GRC-372', 66),
+('2025-05-14', '2026-05-14', 'Tosse dos Canis', 'Prevenção da tosse dos canis', 'GRC-388', 66),
+('2026-05-08', '2027-05-08', 'Giárdia', 'Reforço anual', 'GIA-397', 66),
+('2025-05-08', '2026-05-08', 'Giárdia', 'Reforço anual', 'GIA-417', 66),
+('2025-08-29', '2026-08-29', 'Leishmaniose', 'Vacina anual', 'LEI-423', 66),
+('2024-08-29', '2025-08-29', 'Leishmaniose', 'Vacina anual', 'LEI-438', 66),
+-- Cleo (pet, animal 67)
+('2026-08-16', '2027-08-16', 'V4', 'Múltipla felina', 'V4-455', 67),
+('2025-09-24', '2026-09-24', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-471', 67),
+('2024-09-24', '2025-09-24', 'Raiva', 'Vacina anual contra a raiva', 'RAB-474', 67),
+-- Zeus (pet, animal 68)
+('2026-08-23', '2027-08-23', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-479', 68),
+('2026-04-01', '2027-04-01', 'V10', 'Múltipla canina', 'V10-486', 68),
+('2025-04-01', '2026-04-01', 'V-10', 'Múltipla canina', 'V10-492', 68),
+('2026-04-05', '2027-04-05', 'Gripe Canina', 'Prevenção da tosse dos canis', 'GRC-498', 68),
+('2025-09-27', '2026-09-27', 'Giárdia', 'Reforço anual', 'GIA-518', 68),
+-- Kiara (pet, animal 69)
+('2026-06-21', '2027-06-21', 'Poliomavírus', 'Vacina para psitacídeos', 'POL-540', 69),
+('2025-06-21', '2026-06-21', 'Poliomavírus', 'Vacina para psitacídeos', 'POL-545', 69),
+-- Amora (pet, animal 70)
+('2026-06-20', '2027-06-20', 'V4', 'Múltipla felina', 'V4-555', 70),
+('2025-06-20', '2026-06-20', 'Tríplice felina', 'Múltipla felina', 'V4-561', 70),
+('2026-04-29', '2027-04-29', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-577', 70),
+('2025-08-17', '2026-08-17', 'FeLV', 'Leucemia felina', 'FEL-582', 70),
+('2024-08-17', '2025-08-17', 'FeLV', 'Leucemia felina', 'FEL-599', 70),
+-- Bob (pet, animal 71)
+('2026-05-31', '2027-05-31', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-604', 71),
+('2025-05-31', '2026-05-31', 'Raiva', 'Vacina anual contra a raiva', 'RAB-621', 71),
+('2025-10-06', '2026-10-06', 'V10', 'Múltipla canina', 'V10-635', 71),
+('2026-09-04', '2027-09-04', 'Gripe Canina', 'Prevenção da tosse dos canis', 'GRC-651', 71),
+('2025-09-04', '2026-09-04', 'Tosse dos Canis', 'Prevenção da tosse dos canis', 'GRC-662', 71),
+-- Mel (pet, animal 72)
+('2026-03-18', '2027-03-18', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-682', 72),
+('2025-03-18', '2026-03-18', 'Anti-rábica', 'Vacina anual contra a raiva', 'RAB-688', 72),
+('2026-06-19', '2027-06-19', 'V10', 'Múltipla canina', 'V10-696', 72),
+('2025-06-19', '2026-06-19', 'V8', 'Múltipla canina', 'V10-718', 72),
+('2025-09-30', '2026-09-30', 'Gripe Canina', 'Prevenção da tosse dos canis', 'GRC-729', 72),
+('2026-05-28', '2027-05-28', 'Giárdia', 'Reforço anual', 'GIA-735', 72),
+('2026-06-15', '2027-06-15', 'Leishmaniose', 'Vacina anual', 'LEI-762', 72),
+('2025-06-15', '2026-06-15', 'Leishmaniose', 'Vacina anual', 'LEI-785', 72);
+
+-- === Vacinas: Agropecuária Vale ===
+INSERT INTO vaccine_model (application_date, expiration_date, name, description, batch, animal_id) VALUES
+-- Sultão (pet, animal 94)
+('2026-08-26', '2027-08-26', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-806', 94),
+('2025-07-14', '2026-07-14', 'V10', 'Múltipla canina', 'V10-819', 94),
+('2024-07-14', '2025-07-14', 'V-10', 'Múltipla canina', 'V10-829', 94),
+('2026-03-11', '2027-03-11', 'Gripe Canina', 'Prevenção da tosse dos canis', 'GRC-851', 94),
+('2025-03-11', '2026-03-11', 'Tosse dos Canis', 'Prevenção da tosse dos canis', 'GRC-862', 94),
+('2025-09-22', '2026-09-22', 'Giárdia', 'Reforço anual', 'GIA-882', 94),
+('2026-05-05', '2027-05-05', 'Leishmaniose', 'Vacina anual', 'LEI-899', 94),
+('2025-05-05', '2026-05-05', 'Leishmaniose', 'Vacina anual', 'LEI-925', 94),
+-- Miúda (pet, animal 95)
+('2026-07-12', '2027-07-12', 'V4', 'Múltipla felina', 'V4-934', 95),
+('2026-03-14', '2027-03-14', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-955', 95),
+('2025-03-14', '2026-03-14', 'Raiva', 'Vacina anual contra a raiva', 'RAB-974', 95),
+-- Ventania (fazenda, animal 96)
+('2026-03-30', '2026-09-30', 'Influenza Equina', 'Reforço semestral', 'INF-985', 96),
+('2025-09-30', '2026-03-30', 'Gripe Equina', 'Reforço semestral', 'INF-988', 96),
+('2026-07-28', '2027-07-28', 'Tétano', 'Reforço anual', 'TET-010', 96),
+('2025-07-28', '2026-07-28', 'Antitetânica', 'Reforço anual', 'TET-036', 96),
+('2026-04-06', '2027-04-06', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-042', 96),
+('2026-06-05', '2027-06-05', 'Encefalomielite Equina', 'Prevenção de encefalomielite', 'ENC-065', 96),
+('2025-06-05', '2026-06-05', 'Encefalomielite Equina', 'Prevenção de encefalomielite', 'ENC-082', 96),
+-- Boneca (fazenda, animal 97)
+('2025-10-17', '2026-04-17', 'Febre Aftosa', 'Campanha de vacinação semestral', 'AFT-097', 97),
+('2026-06-13', '2027-06-13', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-113', 97),
+('2025-10-05', '2026-10-05', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-134', 97),
+('2024-10-05', '2025-10-05', 'Antirrábica', 'Controle da raiva dos herbívoros', 'RAI-148', 97),
+('2026-09-13', '2027-03-13', 'Leptospirose', 'Vacina reprodutiva', 'LEP-175', 97),
+('2026-03-13', '2026-09-13', 'Leptospirose', 'Vacina reprodutiva', 'LEP-201', 97),
+('2021-03-06', NULL, 'Brucelose', 'Dose única para bezerras', 'BRU-215', 97),
+-- Trovoada (fazenda, animal 98)
+('2026-07-14', '2027-01-14', 'Febre Aftosa', 'Campanha de vacinação semestral', 'AFT-233', 98),
+('2026-01-14', '2026-07-14', 'Aftosa', 'Campanha de vacinação semestral', 'AFT-250', 98),
+('2026-09-05', '2027-09-05', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-272', 98),
+('2025-09-05', '2026-09-05', 'Clostridiose', 'Vacina polivalente clostridial', 'CLO-292', 98),
+('2025-09-22', '2026-09-22', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-298', 98),
+('2021-08-17', NULL, 'Brucelose', 'Dose única para bezerras', 'BRU-314', 98),
+-- Bravo (fazenda, animal 99)
+('2026-07-12', '2027-01-12', 'Febre Aftosa', 'Campanha de vacinação semestral', 'AFT-329', 99),
+('2026-01-12', '2026-07-12', 'Aftosa', 'Campanha de vacinação semestral', 'AFT-332', 99),
+('2026-07-26', '2027-07-26', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-341', 99),
+('2025-07-26', '2026-07-26', 'Clostridiose', 'Vacina polivalente clostridial', 'CLO-349', 99),
+('2026-09-04', '2027-09-04', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-374', 99),
+('2025-09-04', '2026-09-04', 'Antirrábica', 'Controle da raiva dos herbívoros', 'RAI-380', 99),
+-- Ovelinha (fazenda, animal 100)
+('2025-03-30', '2026-03-30', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-402', 100),
+('2024-03-30', '2025-03-30', 'Clostridiose', 'Vacina polivalente clostridial', 'CLO-414', 100),
+('2026-08-15', '2027-08-15', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-420', 100),
+('2025-09-28', '2026-09-28', 'Ectima Contagioso', 'Vacina contra boqueira', 'ECT-426', 100),
+-- Cacau (fazenda, animal 101)
+('2026-08-30', '2027-02-28', 'Parvovirose Suína', 'Vacina reprodutiva', 'PAR-432', 101),
+('2026-08-29', '2027-02-28', 'Erisipela Suína', 'Vacina contra erisipela', 'ERI-453', 101),
+-- Pintada (fazenda, animal 102)
+('2026-06-09', '2026-12-09', 'Newcastle', 'Vacina contra Newcastle', 'NEW-457', 102),
+('2025-12-09', '2026-06-09', 'Doença de Newcastle', 'Vacina contra Newcastle', 'NEW-484', 102),
+('2025-09-30', '2026-09-30', 'Bouba Aviária', 'Vacina contra bouba', 'BOU-500', 102),
+('2026-04-27', '2027-04-27', 'Gumboro', 'Vacina contra doença de Gumboro', 'GUM-524', 102),
+-- Valente (fazenda, animal 103)
+('2026-05-27', '2026-11-27', 'Influenza Equina', 'Reforço semestral', 'INF-533', 103),
+('2026-06-02', '2027-06-02', 'Tétano', 'Reforço anual', 'TET-545', 103),
+('2025-06-02', '2026-06-02', 'Antitetânica', 'Reforço anual', 'TET-567', 103),
+('2025-06-10', '2026-06-10', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-592', 103),
+('2024-06-10', '2025-06-10', 'Raiva', 'Vacina anual contra a raiva', 'RAB-613', 103),
+('2026-06-03', '2027-06-03', 'Encefalomielite Equina', 'Prevenção de encefalomielite', 'ENC-631', 103),
+('2025-06-03', '2026-06-03', 'Encefalomielite Equina', 'Prevenção de encefalomielite', 'ENC-654', 103),
+-- Jurema (fazenda, animal 104)
+('2026-03-25', '2026-09-25', 'Febre Aftosa', 'Campanha de vacinação semestral', 'AFT-657', 104),
+('2025-09-25', '2026-03-25', 'Aftosa', 'Campanha de vacinação semestral', 'AFT-664', 104),
+('2026-05-29', '2027-05-29', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-673', 104),
+('2025-05-29', '2026-05-29', 'Clostridiose', 'Vacina polivalente clostridial', 'CLO-692', 104),
+('2026-04-10', '2027-04-10', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-699', 104),
+('2025-04-10', '2026-04-10', 'Antirrábica', 'Controle da raiva dos herbívoros', 'RAI-726', 104),
+('2021-07-10', NULL, 'Brucelose', 'Dose única para bezerras', 'BRU-751', 104),
+-- Lanzinha (fazenda, animal 105)
+('2026-07-03', '2027-07-03', 'Clostridioses', 'Vacina polivalente clostridial', 'CLO-754', 105),
+('2025-09-27', '2026-09-27', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-771', 105),
+('2024-09-27', '2025-09-27', 'Raiva', 'Controle da raiva dos herbívoros', 'RAI-786', 105),
+('2026-08-28', '2027-08-28', 'Ectima Contagioso', 'Vacina contra boqueira', 'ECT-789', 105),
+('2025-08-28', '2026-08-28', 'Ectima Contagioso', 'Vacina contra boqueira', 'ECT-813', 105);
+
+-- === Vacinas: r@r.com (Rodrigo) ===
+INSERT INTO vaccine_model (application_date, expiration_date, name, description, batch, animal_id) VALUES
+-- Caramelo (pet, animal 13)
+('2026-08-24', '2027-08-24', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-824', 13),
+('2025-08-24', '2026-08-24', 'Raiva', 'Vacina anual contra a raiva', 'RAB-837', 13),
+('2026-07-13', '2027-07-13', 'V10', 'Múltipla canina', 'V10-842', 13),
+('2025-07-13', '2026-07-13', 'V8', 'Múltipla canina', 'V10-862', 13),
+('2025-09-01', '2026-09-01', 'Gripe Canina', 'Prevenção da tosse dos canis', 'GRC-887', 13),
+('2024-09-01', '2025-09-01', 'Tosse dos Canis', 'Prevenção da tosse dos canis', 'GRC-894', 13),
+('2026-08-04', '2027-08-04', 'Giárdia', 'Reforço anual', 'GIA-901', 13),
+('2025-08-04', '2026-08-04', 'Giárdia', 'Reforço anual', 'GIA-912', 13),
+('2025-09-24', '2026-09-24', 'Leishmaniose', 'Vacina anual', 'LEI-927', 13),
+('2024-09-24', '2025-09-24', 'Leishmaniose', 'Vacina anual', 'LEI-950', 13);
+
+-- === Vacinas: Ana Clara ===
+INSERT INTO vaccine_model (application_date, expiration_date, name, description, batch, animal_id) VALUES
+-- Nala (pet, animal 120)
+('2026-05-19', '2027-05-19', 'V4', 'Múltipla felina', 'V4-964', 120),
+('2025-05-19', '2026-05-19', 'V3', 'Múltipla felina', 'V4-978', 120),
+('2026-05-18', '2027-05-18', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-983', 120),
+('2026-04-17', '2027-04-17', 'FeLV', 'Leucemia felina', 'FEL-990', 120);
+
+-- === Vacinas: Carlos Silva ===
+INSERT INTO vaccine_model (application_date, expiration_date, name, description, batch, animal_id) VALUES
+-- Max (pet, animal 121)
+('2025-09-30', '2026-09-30', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-010', 121),
+('2024-09-30', '2025-09-30', 'Anti-rábica', 'Vacina anual contra a raiva', 'RAB-020', 121),
+('2026-03-16', '2027-03-16', 'V10', 'Múltipla canina', 'V10-031', 121),
+('2025-03-16', '2026-03-16', 'V8', 'Múltipla canina', 'V10-043', 121),
+('2026-08-09', '2027-08-09', 'Gripe Canina', 'Prevenção da tosse dos canis', 'GRC-054', 121),
+('2025-08-09', '2026-08-09', 'Tosse dos Canis', 'Prevenção da tosse dos canis', 'GRC-063', 121),
+('2026-06-30', '2027-06-30', 'Giárdia', 'Reforço anual', 'GIA-069', 121),
+('2025-06-30', '2026-06-30', 'Giárdia', 'Reforço anual', 'GIA-093', 121),
+('2025-02-21', '2026-02-21', 'Leishmaniose', 'Vacina anual', 'LEI-109', 121),
+('2024-02-21', '2025-02-21', 'Leishmaniose', 'Vacina anual', 'LEI-122', 121);
+
+-- === Vacinas: Mariana Costa ===
+INSERT INTO vaccine_model (application_date, expiration_date, name, description, batch, animal_id) VALUES
+-- Luna (pet, animal 12)
+('2026-07-06', '2027-07-06', 'V4', 'Múltipla felina', 'V4-134', 12),
+('2025-07-06', '2026-07-06', 'V3', 'Múltipla felina', 'V4-139', 12),
+('2025-09-30', '2026-09-30', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-166', 12),
+('2024-09-30', '2025-09-30', 'Raiva', 'Vacina anual contra a raiva', 'RAB-189', 12),
+('2026-07-27', '2027-07-27', 'FeLV', 'Leucemia felina', 'FEL-209', 12),
+('2025-07-27', '2026-07-27', 'FeLV', 'Leucemia felina', 'FEL-222', 12),
+-- Pretinha (pet, animal 122)
+('2026-07-27', '2027-07-27', 'V4', 'Múltipla felina', 'V4-225', 122),
+('2026-06-27', '2027-06-27', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-231', 122),
+('2025-06-27', '2026-06-27', 'Raiva', 'Vacina anual contra a raiva', 'RAB-255', 122);
+
+-- === Vacinas: Joao Souza ===
+INSERT INTO vaccine_model (application_date, expiration_date, name, description, batch, animal_id) VALUES
+-- Fumaça (pet, animal 15)
+('2025-10-01', '2026-10-01', 'V4', 'Múltipla felina', 'V4-275', 15),
+('2026-07-22', '2027-07-22', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-279', 15),
+('2025-07-22', '2026-07-22', 'Raiva', 'Vacina anual contra a raiva', 'RAB-303', 15),
+('2026-05-14', '2027-05-14', 'FeLV', 'Leucemia felina', 'FEL-328', 15),
+('2025-05-14', '2026-05-14', 'FeLV', 'Leucemia felina', 'FEL-351', 15),
+-- Bella (pet, animal 123)
+('2026-04-03', '2027-04-03', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-364', 123),
+('2025-07-30', '2026-07-30', 'V10', 'Múltipla canina', 'V10-384', 123),
+('2026-04-27', '2027-04-27', 'Gripe Canina', 'Prevenção da tosse dos canis', 'GRC-407', 123),
+('2025-04-27', '2026-04-27', 'Tosse dos Canis', 'Prevenção da tosse dos canis', 'GRC-427', 123);
+
+-- Mais vacinas do Rex (pet do d@d.com, animal 1)
+INSERT INTO vaccine_model (application_date, expiration_date, name, description, batch, animal_id) VALUES
+('2026-05-20', '2027-05-20', 'Gripe Canina', 'Prevenção da tosse dos canis', 'GRC-311', 1),
+('2026-06-02', '2027-06-02', 'Leishmaniose', 'Vacina anual', 'LEI-140', 1);
+
 INSERT INTO announcement_model (title, description, event_date, location, announcement_type, user_id, contact) VALUES
 ('Feira de Adoção de Cães', 'Venha adotar seu novo melhor amigo.', '2024-05-10', 'Praça Central', 'ADOPTION', 6, '11966660003'),
 ('Procura-se Gato', 'Meu gato sumiu próximo ao centro.', NULL, 'Rua das Flores, 123', 'LOST', 4, '11988880001'),
@@ -177,12 +1075,48 @@ INSERT INTO announcement_model (title, description, event_date, location, announ
 ('Leilão de Gado', 'Excelente oportunidade para pecuaristas.', '2024-07-20', 'Agropecuária Vale', 'ADOPTION', 8, '19944440005'),
 ('Gato SRD para Adoção', 'Lindo filhote de gato.', NULL, 'PetShop Cão Feliz', 'ADOPTION', 6, '11966660003');
 
+-- Mais anúncios (campanhas de vacinação, adoção e animais perdidos)
+INSERT INTO announcement_model (title, description, event_date, location, announcement_type, user_id, contact) VALUES
+('Campanha de Vacinação Antirrábica Gratuita', 'Traga seu cão ou gato para a dose anual contra a raiva. Atendimento por ordem de chegada, com veterinário no local.', '2026-10-10', 'PetShop Cão Feliz - Rua das Acácias, 250', 'VACCINE', 6, '11966660003'),
+('Vacina V10 com 20% de desconto', 'Durante a semana do pet, a V10 e a gripe canina saem com 20% de desconto. Agende pelo telefone.', '2026-10-15', 'PetShop Cão Feliz', 'VACCINE', 6, '11966660003'),
+('Mutirão de Vacinação de Gatos (V4 e FeLV)', 'Vacinação múltipla felina e contra leucemia felina. Gatos devem vir em caixa de transporte.', '2026-11-14', 'PetShop Cão Feliz', 'VACCINE', 6, '11966660003'),
+('Vacinação contra Febre Aftosa - 2ª etapa', 'Vacinas disponíveis no balcão para pecuaristas cadastrados. Levar o cartão do produtor.', '2026-11-05', 'Agropecuária Vale - Balcão de atendimento', 'VACCINE', 8, '19944440005'),
+('Dia D de Vacinação de Equinos', 'Influenza, tétano e encefalomielite no curral central, com veterinário responsável e atestado no ato.', '2026-10-24', 'Fazenda Boa Vista - Curral central', 'VACCINE', 5, '19977770002'),
+('Vacinação de Aves - Newcastle', 'Campanha para pequenos criadores de aves. Vagas limitadas por lote.', '2026-10-30', 'BB enterprise - Galpão 2', 'VACCINE', 3, '31999990005'),
+('Feira de Adoção de Cães e Gatos', 'Mais de 15 animais vacinados e vermifugados esperando por um lar. Entrada gratuita.', '2026-10-18', 'Praça da Matriz', 'ADOPTION', 6, '11966660003'),
+('Gatos do celeiro procuram um lar', 'Gatos castrados e vacinados, ótimos para sítios e chácaras. Retirada na fazenda.', '2026-10-03', 'Fazenda Boa Vista', 'ADOPTION', 5, '19977770002'),
+('Projeto Adote um Amigo', 'Encontro de adoção responsável com termo de compromisso e acompanhamento nos primeiros 30 dias.', '2026-11-08', 'Parque Municipal', 'ADOPTION', 3, '31999990005'),
+('Pets da Agropecuária Vale para adoção', 'Cães e gatos resgatados na região, todos com a carteira de vacinação em dia.', '2026-11-21', 'Agropecuária Vale', 'ADOPTION', 8, '19944440005'),
+('Procura-se Beagle Perdido', 'Beagle tricolor, atende por Bidu, fugiu na sexta-feira à noite. Oferecemos recompensa.', NULL, 'Bairro Centro, próximo à padaria', 'LOST', 2, '31999990002'),
+('Vaca desgarrada encontrada', 'Vaca Nelore sem brinco encontrada na estrada. Aguardando o dono.', NULL, 'Estrada Vicinal, km 12', 'LOST', 2, '31999990002'),
+('Gato Siamês desaparecido', 'Gata Siamesa de olhos azuis, muito dócil, sumiu do prédio há dois dias.', NULL, 'Rua das Palmeiras, 45', 'LOST', 4, '11988880001'),
+('Encontrei uma Calopsita', 'Calopsita cinza com bochechas laranja pousou na minha varanda. Está bem cuidada.', NULL, 'Av. Brasil, 800', 'LOST', 7, '31955550004'),
+('Periquito verde fugiu', 'Periquito verde de 1 ano, responde pelo nome Kiwi. Fugiu pela janela.', NULL, 'Rua dos Ipês, 321', 'LOST', 9, '11933330006'),
+('Labrador perdido no parque', 'Labrador chocolate de coleira vermelha, muito brincalhona, perdida durante a caminhada.', NULL, 'Parque das Águas', 'LOST', 10, '11922220007'),
+('Égua perdida na estrada rural', 'Égua Mangalarga alazã com marca branca na testa, escapou do pasto durante a chuva.', NULL, 'Estrada do Vale, km 7', 'LOST', 8, '19944440005');
+
 -- pet_id = animal_model.id do pet (Mia = 4, Bolinha = 6, Thor = 9, Fumaça = 15)
 INSERT INTO adoption_model (pet_id, owner_id, description, contact, adopted, publication_date) VALUES
 (4, 4, 'Gatinha muito mansa e carinhosa, precisa de um lar telado.', '11988880001', false, '2024-01-10'),
 (6, 6, 'Poodle fêmea resgatada, vacinada e vermifugada.', '11966660003', true, '2024-02-15'),
 (9, 6, 'Pastor Alemão filhote, ideal para companhia e sítios.', '11966660003', false, '2024-03-20'),
 (15, 10, 'Gatinho preto muito brincalhão e sapeca.', '11922220007', false, '2024-04-05');
+
+-- Adoções dos novos pets marcados para adoção (pet_id = animal_model.id)
+INSERT INTO adoption_model (pet_id, owner_id, description, contact, adopted, publication_date) VALUES
+(61, 6, 'Pipa é um cão dócil, vacinado e vermifugado, pronto para uma nova família.', '11966660003', false, '2026-07-25'),
+(62, 6, 'Bidu é um cão dócil, vacinado e vermifugado, pronto para uma nova família.', '11966660003', false, '2026-08-01'),
+(63, 6, 'Nina é uma gatinha(o) carinhosa(o), vacinada(o) e acostumada(o) com a caixa de areia.', '11966660003', false, '2026-09-13'),
+(65, 6, 'Lola é um cão dócil, vacinado e vermifugado, pronto para uma nova família.', '11966660003', true, '2026-08-09'),
+(66, 6, 'Tobby é um cão dócil, vacinado e vermifugado, pronto para uma nova família.', '11966660003', false, '2026-08-08'),
+(69, 6, 'Kiara é uma ave saudável e sociável, ideal para quem gosta de companhia.', '11966660003', false, '2026-07-24'),
+(70, 6, 'Amora é uma gatinha(o) carinhosa(o), vacinada(o) e acostumada(o) com a caixa de areia.', '11966660003', false, '2026-08-01'),
+(71, 6, 'Bob é um cão dócil, vacinado e vermifugado, pronto para uma nova família.', '11966660003', false, '2026-07-30'),
+(74, 3, 'Frida é uma gatinha(o) carinhosa(o), vacinada(o) e acostumada(o) com a caixa de areia.', '31999990005', false, '2026-09-17'),
+(82, 5, 'Tigrinho é uma gatinha(o) carinhosa(o), vacinada(o) e acostumada(o) com a caixa de areia.', '19977770002', false, '2026-08-22'),
+(95, 8, 'Miúda é uma gatinha(o) carinhosa(o), vacinada(o) e acostumada(o) com a caixa de areia.', '19944440005', true, '2026-08-20'),
+(109, 2, 'Sarará é um cão dócil, vacinado e vermifugado, pronto para uma nova família.', '31999990002', false, '2026-08-06'),
+(122, 9, 'Pretinha é uma gatinha(o) carinhosa(o), vacinada(o) e acostumada(o) com a caixa de areia.', '11933330006', false, '2026-09-15');
 
 INSERT INTO farm_animal_sale (description, price_type, price_per_arroba, price, user_id, contact) VALUES
 ('Lote de Cavalos Mangalarga e Crioulo', 'MANUAL', NULL, 30000.00, 5, '19977770002'),

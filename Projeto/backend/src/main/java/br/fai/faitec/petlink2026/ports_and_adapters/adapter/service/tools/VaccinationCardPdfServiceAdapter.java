@@ -81,8 +81,6 @@ public class VaccinationCardPdfServiceAdapter implements VaccinationCardPdfServi
     @Override
     public String generateVaccinationCardPdf(final int animalId, final String outputDirectory) throws IOException {
 
-        // pet_model e farm_animal_model compartilham os ids de animal_model, entao o mesmo id
-        // identifica um unico animal, seja ele pet ou animal de fazenda.
         final AnimalModel animal = findAnimal(animalId);
 
         if (animal == null) {
@@ -95,7 +93,7 @@ public class VaccinationCardPdfServiceAdapter implements VaccinationCardPdfServi
 
         final Document doc = new Document(PageSize.A4, PAGE_MARGIN, PAGE_MARGIN, 135f, 60f);
 
-        final String nomeArquivo = "carteira-vacinacao_" + fileSlug(animalName) + "_" + animal.getId() + ".pdf";
+        final String nomeArquivo = "carteira-vacinacao_" + fileSlug(animalName) + ".pdf";
         final String caminhoCompleto = outputDirectory + nomeArquivo;
 
         final boolean farmAnimal = animal instanceof FarmAnimalModel;
