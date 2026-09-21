@@ -1,5 +1,6 @@
 package br.fai.faitec.petlink2026.dto.user;
 
+import br.fai.faitec.petlink2026.domain.user.AccountType;
 import br.fai.faitec.petlink2026.domain.user.UserModel;
 
 public class UpdateUserDto {
@@ -11,8 +12,8 @@ public class UpdateUserDto {
     private String document;
 
 
-    public UserModel toUserModel() {
-        final UserModel userModel = new UserModel();
+    public UserModel toUserModel(final AccountType accountType) {
+        final UserModel userModel = accountType.createUser();
         userModel.setId(id);
         userModel.setFullname(fullname);
         userModel.setEmail(email);

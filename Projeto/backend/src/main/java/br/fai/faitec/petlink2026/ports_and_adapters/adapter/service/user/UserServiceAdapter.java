@@ -5,9 +5,13 @@ import br.fai.faitec.petlink2026.domain.animal.FarmAnimalModel;
 import br.fai.faitec.petlink2026.domain.animal.PetModel;
 import br.fai.faitec.petlink2026.domain.announcement.AnnouncementModel;
 import br.fai.faitec.petlink2026.domain.user.AccountType;
+import br.fai.faitec.petlink2026.domain.user.EnterpriseModel;
+import br.fai.faitec.petlink2026.domain.user.PersonModel;
 import br.fai.faitec.petlink2026.domain.user.UserModel;
 import br.fai.faitec.petlink2026.domain.vaccine.VaccineModel;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.announcement.AnnouncementDao;
+import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.user.EnterpriseDao;
+import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.user.PersonDao;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.user.UserDao;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.service.adoption.AdoptionService;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.service.animal.FarmAnimalService;
@@ -25,6 +29,10 @@ public class UserServiceAdapter implements UserService {
 
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private PersonDao personDao;
+    @Autowired
+    private EnterpriseDao enterpriseDao;
     @Autowired
     private PetService petService;
     @Autowired
@@ -63,7 +71,15 @@ public class UserServiceAdapter implements UserService {
             return 0;
         }
 
-        return userDao.add(userModel);
+        if (userModel instanceof PersonModel personModel) {
+            return personDao.add(personModel);
+        }
+
+        if (userModel instanceof EnterpriseModel enterpriseModel) {
+            return enterpriseDao.add(enterpriseModel);
+        }
+
+        return 0;
     }
 
     @Override
@@ -111,7 +127,6 @@ public class UserServiceAdapter implements UserService {
             return false;
         }
 
-        // CPF/CNPJ so pode ser definido uma vez; depois de cadastrado, nao pode mais ser alterado por aqui.
         if (isBlank(dataToUpdate.getDocument()) && !isBlank(userModel.getDocument())) {
             if (isDocumentInvalid(userModel.getDocument(), dataToUpdate.getAccountType())) {
                 return false;
@@ -122,10 +137,18 @@ public class UserServiceAdapter implements UserService {
         dataToUpdate.setFullname(userModel.getFullname());
         dataToUpdate.setPhone(userModel.getPhone());
         dataToUpdate.setEmail(userModel.getEmail());
-        dataToUpdate.setDocument(userModel.getDocument());
 
-        userDao.updateInformation(id, dataToUpdate);
-        return true;
+        if (dataToUpdate instanceof PersonModel personModel) {
+            personDao.updateInformation(id, personModel);
+            return true;
+        }
+
+        if (dataToUpdate instanceof EnterpriseModel enterpriseModel) {
+            enterpriseDao.updateInformation(id, enterpriseModel);
+            return true;
+        }
+
+        return false;
     }
 
     @Override

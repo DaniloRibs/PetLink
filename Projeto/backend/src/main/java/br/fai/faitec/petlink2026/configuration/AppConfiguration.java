@@ -5,6 +5,8 @@ import br.fai.faitec.petlink2026.ports_and_adapters.adapter.dao.animal.FarmAnima
 import br.fai.faitec.petlink2026.ports_and_adapters.adapter.dao.announcement.AnnouncementPostgresDaoAdapter;
 import br.fai.faitec.petlink2026.ports_and_adapters.adapter.dao.animal.PetPostgresDaoAdapter;
 import br.fai.faitec.petlink2026.ports_and_adapters.adapter.dao.sale.FarmAnimalSalePostgresDaoAdapter;
+import br.fai.faitec.petlink2026.ports_and_adapters.adapter.dao.user.EnterprisePostgresDaoAdapter;
+import br.fai.faitec.petlink2026.ports_and_adapters.adapter.dao.user.PersonPostgresDaoAdapter;
 import br.fai.faitec.petlink2026.ports_and_adapters.adapter.dao.user.UserPostgresDaoAdapter;
 import br.fai.faitec.petlink2026.ports_and_adapters.adapter.dao.vaccine.VaccinePostgresDaoAdapter;
 import br.fai.faitec.petlink2026.ports_and_adapters.adapter.sucurity.BasicAuthenticationServiceAdapter;
@@ -14,6 +16,8 @@ import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.animal.FarmAnimalDa
 import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.announcement.AnnouncementDao;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.animal.PetDao;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.sale.FarmAnimalSaleDao;
+import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.user.EnterpriseDao;
+import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.user.PersonDao;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.user.UserDao;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.vaccine.VaccineDao;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.service.security.AuthenticationService;
@@ -52,6 +56,16 @@ public class AppConfiguration {
     @Bean
     public UserDao getUserPostgresDao(final Connection connection) {
         return new UserPostgresDaoAdapter(connection);
+    }
+
+    @Bean
+    public PersonDao getPersonPostgresDao(final Connection connection) {
+        return new PersonPostgresDaoAdapter(connection);
+    }
+
+    @Bean
+    public EnterpriseDao getEnterprisePostgresDao(final Connection connection) {
+        return new EnterprisePostgresDaoAdapter(connection);
     }
 
     @Bean

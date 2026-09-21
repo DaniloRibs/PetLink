@@ -6,6 +6,8 @@ DROP TABLE IF EXISTS vaccine_model CASCADE;
 DROP TABLE IF EXISTS farm_animal_model CASCADE;
 DROP TABLE IF EXISTS pet_model CASCADE;
 DROP TABLE IF EXISTS animal_model CASCADE;
+DROP TABLE IF EXISTS enterprise_model CASCADE;
+DROP TABLE IF EXISTS person_model CASCADE;
 DROP TABLE IF EXISTS user_model CASCADE;
 
 CREATE TABLE user_model
@@ -14,9 +16,23 @@ CREATE TABLE user_model
     email VARCHAR(100) UNIQUE NOT NULL,
     full_name VARCHAR(50) NOT NULL,
     password VARCHAR(60) NOT NULL,
-    document VARCHAR(14),
-    phone VARCHAR(15),
-    account_type VARCHAR(20) NOT NULL
+    phone VARCHAR(15)
+);
+
+CREATE TABLE person_model
+(
+    id SERIAL PRIMARY KEY,
+    cpf VARCHAR(14),
+    user_id INT NOT NULL UNIQUE,
+    CONSTRAINT fk_person_user FOREIGN KEY (user_id) REFERENCES user_model(id) ON DELETE CASCADE
+);
+
+CREATE TABLE enterprise_model
+(
+    id SERIAL PRIMARY KEY,
+    cnpj VARCHAR(14) NOT NULL,
+    user_id INT NOT NULL UNIQUE,
+    CONSTRAINT fk_enterprise_user FOREIGN KEY (user_id) REFERENCES user_model(id) ON DELETE CASCADE
 );
 
 CREATE TABLE animal_model

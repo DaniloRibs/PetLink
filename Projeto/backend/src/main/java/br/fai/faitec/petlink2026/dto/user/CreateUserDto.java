@@ -14,13 +14,16 @@ public class CreateUserDto {
     private AccountType accountType;
 
     public UserModel toUserModel() {
-        final UserModel userModel = new UserModel();
+        if (accountType == null) {
+            return null;
+        }
+
+        final UserModel userModel = accountType.createUser();
         userModel.setEmail(email);
         userModel.setPassword(password);
         userModel.setFullname(fullname);
         userModel.setPhone(phone);
         userModel.setDocument(document);
-        userModel.setAccountType(accountType);
 
         return userModel;
     }

@@ -47,7 +47,6 @@ public class UserRestController {
     }
 
     // deletar pelo id
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable final int id) {
         userService.delete(id);
@@ -57,7 +56,12 @@ public class UserRestController {
     @PutMapping("/{id}")
     public ResponseEntity<UserModel> update(@PathVariable final int id, @RequestBody final UpdateUserDto updateUserDto) {
 
-        final UserModel userModel = updateUserDto.toUserModel();
+        final UserModel currentUser = userService.findById(id);
+        if (currentUser == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        final UserModel userModel = updateUserDto.toUserModel(currentUser.getAccountType());
 
         boolean response = userService.update(id, userModel);
 
