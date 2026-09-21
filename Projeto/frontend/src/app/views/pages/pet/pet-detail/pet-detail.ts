@@ -14,6 +14,7 @@ import { VaccineReadService } from '../../../../services/vaccine/vaccine-read';
 import { VaccineCreateService } from '../../../../services/vaccine/vaccine-create';
 import { VaccineDeleteService } from '../../../../services/vaccine/vaccine-delete';
 import { VaccineUpdateService } from '../../../../services/vaccine/vaccine-update';
+import { VaccinationCardDownloadService } from '../../../../services/vaccine/vaccination-card-download';
 import { Pet, PetGender, PetSpecies } from '../../../../models/domain/pet';
 import { AnimalMode } from '../../../../models/domain/animalMode';
 import { AnimalModeService } from '../../../../services/animalMode/animalMode';
@@ -59,6 +60,7 @@ export class PetDetail implements OnInit {
   vaccineCreateValidationFailed: boolean = false;
   vaccineCreatedOk: boolean = false;
   pendingAdoptionConfirmation: boolean = false;
+  downloadingCard: boolean = false;
 
   vaccineEditForm: FormGroup;
   editingVaccineId: number | null = null;
@@ -86,6 +88,7 @@ export class PetDetail implements OnInit {
     private vaccineCreateService: VaccineCreateService,
     private vaccineDeleteService: VaccineDeleteService,
     private vaccineUpdateService: VaccineUpdateService,
+    private vaccinationCardDownloadService: VaccinationCardDownloadService,
     private animalModeService: AnimalModeService,
     private farmAnimalReadService: FarmAnimalReadService,
     private farmAnimalUpdateService: FarmAnimalUpdateService,
@@ -171,6 +174,73 @@ export class PetDetail implements OnInit {
     if (this.currentPetId) {
       void this.loadPetData(this.currentPetId);
     }
+  }
+
+  downloadVaccinationCard(): void {
+    if (!this.pet?.id || this.downloadingCard) {
+      return;
+    }
+
+    const petId = this.pet.id;
+    this.downloadingCard = true;
+
+    this.vaccinationCardDownloadService.download(petId, this.isFarm).subscribe({
+      next: (response) => {
+        const pdf = response.body;
+
+        if (!pdf) {
+          this.finishCardDownload(false);
+          return;
+        }
+
+        this.saveFile(pdf, this.cardFileName(response.headers.get('Content-Disposition'), petId));
+        this.finishCardDownload(true);
+      },
+      error: (error) => {
+        console.error('Erro ao gerar a carteira de vacinação', error);
+        this.finishCardDownload(false);
+      },
+    });
+  }
+
+  private finishCardDownload(success: boolean): void {
+    this.zone.run(() => {
+      this.downloadingCard = false;
+
+      if (success) {
+        this.toastrService.success('Carteira de vacinação gerada!');
+      } else {
+        this.toastrService.error('Não foi possível gerar a carteira de vacinação.');
+      }
+
+      this.cdr.detectChanges();
+    });
+  }
+
+  private cardFileName(contentDisposition: string | null, petId: number): string {
+    const match = contentDisposition?.match(/filename\*?=(?:UTF-8'')?"?([^";]+)"?/i);
+
+    if (match?.[1]) {
+      try {
+        return decodeURIComponent(match[1]);
+      } catch {
+        return match[1];
+      }
+    }
+
+    return `carteira-vacinacao-${petId}.pdf`;
+  }
+
+  private saveFile(file: Blob, fileName: string): void {
+    const url = window.URL.createObjectURL(file);
+    const link = document.createElement('a');
+
+    link.href = url;
+    link.download = fileName;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    window.URL.revokeObjectURL(url);
   }
 
   requestToggleAdoption(): void {

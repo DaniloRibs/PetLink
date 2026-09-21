@@ -33,7 +33,7 @@ public class AnnouncementController {
         return announcement == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(announcement);
     }
 
-    @GetMapping("/user/{id}")
+    @GetMapping("/user/{userId}")
     public ResponseEntity<List<ReadAnnouncementDto>> getAnnouncementsByUserId(@PathVariable final int userId) {
         List<ReadAnnouncementDto> announcements = announcementService.getAnnouncementsByUserId(userId);
         return ResponseEntity.ok(announcements);

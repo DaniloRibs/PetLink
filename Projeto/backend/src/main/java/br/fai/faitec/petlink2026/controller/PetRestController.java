@@ -5,12 +5,14 @@ import br.fai.faitec.petlink2026.domain.vaccine.VaccineModel;
 import br.fai.faitec.petlink2026.dto.animal.CreatePetDto;
 import br.fai.faitec.petlink2026.dto.vaccine.CreateVaccineDto;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.service.animal.PetService;
+import br.fai.faitec.petlink2026.ports_and_adapters.port.service.tools.VaccinationCardPdfService;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.service.vaccine.VaccineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.io.IOException;
 import java.net.URI;
 import java.util.List;
 
@@ -23,6 +25,9 @@ public class PetRestController {
 
     @Autowired
     private VaccineService vaccineService;
+
+    @Autowired
+    private VaccinationCardPdfService vaccinationCardPdfService;
 
     //     BUSCAR TODOS OS PETS
     @GetMapping
@@ -91,7 +96,13 @@ public class PetRestController {
     @GetMapping("/{petId}/vaccine/{vaccineId}")
     public ResponseEntity<VaccineModel> getEntitiesByPetIdAndVaccineId(@PathVariable final int petId, @PathVariable final int vaccineId) {
         VaccineModel vaccineModel = petService.findVaccineByAnimalId(petId, vaccineId);
-        return ResponseEntity.ok(vaccineModel);
+        return vaccineModel == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(vaccineModel);
+    }
+
+    //     GERAR PDF DO CARTAO DE VACINACAO (funciona para qualquer animal, pet ou de fazenda)
+    @GetMapping("/{petId}/vaccination-card")
+    public ResponseEntity<byte[]> getVaccinationCardPdf(@PathVariable final int petId) throws IOException {
+        return VaccinationCardResponses.build(vaccinationCardPdfService, petId);
     }
 
     //VACINAS

@@ -11,7 +11,7 @@ public class UpdateAnimalFarmDto {
     private String breed;
     private Date birthDate;
     private double weight;
-    private boolean forSeel;
+    private boolean forSell;
 
 
     public FarmAnimalModel toFarmAnimalModel() {
@@ -21,7 +21,7 @@ public class UpdateAnimalFarmDto {
         farmAnimalModel.setName(name);
         farmAnimalModel.setBreed(breed);
         farmAnimalModel.setBirthDate(birthDate);
-        farmAnimalModel.setForSell(forSeel);
+        farmAnimalModel.setForSell(forSell);
 
         return farmAnimalModel;
     }
@@ -34,12 +34,12 @@ public class UpdateAnimalFarmDto {
         this.weight = weight;
     }
 
-    public boolean isForSeel() {
-        return forSeel;
+    public boolean isForSell() {
+        return forSell;
     }
 
-    public void setForSeel(boolean forSeel) {
-        this.forSeel = forSeel;
+    public void setForSell(boolean forSell) {
+        this.forSell = forSell;
     }
 
     public int getId() {

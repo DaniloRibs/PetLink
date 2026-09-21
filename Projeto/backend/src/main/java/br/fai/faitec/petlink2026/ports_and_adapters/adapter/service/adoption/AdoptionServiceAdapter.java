@@ -50,6 +50,11 @@ public class AdoptionServiceAdapter implements AdoptionService {
             return 0;
         }
 
+        // Anuncio de adocao exige CPF/CNPJ ja cadastrado, para responsabilizacao do autor.
+        if (owner.getDocument() == null || owner.getDocument().isEmpty()) {
+            return 0;
+        }
+
         adoptionModel.setAdopted(false);
         adoptionModel.setPublicationDate(new Date(System.currentTimeMillis()));
 

@@ -134,10 +134,17 @@
     </div>
     }
 
-    <button class="primary-button action-btn" (click)="toggleVaccineForm()">
-      <span class="action-btn-icon"><mat-icon>add</mat-icon></span>
-      Cadastrar vacina
-    </button>
+    <div class="vaccine-actions">
+      <button class="primary-button action-btn" (click)="toggleVaccineForm()">
+        <span class="action-btn-icon"><mat-icon>add</mat-icon></span>
+        Cadastrar vacina
+      </button>
+
+      <button class="secondary-button action-btn" (click)="downloadVaccinationCard()" [disabled]="downloadingCard">
+        <mat-icon>picture_as_pdf</mat-icon>
+        {{ downloadingCard ? 'Gerando PDF...' : 'Baixar carteira de vacinação' }}
+      </button>
+    </div>
     }
   </div>
 </section>
@@ -214,7 +221,7 @@
     <form [formGroup]="vaccineForm" (ngSubmit)="createVaccine()">
       <div class="field-group">
         <label>Nome da vacina</label>
-        <input type="text" placeholder formControlName="name">
+        <input type="text" placeholder maxlength="30" formControlName="name">
       </div>
 
       <div class="form-row">
@@ -231,12 +238,12 @@
 
       <div class="field-group">
         <label>Lote</label>
-        <input type="text" placeholder formControlName="batch">
+        <input type="text" placeholder maxlength="15" formControlName="batch">
       </div>
 
       <div class="field-group">
         <label>Observações</label>
-        <input type="text" placeholder formControlName="description">
+        <input type="text" placeholder maxlength="100" formControlName="description">
       </div>
 
       <input type="submit" value="Cadastrar Vacina" [disabled]="!validateVaccineFields()">
@@ -262,7 +269,7 @@
     <form [formGroup]="vaccineEditForm" (ngSubmit)="saveVaccineEdit(vaccine)">
       <div class="field-group">
         <label>Nome da vacina</label>
-        <input type="text" formControlName="name">
+        <input type="text" maxlength="30" formControlName="name">
       </div>
 
       <div class="form-row">
@@ -279,12 +286,12 @@
 
       <div class="field-group">
         <label>Lote</label>
-        <input type="text" placeholder formControlName="batch">
+        <input type="text" placeholder maxlength="15" formControlName="batch">
       </div>
 
       <div class="field-group">
         <label>Observações</label>
-        <input type="text" placeholder formControlName="description">
+        <input type="text" placeholder maxlength="100" formControlName="description">
       </div>
 
       <input type="submit" value="Salvar alterações" [disabled]="!validateVaccineEditFields()">

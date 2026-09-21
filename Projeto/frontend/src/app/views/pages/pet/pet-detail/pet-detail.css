@@ -19,9 +19,16 @@
   border-color: rgba(var(--primary-rgb), 0.4);
 }
 
-.empty-state+.action-btn,
-.vaccine-card-grid+.action-btn {
+.empty-state+.vaccine-actions,
+.vaccine-card-grid+.vaccine-actions {
   margin-top: 20px;
+}
+
+.vaccine-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
 }
 
 .pet-hero {

@@ -1,13 +1,19 @@
 package br.fai.faitec.petlink2026.ports_and_adapters.adapter.service.user;
 
+import br.fai.faitec.petlink2026.domain.adoption.AdoptionModel;
 import br.fai.faitec.petlink2026.domain.animal.FarmAnimalModel;
 import br.fai.faitec.petlink2026.domain.animal.PetModel;
+import br.fai.faitec.petlink2026.domain.announcement.AnnouncementModel;
 import br.fai.faitec.petlink2026.domain.user.AccountType;
 import br.fai.faitec.petlink2026.domain.user.UserModel;
+import br.fai.faitec.petlink2026.domain.vaccine.VaccineModel;
+import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.announcement.AnnouncementDao;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.user.UserDao;
+import br.fai.faitec.petlink2026.ports_and_adapters.port.service.adoption.AdoptionService;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.service.animal.FarmAnimalService;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.service.animal.PetService;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.service.user.UserService;
+import br.fai.faitec.petlink2026.ports_and_adapters.port.service.vaccine.VaccineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +29,12 @@ public class UserServiceAdapter implements UserService {
     private PetService petService;
     @Autowired
     private FarmAnimalService farmAnimalService;
+    @Autowired
+    private VaccineService vaccineService;
+    @Autowired
+    private AdoptionService adoptionService;
+    @Autowired
+    private AnnouncementDao announcementDao;
 
     @Override
     public int create(UserModel userModel) {
@@ -59,6 +71,31 @@ public class UserServiceAdapter implements UserService {
         if (isIdInvalid(id)) {
             return;
         }
+
+        UserModel userModel = userDao.readyById(id);
+        if (userModel == null) {
+            return;
+        }
+
+        for (PetModel pet : showAllPetsByOwnerId(id)) {
+            for (VaccineModel vaccine : petService.showAllVaccineByAnimalId(pet.getId())) {
+                vaccineService.delete(vaccine.getId());
+            }
+            petService.delete(pet.getId());
+        }
+
+        for (AdoptionModel adoption : adoptionService.findAll()) {
+            if (adoption.getOwnerId() == id) {
+                adoptionService.delete(adoption.getId());
+            }
+        }
+
+        for (AnnouncementModel announcement : announcementDao.readAll()) {
+            if (announcement.getIdCreator() == id) {
+                announcementDao.remove(announcement.getId());
+            }
+        }
+
         userDao.remove(id);
 
     }
@@ -70,8 +107,16 @@ public class UserServiceAdapter implements UserService {
             return false;
         }
 
-        if (isContactInvalid(userModel.getPhone(), userModel.getDocument(), dataToUpdate.getAccountType())) {
+        if (!isBlank(userModel.getPhone()) && isPhoneInvalid(userModel.getPhone())) {
             return false;
+        }
+
+        // CPF/CNPJ so pode ser definido uma vez; depois de cadastrado, nao pode mais ser alterado por aqui.
+        if (isBlank(dataToUpdate.getDocument()) && !isBlank(userModel.getDocument())) {
+            if (isDocumentInvalid(userModel.getDocument(), dataToUpdate.getAccountType())) {
+                return false;
+            }
+            dataToUpdate.setDocument(userModel.getDocument());
         }
 
         dataToUpdate.setFullname(userModel.getFullname());
@@ -93,6 +138,11 @@ public class UserServiceAdapter implements UserService {
 
 
         UserModel userModel = userDao.readyById(id);
+
+        if (userModel == null) {
+            return null;
+        }
+
         userModel.setPets(showAllPetsByOwnerId(id));
         userModel.setFarmAnimalModels(showAllAnimalByOwnerId(id));
         return userModel;
@@ -174,7 +224,7 @@ public class UserServiceAdapter implements UserService {
 
         PetModel petModel = petService.findById(idPet);
 
-        if (petModel.getOwnerId() != idOwner) {
+        if (petModel == null || petModel.getOwnerId() != idOwner) {
             return null;
         }
 
@@ -217,7 +267,7 @@ public class UserServiceAdapter implements UserService {
 
         FarmAnimalModel farmAnimalModel = farmAnimalService.findById(idPet);
 
-        if (farmAnimalModel.getOwnerId() != idOwner) {
+        if (farmAnimalModel == null || farmAnimalModel.getOwnerId() != idOwner) {
             return null;
         }
 

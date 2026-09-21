@@ -80,6 +80,10 @@ public class PetServiceAdapter implements PetService {
         }
         PetModel petModel = petDao.readyById(id);
 
+        if (petModel == null) {
+            return null;
+        }
+
         petModel.setVaccines(showAllVaccineByAnimalId(id));
 
         return petModel;
@@ -123,6 +127,14 @@ public class PetServiceAdapter implements PetService {
         dataToUpdate.setBirthDate(petModel.getBirthDate());
         dataToUpdate.setBreed(petModel.getBreed());
         dataToUpdate.setForAdoption(petModel.isForAdoption());
+
+        if (petModel.getSpecies() != null) {
+            dataToUpdate.setSpecies(petModel.getSpecies());
+        }
+
+        if (petModel.getGender() != null && !petModel.getGender().isEmpty()) {
+            dataToUpdate.setGender(petModel.getGender());
+        }
 
         petDao.updateInformation(id, dataToUpdate);
 

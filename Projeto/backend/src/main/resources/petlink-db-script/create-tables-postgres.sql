@@ -54,10 +54,10 @@ CREATE TABLE vaccine_model
 (
     id SERIAL PRIMARY KEY,
     application_date DATE NOT NULL,
-    expiration_date DATE NOT NULL,
+    expiration_date DATE,
     name VARCHAR(30) NOT NULL,
-    description VARCHAR(100) NOT NULL,
-    batch VARCHAR(15) NOT NULL,
+    description VARCHAR(100),
+    batch VARCHAR(15),
     animal_id INT NOT NULL,
     CONSTRAINT fk_vaccine_pet FOREIGN KEY (animal_id) REFERENCES animal_model(id) ON DELETE CASCADE
 );
@@ -68,7 +68,7 @@ CREATE TABLE announcement_model
     title VARCHAR(100) NOT NULL,
     description TEXT NOT NULL,
     event_date DATE,
-    location VARCHAR(150) NOT NULL,
+    location VARCHAR(150),
     announcement_type VARCHAR(15) NOT NULL,
     user_id INT NOT NULL,
     contact VARCHAR(150),
@@ -86,7 +86,7 @@ CREATE TABLE adoption_model
     adopted BOOLEAN NOT NULL DEFAULT FALSE,
     publication_date DATE NOT NULL,
 
-    CONSTRAINT fk_adoption_pet FOREIGN KEY (pet_id) REFERENCES pet_model(id) ON DELETE CASCADE,
+    CONSTRAINT fk_adoption_pet FOREIGN KEY (pet_id) REFERENCES animal_model(id) ON DELETE CASCADE,
     CONSTRAINT fk_adoption_owner FOREIGN KEY (owner_id) REFERENCES user_model(id) ON DELETE CASCADE
 );
 

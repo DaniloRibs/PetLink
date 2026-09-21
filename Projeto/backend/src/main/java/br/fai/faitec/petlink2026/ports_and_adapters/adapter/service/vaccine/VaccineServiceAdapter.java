@@ -22,19 +22,13 @@ public class VaccineServiceAdapter implements VaccineService {
             return 0;
         }
 
-        if (vaccineModel.getName().isEmpty()) {
-            return 0;
-        }
-        if (vaccineModel.getExpirationDate() == null) {
+        if (vaccineModel.getName() == null || vaccineModel.getName().isBlank()) {
             return 0;
         }
         if (vaccineModel.getApplicationDate() == null) {
             return 0;
         }
-        if (vaccineModel.getBatch().isEmpty()) {
-            return 0;
-        }
-        if (isIdInvalid(vaccineModel.getPetId())) {
+        if (vaccineModel.getPetId() <= 0) {
             return 0;
         }
         if (isIdInvalid(vaccineModel.getId())) {

@@ -157,6 +157,10 @@ public class FarmAnimalServiceAdapter implements FarmAnimalService {
         }
         FarmAnimalModel farmAnimalModel = farmAnimalDao.readyById(id);
 
+        if (farmAnimalModel == null) {
+            return null;
+        }
+
         farmAnimalModel.setVaccines(showAllVaccineByAnimalId(id));
 
         return farmAnimalModel;

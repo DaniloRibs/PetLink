@@ -1,6 +1,7 @@
 package br.fai.faitec.petlink2026.ports_and_adapters.adapter.service.announcement;
 
 import br.fai.faitec.petlink2026.domain.announcement.AnnouncementModel;
+import br.fai.faitec.petlink2026.domain.announcement.AnnouncementType;
 import br.fai.faitec.petlink2026.domain.user.AccountType;
 import br.fai.faitec.petlink2026.domain.user.UserModel;
 import br.fai.faitec.petlink2026.dto.announcement.ReadAnnouncementDto;
@@ -46,7 +47,15 @@ public class AnnouncementServiceAdapter implements AnnouncementService {
             return 0;
         }
 
-        if (creator.getAccountType() != AccountType.ENTERPRISE) {
+        // Usuario PERSON so pode publicar anuncios de animal perdido.
+        // Usuario ENTERPRISE pode publicar qualquer tipo de anuncio.
+        if (creator.getAccountType() == AccountType.PERSON && announcement.getAnnouncementType() != AnnouncementType.LOST) {
+            return 0;
+        }
+
+        // Anuncio de animal perdido exige CPF/CNPJ ja cadastrado, para responsabilizacao do autor.
+        if (announcement.getAnnouncementType() == AnnouncementType.LOST
+                && (creator.getDocument() == null || creator.getDocument().isEmpty())) {
             return 0;
         }
 

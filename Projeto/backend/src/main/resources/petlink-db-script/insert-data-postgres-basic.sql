@@ -138,15 +138,34 @@ INSERT INTO pet_model (for_adoption, animal_id) VALUES
 (false, 13),
 (true, 15);
 
+-- Vacinas coerentes com a espécie de cada animal (animal_id = animal_model.id)
 INSERT INTO vaccine_model (application_date, expiration_date, name, description, batch, animal_id) VALUES
+-- Rex (cachorro)
 ('2023-01-10', '2024-01-10', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-001', 1),
 ('2023-05-15', '2024-05-15', 'V10', 'Múltipla canina', 'V10-998', 1),
-('2023-02-20', '2024-02-20', 'V4', 'Múltipla felina', 'V4-112', 2),
-('2023-10-01', '2024-10-01', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-002', 3),
-('2023-11-15', '2024-11-15', 'V10', 'Múltipla canina', 'V10-999', 5),
+-- Mimosa (bovino)
+('2023-04-02', '2023-10-02', 'Febre Aftosa', 'Campanha de vacinação semestral', 'AFT-210', 2),
+('2023-04-02', '2024-04-02', 'Brucelose', 'Dose única para bezerras', 'BRU-045', 2),
+-- Trovão (equino)
+('2023-10-01', '2024-10-01', 'Influenza Equina', 'Reforço anual', 'INF-330', 3),
+('2023-10-01', '2024-10-01', 'Tétano', 'Reforço anual', 'TET-118', 3),
+-- Mia (gato)
+('2023-02-20', '2024-02-20', 'V4', 'Múltipla felina', 'V4-112', 4),
+('2023-03-05', '2024-03-05', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-004', 4),
+-- Pé de Pano (equino)
+('2023-11-15', '2024-11-15', 'Tétano', 'Reforço anual', 'TET-119', 5),
+-- Bolinha (cachorro)
 ('2023-06-12', '2024-06-12', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-003', 6),
-('2022-12-05', '2023-12-05', 'V10', 'Múltipla canina', 'V10-888', 7),
-('2023-11-20', '2024-11-20', 'V4', 'Múltipla felina', 'V4-115', 8);
+-- Pipoca (pássaro de estimação)
+('2022-12-05', '2023-12-05', 'Poliomavírus', 'Vacina para psitacídeos', 'POL-071', 7),
+-- Peppa (suíno)
+('2023-11-20', '2024-05-20', 'Parvovirose Suína', 'Vacina reprodutiva', 'PAR-090', 8),
+-- Malhada (bovino), sem lote nem próxima dose informados
+('2023-08-14', NULL, 'Febre Aftosa', NULL, NULL, 10),
+-- Branquinha (ovino)
+('2023-09-01', '2024-03-01', 'Clostridioses', 'Vacina polivalente', 'CLO-502', 11),
+-- Galo Doido (ave de granja)
+('2023-06-20', '2023-12-20', 'Newcastle', 'Vacina contra doença de Newcastle', 'NEW-330', 14);
 
 INSERT INTO announcement_model (title, description, event_date, location, announcement_type, user_id, contact) VALUES
 ('Feira de Adoção de Cães', 'Venha adotar seu novo melhor amigo.', '2024-05-10', 'Praça Central', 'ADOPTION', 6, '11966660003'),
@@ -156,11 +175,12 @@ INSERT INTO announcement_model (title, description, event_date, location, announ
 ('Leilão de Gado', 'Excelente oportunidade para pecuaristas.', '2024-07-20', 'Agropecuária Vale', 'ADOPTION', 8, '19944440005'),
 ('Gato SRD para Adoção', 'Lindo filhote de gato.', NULL, 'PetShop Cão Feliz', 'ADOPTION', 6, '11966660003');
 
+-- pet_id = animal_model.id do pet (Mia = 4, Bolinha = 6, Thor = 9, Fumaça = 15)
 INSERT INTO adoption_model (pet_id, owner_id, description, contact, adopted, publication_date) VALUES
-(2, 4, 'Gatinha muito mansa e carinhosa, precisa de um lar telado.', '11988880001', false, '2024-01-10'),
-(3, 6, 'Poodle fêmea resgatada, vacinada e vermifugada.', '11966660003', true, '2024-02-15'),
-(5, 6, 'Pastor Alemão filhote, ideal para companhia e sítios.', '11966660003', false, '2024-03-20'),
-(8, 10, 'Gatinho preto muito brincalhão e sapeca.', '11922220007', false, '2024-04-05');
+(4, 4, 'Gatinha muito mansa e carinhosa, precisa de um lar telado.', '11988880001', false, '2024-01-10'),
+(6, 6, 'Poodle fêmea resgatada, vacinada e vermifugada.', '11966660003', true, '2024-02-15'),
+(9, 6, 'Pastor Alemão filhote, ideal para companhia e sítios.', '11966660003', false, '2024-03-20'),
+(15, 10, 'Gatinho preto muito brincalhão e sapeca.', '11922220007', false, '2024-04-05');
 
 INSERT INTO farm_animal_sale (description, price_type, price_per_arroba, price, user_id, contact) VALUES
 ('Lote de Cavalos Mangalarga e Crioulo', 'MANUAL', NULL, 30000.00, 5, '19977770002'),
