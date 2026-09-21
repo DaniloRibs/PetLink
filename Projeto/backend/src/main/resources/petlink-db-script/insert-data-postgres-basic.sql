@@ -143,6 +143,8 @@ INSERT INTO vaccine_model (application_date, expiration_date, name, description,
 -- Rex (cachorro)
 ('2023-01-10', '2024-01-10', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-001', 1),
 ('2023-05-15', '2024-05-15', 'V10', 'Múltipla canina', 'V10-998', 1),
+-- reforço cadastrado como "Raiva": vale como a Antirrábica de 2023, então ela não gera aviso de vencida
+('2026-03-10', '2027-03-10', 'Raiva', 'Reforço anual', 'RAB-010', 1),
 -- Mimosa (bovino)
 ('2023-04-02', '2023-10-02', 'Febre Aftosa', 'Campanha de vacinação semestral', 'AFT-210', 2),
 ('2023-04-02', '2024-04-02', 'Brucelose', 'Dose única para bezerras', 'BRU-045', 2),

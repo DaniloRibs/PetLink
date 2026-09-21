@@ -38,28 +38,6 @@
         }
       </div>
     </div>
-    @if (!isFarm) {
-    <div class="pet-actions-row">
-      <div class="pet-actions-row">
-        @if (pendingAdoptionConfirmation) {
-        <p class="confirm-text">
-          {{ pet.forAdoption ? 'Remover ' + pet.name + ' da lista de adoção?' : 'Colocar ' + pet.name + ' para adoção?'
-          }}
-        </p>
-        <div class="confirm-actions">
-          <button class="primary-button" (click)="confirmToggleAdoption()">Confirmar</button>
-          <button class="secondary-button" (click)="cancelToggleAdoption()">Cancelar</button>
-        </div>
-        } @else {
-        <button class="primary-button adoption-toggle" (click)="requestToggleAdoption()">
-          <mat-icon>{{ pet.forAdoption ? 'favorite' : 'favorite_border' }}</mat-icon>
-          {{ pet.forAdoption ? 'Remover da lista de adoção' : 'Colocar para adoção' }}
-        </button>
-        }
-      </div>
-    </div>
-    }
-
     @if (pendingDeleteConfirmation) {
     <p class="confirm-text">Remover {{ pet.name || 'este animal' }} definitivamente? Essa ação não pode ser desfeita.
     </p>

@@ -2,11 +2,9 @@ import { ChangeDetectorRef, Component, ElementRef, HostListener, OnInit } from '
 import { RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 
-import { Pet } from '../../../../models/domain/pet';
 import { AnimalMode } from '../../../../models/domain/animalMode';
-import { PetReadService } from '../../../../services/pet/pet-read';
-import { FarmAnimalReadService } from '../../../../services/farm-animal/farm-animal-read';
-import { VaccineReadService } from '../../../../services/vaccine/vaccine-read';
+import { VaccineAlert } from '../../../../models/domain/vaccineAlert';
+import { VaccineAlertReadService } from '../../../../services/vaccine/vaccine-alert-read';
 import { CurrentUserService } from '../../../../services/security/current-user';
 import { AnimalModeService } from '../../../../services/animalMode/animalMode';
 
@@ -15,7 +13,7 @@ interface VaccineNotification {
   petId: string;
   petName: string;
   message: string;
-  status: 'overdue' | 'soon' | 'missing';
+  status: 'overdue' | 'soon';
   kind: AnimalMode;
 }
 
@@ -31,14 +29,10 @@ export class NotificationBell implements OnInit {
   loading: boolean = true;
   panelOpen: boolean = false;
 
-  private currentUserId: number | null = null;
-  private readonly permanentKeyPrefix = 'petlink.keep.hiddenNotifications.';
   private readonly untilLoginKey = 'hiddenNotificationsUntilLogin';
 
   constructor(
-    private petReadService: PetReadService,
-    private farmAnimalReadService: FarmAnimalReadService,
-    private vaccineReadService: VaccineReadService,
+    private vaccineAlertReadService: VaccineAlertReadService,
     private currentUserService: CurrentUserService,
     private animalModeService: AnimalModeService,
     private elementRef: ElementRef<HTMLElement>,
@@ -50,129 +44,66 @@ export class NotificationBell implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
+    await this.loadNotifications();
+  }
+
+  private async loadNotifications(): Promise<void> {
     try {
       const currentUser = this.currentUserService.get() ?? await this.currentUserService.load();
       if (!currentUser?.id) {
         throw new Error('Usuário atual não encontrado');
       }
-      this.currentUserId = currentUser.id;
 
-      const [pets, farmAnimals] = await Promise.all([
-        this.petReadService.findByOwnerId(currentUser.id),
-        this.farmAnimalReadService.findByOwnerId(currentUser.id).catch(error => {
-          console.error('Erro ao carregar animais de fazenda', error);
-          return [] as Pet[];
-        }),
-      ]);
-
-      const farmIds = new Set(farmAnimals.map(animal => animal.id));
-      const petsOnly = pets.filter(pet => !farmIds.has(pet.id));
-
-      const [petItems, farmItems] = await Promise.all([
-        this.buildNotifications(petsOnly, AnimalMode.PET),
-        this.buildNotifications(farmAnimals, AnimalMode.FARM),
-      ]);
-
-      const hiddenForever = this.readSet(this.permanentStorageKey);
+      const alerts = await this.vaccineAlertReadService.findByUserId(currentUser.id);
       const hiddenUntilLogin = this.readSet(this.untilLoginKey);
 
-      this.notifications = [...petItems, ...farmItems].filter(item => {
-        if (item.status === 'missing') {
-          return !hiddenForever.has(item.key);
-        }
-        if (item.status === 'soon') {
-          return !hiddenUntilLogin.has(item.key);
-        }
-        return true;
-      });
+      this.notifications = alerts
+        .map(alert => this.toNotification(alert))
+        .filter(item => item.status === 'overdue' || !hiddenUntilLogin.has(item.key));
     } catch (error) {
-      console.error('Erro ao montar notificações de vacina', error);
+      console.error('Erro ao carregar vacinas vencidas', error);
     } finally {
       this.loading = false;
       this.cdr.detectChanges();
     }
   }
 
-  private async buildNotifications(animals: Pet[], kind: AnimalMode): Promise<VaccineNotification[]> {
-    const today = new Date();
+  private toNotification(alert: VaccineAlert): VaccineNotification {
+    const date = this.formatDate(alert.expirationDate);
+    const overdue = alert.status === 'EXPIRED';
 
-    const results = await Promise.all(animals.map(async animal => {
-      const items: VaccineNotification[] = [];
-      const name = animal.name || animal.identify || 'Animal sem nome';
+    let message: string;
+    if (overdue) {
+      const delay = alert.daysOverdue === 1 ? '1 dia de atraso' : `${alert.daysOverdue} dias de atraso`;
+      message = `está com a vacina ${alert.vaccineName} vencida desde ${date} (${delay}).`;
+    } else if (alert.daysUntilExpiration === 0) {
+      message = `está com a vacina ${alert.vaccineName} vencendo hoje (${date}).`;
+    } else {
+      const remaining = alert.daysUntilExpiration === 1 ? '1 dia' : `${alert.daysUntilExpiration} dias`;
+      message = `está com a vacina ${alert.vaccineName} para vencer em ${remaining} (${date}).`;
+    }
 
-      const vaccines = await this.vaccineReadService.findByPetId(String(animal.id)).catch(() => null);
-      if (vaccines === null) {
-        return items;
-      }
-
-      if (vaccines.length === 0) {
-        items.push({
-          key: `missing:${animal.id}`,
-          petId: String(animal.id),
-          petName: name,
-          message: 'ainda não tem nenhuma vacina cadastrada.',
-          status: 'missing',
-          kind,
-        });
-        return items;
-      }
-
-      for (const vaccine of vaccines) {
-        if (!vaccine.expirationDate) {
-          continue;
-        }
-
-        const nextDose = new Date(vaccine.expirationDate);
-        const diffDays = Math.ceil((nextDose.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
-        const vaccineRef = vaccine.id ?? `${animal.id}-${vaccine.name}`;
-
-        if (diffDays < 0) {
-          items.push({
-            key: `overdue:${vaccineRef}`,
-            petId: String(animal.id),
-            petName: name,
-            message: `está com a dose de ${vaccine.name} atrasada.`,
-            status: 'overdue',
-            kind,
-          });
-        } else if (diffDays <= 30) {
-          items.push({
-            key: `soon:${vaccineRef}`,
-            petId: String(animal.id),
-            petName: name,
-            message: `tem dose de ${vaccine.name} prevista para daqui a ${diffDays} dia(s).`,
-            status: 'soon',
-            kind,
-          });
-        }
-      }
-
-      return items;
-    }));
-
-    return results.flat();
+    return {
+      key: `${overdue ? 'overdue' : 'soon'}:${alert.animalId}:${alert.vaccineId}`,
+      petId: String(alert.animalId),
+      petName: alert.animalName || 'Animal sem nome',
+      message,
+      status: overdue ? 'overdue' : 'soon',
+      kind: alert.farmAnimal ? AnimalMode.FARM : AnimalMode.PET,
+    };
   }
 
   clearNotifications(): void {
-    const hiddenForever = this.readSet(this.permanentStorageKey);
     const hiddenUntilLogin = this.readSet(this.untilLoginKey);
 
     for (const item of this.notifications) {
-      if (item.status === 'missing') {
-        hiddenForever.add(item.key);
-      } else if (item.status === 'soon') {
+      if (item.status === 'soon') {
         hiddenUntilLogin.add(item.key);
       }
     }
 
-    this.writeSet(this.permanentStorageKey, hiddenForever);
     this.writeSet(this.untilLoginKey, hiddenUntilLogin);
-
     this.notifications = this.notifications.filter(item => item.status === 'overdue');
-  }
-
-  private get permanentStorageKey(): string {
-    return this.permanentKeyPrefix + this.currentUserId;
   }
 
   private readSet(storageKey: string): Set<string> {
@@ -198,6 +129,11 @@ export class NotificationBell implements OnInit {
     }
   }
 
+  private formatDate(isoDate: string): string {
+    const [year, month, day] = (isoDate ?? '').split('-');
+    return year && month && day ? `${day}/${month}/${year}` : isoDate;
+  }
+
   openItem(item: VaccineNotification): void {
     this.animalModeService.set(item.kind);
     this.closePanel();
@@ -205,6 +141,10 @@ export class NotificationBell implements OnInit {
 
   togglePanel(): void {
     this.panelOpen = !this.panelOpen;
+
+    if (this.panelOpen) {
+      void this.loadNotifications();
+    }
   }
 
   closePanel(): void {

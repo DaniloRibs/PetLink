@@ -7,6 +7,8 @@ import br.fai.faitec.petlink2026.dto.user.UpdatePasswordDto;
 import br.fai.faitec.petlink2026.dto.user.UpdateUserDto;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.service.animal.PetService;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.service.user.UserService;
+import br.fai.faitec.petlink2026.ports_and_adapters.port.service.vaccine.VaccineNotificationService;
+import br.fai.faitec.petlink2026.domain.vaccine.VaccineAlertModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +27,8 @@ public class UserRestController {
     private UserService userService;
     @Autowired
     private PetService petService;
+    @Autowired
+    private VaccineNotificationService vaccineNotificationService;
 
     //USERS
     // LISTAR USUARIOS
@@ -106,6 +110,12 @@ public class UserRestController {
     public ResponseEntity<List<FarmAnimalModel>> getFarmAnimalsByUserId(@PathVariable final int userId) {
         List<FarmAnimalModel> entities = userService.showAllAnimalByOwnerId(userId);
         return ResponseEntity.ok(entities);
+    }
+
+    //     AVISOS DE VACINA (vencidas e a vencer) DOS ANIMAIS DO USUARIO
+    @GetMapping("/{userId}/vaccine-alert")
+    public ResponseEntity<List<VaccineAlertModel>> getVaccineAlertsByUserId(@PathVariable final int userId) {
+        return ResponseEntity.ok(vaccineNotificationService.findAlertsByOwnerId(userId));
     }
 
     //     BUSCAR UM DOS PETS DO USUARIO
