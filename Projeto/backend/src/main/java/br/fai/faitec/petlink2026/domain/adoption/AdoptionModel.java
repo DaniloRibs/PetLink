@@ -10,6 +10,8 @@ public class AdoptionModel {
     private String contact;
     private boolean adopted;
     private Date publicationDate;
+    private int receiverId;
+    private TransferStatus transferStatus = TransferStatus.NONE;
 
     public int getId() {
         return id;
@@ -65,5 +67,21 @@ public class AdoptionModel {
 
     public void setPublicationDate(Date publicationDate) {
         this.publicationDate = publicationDate;
+    }
+
+    public int getReceiverId() {
+        return receiverId;
+    }
+
+    public void setReceiverId(int receiverId) {
+        this.receiverId = receiverId;
+    }
+
+    public TransferStatus getTransferStatus() {
+        return transferStatus;
+    }
+
+    public void setTransferStatus(TransferStatus transferStatus) {
+        this.transferStatus = transferStatus;
     }
 }

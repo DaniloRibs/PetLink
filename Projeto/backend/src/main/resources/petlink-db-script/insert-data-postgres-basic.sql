@@ -929,10 +929,7 @@ INSERT INTO vaccine_model (application_date, expiration_date, name, description,
 ('2025-09-30', '2026-09-30', 'Gripe Canina', 'Prevenção da tosse dos canis', 'GRC-729', 72),
 ('2026-05-28', '2027-05-28', 'Giárdia', 'Reforço anual', 'GIA-735', 72),
 ('2026-06-15', '2027-06-15', 'Leishmaniose', 'Vacina anual', 'LEI-762', 72),
-('2025-06-15', '2026-06-15', 'Leishmaniose', 'Vacina anual', 'LEI-785', 72);
-
--- === Vacinas: Agropecuária Vale ===
-INSERT INTO vaccine_model (application_date, expiration_date, name, description, batch, animal_id) VALUES
+('2025-06-15', '2026-06-15', 'Leishmaniose', 'Vacina anual', 'LEI-785', 72),
 -- Sultão (pet, animal 94)
 ('2026-08-26', '2027-08-26', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-806', 94),
 ('2025-07-14', '2026-07-14', 'V10', 'Múltipla canina', 'V10-819', 94),
@@ -1010,11 +1007,7 @@ INSERT INTO vaccine_model (application_date, expiration_date, name, description,
 ('2025-09-27', '2026-09-27', 'Raiva dos herbívoros', 'Controle da raiva dos herbívoros', 'RAI-771', 105),
 ('2024-09-27', '2025-09-27', 'Raiva', 'Controle da raiva dos herbívoros', 'RAI-786', 105),
 ('2026-08-28', '2027-08-28', 'Ectima Contagioso', 'Vacina contra boqueira', 'ECT-789', 105),
-('2025-08-28', '2026-08-28', 'Ectima Contagioso', 'Vacina contra boqueira', 'ECT-813', 105);
-
--- === Vacinas: r@r.com (Rodrigo) ===
-INSERT INTO vaccine_model (application_date, expiration_date, name, description, batch, animal_id) VALUES
--- Caramelo (pet, animal 13)
+('2025-08-28', '2026-08-28', 'Ectima Contagioso', 'Vacina contra boqueira', 'ECT-813', 105),
 ('2026-08-24', '2027-08-24', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-824', 13),
 ('2025-08-24', '2026-08-24', 'Raiva', 'Vacina anual contra a raiva', 'RAB-837', 13),
 ('2026-07-13', '2027-07-13', 'V10', 'Múltipla canina', 'V10-842', 13),
@@ -1024,19 +1017,11 @@ INSERT INTO vaccine_model (application_date, expiration_date, name, description,
 ('2026-08-04', '2027-08-04', 'Giárdia', 'Reforço anual', 'GIA-901', 13),
 ('2025-08-04', '2026-08-04', 'Giárdia', 'Reforço anual', 'GIA-912', 13),
 ('2025-09-24', '2026-09-24', 'Leishmaniose', 'Vacina anual', 'LEI-927', 13),
-('2024-09-24', '2025-09-24', 'Leishmaniose', 'Vacina anual', 'LEI-950', 13);
-
--- === Vacinas: Ana Clara ===
-INSERT INTO vaccine_model (application_date, expiration_date, name, description, batch, animal_id) VALUES
--- Nala (pet, animal 120)
+('2024-09-24', '2025-09-24', 'Leishmaniose', 'Vacina anual', 'LEI-950', 13),
 ('2026-05-19', '2027-05-19', 'V4', 'Múltipla felina', 'V4-964', 120),
 ('2025-05-19', '2026-05-19', 'V3', 'Múltipla felina', 'V4-978', 120),
 ('2026-05-18', '2027-05-18', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-983', 120),
-('2026-04-17', '2027-04-17', 'FeLV', 'Leucemia felina', 'FEL-990', 120);
-
--- === Vacinas: Carlos Silva ===
-INSERT INTO vaccine_model (application_date, expiration_date, name, description, batch, animal_id) VALUES
--- Max (pet, animal 121)
+('2026-04-17', '2027-04-17', 'FeLV', 'Leucemia felina', 'FEL-990', 120),
 ('2025-09-30', '2026-09-30', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-010', 121),
 ('2024-09-30', '2025-09-30', 'Anti-rábica', 'Vacina anual contra a raiva', 'RAB-020', 121),
 ('2026-03-16', '2027-03-16', 'V10', 'Múltipla canina', 'V10-031', 121),
@@ -1046,38 +1031,25 @@ INSERT INTO vaccine_model (application_date, expiration_date, name, description,
 ('2026-06-30', '2027-06-30', 'Giárdia', 'Reforço anual', 'GIA-069', 121),
 ('2025-06-30', '2026-06-30', 'Giárdia', 'Reforço anual', 'GIA-093', 121),
 ('2025-02-21', '2026-02-21', 'Leishmaniose', 'Vacina anual', 'LEI-109', 121),
-('2024-02-21', '2025-02-21', 'Leishmaniose', 'Vacina anual', 'LEI-122', 121);
-
--- === Vacinas: Mariana Costa ===
-INSERT INTO vaccine_model (application_date, expiration_date, name, description, batch, animal_id) VALUES
--- Luna (pet, animal 12)
+('2024-02-21', '2025-02-21', 'Leishmaniose', 'Vacina anual', 'LEI-122', 121),
 ('2026-07-06', '2027-07-06', 'V4', 'Múltipla felina', 'V4-134', 12),
 ('2025-07-06', '2026-07-06', 'V3', 'Múltipla felina', 'V4-139', 12),
 ('2025-09-30', '2026-09-30', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-166', 12),
 ('2024-09-30', '2025-09-30', 'Raiva', 'Vacina anual contra a raiva', 'RAB-189', 12),
 ('2026-07-27', '2027-07-27', 'FeLV', 'Leucemia felina', 'FEL-209', 12),
 ('2025-07-27', '2026-07-27', 'FeLV', 'Leucemia felina', 'FEL-222', 12),
--- Pretinha (pet, animal 122)
 ('2026-07-27', '2027-07-27', 'V4', 'Múltipla felina', 'V4-225', 122),
 ('2026-06-27', '2027-06-27', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-231', 122),
-('2025-06-27', '2026-06-27', 'Raiva', 'Vacina anual contra a raiva', 'RAB-255', 122);
-
--- === Vacinas: Joao Souza ===
-INSERT INTO vaccine_model (application_date, expiration_date, name, description, batch, animal_id) VALUES
--- Fumaça (pet, animal 15)
+('2025-06-27', '2026-06-27', 'Raiva', 'Vacina anual contra a raiva', 'RAB-255', 122),
 ('2025-10-01', '2026-10-01', 'V4', 'Múltipla felina', 'V4-275', 15),
 ('2026-07-22', '2027-07-22', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-279', 15),
 ('2025-07-22', '2026-07-22', 'Raiva', 'Vacina anual contra a raiva', 'RAB-303', 15),
 ('2026-05-14', '2027-05-14', 'FeLV', 'Leucemia felina', 'FEL-328', 15),
 ('2025-05-14', '2026-05-14', 'FeLV', 'Leucemia felina', 'FEL-351', 15),
--- Bella (pet, animal 123)
 ('2026-04-03', '2027-04-03', 'Antirrábica', 'Vacina anual contra a raiva', 'RAB-364', 123),
 ('2025-07-30', '2026-07-30', 'V10', 'Múltipla canina', 'V10-384', 123),
 ('2026-04-27', '2027-04-27', 'Gripe Canina', 'Prevenção da tosse dos canis', 'GRC-407', 123),
-('2025-04-27', '2026-04-27', 'Tosse dos Canis', 'Prevenção da tosse dos canis', 'GRC-427', 123);
-
--- Mais vacinas do Rex (pet do d@d.com, animal 1)
-INSERT INTO vaccine_model (application_date, expiration_date, name, description, batch, animal_id) VALUES
+('2025-04-27', '2026-04-27', 'Tosse dos Canis', 'Prevenção da tosse dos canis', 'GRC-427', 123),
 ('2026-05-20', '2027-05-20', 'Gripe Canina', 'Prevenção da tosse dos canis', 'GRC-311', 1),
 ('2026-06-02', '2027-06-02', 'Leishmaniose', 'Vacina anual', 'LEI-140', 1);
 
@@ -1087,10 +1059,7 @@ INSERT INTO announcement_model (title, description, event_date, location, announ
 ('Venda de Cavalos', 'Cavalos de raça para montaria.', '2024-06-15', 'Fazenda Boa Vista', 'ADOPTION', 5, '19977770002'),
 ('Encontrei um Cachorro', 'Cachorro preto, porte médio, com coleira azul.', NULL, 'Av. Paulista, 1000', 'LOST', 9, '11933330006'),
 ('Leilão de Gado', 'Excelente oportunidade para pecuaristas.', '2024-07-20', 'Agropecuária Vale', 'ADOPTION', 8, '19944440005'),
-('Gato SRD para Adoção', 'Lindo filhote de gato.', NULL, 'PetShop Cão Feliz', 'ADOPTION', 6, '11966660003');
-
--- Mais anúncios (campanhas de vacinação, adoção e animais perdidos)
-INSERT INTO announcement_model (title, description, event_date, location, announcement_type, user_id, contact) VALUES
+('Gato SRD para Adoção', 'Lindo filhote de gato.', NULL, 'PetShop Cão Feliz', 'ADOPTION', 6, '11966660003'),
 ('Campanha de Vacinação Antirrábica Gratuita', 'Traga seu cão ou gato para a dose anual contra a raiva. Atendimento por ordem de chegada, com veterinário no local.', '2026-10-10', 'PetShop Cão Feliz - Rua das Acácias, 250', 'VACCINE', 6, '11966660003'),
 ('Vacina V10 com 20% de desconto', 'Durante a semana do pet, a V10 e a gripe canina saem com 20% de desconto. Agende pelo telefone.', '2026-10-15', 'PetShop Cão Feliz', 'VACCINE', 6, '11966660003'),
 ('Mutirão de Vacinação de Gatos (V4 e FeLV)', 'Vacinação múltipla felina e contra leucemia felina. Gatos devem vir em caixa de transporte.', '2026-11-14', 'PetShop Cão Feliz', 'VACCINE', 6, '11966660003'),
@@ -1109,15 +1078,12 @@ INSERT INTO announcement_model (title, description, event_date, location, announ
 ('Labrador perdido no parque', 'Labrador chocolate de coleira vermelha, muito brincalhona, perdida durante a caminhada.', NULL, 'Parque das Águas', 'LOST', 10, '11922220007'),
 ('Égua perdida na estrada rural', 'Égua Mangalarga alazã com marca branca na testa, escapou do pasto durante a chuva.', NULL, 'Estrada do Vale, km 7', 'LOST', 8, '19944440005');
 
--- pet_id = animal_model.id do pet (Mia = 4, Bolinha = 6, Thor = 9, Fumaça = 15)
+
 INSERT INTO adoption_model (pet_id, owner_id, description, contact, adopted, publication_date) VALUES
 (4, 4, 'Gatinha muito mansa e carinhosa, precisa de um lar telado.', '11988880001', false, '2024-01-10'),
 (6, 6, 'Poodle fêmea resgatada, vacinada e vermifugada.', '11966660003', true, '2024-02-15'),
 (9, 6, 'Pastor Alemão filhote, ideal para companhia e sítios.', '11966660003', false, '2024-03-20'),
-(15, 10, 'Gatinho preto muito brincalhão e sapeca.', '11922220007', false, '2024-04-05');
-
--- Adoções dos novos pets marcados para adoção (pet_id = animal_model.id)
-INSERT INTO adoption_model (pet_id, owner_id, description, contact, adopted, publication_date) VALUES
+(15, 10, 'Gatinho preto muito brincalhão e sapeca.', '11922220007', false, '2024-04-05'),
 (61, 6, 'Pipa é um cão dócil, vacinado e vermifugado, pronto para uma nova família.', '11966660003', false, '2026-07-25'),
 (62, 6, 'Bidu é um cão dócil, vacinado e vermifugado, pronto para uma nova família.', '11966660003', false, '2026-08-01'),
 (63, 6, 'Nina é uma gatinha(o) carinhosa(o), vacinada(o) e acostumada(o) com a caixa de areia.', '11966660003', false, '2026-09-13'),

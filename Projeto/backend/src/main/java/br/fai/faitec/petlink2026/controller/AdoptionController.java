@@ -3,7 +3,10 @@ package br.fai.faitec.petlink2026.controller;
 
 import br.fai.faitec.petlink2026.domain.adoption.AdoptionModel;
 import br.fai.faitec.petlink2026.dto.adoption.CreateAdoptionDto;
+import br.fai.faitec.petlink2026.dto.adoption.MarkAsAdoptedDto;
+import br.fai.faitec.petlink2026.dto.adoption.TransferDecisionDto;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.service.adoption.AdoptionService;
+import br.fai.faitec.petlink2026.ports_and_adapters.port.service.transfer.TransferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +21,9 @@ public class AdoptionController {
 
     @Autowired
     private AdoptionService adoptionService;
+
+    @Autowired
+    private TransferService transferService;
 
     // BUSCAR TODAS AS ADOCOES
     @GetMapping
@@ -63,10 +69,26 @@ public class AdoptionController {
         return response ? ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
     }
 
-    // MARCAR COMO ADOTADO
+    // informado em receiverEmail confirmar (ver /transfer/confirm e /transfer/reject).
     @PatchMapping("/{id}/adopt")
-    public ResponseEntity<Void> markAsAdopted(@PathVariable final int id) {
-        boolean response = adoptionService.markAsAdopted(id);
+    public ResponseEntity<Void> markAsAdopted(@PathVariable final int id, @RequestBody final MarkAsAdoptedDto markAsAdoptedDto) {
+        boolean response = transferService.requestTransfer(id, markAsAdoptedDto.getReceiverEmail());
+
+        return response ? ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
+    }
+
+    // O USUARIO QUE VAI RECEBER O PET ACEITA A TRANSFERENCIA
+    @PatchMapping("/{id}/transfer/confirm")
+    public ResponseEntity<Void> confirmTransfer(@PathVariable final int id, @RequestBody final TransferDecisionDto transferDecisionDto) {
+        boolean response = transferService.confirmTransfer(id, transferDecisionDto.getReceiverId());
+
+        return response ? ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
+    }
+
+    // O USUARIO QUE VAI RECEBER O PET RECUSA A TRANSFERENCIA
+    @PatchMapping("/{id}/transfer/reject")
+    public ResponseEntity<Void> rejectTransfer(@PathVariable final int id, @RequestBody final TransferDecisionDto transferDecisionDto) {
+        boolean response = transferService.rejectTransfer(id, transferDecisionDto.getReceiverId());
 
         return response ? ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
     }

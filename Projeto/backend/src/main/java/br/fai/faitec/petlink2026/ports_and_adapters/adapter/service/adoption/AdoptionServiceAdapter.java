@@ -1,6 +1,7 @@
 package br.fai.faitec.petlink2026.ports_and_adapters.adapter.service.adoption;
 
 import br.fai.faitec.petlink2026.domain.adoption.AdoptionModel;
+import br.fai.faitec.petlink2026.domain.adoption.TransferStatus;
 import br.fai.faitec.petlink2026.domain.animal.PetModel;
 import br.fai.faitec.petlink2026.domain.user.UserModel;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.adoption.AdoptionDao;
@@ -50,12 +51,16 @@ public class AdoptionServiceAdapter implements AdoptionService {
             return 0;
         }
 
-        // Anuncio de adocao exige CPF/CNPJ ja cadastrado, para responsabilizacao do autor.
         if (owner.getDocument() == null || owner.getDocument().isEmpty()) {
             return 0;
         }
 
+        pet.setForAdoption(true);
+        petDao.updateInformation(pet.getId(), pet);
+
         adoptionModel.setAdopted(false);
+        adoptionModel.setReceiverId(0);
+        adoptionModel.setTransferStatus(TransferStatus.NONE);
         adoptionModel.setPublicationDate(new Date(System.currentTimeMillis()));
 
         return adoptionDao.add(adoptionModel);
@@ -72,6 +77,15 @@ public class AdoptionServiceAdapter implements AdoptionService {
 
         if (adoptionModel == null) {
             return;
+        }
+
+        if (adoptionModel.getTransferStatus() != TransferStatus.ACCEPTED) {
+            PetModel pet = petDao.readyById(adoptionModel.getPetId());
+
+            if (pet != null && pet.getOwnerId() == adoptionModel.getOwnerId()) {
+                pet.setForAdoption(false);
+                petDao.updateInformation(pet.getId(), pet);
+            }
         }
 
         adoptionDao.remove(id);
@@ -110,24 +124,6 @@ public class AdoptionServiceAdapter implements AdoptionService {
         dataToUpdate.setContact(adoptionModel.getContact());
 
         adoptionDao.updateInformation(id, dataToUpdate);
-
-        return true;
-    }
-
-    @Override
-    public boolean markAsAdopted(int id) {
-        if (isIdInvalid(id)) {
-            return false;
-        }
-
-        AdoptionModel adoptionModel = adoptionDao.readyById(id);
-
-        if (adoptionModel == null) {
-            return false;
-        }
-
-        adoptionModel.setAdopted(true);
-        adoptionDao.updateInformation(id, adoptionModel);
 
         return true;
     }
