@@ -1,14 +1,28 @@
-INSERT INTO user_model (email, full_name, password, document, phone, account_type) VALUES
-('r@r.com', 'Rodrigo', '12345', NULL, '31999990001', 'PERSON'),
-('d@d.com', 'Danilo', '12345', '39053344705', '31999990002', 'PERSON'),
-('bruno@bruno.com', 'BB enterprise', '123123', '11222333000181', '31999990005', 'ENTERPRISE'),
-('ana@ana.com', 'Ana Clara', '12345', NULL, '11988880001', 'PERSON'),
-('bovista@fazenda.com', 'Fazenda Boa Vista', '12345', '76634789000109', '19977770002', 'ENTERPRISE'),
-('caofeliz@shop.com', 'PetShop Cão Feliz', '12345', '10682248000104', '11966660003', 'ENTERPRISE'),
-('carlos@c.com', 'Carlos Silva', '12345', NULL, '31955550004', 'PERSON'),
-('agro@vale.com', 'Agropecuária Vale', '12345', '08745914000180', '19944440005', 'ENTERPRISE'),
-('mari@m.com', 'Mariana Costa', '12345', NULL, '11933330006', 'PERSON'),
-('joao@j.com', 'Joao Souza', '12345', NULL, '11922220007', 'PERSON');
+INSERT INTO user_model (email, full_name, password, phone) VALUES
+('r@r.com', 'Rodrigo', '12345', '31999990001'),
+('d@d.com', 'Danilo', '12345', '31999990002'),
+('bruno@bruno.com', 'BB enterprise', '123123', '31999990005'),
+('ana@ana.com', 'Ana Clara', '12345', '11988880001'),
+('bovista@fazenda.com', 'Fazenda Boa Vista', '12345', '19977770002'),
+('caofeliz@shop.com', 'PetShop Cão Feliz', '12345', '11966660003'),
+('carlos@c.com', 'Carlos Silva', '12345', '31955550004'),
+('agro@vale.com', 'Agropecuária Vale', '12345', '19944440005'),
+('mari@m.com', 'Mariana Costa', '12345', '11933330006'),
+('joao@j.com', 'Joao Souza', '12345', '11922220007');
+
+INSERT INTO person_model (cpf, user_id) VALUES
+(NULL, 1),
+('39053344705', 2),
+(NULL, 4),
+(NULL, 7),
+(NULL, 9),
+(NULL, 10);
+
+INSERT INTO enterprise_model (cnpj, user_id) VALUES
+('11222333000181', 3),
+('76634789000109', 5),
+('10682248000104', 6),
+('08745914000180', 8);
 
 INSERT INTO animal_model (name, species, breed, birth_date, user_id, gender) VALUES
 ('Rex', 'DOG', 'Labrador', '2020-05-10', 2, 'M'),

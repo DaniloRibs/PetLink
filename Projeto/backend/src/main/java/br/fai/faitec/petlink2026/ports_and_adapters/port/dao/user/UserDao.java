@@ -1,9 +1,10 @@
 package br.fai.faitec.petlink2026.ports_and_adapters.port.dao.user;
 
 import br.fai.faitec.petlink2026.domain.user.UserModel;
-import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.crud.CrudDao;
+import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.crud.DeleteDao;
+import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.crud.ReadDao;
 
-public interface UserDao extends CrudDao<UserModel>, ReadByEmailDao,
+public interface UserDao extends ReadDao<UserModel>, DeleteDao, ReadByEmailDao,
         UpdatePasswordDao {
 
 

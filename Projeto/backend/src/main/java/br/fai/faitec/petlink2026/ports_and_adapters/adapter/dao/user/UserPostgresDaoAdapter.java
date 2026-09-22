@@ -1,7 +1,8 @@
 package br.fai.faitec.petlink2026.ports_and_adapters.adapter.dao.user;
 
 
-import br.fai.faitec.petlink2026.domain.user.AccountType;
+import br.fai.faitec.petlink2026.domain.user.EnterpriseModel;
+import br.fai.faitec.petlink2026.domain.user.PersonModel;
 import br.fai.faitec.petlink2026.domain.user.UserModel;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.user.UserDao;
 
@@ -12,7 +13,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class UserPostgresDaoAdapter implements UserDao {
+
+    private static final String SELECT_USER = "SELECT u.id, u.email, u.full_name, u.password, u.phone, " +
+            "p.id AS person_id, p.cpf, " +
+            "e.id AS enterprise_id, e.cnpj " +
+            "FROM user_model u " +
+            "LEFT JOIN person_model p ON p.user_id = u.id " +
+            "LEFT JOIN enterprise_model e ON e.user_id = u.id ";
 
     private final Connection connection;
 
@@ -20,52 +29,9 @@ public class UserPostgresDaoAdapter implements UserDao {
         this.connection = connection;
     }
 
-
-    @Override
-    public int add(UserModel userModel) {
-        String sql = "INSERT INTO user_model(password, full_name, email, account_type, phone, document) " +
-                " VALUES(?,?,?,?,?,?); ";
-
-        PreparedStatement preparedStatement;
-        ResultSet resultSet;
-        try {
-            connection.setAutoCommit(false);
-            preparedStatement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-
-            preparedStatement.setString(1, userModel.getPassword());
-            preparedStatement.setString(2, userModel.getFullname());
-            preparedStatement.setString(3, userModel.getEmail());
-            preparedStatement.setString(4, userModel.getAccountType().name());
-            preparedStatement.setString(5, userModel.getPhone());
-            preparedStatement.setString(6, userModel.getDocument());
-
-
-            preparedStatement.execute();
-
-            resultSet = preparedStatement.getGeneratedKeys();
-            int id = 0;
-
-            if (resultSet.next()) {
-                id = resultSet.getInt(1);
-            }
-            connection.commit();
-            resultSet.close();
-            preparedStatement.close();
-            return id;
-        } catch (Exception e) {
-            try {
-                connection.rollback();
-
-            } catch (SQLException ex) {
-                throw new RuntimeException(ex);
-            }
-            throw new RuntimeException(e);
-        }
-
-    }
-
     @Override
     public void remove(int id) {
+
         String sql = "DELETE FROM user_model " +
                 "WHERE id = ? ;";
 
@@ -83,41 +49,23 @@ public class UserPostgresDaoAdapter implements UserDao {
 
     @Override
     public UserModel readyById(int id) {
-        final String sql = "SELECT * FROM user_model WHERE id = ? ;";
+        final String sql = SELECT_USER + "WHERE u.id = ? ;";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, id);
 
             ResultSet resultSet = preparedStatement.executeQuery();
+            UserModel userModel = null;
+
             if (resultSet.next()) {
-                final int entityID = resultSet.getInt("id");
-                final String fullname = resultSet.getString("full_name");
-                final String email = resultSet.getString("email");
-                final String password = resultSet.getString("password");
-                final String document = resultSet.getString("document");
-                final String phone = resultSet.getString("phone");
-
-
-                final String auxAccountType = resultSet.getString("account_type");
-                final AccountType accountType = AccountType.valueOf(auxAccountType);
-
-                final UserModel userModel = new UserModel();
-                userModel.setId(entityID);
-                userModel.setFullname(fullname);
-                userModel.setEmail(email);
-                userModel.setPassword(password);
-                userModel.setPhone(phone);
-                userModel.setDocument(document);
-                userModel.setAccountType(accountType);
-
-                preparedStatement.close();
-                resultSet.close();
-
-                return userModel;
-
+                userModel = mapRow(resultSet);
             }
-            return null;
+
+            resultSet.close();
+            preparedStatement.close();
+
+            return userModel;
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -128,35 +76,13 @@ public class UserPostgresDaoAdapter implements UserDao {
     public List<UserModel> readAll() {
         final List<UserModel> entities = new ArrayList<>();
 
-        final String sql = "SELECT * FROM user_model";
+        final String sql = SELECT_USER + ";";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                final int entityId = resultSet.getInt("id");
-                final String fullname = resultSet.getString("full_name");
-                final String email = resultSet.getString("email");
-                final String password = resultSet.getString("password");
-                final String document = resultSet.getString("document");
-                final String phone = resultSet.getString("phone");
-
-
-                final String auxAccountType = resultSet.getString("account_type");
-                final AccountType accountType = AccountType.valueOf(auxAccountType);
-
-                final UserModel userModel = new UserModel();
-                userModel.setId(entityId);
-                userModel.setFullname(fullname);
-                userModel.setEmail(email);
-                userModel.setPassword(password);
-                userModel.setPhone(phone);
-                userModel.setDocument(document);
-                userModel.setAccountType(accountType);
-
-
-                entities.add(userModel);
-
+                entities.add(mapRow(resultSet));
             }
 
             resultSet.close();
@@ -172,76 +98,29 @@ public class UserPostgresDaoAdapter implements UserDao {
 
 
     @Override
-    public void updateInformation(int id, UserModel entity) {
-
-        String sql = "UPDATE user_model SET " +
-                "full_name = ?, " +
-                "email = ?, " +
-                "phone = ?, " +
-                "document = ? " +
-                "WHERE id = ?;";
-
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-
-            preparedStatement.setString(1, entity.getFullname());
-            preparedStatement.setString(2, entity.getEmail());
-            preparedStatement.setString(3, entity.getPhone());
-            preparedStatement.setString(4, entity.getDocument());
-            preparedStatement.setInt(5, id);
-
-            preparedStatement.executeUpdate();
-            preparedStatement.close();
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-
-    @Override
     public UserModel readByEmail(String email) {
 
-        final String sql = "SELECT * FROM user_model WHERE email = ?;";
+        final String sql = SELECT_USER + "WHERE u.email = ?;";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, email);
 
             ResultSet resultSet = preparedStatement.executeQuery();
+            UserModel userModel = null;
 
             if (resultSet.next()) {
-                final int entityId = resultSet.getInt("id");
-                final String fullname = resultSet.getString("full_name");
-                final String password = resultSet.getString("password");
-                final String document = resultSet.getString("document");
-                final String phone = resultSet.getString("phone");
-
-
-                final String auxAccountType = resultSet.getString("account_type");
-                final AccountType accountType = AccountType.valueOf(auxAccountType);
-
-
-                UserModel userModel = new UserModel();
-                userModel.setId(entityId);
-                userModel.setFullname(fullname);
-                userModel.setEmail(email);
-                userModel.setPassword(password);
-                userModel.setPhone(phone);
-                userModel.setDocument(document);
-                userModel.setAccountType(accountType);
-
-                preparedStatement.close();
-                resultSet.close();
-
-                return userModel;
-
+                userModel = mapRow(resultSet);
             }
+
+            resultSet.close();
+            preparedStatement.close();
+
+            return userModel;
 
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return null;
     }
 
     @Override
@@ -261,5 +140,29 @@ public class UserPostgresDaoAdapter implements UserDao {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private UserModel mapRow(ResultSet resultSet) throws SQLException {
+        final int userId = resultSet.getInt("id");
+        final UserModel userModel;
+
+        if (resultSet.getObject("person_id") != null) {
+            final PersonModel personModel = new PersonModel();
+            personModel.setCpf(resultSet.getString("cpf"));
+            userModel = personModel;
+        } else if (resultSet.getObject("enterprise_id") != null) {
+            final EnterpriseModel enterpriseModel = new EnterpriseModel();
+            enterpriseModel.setCnpj(resultSet.getString("cnpj"));
+            userModel = enterpriseModel;
+        } else {
+            throw new IllegalStateException("O usuário " + userId + " não está cadastrado como pessoa nem como empresa.");
+        }
+
+        userModel.setId(userId);
+        userModel.setEmail(resultSet.getString("email"));
+        userModel.setFullname(resultSet.getString("full_name"));
+        userModel.setPassword(resultSet.getString("password"));
+        userModel.setPhone(resultSet.getString("phone"));
+        return userModel;
     }
 }
