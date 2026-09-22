@@ -17,6 +17,7 @@ export class Landing implements OnInit, OnDestroy {
   readonly AnimalMode = AnimalMode;
 
   mode: AnimalMode = AnimalMode.PET;
+  showAbout: boolean = false;
 
   private readonly platformId = inject(PLATFORM_ID);
   private autoRotateTimer: ReturnType<typeof setInterval> | null = null;
@@ -61,6 +62,14 @@ export class Landing implements OnInit, OnDestroy {
     if (this.userChoseMode) {
       this.animalModeService.set(this.mode);
     }
+  }
+
+  openAbout(): void {
+    this.showAbout = true;
+  }
+
+  closeAbout(): void {
+    this.showAbout = false;
   }
 
   private stopAutoRotate(): void {

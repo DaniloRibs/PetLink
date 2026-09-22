@@ -35,6 +35,11 @@ export function genderLabel(gender?: string): string {
     }
 }
 
+export function speciesLabel(species?: string): string {
+    const option = [...PET_SPECIES_OPTIONS, ...FARM_SPECIES_OPTIONS].find(o => o.value === species);
+    return option?.label ?? '';
+}
+
 export function filterByMode(pets: Pet[], isFarm: boolean): Pet[] {
     return pets.filter(pet => {
         if (pet.species === PetSpecies.OTHER) {

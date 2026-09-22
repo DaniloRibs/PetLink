@@ -1,3 +1,9 @@
+:host {
+  --adoption-pink: var(--primary);
+  --adoption-pink-rgb: var(--primary-rgb);
+  --adoption-pink-soft: var(--primary-soft);
+}
+
 .adoption-tabs {
   display: flex;
   gap: 6px;
@@ -37,14 +43,203 @@
   background: var(--primary);
 }
 
-.adoption-contact {
-  margin-top: 4px !important;
-  font-weight: 600;
-  color: var(--primary) !important;
-}
-
 .adoption-tab mat-icon {
   font-size: 18px;
   width: 18px;
   height: 18px;
+}
+
+.adoption-pet-card {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  border-color: rgba(var(--primary-rgb), 0.18);
+  background: linear-gradient(180deg, var(--primary-soft), var(--primary-soft) 65%);
+}
+
+.adoption-pet-card:hover {
+  border-color: rgba(var(--primary-rgb), 0.4);
+  box-shadow: 0 10px 20px rgba(var(--primary-rgb), 0.16);
+}
+
+.adoption-icon-ring {
+  box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.18), 0 4px 10px rgba(94, 63, 39, 0.08);
+}
+
+.adoption-icon-ring.large {
+  width: 72px;
+  height: 72px;
+  font-size: 34px;
+  flex-shrink: 0;
+}
+
+.waiting-badge {
+  background: var(--primary);
+  box-shadow: 0 4px 8px rgba(var(--primary-rgb), 0.3);
+}
+
+.waiting-badge.static {
+  position: static;
+  display: inline-block;
+  margin: 4px 0 10px;
+}
+
+.adoption-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: auto;
+  padding-top: 10px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 999px;
+  background: var(--primary);
+  color: #fff;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.adoption-cta-btn:hover {
+  background: var(--primary);
+  filter: brightness(0.9);
+  transform: translateY(-1px);
+}
+
+.adoption-cta-btn mat-icon {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+}
+
+.adoption-description {
+  font-size: 13px;
+  color: #6b5d55;
+}
+
+.adoption-detail-modal {
+  text-align: left;
+}
+
+.adoption-detail-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 4px;
+}
+
+.adoption-detail-header h2 {
+  margin: 2px 0;
+  text-align: left;
+}
+
+.adoption-detail-subtitle {
+  color: #6b5d55;
+  font-size: 13px;
+  margin: 0;
+}
+
+.adoption-modal-section {
+  margin: 16px 0;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: rgba(var(--primary-rgb), 0.05);
+  border: 1px solid rgba(var(--primary-rgb), 0.08);
+}
+
+.adoption-modal-section p {
+  margin: 4px 0;
+}
+
+.adoption-modal-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+
+.date-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #f5f5f5;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: #333;
+  width: fit-content;
+}
+
+.pet-card>.primary-button {
+  margin-top: auto;
+}
+
+.contact-toggle {
+  display: flex;
+  gap: 10px;
+}
+
+.contact-toggle .toggle-option {
+  flex: 1;
+  min-width: 0;
+}
+
+.contact-toggle .toggle-option>span {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 4px !important;
+  width: 100% !important;
+  min-height: 0 !important;
+  height: auto !important;
+  padding: 12px 10px !important;
+  box-sizing: border-box !important;
+  text-align: center !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+  border: 1px solid #ece4de !important;
+  border-radius: 10px !important;
+}
+
+.contact-toggle .toggle-option input:checked+span {
+  background: var(--primary) !important;
+  color: #fff !important;
+  border-color: var(--primary) !important;
+}
+
+.contact-toggle .toggle-option strong,
+.contact-toggle .toggle-option strong mat-icon,
+.contact-toggle .toggle-option small {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.contact-toggle .toggle-option strong {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.contact-toggle .toggle-option strong mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  color: inherit;
+}
+
+.contact-toggle .toggle-option small {
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 11px;
+  opacity: 0.85;
 }

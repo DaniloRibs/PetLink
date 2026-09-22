@@ -2,10 +2,12 @@ import { speciesIcon } from '../../../../shared/pet-species-icon';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-
+import { speciesLabel } from '../../../../shared/pet-options';
 import { Pet } from '../../../../models/domain/pet';
 import { Adoption } from '../../../../models/domain/adoption';
 import { CreateAdoptionDto } from '../../../../models/dto/create-adoption-dto';
+import { User } from '../../../../models/domain/user';
+import { isValidPhone } from '../../../../shared/document-validators';
 import { PetReadService } from '../../../../services/pet/pet-read';
 import { CurrentUserService } from '../../../../services/security/current-user';
 import { AdoptionReadService } from '../../../../services/adoption/adoption-read';
@@ -33,15 +35,23 @@ export class AdoptionHub implements OnInit {
   myAdoptionsByPetId: Record<number, Adoption> = {};
   loading: boolean = true;
   userId: number | null = null;
-
+  user: User | null = null;
+  selectedAdoption: AdoptionListing | null = null;
   donationForm: FormGroup;
-  petIdBeingOffered: number | null = null;
+  petBeingOffered: Pet | null = null;
   donationValidationFailed: boolean = false;
-
   pendingRemovalAdoptionId: number | null = null;
 
   speciesIcon(species: string): string {
     return speciesIcon(species);
+  }
+
+  speciesLabel(species: string): string {
+    return speciesLabel(species);
+  }
+
+  get userHasValidPhone(): boolean {
+    return isValidPhone(this.user?.phone ?? '');
   }
 
   constructor(
@@ -56,17 +66,17 @@ export class AdoptionHub implements OnInit {
   ) {
     this.donationForm = this.formBuilder.group({
       description: ['', [Validators.required]],
-      contact: ['', [Validators.required]],
+      contactMethod: ['email', [Validators.required]],
     });
   }
 
   async ngOnInit(): Promise<void> {
     try {
-      const currentUser = this.currentUserService.get() ?? await this.currentUserService.load();
-      if (!currentUser?.id) {
+      this.user = this.currentUserService.get() ?? await this.currentUserService.load();
+      if (!this.user?.id) {
         throw new Error('Usuário atual não encontrado');
       }
-      this.userId = currentUser.id;
+      this.userId = this.user.id;
 
       const [myPets, allAdoptions] = await Promise.all([
         this.petReadService.findByOwnerId(this.userId),
@@ -84,7 +94,12 @@ export class AdoptionHub implements OnInit {
         adoption => adoption.ownerId !== this.userId && !adoption.adopted
       );
 
-      this.availableForAdoption = await this.loadListings(othersAdoptions);
+      const listings = await this.loadListings(othersAdoptions);
+      this.availableForAdoption = listings.sort((a, b) => {
+        const aTime = a.adoption.publicationDate ? new Date(a.adoption.publicationDate).getTime() : 0;
+        const bTime = b.adoption.publicationDate ? new Date(b.adoption.publicationDate).getTime() : 0;
+        return aTime - bTime;
+      });
     } catch (error) {
       console.error('Erro ao carregar dados de adoção', error);
     } finally {
@@ -115,6 +130,33 @@ export class AdoptionHub implements OnInit {
     void this.ngOnInit();
   }
 
+  waitingLabel(publicationDate?: string): string | null {
+    if (!publicationDate) {
+      return null;
+    }
+    const published = new Date(publicationDate).getTime();
+    if (isNaN(published)) {
+      return null;
+    }
+    const days = Math.floor((Date.now() - published) / (1000 * 60 * 60 * 24));
+    if (days <= 0) {
+      return 'Novo hoje';
+    }
+    return days === 1 ? '1 dia esperando' : `${days} dias esperando`;
+  }
+
+  contactIcon(contact?: string): string {
+    return contact?.includes('@') ? 'mail' : 'call';
+  }
+
+  openAdoption(listing: AdoptionListing): void {
+    this.selectedAdoption = listing;
+  }
+
+  closeAdoption(): void {
+    this.selectedAdoption = null;
+  }
+
   setTab(tab: 'adotar' | 'doar'): void {
     this.activeTab = tab;
   }
@@ -128,37 +170,41 @@ export class AdoptionHub implements OnInit {
   }
 
   requestOfferForAdoption(pet: Pet): void {
-    this.petIdBeingOffered = pet.id ?? null;
+    this.petBeingOffered = pet;
     this.donationValidationFailed = false;
-    this.donationForm.reset();
+    this.donationForm.reset({ description: '', contactMethod: 'email' });
   }
 
   cancelOfferForAdoption(): void {
-    this.petIdBeingOffered = null;
+    this.petBeingOffered = null;
   }
 
   validateDonationFields(): boolean {
     return this.donationForm.valid;
   }
 
-  confirmOfferForAdoption(pet: Pet): void {
+  confirmOfferForAdoption(): void {
     this.donationValidationFailed = false;
 
-    if (!this.userId || !pet.id || !this.validateDonationFields()) {
+    const pet = this.petBeingOffered;
+    if (!this.userId || !pet?.id || !this.user || !this.validateDonationFields()) {
       this.donationValidationFailed = true;
       return;
     }
+
+    const wantsPhone = this.donationForm.controls['contactMethod'].value === 'phone';
+    const contact = (wantsPhone && this.userHasValidPhone) ? this.user.phone! : this.user.email;
 
     const createAdoptionDto: CreateAdoptionDto = {
       petId: pet.id,
       ownerId: this.userId,
       description: this.donationForm.controls['description'].value,
-      contact: this.donationForm.controls['contact'].value,
+      contact: contact,
     };
 
     this.adoptionCreateService.create(createAdoptionDto).subscribe({
       next: () => {
-        this.petIdBeingOffered = null;
+        this.petBeingOffered = null;
         this.reload();
       },
       error: (error) => {
