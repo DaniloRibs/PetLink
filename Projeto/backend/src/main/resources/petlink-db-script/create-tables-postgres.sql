@@ -101,10 +101,15 @@ CREATE TABLE adoption_model
     contact VARCHAR(100),
     adopted BOOLEAN NOT NULL DEFAULT FALSE,
     publication_date DATE NOT NULL,
+    -- usuario que vai receber o pet e em que pe esta a transferencia (NONE, PENDING, ACCEPTED, REJECTED)
+    receiver_id INT,
+    transfer_status VARCHAR(10) NOT NULL DEFAULT 'NONE',
 
     CONSTRAINT fk_adoption_pet FOREIGN KEY (pet_id) REFERENCES animal_model(id) ON DELETE CASCADE,
-    CONSTRAINT fk_adoption_owner FOREIGN KEY (owner_id) REFERENCES user_model(id) ON DELETE CASCADE
+    CONSTRAINT fk_adoption_owner FOREIGN KEY (owner_id) REFERENCES user_model(id) ON DELETE CASCADE,
+    CONSTRAINT fk_adoption_receiver FOREIGN KEY (receiver_id) REFERENCES user_model(id) ON DELETE SET NULL
 );
+
 
 CREATE TABLE farm_animal_sale
 (

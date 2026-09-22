@@ -1,6 +1,7 @@
 package br.fai.faitec.petlink2026.ports_and_adapters.adapter.dao.adoption;
 
 import br.fai.faitec.petlink2026.domain.adoption.AdoptionModel;
+import br.fai.faitec.petlink2026.domain.adoption.TransferStatus;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.adoption.AdoptionDao;
 
 import java.sql.Connection;
@@ -8,6 +9,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,8 +23,8 @@ public class AdoptionPostgresDaoAdapter implements AdoptionDao {
 
     @Override
     public int add(AdoptionModel entity) {
-        String sql = "INSERT INTO adoption_model(pet_id, owner_id, description, contact, adopted, publication_date) " +
-                " VALUES(?,?,?,?,?,?); ";
+        String sql = "INSERT INTO adoption_model(pet_id, owner_id, description, contact, adopted, publication_date, receiver_id, transfer_status) " +
+                " VALUES(?,?,?,?,?,?,?,?); ";
 
         PreparedStatement preparedStatement;
         ResultSet resultSet;
@@ -36,6 +38,15 @@ public class AdoptionPostgresDaoAdapter implements AdoptionDao {
             preparedStatement.setString(4, entity.getContact());
             preparedStatement.setBoolean(5, entity.isAdopted());
             preparedStatement.setDate(6, entity.getPublicationDate());
+
+            if (entity.getReceiverId() > 0) {
+                preparedStatement.setInt(7, entity.getReceiverId());
+            } else {
+                preparedStatement.setNull(7, Types.INTEGER);
+            }
+
+            preparedStatement.setString(8, (entity.getTransferStatus() == null
+                    ? TransferStatus.NONE : entity.getTransferStatus()).name());
 
             preparedStatement.execute();
 
@@ -91,6 +102,8 @@ public class AdoptionPostgresDaoAdapter implements AdoptionDao {
                 final String contact = resultSet.getString("contact");
                 final boolean adopted = resultSet.getBoolean("adopted");
                 final Date publicationDate = resultSet.getDate("publication_date");
+                final int receiverId = resultSet.getInt("receiver_id");
+                final String transferStatusRaw = resultSet.getString("transfer_status");
 
                 final AdoptionModel adoptionModel = new AdoptionModel();
                 adoptionModel.setId(entityId);
@@ -100,6 +113,9 @@ public class AdoptionPostgresDaoAdapter implements AdoptionDao {
                 adoptionModel.setContact(contact);
                 adoptionModel.setAdopted(adopted);
                 adoptionModel.setPublicationDate(publicationDate);
+                adoptionModel.setReceiverId(receiverId);
+                adoptionModel.setTransferStatus(transferStatusRaw == null
+                        ? TransferStatus.NONE : TransferStatus.valueOf(transferStatusRaw));
 
                 preparedStatement.close();
                 resultSet.close();
@@ -130,6 +146,8 @@ public class AdoptionPostgresDaoAdapter implements AdoptionDao {
                 final String contact = resultSet.getString("contact");
                 final boolean adopted = resultSet.getBoolean("adopted");
                 final Date publicationDate = resultSet.getDate("publication_date");
+                final int receiverId = resultSet.getInt("receiver_id");
+                final String transferStatusRaw = resultSet.getString("transfer_status");
 
                 final AdoptionModel adoptionModel = new AdoptionModel();
                 adoptionModel.setId(entityId);
@@ -139,6 +157,9 @@ public class AdoptionPostgresDaoAdapter implements AdoptionDao {
                 adoptionModel.setContact(contact);
                 adoptionModel.setAdopted(adopted);
                 adoptionModel.setPublicationDate(publicationDate);
+                adoptionModel.setReceiverId(receiverId);
+                adoptionModel.setTransferStatus(transferStatusRaw == null
+                        ? TransferStatus.NONE : TransferStatus.valueOf(transferStatusRaw));
 
                 entities.add(adoptionModel);
             }
@@ -157,7 +178,9 @@ public class AdoptionPostgresDaoAdapter implements AdoptionDao {
         String sql = "UPDATE adoption_model SET " +
                 "description = ?, " +
                 "contact = ?, " +
-                "adopted = ? " +
+                "adopted = ?, " +
+                "receiver_id = ?, " +
+                "transfer_status = ? " +
                 "WHERE id = ?;";
 
         try {
@@ -166,7 +189,17 @@ public class AdoptionPostgresDaoAdapter implements AdoptionDao {
             preparedStatement.setString(1, entity.getDescription());
             preparedStatement.setString(2, entity.getContact());
             preparedStatement.setBoolean(3, entity.isAdopted());
-            preparedStatement.setInt(4, id);
+
+            if (entity.getReceiverId() > 0) {
+                preparedStatement.setInt(4, entity.getReceiverId());
+            } else {
+                preparedStatement.setNull(4, Types.INTEGER);
+            }
+
+            preparedStatement.setString(5, (entity.getTransferStatus() == null
+                    ? TransferStatus.NONE : entity.getTransferStatus()).name());
+
+            preparedStatement.setInt(6, id);
 
             preparedStatement.executeUpdate();
             preparedStatement.close();
