@@ -34,9 +34,8 @@
           }
         </div>
         <h3>{{ listing.pet.name }}</h3>
-        <p>{{ listing.pet.breed }}</p>
-        <p class="adoption-description">{{ listing.adoption.description }}</p>
-        <p class="adoption-contact">Contato: {{ listing.adoption.contact }}</p>
+        <p>{{ speciesLabel(listing.pet.species) }} · {{ listing.pet.breed }}</p>
+        <button type="button" class="primary-button" (click)="openAdoption(listing)">Saber mais</button>
       </article>
       }
     </div>
@@ -121,3 +120,30 @@
     }
   </div>
 </section>
+@if (selectedAdoption; as listing) {
+<div class="adoption-modal-overlay" (click)="closeAdoption()">
+  <div class="adoption-modal" role="dialog" aria-modal="true" (click)="$event.stopPropagation()">
+    <button type="button" class="adoption-modal-close" (click)="closeAdoption()" aria-label="Fechar">
+      <mat-icon>close</mat-icon>
+    </button>
+
+    <p class="footer-title">ADOÇÃO</p>
+    <h2>{{ listing.pet.name }}</h2>
+
+    <div class="adoption-modal-section">
+      <p class="adoption-modal-label">Sobre o pet</p>
+      <p>{{ speciesLabel(listing.pet.species) }}{{ listing.pet.breed ? ' · ' + listing.pet.breed : '' }}</p>
+    </div>
+
+    <div class="adoption-modal-section">
+      <p class="adoption-modal-label">Descrição</p>
+      <p>{{ listing.adoption.description }}</p>
+    </div>
+
+    <div class="adoption-modal-section">
+      <p class="adoption-modal-label">Contato</p>
+      <p>{{ listing.adoption.contact }}</p>
+    </div>
+  </div>
+</div>
+}

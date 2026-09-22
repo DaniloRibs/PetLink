@@ -2,7 +2,7 @@ import { speciesIcon } from '../../../../shared/pet-species-icon';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-
+import { speciesLabel } from '../../../../shared/pet-options';
 import { Pet } from '../../../../models/domain/pet';
 import { Adoption } from '../../../../models/domain/adoption';
 import { CreateAdoptionDto } from '../../../../models/dto/create-adoption-dto';
@@ -33,15 +33,18 @@ export class AdoptionHub implements OnInit {
   myAdoptionsByPetId: Record<number, Adoption> = {};
   loading: boolean = true;
   userId: number | null = null;
-
+  selectedAdoption: AdoptionListing | null = null;
   donationForm: FormGroup;
   petIdBeingOffered: number | null = null;
   donationValidationFailed: boolean = false;
-
   pendingRemovalAdoptionId: number | null = null;
 
   speciesIcon(species: string): string {
     return speciesIcon(species);
+  }
+
+  speciesLabel(species: string): string {
+    return speciesLabel(species);
   }
 
   constructor(
@@ -113,6 +116,14 @@ export class AdoptionHub implements OnInit {
     this.loading = true;
     this.cdr.detectChanges();
     void this.ngOnInit();
+  }
+
+  openAdoption(listing: AdoptionListing): void {
+    this.selectedAdoption = listing;
+  }
+
+  closeAdoption(): void {
+    this.selectedAdoption = null;
   }
 
   setTab(tab: 'adotar' | 'doar'): void {

@@ -1,11 +1,11 @@
 <div class="menu-page landing-page" [class.theme-farm]="isFarm">
   <div class="menu-shell">
     <header class="menu-header">
-      <a class="brand" routerLink="/" aria-label="PetLink início">
+      <div class="brand">
         <img src="assets/images/PetLink_Logo_Marrom.png" alt="" class="brand-mark">
         <span class="brand-divider"></span>
         <img src="assets/images/PetLink_Logo_Verde.png" alt="PetLink" class="brand-mark">
-      </a>
+      </div>
 
       <div class="menu-actions">
         <a class="menu-link" routerLink="/account/sign-in" (click)="rememberMode()">Entrar</a>
@@ -39,7 +39,7 @@
 
         <div class="hero-buttons">
           <a class="primary-button" routerLink="/account/sign-up" (click)="rememberMode()">Começar agora</a>
-          <a class="secondary-button" href="#modos">Saiba mais</a>
+          <button type="button" class="secondary-button" (click)="openAbout()">Saiba mais</button>
         </div>
       </section>
 
@@ -122,4 +122,92 @@
         em um fluxo visual leve e fácil de usar.</p>
     </section>
   </div>
+  @if (showAbout) {
+  <div class="modal-overlay" (click)="closeAbout()">
+    <div class="login-box modal-form about-modal" role="dialog" aria-modal="true" aria-labelledby="about-title"
+      (click)="$event.stopPropagation()">
+      <button type="button" class="modal-close" (click)="closeAbout()" aria-label="Fechar">
+        <mat-icon>close</mat-icon>
+      </button>
+
+      <div class="about-heading">
+        <p class="footer-title">Imunizar, Cuidar e Conectar</p>
+        <h2 id="about-title">Conheça o PetLink</h2>
+        <p class="about-intro">Um só lugar para cuidar da saúde dos seus animais, em casa ou no campo. Um só login,
+          dois modos: alterne quando quiser.</p>
+      </div>
+
+      <div class="about-modes">
+        <article class="mode-card mode-pet">
+          <div class="mode-card-head">
+            <span class="mode-card-icon"><mat-icon>pets</mat-icon></span>
+            <div>
+              <h3>Animais de Estimação</h3>
+              <p>Cães, gatos, aves e companhia para a vida toda.</p>
+            </div>
+          </div>
+          <ul class="mode-card-list">
+            <li><mat-icon>vaccines</mat-icon> Carteira de vacinas com lembretes</li>
+            <li><mat-icon>notifications</mat-icon> Avisos de doses próximas e atrasadas</li>
+            <li><mat-icon>favorite_border</mat-icon> Adoção responsável</li>
+            <li><mat-icon>campaign</mat-icon> Campanhas de vacinação e animais perdidos</li>
+          </ul>
+          <a class="primary-button" routerLink="/account/sign-up" (click)="rememberMode(AnimalMode.PET)">Começar com
+            pets</a>
+        </article>
+
+        <article class="mode-card mode-farm">
+          <div class="mode-card-head">
+            <span class="mode-card-icon"><i class="horseshoe-icon" aria-hidden="true"></i></span>
+            <div>
+              <h3>Animais de Fazenda</h3>
+              <p>Bovinos, cavalos, suínos, ovinos e aves do campo.</p>
+            </div>
+          </div>
+          <ul class="mode-card-list">
+            <li><mat-icon>label</mat-icon> Identificador e peso de cada animal</li>
+            <li><mat-icon>vaccines</mat-icon> Vacinas dos animais com avisos</li>
+            <li><mat-icon>sell</mat-icon> Venda de animais e lotes, inclusive por arroba</li>
+            <li><mat-icon>storefront</mat-icon> Anúncios visíveis para compradores</li>
+          </ul>
+          <a class="primary-button" routerLink="/account/sign-up" (click)="rememberMode(AnimalMode.FARM)">Começar na
+            fazenda</a>
+        </article>
+      </div>
+
+      <ol class="about-steps">
+        <li>
+          <span class="about-step-number">1</span>
+          <div>
+            <strong>Crie sua conta</strong>
+            <p>Cadastre-se como pessoa física, para cuidar dos seus animais, ou como empresa, para divulgar campanhas
+              de vacinação e eventos.</p>
+          </div>
+        </li>
+        <li>
+          <span class="about-step-number">2</span>
+          <div>
+            <strong>Cadastre seus animais</strong>
+            <p>Adicione nome e espécie de cada um e mantenha a carteira de vacinas sempre atualizada.</p>
+          </div>
+        </li>
+        <li>
+          <span class="about-step-number">3</span>
+          <div>
+            <strong>Acompanhe e conecte-se</strong>
+            <p>Receba avisos de doses, adote um novo amigo ou anuncie um animal.</p>
+          </div>
+        </li>
+        <li>
+          <span class="about-step-number">4</span>
+          <div>
+            <strong>Alterne quando quiser</strong>
+            <p>Um único login para os dois modos: mude entre pets e fazenda a qualquer momento, sem precisar de outra
+              conta.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </div>
+  }
 </div>
