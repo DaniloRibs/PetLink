@@ -13,10 +13,11 @@ import { AnnouncementDeleteService } from '../../../../services/announcement/ann
 import { CurrentUserService } from '../../../../services/security/current-user';
 
 import { AnnouncementCardComponent } from '../announcement-card/announcement-card';
+import { FormatToolbarComponent } from '../../../../shared/format-toolbar/format-toolbar';
 
 @Component({
   selector: 'app-announcement-list',
-  imports: [ReactiveFormsModule, AnnouncementCardComponent, MatIconModule],
+  imports: [ReactiveFormsModule, AnnouncementCardComponent, MatIconModule, FormatToolbarComponent],
   templateUrl: './announcement-list.html',
   styleUrl: './announcement-list.css',
 })

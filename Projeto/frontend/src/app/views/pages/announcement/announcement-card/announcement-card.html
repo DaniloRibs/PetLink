@@ -1,23 +1,22 @@
-<mat-card
-  [class]="
+<mat-card [class]="
     announcement.announcementType === AnnouncementType.ADOPTION ? 'adoption-card mat-elevation-z3' :
     announcement.announcementType === AnnouncementType.LOST ? 'lost-card mat-elevation-z3' :
     'vaccine-card mat-elevation-z3'
   ">
   <mat-card-header>
     @if (announcement.announcementType === AnnouncementType.ADOPTION) {
-      <div mat-card-avatar class="adoption-icon-header">
-        <mat-icon style="color: #ff4d6d;">pets</mat-icon>
-      </div>
+    <div mat-card-avatar class="adoption-icon-header">
+      <mat-icon style="color: #ff4d6d;">pets</mat-icon>
+    </div>
     }
     @else if (announcement.announcementType === AnnouncementType.LOST) {
-      <div mat-card-avatar class="lost-icon-header">
-        <mat-icon style="color: #f59e0b;">search</mat-icon>
-      </div>
+    <div mat-card-avatar class="lost-icon-header">
+      <mat-icon style="color: #f59e0b;">search</mat-icon>
+    </div>
     } @else {
-      <div mat-card-avatar class="vaccine-icon-header">
-        <mat-icon style="color: #19d291;">vaccines</mat-icon>
-      </div>
+    <div mat-card-avatar class="vaccine-icon-header">
+      <mat-icon style="color: #19d291;">vaccines</mat-icon>
+    </div>
     }
     <mat-card-title class="fw-bold">{{ announcement.title }}</mat-card-title>
     <mat-card-subtitle>
@@ -26,84 +25,137 @@
   </mat-card-header>
 
   <mat-card-content class="mt-3">
-    @if (showEditForm) {
-      <form [formGroup]="editForm" (ngSubmit)="saveEdit()" class="announcement-edit-form">
-        <div class="field-group">
-          <label>Título da campanha</label>
-          <input type="text" formControlName="title">
-        </div>
+    <p class="description-text" [innerHTML]="announcement.description | formatText"></p>
 
-        <div class="field-group">
-          <label>Descrição</label>
-          <textarea formControlName="description" rows="4"></textarea>
-        </div>
+    @if (announcement.eventDate) {
+    <div class="date-badge mt-3">
+      <mat-icon class="me-1">event</mat-icon>
+      <span><strong>Data:</strong> {{ announcement.eventDate | date:'dd/MM/yyyy': 'UTC' }}</span>
+    </div>
+    }
 
-        <div class="form-row">
-          <div class="field-group">
-            <label>Data</label>
-            <input type="date" formControlName="date">
-          </div>
-
-          <div class="field-group">
-            <label>Local</label>
-            <input type="text" formControlName="location">
-          </div>
-        </div>
-
-        <div class="confirm-actions">
-          <input type="submit" class="primary-button" value="Salvar" [disabled]="!validateEditFields()">
-          <button type="button" class="secondary-button" (click)="toggleEditForm()">Cancelar</button>
-        </div>
-
-        @if (editValidationFailed) {
-          <p class="text-danger">Confira os dados e tente novamente.</p>
-        }
-      </form>
-    } @else {
-      <p class="description-text">
-        {{ announcement.description }}
-      </p>
-
-      @if (announcement.eventDate) {
-        <div class="date-badge mt-3">
-          <mat-icon class="me-1">event</mat-icon>
-          <span><strong>Data:</strong> {{ announcement.eventDate | date:'dd/MM/yyyy': 'UTC' }}</span>
-        </div>
-      }
-
-      @if (announcement.location) {
-        <div class="date-badge mt-3">
-          <mat-icon class="me-1">place</mat-icon>
-          <span><strong>Local:</strong> {{ announcement.location }}</span>
-        </div>
-      }
-
-      @if (expanded) {
-        <div class="date-badge mt-3 contact-badge">
-          <mat-icon class="me-1">{{ (announcement.contact || announcement.creatorEmail).includes('@') ? 'mail' : 'call' }}</mat-icon>
-          <span><strong>Contato:</strong> {{ announcement.contact || announcement.creatorEmail }}</span>
-        </div>
-      }
+    @if (announcement.location) {
+    <div class="date-badge mt-3">
+      <mat-icon class="me-1">place</mat-icon>
+      <span><strong>Local:</strong> {{ announcement.location }}</span>
+    </div>
     }
   </mat-card-content>
 
   <mat-card-actions align="end">
     @if (canManage) {
-      <button mat-icon-button (click)="toggleEditForm()" aria-label="Editar campanha">
-        <mat-icon>edit</mat-icon>
-      </button>
-      <button mat-icon-button color="warn" (click)="onDelete()" aria-label="Excluir campanha">
-        <mat-icon>delete</mat-icon>
-      </button>
+    <button mat-icon-button (click)="toggleEditForm()" aria-label="Editar campanha">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button mat-icon-button color="warn" (click)="onDelete()" aria-label="Excluir campanha">
+      <mat-icon>delete</mat-icon>
+    </button>
     }
-    <button mat-flat-button
-      [style.background-color]="
+    <button mat-flat-button [style.background-color]="
         announcement.announcementType === AnnouncementType.ADOPTION ? '#ff4d6d' :
         announcement.announcementType === AnnouncementType.LOST ? '#f59e0b' :
         '#19d291'
-      "
-      [style.color]="'#fff'" (click)="toggleDetails()">
-      {{ expanded ? 'Ver menos' : 'Saber Mais' }}
+      " [style.color]="'#fff'" (click)="openDetails()">
+      Saber Mais
     </button>
   </mat-card-actions>
 </mat-card>
+
+@if (showEditForm) {
+<div class="modal-overlay" (click)="toggleEditForm()">
+  <div class="login-box form-box modal-form announcement-edit-modal" role="dialog" aria-modal="true"
+    (click)="$event.stopPropagation()">
+    <button type="button" class="modal-close" (click)="toggleEditForm()" aria-label="Fechar">
+      <mat-icon>close</mat-icon>
+    </button>
+
+    <p class="form-box-title">Editar campanha</p>
+
+    <form [formGroup]="editForm" (ngSubmit)="saveEdit()" class="announcement-edit-form">
+      <div class="field-group">
+        <label>Título da campanha</label>
+        <input type="text" formControlName="title">
+      </div>
+
+      <div class="field-group">
+        <label>Descrição</label>
+        <app-format-toolbar [control]="editForm.controls['description']"
+          [textarea]="descriptionEditInput"></app-format-toolbar>
+        <textarea formControlName="description" rows="10" #descriptionEditInput></textarea>
+      </div>
+
+      <div class="form-row">
+        <div class="field-group">
+          <label>Data</label>
+          <input type="date" formControlName="date">
+        </div>
+
+        <div class="field-group">
+          <label>Local</label>
+          <input type="text" formControlName="location">
+        </div>
+      </div>
+
+      <div class="confirm-actions">
+        <input type="submit" class="primary-button" value="Salvar" [disabled]="!validateEditFields()">
+        <button type="button" class="secondary-button" (click)="toggleEditForm()">Cancelar</button>
+      </div>
+
+      @if (editValidationFailed) {
+      <p class="text-danger">Confira os dados e tente novamente.</p>
+      }
+    </form>
+  </div>
+</div>
+}
+
+@if (showDetailModal) {
+<div class="modal-overlay" (click)="closeDetails()">
+  <div class="login-box form-box modal-form announcement-detail-modal" role="dialog" aria-modal="true"
+    (click)="$event.stopPropagation()">
+    <button type="button" class="modal-close" (click)="closeDetails()" aria-label="Fechar">
+      <mat-icon>close</mat-icon>
+    </button>
+
+    <div class="announcement-detail-header">
+      @if (announcement.announcementType === AnnouncementType.ADOPTION) {
+      <div class="adoption-icon-header large"><mat-icon style="color: #ff4d6d;">pets</mat-icon></div>
+      } @else if (announcement.announcementType === AnnouncementType.LOST) {
+      <div class="lost-icon-header large"><mat-icon style="color: #f59e0b;">search</mat-icon></div>
+      } @else {
+      <div class="vaccine-icon-header large"><mat-icon style="color: #19d291;">vaccines</mat-icon></div>
+      }
+      <div>
+        <p class="footer-title">
+          {{ announcement.announcementType === AnnouncementType.ADOPTION ? 'ADOÇÃO' :
+          announcement.announcementType === AnnouncementType.LOST ? 'ANIMAL PERDIDO' : 'VACINAÇÃO' }}
+        </p>
+        <h2>{{ announcement.title }}</h2>
+        <p class="announcement-detail-subtitle">Anunciado por {{ announcement.creatorName }}</p>
+      </div>
+    </div>
+
+    <p class="description-text" [innerHTML]="announcement.description | formatText"></p>
+
+    @if (announcement.eventDate) {
+    <div class="date-badge mt-3">
+      <mat-icon class="me-1">event</mat-icon>
+      <span><strong>Data:</strong> {{ announcement.eventDate | date:'dd/MM/yyyy': 'UTC' }}</span>
+    </div>
+    }
+
+    @if (announcement.location) {
+    <div class="date-badge mt-3">
+      <mat-icon class="me-1">place</mat-icon>
+      <span><strong>Local:</strong> {{ announcement.location }}</span>
+    </div>
+    }
+
+    <div class="date-badge mt-3">
+      <mat-icon class="me-1">{{ (announcement.contact || announcement.creatorEmail).includes('@') ? 'mail' : 'call'
+        }}</mat-icon>
+      <span><strong>Contato:</strong> {{ announcement.contact || announcement.creatorEmail }}</span>
+    </div>
+  </div>
+</div>
+}

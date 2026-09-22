@@ -7,6 +7,8 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Announcement, AnnouncementType } from '../../../../models/domain/announcement';
 import { AnnouncementUpdateService } from '../../../../services/announcement/announcement-update';
 import { User } from '../../../../models/domain/user';
+import { FormatTextPipe } from '../../../../shared/pipes/format-text/format-text.pipe';
+import { FormatToolbarComponent } from '../../../../shared/format-toolbar/format-toolbar';
 
 @Component({
   selector: 'announcement-card',
@@ -17,7 +19,9 @@ import { User } from '../../../../models/domain/user';
     MatCardModule,
     MatButtonModule,
     MatIconModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormatTextPipe,
+    FormatToolbarComponent
   ],
   templateUrl: './announcement-card.html',
   styleUrl: './announcement-card.scss'
@@ -32,8 +36,7 @@ export class AnnouncementCardComponent {
   @Output() updated = new EventEmitter<Announcement>();
 
   AnnouncementType = AnnouncementType;
-  expanded = false;
-
+  showDetailModal = false;
   showEditForm: boolean = false;
   editForm: FormGroup;
   editValidationFailed: boolean = false;
@@ -54,8 +57,12 @@ export class AnnouncementCardComponent {
     this.delete.emit(this.announcement);
   }
 
-  toggleDetails(): void {
-    this.expanded = !this.expanded;
+  openDetails(): void {
+    this.showDetailModal = true;
+  }
+
+  closeDetails(): void {
+    this.showDetailModal = false;
   }
 
   toggleEditForm(): void {
@@ -64,11 +71,11 @@ export class AnnouncementCardComponent {
 
     if (this.showEditForm) {
       let formattedDate = '';
-      
+
       if (this.announcement.eventDate) {
         try {
           const dateVal = new Date(this.announcement.eventDate);
-          if (!isNaN(dateVal.getTime())) { 
+          if (!isNaN(dateVal.getTime())) {
             formattedDate = dateVal.toISOString().split('T')[0];
           } else {
             formattedDate = String(this.announcement.eventDate).substring(0, 10);
@@ -113,13 +120,13 @@ export class AnnouncementCardComponent {
 
     this.announcementUpdateService.update(updatedAnnouncement).subscribe({
       next: (saved) => {
-        const finalizedResult = (saved && typeof saved === 'object') 
-          ? { ...saved, id: this.announcement.id } 
+        const finalizedResult = (saved && typeof saved === 'object')
+          ? { ...saved, id: this.announcement.id }
           : updatedAnnouncement;
 
         this.announcement = finalizedResult;
         this.showEditForm = false;
-        
+
         this.updated.emit(finalizedResult);
       },
       error: (error) => {
@@ -128,4 +135,4 @@ export class AnnouncementCardComponent {
       },
     });
   }
-}
+} 

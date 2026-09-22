@@ -47,6 +47,11 @@
             <mat-icon>edit</mat-icon>
             Editar perfil
           </button>
+
+          <button class="secondary-button profile-edit-btn" (click)="toggleChangePasswordForm()">
+            <mat-icon>lock</mat-icon>
+            Editar senha
+          </button>
         </div>
         } @else {
         <form [formGroup]="form" (ngSubmit)="updateProfile()">
@@ -65,27 +70,21 @@
 
           <div class="field-group">
             <label for="phone">Telefone (opcional)</label>
-            <input
-              type="tel"
-              id="phone"
-              placeholder="Telefone (opcional)"
-              formControlName="phone"
-              mask="(00) 00000-0000"
-              [dropSpecialCharacters]="true">
+            <input type="tel" id="phone" placeholder="Telefone (opcional)" formControlName="phone"
+              mask="(00) 00000-0000" [dropSpecialCharacters]="true">
             @if (form.get('phone')?.touched && form.get('phone')?.invalid) {
             <p class="text-danger">Telefone inválido.</p>
             }
           </div>
 
           <div class="field-group">
-            <label for="document">{{ isEmpresa ? 'CNPJ' : 'CPF (opcional)' }}</label>
-            <input
-              type="text"
-              id="document"
-              [placeholder]="isEmpresa ? 'CNPJ' : 'CPF (opcional)'"
-              formControlName="document"
-              [mask]="isEmpresa ? '00.000.000/0000-00' : '000.000.000-00'"
-              [dropSpecialCharacters]="true">
+            <label for="document">{{ isEmpresa ? 'CNPJ' : (documentLocked ? 'CPF' : 'CPF (opcional)') }}</label>
+            <input type="text" id="document" [placeholder]="isEmpresa ? 'CNPJ' : 'CPF (opcional)'"
+              formControlName="document" [mask]="isEmpresa ? '00.000.000/0000-00' : '000.000.000-00'"
+              [dropSpecialCharacters]="true" [readonly]="documentLocked" [class.field-locked]="documentLocked">
+            @if (documentLocked) {
+            <p class="field-hint">{{ isEmpresa ? 'CNPJ' : 'CPF' }} não pode ser alterado.</p>
+            }
             @if (form.get('document')?.touched && form.get('document')?.invalid) {
             <p class="text-danger">{{ isEmpresa ? 'CNPJ obrigatório e deve ser válido.' : 'CPF inválido.' }}</p>
             }
@@ -113,3 +112,45 @@
     }
   </div>
 </section>
+
+@if (showChangePasswordForm) {
+<div class="modal-overlay" (click)="toggleChangePasswordForm()">
+  <div class="login-box form-box modal-form" role="dialog" aria-modal="true" (click)="$event.stopPropagation()">
+    <button type="button" class="modal-close" (click)="toggleChangePasswordForm()" aria-label="Fechar">
+      <mat-icon>close</mat-icon>
+    </button>
+    <p class="form-box-title">Editar senha</p>
+
+    <form [formGroup]="passwordForm" (ngSubmit)="changePassword()">
+      <div class="field-group">
+        <label for="oldPassword">Senha atual</label>
+        <input type="password" id="oldPassword" placeholder="Senha atual" formControlName="oldPassword">
+      </div>
+
+      <div class="field-group">
+        <label for="newPassword">Nova senha</label>
+        <input type="password" id="newPassword" placeholder="Nova senha" formControlName="newPassword">
+        @if (passwordForm.get('newPassword')?.touched && passwordForm.get('newPassword')?.invalid) {
+        <p class="text-danger">A senha deve ter no mínimo 6 caracteres.</p>
+        }
+      </div>
+
+      <div class="field-group">
+        <label for="confirmPassword">Confirmar nova senha</label>
+        <input type="password" id="confirmPassword" placeholder="Confirmar nova senha"
+          formControlName="confirmPassword">
+      </div>
+
+      @if (passwordUpdateFailed) {
+      <p class="text-danger">{{ passwordErrorMessage }}</p>
+      }
+
+      <div class="confirm-actions profile-form-actions">
+        <input type="submit" [value]="changingPassword ? 'Salvando...' : 'Salvar nova senha'"
+          [disabled]="passwordForm.invalid || changingPassword">
+        <button type="button" class="secondary-button" (click)="toggleChangePasswordForm()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>
+}

@@ -3,9 +3,11 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { provideNgxMask, NgxMaskDirective } from 'ngx-mask';
+import { ToastrService } from 'ngx-toastr';
 
 import { User, AccountType } from '../../../models/domain/user';
 import { UserUpdateService } from '../../../services/user/user-update';
+import { UserPasswordUpdateService } from '../../../services/user/user-password-update';
 import { CurrentUserService } from '../../../services/security/current-user';
 import { AuthenticationService } from '../../../services/security/authentication';
 import { optionalCpfValidator, optionalPhoneValidator, requiredCnpjValidator } from '../../../shared/document-validators';
@@ -30,9 +32,19 @@ export class MyProfile implements OnInit {
   updateFailed: boolean = false;
   emailChanged: boolean = false;
 
+  passwordForm: FormGroup;
+  showChangePasswordForm: boolean = false;
+  changingPassword: boolean = false;
+  passwordUpdateFailed: boolean = false;
+  passwordErrorMessage: string = '';
+
   get userInitial(): string {
     const name = this.entity?.fullname || this.entity?.email || '?';
     return name.trim().charAt(0).toUpperCase();
+  }
+
+  get documentLocked(): boolean {
+    return !!this.entity?.document;
   }
 
   get isEmpresa(): boolean {
@@ -42,8 +54,10 @@ export class MyProfile implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private updateService: UserUpdateService,
+    private passwordUpdateService: UserPasswordUpdateService,
     private currentUserService: CurrentUserService,
     private authenticationService: AuthenticationService,
+    private toastrService: ToastrService,
     private cdr: ChangeDetectorRef,
   ) {
     this.form = this.formBuilder.group({
@@ -51,6 +65,12 @@ export class MyProfile implements OnInit {
       email: ['', [Validators.required, Validators.email, strictEmailValidator()]],
       phone: ['', [optionalPhoneValidator()]],
       document: ['', [optionalCpfValidator()]],
+    });
+
+    this.passwordForm = this.formBuilder.group({
+      oldPassword: ['', [Validators.required]],
+      newPassword: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', [Validators.required]],
     });
   }
 
@@ -99,6 +119,13 @@ export class MyProfile implements OnInit {
         document: this.entity.document ?? '',
       });
       this.applyDocumentValidator();
+
+      const documentControl = this.form.controls['document'];
+      if (this.documentLocked) {
+        documentControl.disable();
+      } else {
+        documentControl.enable();
+      }
     }
   }
 
@@ -139,4 +166,55 @@ export class MyProfile implements OnInit {
       this.cdr.detectChanges();
     }
   }
-}
+
+  toggleChangePasswordForm(): void {
+    this.showChangePasswordForm = !this.showChangePasswordForm;
+    this.passwordUpdateFailed = false;
+    this.passwordErrorMessage = '';
+
+    if (this.showChangePasswordForm) {
+      this.passwordForm.reset();
+    }
+  }
+
+  async changePassword(): Promise<void> {
+    this.passwordUpdateFailed = false;
+    this.passwordErrorMessage = '';
+
+    if (this.passwordForm.invalid) {
+      this.passwordUpdateFailed = true;
+      this.passwordErrorMessage = 'Preencha todos os campos corretamente.';
+      return;
+    }
+
+    const oldPassword = this.passwordForm.controls['oldPassword'].value;
+    const newPassword = this.passwordForm.controls['newPassword'].value;
+    const confirmPassword = this.passwordForm.controls['confirmPassword'].value;
+
+    if (newPassword !== confirmPassword) {
+      this.passwordUpdateFailed = true;
+      this.passwordErrorMessage = 'A confirmação não corresponde à nova senha.';
+      return;
+    }
+
+    if (!this.entity?.id) {
+      this.passwordUpdateFailed = true;
+      this.passwordErrorMessage = 'Não foi possível identificar o usuário.';
+      return;
+    }
+
+    this.changingPassword = true;
+    try {
+      await this.passwordUpdateService.updatePassword(this.entity.id, oldPassword, newPassword);
+      this.toastrService.success('Senha alterada com sucesso!');
+      this.showChangePasswordForm = false;
+    } catch (error) {
+      console.error('Erro ao atualizar senha', error);
+      this.passwordUpdateFailed = true;
+      this.passwordErrorMessage = 'Não foi possível alterar a senha. Confira os dados e tente novamente.';
+    } finally {
+      this.changingPassword = false;
+      this.cdr.detectChanges();
+    }
+  }
+} 

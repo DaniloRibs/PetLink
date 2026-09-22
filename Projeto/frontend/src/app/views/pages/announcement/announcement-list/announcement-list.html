@@ -2,7 +2,6 @@
   <div class="content-form-card">
     <div class="section-header">
       <p class="footer-title">ANÚNCIOS</p>
-
     </div>
     <p class="hero-text">Fique de olho nas campanhas de vacinação divulgadas por empresas parceiras.</p>
 
@@ -15,10 +14,10 @@
     </button>
     }
 
-
     @if (showForm) {
     <div class="modal-overlay" (click)="toggleForm()">
-      <div class="login-box form-box modal-form" role="dialog" aria-modal="true" (click)="$event.stopPropagation()">
+      <div class="login-box form-box modal-form announcement-create-modal" role="dialog" aria-modal="true"
+        (click)="$event.stopPropagation()">
         <button type="button" class="modal-close" (click)="toggleForm()" aria-label="Fechar">
           <mat-icon>close</mat-icon>
         </button>
@@ -42,7 +41,9 @@
 
           <div class="field-group">
             <label>Descrição</label>
-            <textarea placeholder formControlName="description" rows="5"></textarea>
+            <app-format-toolbar [control]="form.controls['description']"
+              [textarea]="descriptionInput"></app-format-toolbar>
+            <textarea placeholder formControlName="description" rows="5" #descriptionInput></textarea>
           </div>
 
           <div class="form-row">

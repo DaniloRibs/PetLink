@@ -1,9 +1,15 @@
+:host {
+  display: flex;
+  height: 100%;
+}
+
 .vaccine-card,
 .adoption-card,
 .lost-card {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  flex: 1;
   border-radius: 18px !important;
   background-color: #fffaf5 !important;
   border-left: 8px solid transparent;
@@ -16,7 +22,6 @@
   }
 }
 
-/* 2. Cores das bordas laterais para cada tipo */
 .vaccine-card {
   border-left-color: #19d291;
 }
@@ -27,7 +32,7 @@
 
 .lost-card {
   border-left-color: #f59e0b;
-  /* Borda amarela/laranja do Lost */
+
 }
 
 .vaccine-icon-header {
@@ -109,5 +114,84 @@ mat-card-actions {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+.announcement-detail-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 4px;
+}
+
+.announcement-detail-header h2 {
+  margin: 2px 0;
+  text-align: left;
+}
+
+.announcement-detail-subtitle {
+  color: #6b5d55;
+  font-size: 13px;
+  margin: 0;
+}
+
+.adoption-icon-header.large,
+.lost-icon-header.large,
+.vaccine-icon-header.large {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+
+  mat-icon {
+    font-size: 26px;
+    width: 26px;
+    height: 26px;
+  }
+}
+
+.login-box.modal-form.announcement-detail-modal,
+.login-box.modal-form.announcement-edit-modal {
+  width: min(880px, 92vw);
+}
+
+.announcement-edit-modal textarea {
+  min-height: 240px;
+}
+
+.announcement-detail-modal,
+.announcement-edit-modal {
+  text-align: left;
+  transform-origin: bottom center;
+  animation: card-arrive 0.45s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.modal-overlay {
+  animation: overlay-fade 0.25s ease;
+}
+
+@keyframes card-arrive {
+  0% {
+    opacity: 0;
+    transform: translateY(70px) scale(0.9) rotate(-3deg);
+  }
+
+  60% {
+    opacity: 1;
+    transform: translateY(-8px) scale(1.02) rotate(0.5deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+}
+
+@keyframes overlay-fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
   }
 }

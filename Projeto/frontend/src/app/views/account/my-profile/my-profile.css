@@ -175,3 +175,25 @@
   justify-content: center !important;
   box-sizing: border-box !important;
 }
+
+.profile-form-box .field-locked {
+  background: #f1ece6;
+  color: #b8ab9e;
+  border-color: transparent;
+  cursor: not-allowed;
+  opacity: 0.75;
+  pointer-events: none;
+}
+
+.field-hint {
+  margin: 2px 0 0;
+  font-size: 12px;
+  color: #b8ab9e;
+  text-align: left;
+}
+
+.format-btn.active {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}

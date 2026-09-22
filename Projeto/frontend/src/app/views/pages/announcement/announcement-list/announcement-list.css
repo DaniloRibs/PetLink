@@ -159,3 +159,11 @@
     max-width: none;
   }
 }
+
+.announcement-create-modal {
+  width: min(880px, 92vw) !important;
+}
+
+.announcement-create-modal textarea {
+  min-height: 240px !important;
+}
