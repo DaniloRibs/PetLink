@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { provideNgxMask, NgxMaskDirective } from 'ngx-mask';
 import { ToastrService } from 'ngx-toastr';
@@ -8,6 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { User, AccountType } from '../../../models/domain/user';
 import { UserUpdateService } from '../../../services/user/user-update';
 import { UserPasswordUpdateService } from '../../../services/user/user-password-update';
+import { UserDeleteService } from '../../../services/user/user-delete';
 import { CurrentUserService } from '../../../services/security/current-user';
 import { AuthenticationService } from '../../../services/security/authentication';
 import { optionalCpfValidator, optionalPhoneValidator, requiredCnpjValidator } from '../../../shared/document-validators';
@@ -38,6 +39,13 @@ export class MyProfile implements OnInit {
   passwordUpdateFailed: boolean = false;
   passwordErrorMessage: string = '';
 
+  readonly DELETE_KEYWORD = 'DELETAR';
+  deleteForm: FormGroup;
+  showDeleteAccountModal: boolean = false;
+  deletingAccount: boolean = false;
+  deleteAccountFailed: boolean = false;
+  deleteAccountErrorMessage: string = '';
+
   get userInitial(): string {
     const name = this.entity?.fullname || this.entity?.email || '?';
     return name.trim().charAt(0).toUpperCase();
@@ -55,6 +63,8 @@ export class MyProfile implements OnInit {
     private formBuilder: FormBuilder,
     private updateService: UserUpdateService,
     private passwordUpdateService: UserPasswordUpdateService,
+    private userDeleteService: UserDeleteService,
+    private router: Router,
     private currentUserService: CurrentUserService,
     private authenticationService: AuthenticationService,
     private toastrService: ToastrService,
@@ -72,7 +82,16 @@ export class MyProfile implements OnInit {
       newPassword: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required]],
     });
+
+    this.deleteForm = this.formBuilder.group({
+      confirmation: ['', [Validators.required, this.deleteKeywordValidator]],
+    });
   }
+
+  private deleteKeywordValidator = (control: AbstractControl): ValidationErrors | null => {
+    const value = String(control.value ?? '').trim();
+    return value === this.DELETE_KEYWORD ? null : { keywordMismatch: true };
+  };
 
   async ngOnInit(): Promise<void> {
     try {
@@ -217,4 +236,53 @@ export class MyProfile implements OnInit {
       this.cdr.detectChanges();
     }
   }
-} 
+
+  openDeleteAccountModal(): void {
+    this.deleteForm.reset({ confirmation: '' });
+    this.deleteAccountFailed = false;
+    this.deleteAccountErrorMessage = '';
+    this.showDeleteAccountModal = true;
+  }
+
+  closeDeleteAccountModal(): void {
+    if (this.deletingAccount) {
+      return;
+    }
+    this.showDeleteAccountModal = false;
+  }
+
+  async deleteAccount(): Promise<void> {
+    this.deleteAccountFailed = false;
+    this.deleteAccountErrorMessage = '';
+
+    if (this.deleteForm.invalid) {
+      this.deleteAccountFailed = true;
+      this.deleteAccountErrorMessage = `Digite ${this.DELETE_KEYWORD} para confirmar a exclusão.`;
+      return;
+    }
+
+    if (!this.entity?.id) {
+      this.deleteAccountFailed = true;
+      this.deleteAccountErrorMessage = 'Não foi possível identificar o usuário.';
+      return;
+    }
+
+    this.deletingAccount = true;
+    try {
+      await this.userDeleteService.delete(this.entity.id);
+
+      this.showDeleteAccountModal = false;
+      this.authenticationService.logout();
+      this.currentUserService.clear();
+      this.toastrService.success('Sua conta foi excluída com sucesso.');
+      await this.router.navigate(['/account/sign-in']);
+    } catch (error) {
+      console.error('Erro ao excluir conta', error);
+      this.deleteAccountFailed = true;
+      this.deleteAccountErrorMessage = 'Não foi possível excluir a conta. Tente novamente.';
+    } finally {
+      this.deletingAccount = false;
+      this.cdr.detectChanges();
+    }
+  }
+}

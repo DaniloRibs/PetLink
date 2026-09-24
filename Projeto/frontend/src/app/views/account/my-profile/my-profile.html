@@ -42,16 +42,27 @@
             <span class="profile-view-label">{{ isEmpresa ? 'CNPJ' : 'CPF' }}</span>
             <span class="profile-view-text">{{ entity?.document || 'Não informado' }}</span>
           </div>
+          
+          <div class="edit-actions">
+            <button class="secondary-button profile-edit-btn" (click)="toggleEditForm()">
+              <mat-icon>edit</mat-icon>
+              Editar perfil
+            </button>
+            
+            <button class="secondary-button profile-edit-btn" (click)="toggleChangePasswordForm()">
+              <mat-icon>lock</mat-icon>
+              Editar senha
+            </button>
+          </div>
 
-          <button class="secondary-button profile-edit-btn" (click)="toggleEditForm()">
-            <mat-icon>edit</mat-icon>
-            Editar perfil
-          </button>
-
-          <button class="secondary-button profile-edit-btn" (click)="toggleChangePasswordForm()">
-            <mat-icon>lock</mat-icon>
-            Editar senha
-          </button>
+          <div class="profile-danger-zone">
+            <p class="profile-danger-title">Zona de perigo</p>
+            <p class="profile-danger-text">Excluir sua conta remove seus dados, pets e vacinas de forma permanente.</p>
+            <button type="button" class="danger-button profile-delete-btn" (click)="openDeleteAccountModal()">
+              <mat-icon>delete_forever</mat-icon>
+              Excluir conta
+            </button>
+          </div>
         </div>
         } @else {
         <form [formGroup]="form" (ngSubmit)="updateProfile()">
@@ -149,6 +160,48 @@
         <input type="submit" [value]="changingPassword ? 'Salvando...' : 'Salvar nova senha'"
           [disabled]="passwordForm.invalid || changingPassword">
         <button type="button" class="secondary-button" (click)="toggleChangePasswordForm()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>
+}
+
+@if (showDeleteAccountModal) {
+<div class="modal-overlay" (click)="closeDeleteAccountModal()">
+  <div class="login-box form-box modal-form" role="dialog" aria-modal="true" aria-labelledby="delete-account-title"
+    (click)="$event.stopPropagation()">
+    <button type="button" class="modal-close" (click)="closeDeleteAccountModal()" aria-label="Fechar"
+      [disabled]="deletingAccount">
+      <mat-icon>close</mat-icon>
+    </button>
+    <p class="form-box-title" id="delete-account-title">Excluir conta</p>
+
+    <p class="confirm-text">
+      Essa ação é <strong>permanente</strong> e não pode ser desfeita. Sua conta, seus animais, vacinas, anúncios e
+      adoções serão removidos.
+    </p>
+
+    <form [formGroup]="deleteForm" (ngSubmit)="deleteAccount()">
+      <div class="field-group">
+        <label for="deleteConfirmation">Para confirmar, digite <strong>{{ DELETE_KEYWORD }}</strong></label>
+        <input type="text" id="deleteConfirmation" [placeholder]="DELETE_KEYWORD" formControlName="confirmation"
+          autocomplete="off" autocapitalize="characters" spellcheck="false">
+        @if (deleteForm.get('confirmation')?.dirty && deleteForm.get('confirmation')?.invalid) {
+        <p class="field-hint">Digite exatamente {{ DELETE_KEYWORD }}, em letras maiúsculas.</p>
+        }
+      </div>
+
+      @if (deleteAccountFailed) {
+      <p class="text-danger">{{ deleteAccountErrorMessage }}</p>
+      }
+
+      <div class="confirm-actions profile-form-actions delete-account-actions">
+        <button type="submit" class="danger-button is-solid"
+          [disabled]="deleteForm.invalid || deletingAccount">
+          {{ deletingAccount ? 'Excluindo...' : 'Excluir conta' }}
+        </button>
+        <button type="button" class="secondary-button" (click)="closeDeleteAccountModal()"
+          [disabled]="deletingAccount">Cancelar</button>
       </div>
     </form>
   </div>
