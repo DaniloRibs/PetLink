@@ -28,6 +28,7 @@ export class SignUp implements OnInit, OnDestroy {
   form: FormGroup;
 
   createValidationFailed: boolean = false;
+  showLgpdModal: boolean = false;
 
   readonly facts: string[] = [
     'Cães conseguem aprender e reconhecer centenas de palavras e comandos.',
@@ -132,6 +133,19 @@ export class SignUp implements OnInit, OnDestroy {
       return;
     }
 
+    this.showLgpdModal = true;
+  }
+
+  acceptLgpd(): void {
+    this.showLgpdModal = false;
+    this.submitAccountCreation();
+  }
+
+  declineLgpd(): void {
+    this.showLgpdModal = false;
+  }
+
+  private submitAccountCreation(): void {
     let user: User = {
       fullname: this.form.controls['fullname'].value,
       email: this.form.controls['email'].value,

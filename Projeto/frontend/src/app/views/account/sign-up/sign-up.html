@@ -74,4 +74,35 @@
       </div>
     </div>
   </div>
+
+  @if (showLgpdModal) {
+  <div class="modal-overlay" (click)="declineLgpd()">
+    <div class="login-box modal-form lgpd-modal" role="dialog" aria-modal="true" (click)="$event.stopPropagation()">
+      <button type="button" class="modal-close" (click)="declineLgpd()" aria-label="Fechar">
+        <span class="material-icons" aria-hidden="true">close</span>
+      </button>
+
+      <p class="form-box-title">Termos da LGPD</p>
+
+      <div class="lgpd-modal-content">
+        <p>Para criar sua conta no PetLink, precisamos do seu consentimento para coletar e tratar os seguintes
+          dados pessoais, conforme a Lei Geral de Proteção de Dados (Lei nº 13.709/2018):</p>
+        <ul>
+          <li>Nome completo, e-mail, telefone e CPF/CNPJ informados no cadastro;</li>
+          <li>Dados de pets, anúncios, adoções e vacinas que você cadastrar na plataforma;</li>
+          <li>Registros de uso necessários para o funcionamento e a segurança do serviço.</li>
+        </ul>
+        <p>Esses dados são usados exclusivamente para viabilizar as funcionalidades do PetLink e não são
+          compartilhados com terceiros sem o seu consentimento. Você pode solicitar a atualização ou exclusão dos
+          seus dados a qualquer momento.</p>
+      </div>
+
+      <p class="confirm-text">Você concorda com os termos acima?</p>
+      <div class="confirm-actions">
+        <button type="button" class="lgpd-accept-button" (click)="acceptLgpd()">Aceitar</button>
+        <button type="button" class="lgpd-decline-button" (click)="declineLgpd()">Discordar</button>
+      </div>
+    </div>
+  </div>
+  }
 </div>
