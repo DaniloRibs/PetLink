@@ -19,6 +19,7 @@ import br.fai.faitec.petlink2026.ports_and_adapters.port.service.animal.PetServi
 import br.fai.faitec.petlink2026.ports_and_adapters.port.service.user.UserService;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.service.vaccine.VaccineService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -43,6 +44,8 @@ public class UserServiceAdapter implements UserService {
     private AdoptionService adoptionService;
     @Autowired
     private AnnouncementDao announcementDao;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public int create(UserModel userModel) {
@@ -212,11 +215,12 @@ public class UserServiceAdapter implements UserService {
         }
 
         UserModel userModel = userDao.readyById(id);
+
         if (userModel == null) {
             return false;
         }
 
-        if (!userModel.getPassword().equals(oldPassword)) {
+        if (!passwordEncoder.matches(oldPassword, userModel.getPassword())) {
             return false;
         }
 

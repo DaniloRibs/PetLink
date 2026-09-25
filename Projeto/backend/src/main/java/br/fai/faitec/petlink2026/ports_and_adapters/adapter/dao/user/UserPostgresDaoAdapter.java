@@ -125,7 +125,7 @@ public class UserPostgresDaoAdapter implements UserDao {
 
     @Override
     public boolean updatePassword(int id, String password) {
-        String sql = "UPDATE user_model SET password = ?" +
+        String sql = "UPDATE user_model SET password = crypt(?, gen_salt('bf'))" +
                 " WHERE id = ? ;";
 
 

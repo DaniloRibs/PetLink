@@ -1,14 +1,16 @@
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
 INSERT INTO user_model (email, full_name, password, phone) VALUES
-('r@r.com', 'Rodrigo', '12345', '31999990001'),
-('d@d.com', 'Danilo', '12345', '31999990002'),
-('bruno@bruno.com', 'BB enterprise', '123123', '31999990005'),
-('ana@ana.com', 'Ana Clara', '12345', '11988880001'),
-('bovista@fazenda.com', 'Fazenda Boa Vista', '12345', '19977770002'),
-('caofeliz@shop.com', 'PetShop Cão Feliz', '12345', '11966660003'),
-('carlos@c.com', 'Carlos Silva', '12345', '31955550004'),
-('agro@vale.com', 'Agropecuária Vale', '12345', '19944440005'),
-('mari@m.com', 'Mariana Costa', '12345', '11933330006'),
-('joao@j.com', 'Joao Souza', '12345', '11922220007');
+('r@r.com', 'Rodrigo', crypt('12345', gen_salt('bf')), '31999990001'),
+('d@d.com', 'Danilo', crypt('12345', gen_salt('bf')), '31999990002'),
+('bruno@bruno.com', 'BB enterprise', crypt('12345', gen_salt('bf')), '31999990005'),
+('ana@ana.com', 'Ana Clara', crypt('12345', gen_salt('bf')), '11988880001'),
+('bovista@fazenda.com', 'Fazenda Boa Vista', crypt('12345', gen_salt('bf')), '19977770002'),
+('caofeliz@shop.com', 'PetShop Cão Feliz', crypt('12345', gen_salt('bf')), '11966660003'),
+('carlos@c.com', 'Carlos Silva', crypt('12345', gen_salt('bf')), '31955550004'),
+('agro@vale.com', 'Agropecuária Vale', crypt('12345', gen_salt('bf')), '19944440005'),
+('mari@m.com', 'Mariana Costa', crypt('12345', gen_salt('bf')), '11933330006'),
+('joao@j.com', 'Joao Souza', crypt('12345', gen_salt('bf')), '11922220007');
 
 INSERT INTO person_model (cpf, user_id) VALUES
 (NULL, 1),
