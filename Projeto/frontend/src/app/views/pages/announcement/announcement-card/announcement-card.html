@@ -96,10 +96,10 @@
         </div>
       </div>
 
-      <div class="confirm-actions">
-        <input type="submit" class="primary-button" value="Salvar" [disabled]="!validateEditFields()">
-        <button type="button" class="secondary-button" (click)="toggleEditForm()">Cancelar</button>
-      </div>
+
+      <input type="submit" value="Salvar" [disabled]="!validateEditFields()">
+      <button type="button" class="secondary-button" (click)="toggleEditForm()">Cancelar</button>
+
 
       @if (editValidationFailed) {
       <p class="text-danger">Confira os dados e tente novamente.</p>

@@ -109,12 +109,14 @@ export class AnnouncementCardComponent {
 
     const formValues = this.editForm.value;
 
+    const isLost = this.announcement.announcementType === AnnouncementType.LOST;
+
     const updatedAnnouncement: Announcement = {
       ...this.announcement,
       id: this.announcement.id,
       title: formValues.title,
       description: formValues.description,
-      eventDate: formValues.date || undefined,
+      eventDate: isLost ? undefined : (formValues.date || undefined),
       location: formValues.location || undefined,
     };
 

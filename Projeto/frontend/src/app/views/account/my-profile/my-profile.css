@@ -249,3 +249,65 @@
   margin: 0 0 18px 0 !important;
   padding: 0 !important;
 }
+
+.lgpd-fab {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 1500;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #fff;
+  box-shadow: 0 10px 20px rgba(var(--primary-rgb), 0.35);
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.lgpd-fab:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+.lgpd-fab mat-icon {
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+}
+
+.lgpd-modal {
+  text-align: left;
+}
+
+.lgpd-content {
+  margin: 12px 0 20px;
+  max-height: 50vh;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.lgpd-content h4 {
+  margin: 16px 0 6px;
+  font-size: 14px;
+  color: var(--primary);
+}
+
+.lgpd-content h4:first-child {
+  margin-top: 0;
+}
+
+.lgpd-content p,
+.lgpd-content li {
+  font-size: 13px;
+  color: #4d423c;
+  line-height: 1.5;
+}
+
+.lgpd-content ul {
+  margin: 4px 0;
+  padding-left: 18px;
+}

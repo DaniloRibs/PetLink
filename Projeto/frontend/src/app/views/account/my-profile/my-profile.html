@@ -42,13 +42,13 @@
             <span class="profile-view-label">{{ isEmpresa ? 'CNPJ' : 'CPF' }}</span>
             <span class="profile-view-text">{{ entity?.document || 'Não informado' }}</span>
           </div>
-          
+
           <div class="edit-actions">
             <button class="secondary-button profile-edit-btn" (click)="toggleEditForm()">
               <mat-icon>edit</mat-icon>
               Editar perfil
             </button>
-            
+
             <button class="secondary-button profile-edit-btn" (click)="toggleChangePasswordForm()">
               <mat-icon>lock</mat-icon>
               Editar senha
@@ -56,7 +56,7 @@
           </div>
 
           <div class="profile-danger-zone">
-            
+
             <p class="profile-danger-text">Excluir sua conta remove seus dados, pets e vacinas de forma permanente.</p>
             <button type="button" class="danger-button profile-delete-btn" (click)="openDeleteAccountModal()">
               <mat-icon>delete_forever</mat-icon>
@@ -124,6 +124,45 @@
   </div>
 </section>
 
+
+<button type="button" class="lgpd-fab" (click)="toggleLgpdModal()" aria-label="Privacidade e LGPD">
+  <mat-icon>privacy_tip</mat-icon>
+</button>
+
+@if (showLgpdModal) {
+<div class="modal-overlay" (click)="toggleLgpdModal()">
+  <div class="login-box form-box modal-form lgpd-modal" role="dialog" aria-modal="true"
+    (click)="$event.stopPropagation()">
+    <button type="button" class="modal-close" (click)="toggleLgpdModal()" aria-label="Fechar">
+      <mat-icon>close</mat-icon>
+    </button>
+    <p class="form-box-title">Privacidade e LGPD</p>
+
+    <div class="lgpd-content">
+      <p>O PetLink trata seus dados pessoais em conformidade com a Lei Geral de Proteção de Dados (LGPD — Lei nº
+        13.709/2018).</p>
+
+      <h4>Quais dados coletamos</h4>
+      <p>Nome, e-mail, telefone, CPF/CNPJ e as informações que você cadastra sobre seus pets, vacinas, anúncios e
+        adoções.</p>
+
+      <h4>Por que coletamos</h4>
+      <p>Para viabilizar seu cadastro, a comunicação entre usuários (compra, venda e adoção de animais) e o
+        funcionamento das funcionalidades da plataforma.</p>
+
+      <h4>Seus direitos</h4>
+      <ul>
+        <li>Acessar e corrigir seus dados a qualquer momento em "Editar perfil".</li>
+        <li>Solicitar a exclusão definitiva da sua conta e dos seus dados em "Excluir conta".</li>
+        <li>Solicitar esclarecimentos sobre como seus dados são utilizados.</li>
+      </ul>
+    </div>
+
+    <button type="button" class="secondary-button" (click)="toggleLgpdModal()">Fechar</button>
+  </div>
+</div>
+}
+
 @if (showChangePasswordForm) {
 <div class="modal-overlay" (click)="toggleChangePasswordForm()">
   <div class="login-box form-box modal-form" role="dialog" aria-modal="true" (click)="$event.stopPropagation()">
@@ -142,14 +181,8 @@
         <label for="newPassword">Nova senha</label>
         <input type="password" id="newPassword" placeholder="Nova senha" formControlName="newPassword">
         @if (passwordForm.get('newPassword')?.touched && passwordForm.get('newPassword')?.invalid) {
-        <p class="text-danger">A senha deve ter no mínimo 6 caracteres.</p>
+        <p class="text-danger">A senha deve ter no mínimo 4 caracteres.</p>
         }
-      </div>
-
-      <div class="field-group">
-        <label for="confirmPassword">Confirmar nova senha</label>
-        <input type="password" id="confirmPassword" placeholder="Confirmar nova senha"
-          formControlName="confirmPassword">
       </div>
 
       @if (passwordUpdateFailed) {
@@ -196,8 +229,7 @@
       }
 
       <div class="confirm-actions profile-form-actions delete-account-actions">
-        <button type="submit" class="danger-button is-solid"
-          [disabled]="deleteForm.invalid || deletingAccount">
+        <button type="submit" class="danger-button is-solid" [disabled]="deleteForm.invalid || deletingAccount">
           {{ deletingAccount ? 'Excluindo...' : 'Excluir conta' }}
         </button>
         <button type="button" class="secondary-button" (click)="closeDeleteAccountModal()"

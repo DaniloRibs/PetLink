@@ -57,6 +57,10 @@ export class AnnouncementList implements OnInit {
     return isValidPhone(this.user?.phone ?? '');
   }
 
+  get isLostSelected(): boolean {
+    return this.form.controls['type'].value === AnnouncementType.LOST;
+  }
+
   async ngOnInit(): Promise<void> {
     try {
       this.user = this.currentUserService.get();
@@ -66,6 +70,10 @@ export class AnnouncementList implements OnInit {
 
       this.isCompany = this.user?.accountType === AccountType.ENTERPRISE;
       this.userEmail = this.user?.email ?? '';
+
+      if (!this.isCompany) {
+        this.form.patchValue({ type: AnnouncementType.LOST });
+      }
 
       this.announcements = await this.announcementReadService.findAll();
     } catch (error) {
@@ -88,10 +96,13 @@ export class AnnouncementList implements OnInit {
   createCampaign(): void {
     this.createValidationFailed = false;
 
-    if (!this.isCompany || !this.validateFields() || !this.user?.id) {
+    if (!this.validateFields() || !this.user?.id) {
       this.createValidationFailed = true;
       return;
     }
+
+    const type = this.isCompany ? this.form.controls['type'].value : AnnouncementType.LOST;
+    const isLost = type === AnnouncementType.LOST;
 
     const wantsPhone = this.form.controls['contactMethod'].value === 'phone';
     const contact = (wantsPhone && this.userHasValidPhone) ? this.user.phone! : this.user.email;
@@ -99,23 +110,23 @@ export class AnnouncementList implements OnInit {
     const createAnnouncementDto: CreateAnnouncementDto = {
       title: this.form.controls['title'].value,
       description: this.form.controls['description'].value,
-      eventDate: this.form.controls['date'].value || undefined,
+      eventDate: isLost ? undefined : (this.form.controls['date'].value || undefined),
       location: this.form.controls['location'].value || undefined,
       idCreator: this.user.id,
-      announcementType: this.form.controls['type'].value,
+      announcementType: type,
       contact: contact,
     };
 
     this.announcementCreateService.create(createAnnouncementDto).subscribe({
       next: async () => {
         this.announcements = await this.announcementReadService.findAll();
-        this.form.reset({ type: '', contactMethod: 'email' });
+        this.form.reset({ type: this.isCompany ? '' : AnnouncementType.LOST, contactMethod: 'email' });
         this.showForm = false;
-        this.toastrService.success('Campanha publicada com sucesso!');
+        this.toastrService.success('Anúncio publicado com sucesso!');
         this.cdr.detectChanges();
       },
       error: (error) => {
-        console.error('Erro ao publicar campanha', error);
+        console.error('Erro ao publicar anúncio', error);
         this.createValidationFailed = true;
         this.cdr.detectChanges();
       },

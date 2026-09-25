@@ -2,6 +2,8 @@ import { speciesIcon } from '../../../../shared/pet-species-icon';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { forkJoin } from 'rxjs';
 import { speciesLabel } from '../../../../shared/pet-options';
 import { Pet } from '../../../../models/domain/pet';
 import { Adoption } from '../../../../models/domain/adoption';
@@ -29,18 +31,25 @@ interface AdoptionListing {
 export class AdoptionHub implements OnInit {
 
   activeTab: 'adotar' | 'doar' = 'adotar';
-
-  availableForAdoption: AdoptionListing[] = [];
-  myPets: Pet[] = [];
-  myAdoptionsByPetId: Record<number, Adoption> = {};
   loading: boolean = true;
   userId: number | null = null;
   user: User | null = null;
+
+  myPets: Pet[] = [];
+  myAdoptionsByPetId: Record<number, Adoption> = {};
+  sellablePets: Pet[] = [];
+  myDonations: AdoptionListing[] = [];
+  availableForAdoption: AdoptionListing[] = [];
+
   selectedAdoption: AdoptionListing | null = null;
+  confirmingRemoval: boolean = false;
+  removeFailed: boolean = false;
+  markAdoptedFailed: boolean = false;
+
+  selectedPetId: number | null = null;
+  showAdoptionForm: boolean = false;
   donationForm: FormGroup;
-  petBeingOffered: Pet | null = null;
   donationValidationFailed: boolean = false;
-  pendingRemovalAdoptionId: number | null = null;
 
   speciesIcon(species: string): string {
     return speciesIcon(species);
@@ -62,6 +71,7 @@ export class AdoptionHub implements OnInit {
     private adoptionDeleteService: AdoptionDeleteService,
     private adoptionMarkAsAdoptedService: AdoptionMarkAsAdoptedService,
     private formBuilder: FormBuilder,
+    private toastrService: ToastrService,
     private cdr: ChangeDetectorRef,
   ) {
     this.donationForm = this.formBuilder.group({
@@ -89,6 +99,11 @@ export class AdoptionHub implements OnInit {
       allAdoptions
         .filter(adoption => adoption.ownerId === this.userId && !adoption.adopted)
         .forEach(adoption => { this.myAdoptionsByPetId[adoption.petId] = adoption; });
+
+      this.sellablePets = myPets.filter(pet => !this.hasActiveDonation(pet.id));
+      this.myDonations = myPets
+        .filter(pet => this.hasActiveDonation(pet.id))
+        .map(pet => ({ pet, adoption: this.myAdoptionsByPetId[pet.id!] }));
 
       const othersAdoptions = allAdoptions.filter(
         adoption => adoption.ownerId !== this.userId && !adoption.adopted
@@ -149,14 +164,6 @@ export class AdoptionHub implements OnInit {
     return contact?.includes('@') ? 'mail' : 'call';
   }
 
-  openAdoption(listing: AdoptionListing): void {
-    this.selectedAdoption = listing;
-  }
-
-  closeAdoption(): void {
-    this.selectedAdoption = null;
-  }
-
   setTab(tab: 'adotar' | 'doar'): void {
     this.activeTab = tab;
   }
@@ -165,29 +172,37 @@ export class AdoptionHub implements OnInit {
     return !!petId && !!this.myAdoptionsByPetId[petId];
   }
 
-  activeDonationFor(petId: number | undefined): Adoption | null {
-    return petId ? this.myAdoptionsByPetId[petId] ?? null : null;
-  }
 
-  requestOfferForAdoption(pet: Pet): void {
-    this.petBeingOffered = pet;
+  openAdoptionForm(): void {
+    this.selectedPetId = null;
     this.donationValidationFailed = false;
     this.donationForm.reset({ description: '', contactMethod: 'email' });
+    this.showAdoptionForm = true;
   }
 
-  cancelOfferForAdoption(): void {
-    this.petBeingOffered = null;
+  closeAdoptionForm(): void {
+    this.showAdoptionForm = false;
+  }
+
+  selectPet(id: number | undefined): void {
+    if (id === undefined) {
+      return;
+    }
+    this.selectedPetId = id;
+  }
+
+  isPetSelected(id: number | undefined): boolean {
+    return id !== undefined && this.selectedPetId === id;
   }
 
   validateDonationFields(): boolean {
-    return this.donationForm.valid;
+    return this.donationForm.valid && this.selectedPetId !== null;
   }
 
   confirmOfferForAdoption(): void {
     this.donationValidationFailed = false;
 
-    const pet = this.petBeingOffered;
-    if (!this.userId || !pet?.id || !this.user || !this.validateDonationFields()) {
+    if (!this.userId || !this.user || !this.validateDonationFields()) {
       this.donationValidationFailed = true;
       return;
     }
@@ -196,15 +211,16 @@ export class AdoptionHub implements OnInit {
     const contact = (wantsPhone && this.userHasValidPhone) ? this.user.phone! : this.user.email;
 
     const createAdoptionDto: CreateAdoptionDto = {
-      petId: pet.id,
+      petId: this.selectedPetId!,
       ownerId: this.userId,
       description: this.donationForm.controls['description'].value,
-      contact: contact,
+      contact,
     };
 
     this.adoptionCreateService.create(createAdoptionDto).subscribe({
       next: () => {
-        this.petBeingOffered = null;
+        this.showAdoptionForm = false;
+        this.toastrService.success('Adoção publicada com sucesso!');
         this.reload();
       },
       error: (error) => {
@@ -215,28 +231,65 @@ export class AdoptionHub implements OnInit {
     });
   }
 
-  requestMarkAsAdopted(adoptionId: number): void {
-    this.adoptionMarkAsAdoptedService.markAsAdopted(adoptionId).subscribe({
-      next: () => this.reload(),
-      error: (error) => console.error('Erro ao marcar adoção como concluída', error),
-    });
+  openAdoption(listing: AdoptionListing): void {
+    this.selectedAdoption = listing;
+    this.confirmingRemoval = false;
+    this.removeFailed = false;
+    this.markAdoptedFailed = false;
   }
 
-  requestRemoveFromList(adoptionId: number): void {
-    this.pendingRemovalAdoptionId = adoptionId;
+  closeAdoption(): void {
+    this.selectedAdoption = null;
+    this.confirmingRemoval = false;
+  }
+
+  requestRemoveFromList(): void {
+    this.confirmingRemoval = true;
+    this.removeFailed = false;
   }
 
   cancelRemoveFromList(): void {
-    this.pendingRemovalAdoptionId = null;
+    this.confirmingRemoval = false;
   }
 
-  confirmRemoveFromList(adoptionId: number): void {
+  confirmRemoveFromList(): void {
+    const adoptionId = this.selectedAdoption?.adoption.id;
+    if (adoptionId === undefined) {
+      return;
+    }
+
     this.adoptionDeleteService.delete(adoptionId).subscribe({
       next: () => {
-        this.pendingRemovalAdoptionId = null;
+        this.closeAdoption();
+        this.toastrService.success('Anúncio removido da lista.');
         this.reload();
       },
-      error: (error) => console.error('Erro ao remover anúncio de adoção', error),
+      error: (error) => {
+        console.error('Erro ao remover anúncio de adoção', error);
+        this.removeFailed = true;
+        this.cdr.detectChanges();
+      },
+    });
+  }
+
+  requestMarkAsAdopted(): void {
+    const adoptionId = this.selectedAdoption?.adoption.id;
+    if (adoptionId === undefined) {
+      return;
+    }
+
+    this.markAdoptedFailed = false;
+    this.adoptionMarkAsAdoptedService.markAsAdopted(adoptionId).subscribe({
+      next: () => {
+        this.closeAdoption();
+        this.toastrService.success('Pet marcado como adotado!');
+        this.reload();
+      },
+      error: (error) => {
+        console.error('Erro ao marcar adoção como concluída', error);
+        this.markAdoptedFailed = true;
+        this.cdr.detectChanges();
+      },
     });
   }
 }

@@ -64,7 +64,7 @@
 
         @if (showSaleForm) {
         <div class="modal-overlay" (click)="closeSaleForm()">
-            <div class="login-box form-box modal-form" role="dialog" aria-modal="true"
+            <div class="login-box form-box modal-form sale-create-modal" role="dialog" aria-modal="true"
                 (click)="$event.stopPropagation()">
                 <button type="button" class="modal-close" (click)="closeSaleForm()" aria-label="Fechar">
                     <mat-icon>close</mat-icon>
@@ -172,7 +172,6 @@
             </div>
         </div>
         }
-
         }
 
         @if (!loading && activeTab === 'vender' && mySales.length > 0) {
@@ -191,7 +190,8 @@
                 </div>
                 }
                 <h3>{{ saleTitle(listing) }}</h3>
-                <p class="sale-animal-line">{{ listing.animals.length }} {{ listing.animals.length === 1 ? 'animal' :
+                <p class="sale-animal-line">{{ listing.animals.length }} {{ listing.animals.length === 1 ? 'animal'
+                    :
                     'animais' }}</p>
                 <p class="sale-price">R$ {{ listing.sale.price.toFixed(2) }}</p>
                 <button type="button" class="primary-button" (click)="openSale(listing)">Saber mais</button>

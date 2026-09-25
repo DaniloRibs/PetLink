@@ -3,16 +3,15 @@
     <div class="section-header">
       <p class="footer-title">ANÚNCIOS</p>
     </div>
-    <p class="hero-text">Fique de olho nas campanhas de vacinação divulgadas por empresas parceiras.</p>
+    <p class="hero-text">Fique de olho nas campanhas de vacinação e adoção divulgadas por empresas parceiras, e nos
+      avisos de animais perdidos da comunidade.</p>
 
-    @if (isCompany) {
     <button class="primary-button action-btn announcement-cta" (click)="toggleForm()">
       <span class="action-btn-icon">
         <mat-icon>add</mat-icon>
       </span>
       Publicar Anúncio
     </button>
-    }
 
     @if (showForm) {
     <div class="modal-overlay" (click)="toggleForm()">
@@ -31,12 +30,18 @@
 
           <div class="field-group">
             <label>Tipo</label>
+            @if (isCompany) {
             <select formControlName="type">
               <option value="" disabled selected hidden>Selecionar</option>
               <option [value]="AnnouncementType.VACCINE">Vacinação</option>
               <option [value]="AnnouncementType.ADOPTION">Adoção</option>
               <option [value]="AnnouncementType.LOST">Animal Perdido</option>
             </select>
+            } @else {
+            <select formControlName="type">
+              <option [value]="AnnouncementType.LOST">Animal Perdido</option>
+            </select>
+            }
           </div>
 
           <div class="field-group">
@@ -47,10 +52,12 @@
           </div>
 
           <div class="form-row">
+            @if (!isLostSelected) {
             <div class="field-group">
               <label>Data</label>
               <input type="date" formControlName="date">
             </div>
+            }
 
             <div class="field-group">
               <label>Local</label>
@@ -98,13 +105,13 @@
     <div class="empty-state">
       <div class="empty-state-icon"><mat-icon>campaign</mat-icon></div>
       <p class="empty-state-title">Nenhuma campanha ou anúncio publicado ainda</p>
-      <p class="empty-state-text">Assim que uma empresa parceira publicar, ela aparece aqui.</p>
+      <p class="empty-state-text">Assim que uma empresa parceira ou um usuário publicar, o anúncio aparece aqui.</p>
     </div>
     } @else {
     <div class="announcement-list">
       @for (announcement of announcements; track announcement.id) {
       <announcement-card [announcement]="announcement" [user]="user!"
-        [canManage]="isCompany && announcement.creatorEmail === user?.email" (delete)="removeCampaign(announcement)"
+        [canManage]="announcement.creatorEmail === user?.email" (delete)="removeCampaign(announcement)"
         (updated)="onAnnouncementUpdated($event)">
       </announcement-card>
       }

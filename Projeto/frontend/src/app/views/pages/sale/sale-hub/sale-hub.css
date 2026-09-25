@@ -108,12 +108,39 @@
 }
 
 .sale-animal-option input[type="checkbox"] {
-    width: 18px;
-    height: 18px;
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
     padding: 0;
     margin: 0;
     flex-shrink: 0;
-    accent-color: var(--primary);
+    border: 2px solid #d8cfc7;
+    border-radius: 6px;
+    background: #fff;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    transition: border-color 0.4s ease, background-color 0.4s ease;
+}
+
+.sale-animal-option input[type="checkbox"]::before {
+    content: "";
+    width: 11px;
+    height: 11px;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+    background: #fff;
+    transform: scale(0);
+    transition: transform 0.3s ease;
+}
+
+.sale-animal-option input[type="checkbox"]:checked {
+    border-color: var(--primary);
+    background: var(--primary);
+}
+
+.sale-animal-option input[type="checkbox"]:checked::before {
+    transform: scale(1);
 }
 
 .sale-animal-icon {
@@ -291,4 +318,13 @@
 
 .sale-cta {
     margin: 20px 0 8px;
+}
+
+.sale-create-modal {
+    width: 1100px !important;
+    max-width: 95vw !important;
+}
+
+.sale-create-modal .sale-animal-list {
+    max-height: 260px;
 }

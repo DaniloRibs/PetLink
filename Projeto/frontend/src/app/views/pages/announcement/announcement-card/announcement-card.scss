@@ -149,9 +149,13 @@ mat-card-actions {
   }
 }
 
-.login-box.modal-form.announcement-detail-modal,
-.login-box.modal-form.announcement-edit-modal {
+.login-box.modal-form.announcement-detail-modal {
   width: min(880px, 92vw);
+}
+
+.login-box.modal-form.announcement-edit-modal {
+  width: 1100px;
+  max-width: 95vw;
 }
 
 .announcement-edit-modal textarea {

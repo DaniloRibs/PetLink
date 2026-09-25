@@ -15,12 +15,6 @@
     gap: 10px;
 }
 
-.brand-divider {
-    width: 2px;
-    height: 26px;
-    border-radius: 2px;
-    background: rgba(var(--primary-rgb), 0.25);
-}
 
 .landing-toggle {
     max-width: 420px;

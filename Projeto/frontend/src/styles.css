@@ -295,6 +295,13 @@ a:hover {
     display: block;
 }
 
+.menu-page .brand-logo {
+    height: 34px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+}
+
 .menu-page .menu-nav {
     display: flex;
     align-items: center;
@@ -699,6 +706,31 @@ a:hover {
     transform: translateY(-2px);
 }
 
+.auth-logo-badge {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    border: 2px solid rgba(var(--primary-rgb), 0.3);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.6);
+    transition: 0.2s ease;
+}
+
+
+.auth-logo-badge img {
+    height: 42px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    pointer-events: none;
+}
+
 .dashboard-header {
     position: fixed;
     top: 0;
@@ -847,6 +879,14 @@ a:hover {
     display: block;
 }
 
+.login-box-logo {
+    height: 38px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+}
+
 .auth-brand-divider {
     width: 2px;
     height: 32px;
@@ -868,7 +908,7 @@ a:hover {
     justify-content: center;
 }
 
-.auth-content .container img {
+.auth-content .container img:not(.login-box-logo) {
     display: none;
 }
 

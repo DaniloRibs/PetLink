@@ -42,6 +42,7 @@ export class MyProfile implements OnInit {
   readonly DELETE_KEYWORD = 'DELETAR';
   deleteForm: FormGroup;
   showDeleteAccountModal: boolean = false;
+  showLgpdModal: boolean = false;
   deletingAccount: boolean = false;
   deleteAccountFailed: boolean = false;
   deleteAccountErrorMessage: string = '';
@@ -79,8 +80,7 @@ export class MyProfile implements OnInit {
 
     this.passwordForm = this.formBuilder.group({
       oldPassword: ['', [Validators.required]],
-      newPassword: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', [Validators.required]],
+      newPassword: ['', [Validators.required, Validators.minLength(4)]],
     });
 
     this.deleteForm = this.formBuilder.group({
@@ -208,13 +208,6 @@ export class MyProfile implements OnInit {
 
     const oldPassword = this.passwordForm.controls['oldPassword'].value;
     const newPassword = this.passwordForm.controls['newPassword'].value;
-    const confirmPassword = this.passwordForm.controls['confirmPassword'].value;
-
-    if (newPassword !== confirmPassword) {
-      this.passwordUpdateFailed = true;
-      this.passwordErrorMessage = 'A confirmação não corresponde à nova senha.';
-      return;
-    }
 
     if (!this.entity?.id) {
       this.passwordUpdateFailed = true;
@@ -251,6 +244,10 @@ export class MyProfile implements OnInit {
     this.showDeleteAccountModal = false;
   }
 
+  toggleLgpdModal(): void {
+    this.showLgpdModal = !this.showLgpdModal;
+  }
+
   async deleteAccount(): Promise<void> {
     this.deleteAccountFailed = false;
     this.deleteAccountErrorMessage = '';
@@ -285,4 +282,4 @@ export class MyProfile implements OnInit {
       this.cdr.detectChanges();
     }
   }
-}
+} 

@@ -68,12 +68,12 @@
         <span class="sidebar-item-label">{{ isFarm ? 'Meus Animais' : 'Meus Pets' }}</span>
       </a>
 
-      @if (!isFarm) {
       <a routerLink="/painel/anuncios" routerLinkActive="active-link" class="sidebar-item">
         <span class="sidebar-item-icon"><mat-icon>campaign</mat-icon></span>
         <span class="sidebar-item-label">Anúncios</span>
       </a>
 
+      @if (!isFarm) {
       <a routerLink="/painel/adocoes" routerLinkActive="active-link" class="sidebar-item">
         <span class="sidebar-item-icon"><mat-icon>favorite</mat-icon></span>
         <span class="sidebar-item-label">Adoções</span>

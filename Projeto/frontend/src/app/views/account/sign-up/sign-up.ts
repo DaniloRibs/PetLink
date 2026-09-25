@@ -89,9 +89,6 @@ export class SignUp implements OnInit, OnDestroy {
         Validators.required,
         Validators.minLength(4),
       ]],
-      repeatPassword: ['', [
-        Validators.required,
-      ]],
     });
 
     this.form.controls['accountType'].valueChanges.subscribe((accountType: AccountType) => {
@@ -117,12 +114,8 @@ export class SignUp implements OnInit, OnDestroy {
     return this.form.controls['accountType'].value === AccountType.ENTERPRISE;
   }
 
-  passwordsMatch() {
-    return this.form.controls['password'].value === this.form.controls['repeatPassword'].value;
-  }
-
   validateFields() {
-    return this.form.valid && this.passwordsMatch();
+    return this.form.valid;
   }
 
   createAccount() {
@@ -179,4 +172,4 @@ export class SignUp implements OnInit, OnDestroy {
       this.currentFact = (this.currentFact + 1) % this.facts.length;
     }, 9000);
   }
-}
+} 

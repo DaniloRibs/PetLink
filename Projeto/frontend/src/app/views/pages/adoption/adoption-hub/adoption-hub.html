@@ -14,7 +14,9 @@
     </div>
 
     @if (loading) {
+
     <p>Carregando...</p>
+
     } @else if (activeTab === 'adotar') {
 
     @if (availableForAdoption.length === 0) {
@@ -26,7 +28,7 @@
     } @else {
     <div class="pet-card-grid">
       @for (listing of availableForAdoption; track listing.adoption.id) {
-      <article class="pet-card adoption-pet-card" (click)="openAdoption(listing)">
+      <article class="pet-card adoption-pet-card">
         @if (waitingLabel(listing.adoption.publicationDate); as label) {
         <span class="pet-badge waiting-badge">{{ label }}</span>
         }
@@ -39,160 +41,179 @@
         </div>
         <h3>{{ listing.pet.name }}</h3>
         <p>{{ speciesLabel(listing.pet.species) }} · {{ listing.pet.breed }}</p>
-        <button type="button" class="adoption-cta-btn" (click)="$event.stopPropagation(); openAdoption(listing)">
-          <mat-icon>favorite</mat-icon> Saber mais
-        </button>
+        <button type="button" class="primary-button" (click)="openAdoption(listing)">Saber mais</button>
       </article>
       }
     </div>
     }
-    } @else {
 
-    @if (myPets.length === 0) {
+    } @else if (sellablePets.length === 0) {
+
     <div class="empty-state">
       <div class="empty-state-icon"><mat-icon>pets</mat-icon></div>
-      <p class="empty-state-title">Você ainda não tem pets cadastrados</p>
-      <p class="empty-state-text">Cadastre um pet em "Meus Pets" para poder colocá-lo para doação.</p>
+      <p class="empty-state-title">Nenhum animal disponível para colocar em adoção</p>
+      <p class="empty-state-text">Cadastre um pet em "Meus Pets" para poder anunciá-lo aqui.</p>
     </div>
+
     } @else {
+
+    <button type="button" class="primary-button action-btn adoption-cta" (click)="openAdoptionForm()">
+      <span class="action-btn-icon"><mat-icon>add</mat-icon></span>
+      Nova adoção
+    </button>
+
+    @if (showAdoptionForm) {
+    <div class="modal-overlay" (click)="closeAdoptionForm()">
+      <div class="login-box form-box modal-form adoption-create-modal" role="dialog" aria-modal="true"
+        (click)="$event.stopPropagation()">
+        <button type="button" class="modal-close" (click)="closeAdoptionForm()" aria-label="Fechar">
+          <mat-icon>close</mat-icon>
+        </button>
+        <p class="form-box-title">Nova adoção</p>
+
+        <form [formGroup]="donationForm" (ngSubmit)="confirmOfferForAdoption()">
+
+          <div class="field-group">
+            <label>Qual pet você quer colocar para doação?</label>
+            <div class="sale-animal-list">
+              @for (pet of sellablePets; track pet.id) {
+              <label class="sale-animal-option" [class.selected]="isPetSelected(pet.id)">
+                <input type="radio" name="petToDonate" [checked]="isPetSelected(pet.id)" (change)="selectPet(pet.id)">
+                <span class="sale-animal-icon">
+                  @if (speciesIcon(pet.species)) {
+                  {{ speciesIcon(pet.species) }}
+                  } @else {
+                  <mat-icon>pets</mat-icon>
+                  }
+                </span>
+                <span class="sale-animal-info">
+                  <strong class="sale-animal-name">{{ pet.name || 'Sem nome' }}</strong>
+                  <small class="sale-animal-meta">{{ speciesLabel(pet.species) }}{{ pet.breed ? ' · ' + pet.breed : ''
+                    }}</small>
+                </span>
+              </label>
+              }
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label>Descrição</label>
+            <textarea placeholder="Conte um pouco sobre o(s) pet(s): personalidade, cuidados, história..."
+              formControlName="description" rows="4"></textarea>
+          </div>
+
+          <div class="field-group">
+            <label>Contato exibido no anúncio</label>
+            <div class="toggle-group contact-toggle" role="radiogroup" aria-label="Contato a exibir">
+              <label class="toggle-option">
+                <input type="radio" formControlName="contactMethod" value="email">
+                <span>
+                  <strong><mat-icon>mail</mat-icon> E-mail</strong>
+                  <small>{{ user?.email }}</small>
+                </span>
+              </label>
+              <label class="toggle-option" [class.is-disabled]="!userHasValidPhone">
+                <input type="radio" formControlName="contactMethod" value="phone" [disabled]="!userHasValidPhone">
+                <span>
+                  <strong><mat-icon>call</mat-icon> Telefone</strong>
+                  <small>{{ userHasValidPhone ? user?.phone : 'Indisponível' }}</small>
+                </span>
+              </label>
+            </div>
+            @if (!userHasValidPhone) {
+            <p class="hint-text">Cadastre um telefone válido no seu perfil para poder usá-lo como contato.</p>
+            }
+          </div>
+
+          <input type="submit" value="Publicar" [disabled]="!validateDonationFields()">
+          <button type="button" class="secondary-button" (click)="closeAdoptionForm()">Cancelar</button>
+
+          @if (donationValidationFailed) {
+          <p class="text-danger">Confira os dados e tente novamente.</p>
+          }
+        </form>
+      </div>
+    </div>
+    }
+
+    }
+
+    @if (!loading && activeTab === 'doar' && myDonations.length > 0) {
+    <h3 class="sale-section-title">Minhas doações publicadas</h3>
     <div class="pet-card-grid">
-      @for (pet of myPets; track pet.id) {
-      <article class="pet-card">
-        @if (hasActiveDonation(pet.id)) {
+      @for (listing of myDonations; track listing.adoption.id) {
+      <article class="pet-card adoption-pet-card">
         <span class="pet-badge">Em adoção</span>
-        }
-        <div class="pet-card-icon">
-          @if (speciesIcon(pet.species)) {
-          {{ speciesIcon(pet.species) }}
+        <div class="pet-card-icon adoption-icon-ring">
+          @if (speciesIcon(listing.pet.species)) {
+          {{ speciesIcon(listing.pet.species) }}
           } @else {
           <mat-icon>pets</mat-icon>
           }
         </div>
-        <h3>{{ pet.name }}</h3>
-        <p>{{ pet.breed }}</p>
-
-        @if (hasActiveDonation(pet.id)) {
-
-        <p class="adoption-description">{{ activeDonationFor(pet.id)?.description }}</p>
-        <div class="date-badge">
-          <mat-icon>{{ contactIcon(activeDonationFor(pet.id)?.contact) }}</mat-icon>
-          <span>{{ activeDonationFor(pet.id)?.contact }}</span>
-        </div>
-
-        @if (pendingRemovalAdoptionId === activeDonationFor(pet.id)?.id) {
-        <p class="confirm-text">Remover {{ pet.name }} da lista de adoção?</p>
-        <div class="confirm-actions">
-          <button class="secondary-button"
-            (click)="confirmRemoveFromList(activeDonationFor(pet.id)!.id!)">Confirmar</button>
-          <button class="secondary-button" (click)="cancelRemoveFromList()">Cancelar</button>
-        </div>
-        } @else {
-        <div class="confirm-actions">
-          <button class="primary-button" (click)="requestMarkAsAdopted(activeDonationFor(pet.id)!.id!)">Marcar como
-            adotado</button>
-          <button class="secondary-button" (click)="requestRemoveFromList(activeDonationFor(pet.id)!.id!)">Remover da
-            lista</button>
-        </div>
-        }
-
-        } @else {
-        <button class="secondary-button" (click)="requestOfferForAdoption(pet)">
-          Colocar para doação
-        </button>
-        }
+        <h3>{{ listing.pet.name }}</h3>
+        <p>{{ speciesLabel(listing.pet.species) }} · {{ listing.pet.breed }}</p>
+        <button type="button" class="primary-button" (click)="openAdoption(listing)">Saber mais</button>
       </article>
       }
     </div>
-    }
     }
   </div>
 </section>
 
 @if (selectedAdoption; as listing) {
-<div class="modal-overlay" (click)="closeAdoption()">
-  <div class="login-box form-box modal-form adoption-detail-modal" role="dialog" aria-modal="true"
-    (click)="$event.stopPropagation()">
-    <button type="button" class="modal-close" (click)="closeAdoption()" aria-label="Fechar">
+<div class="sale-modal-overlay" (click)="closeAdoption()">
+  <div class="sale-modal" role="dialog" aria-modal="true" (click)="$event.stopPropagation()">
+    <button type="button" class="sale-modal-close" (click)="closeAdoption()" aria-label="Fechar">
       <mat-icon>close</mat-icon>
     </button>
 
-    <div class="adoption-detail-header">
-      <div class="pet-card-icon adoption-icon-ring large">
-        @if (speciesIcon(listing.pet.species)) {
-        {{ speciesIcon(listing.pet.species) }}
-        } @else {
-        <mat-icon>pets</mat-icon>
-        }
-      </div>
-      <div>
-        <p class="footer-title">ADOÇÃO</p>
-        <h2>{{ listing.pet.name }}</h2>
-        <p class="adoption-detail-subtitle">{{ speciesLabel(listing.pet.species) }}{{ listing.pet.breed ? ' · ' +
-          listing.pet.breed : '' }}</p>
-      </div>
-    </div>
+    <p class="footer-title">{{ listing.adoption.ownerId === userId ? 'SUA DOAÇÃO' : 'ADOÇÃO' }}</p>
+    <h2>{{ listing.pet.name }}</h2>
+    <p class="adoption-detail-subtitle">{{ speciesLabel(listing.pet.species) }}{{ listing.pet.breed ? ' · ' +
+      listing.pet.breed : '' }}</p>
 
-    <div class="adoption-modal-section">
-      <p class="adoption-modal-label">Sobre {{ listing.pet.name }}</p>
+    <div class="sale-modal-section">
+      <p class="sale-modal-label">Sobre {{ listing.pet.name }}</p>
       <p>{{ listing.adoption.description }}</p>
     </div>
 
-    <div class="adoption-modal-section">
-      <p class="adoption-modal-label">Contato</p>
+    <div class="sale-modal-section">
+      <p class="sale-modal-label">{{ listing.adoption.ownerId === userId ? 'Contato' : 'Contato do doador' }}</p>
       <div class="date-badge">
         <mat-icon>{{ contactIcon(listing.adoption.contact) }}</mat-icon>
         <span>{{ listing.adoption.contact }}</span>
       </div>
     </div>
-  </div>
-</div>
-}
 
-@if (petBeingOffered; as pet) {
-<div class="modal-overlay" (click)="cancelOfferForAdoption()">
-  <div class="login-box form-box modal-form" role="dialog" aria-modal="true" (click)="$event.stopPropagation()">
-    <button type="button" class="modal-close" (click)="cancelOfferForAdoption()" aria-label="Fechar">
-      <mat-icon>close</mat-icon>
-    </button>
-    <p class="form-box-title">Colocar {{ pet.name }} para doação</p>
-
-    <form [formGroup]="donationForm" (ngSubmit)="confirmOfferForAdoption()">
-      <div class="field-group">
-        <label>Descrição</label>
-        <textarea placeholder="Conte um pouco sobre o pet: personalidade, cuidados, história..."
-          formControlName="description" rows="4"></textarea>
-      </div>
-
-      <div class="field-group">
-        <label>Contato exibido no anúncio</label>
-        <div class="toggle-group contact-toggle" role="radiogroup" aria-label="Contato a exibir">
-          <label class="toggle-option">
-            <input type="radio" formControlName="contactMethod" value="email">
-            <span>
-              <strong><mat-icon>mail</mat-icon> E-mail</strong>
-              <small>{{ user?.email }}</small>
-            </span>
-          </label>
-          <label class="toggle-option" [class.is-disabled]="!userHasValidPhone">
-            <input type="radio" formControlName="contactMethod" value="phone" [disabled]="!userHasValidPhone">
-            <span>
-              <strong><mat-icon>call</mat-icon> Telefone</strong>
-              <small>{{ userHasValidPhone ? user?.phone : 'Indisponível' }}</small>
-            </span>
-          </label>
-        </div>
-        @if (!userHasValidPhone) {
-        <p class="hint-text">Cadastre um telefone válido no seu perfil para poder usá-lo como contato.</p>
-        }
-      </div>
-
-      <input type="submit" value="Publicar" [disabled]="!validateDonationFields()">
-      <button type="button" class="secondary-button" (click)="cancelOfferForAdoption()">Cancelar</button>
-
-      @if (donationValidationFailed) {
-      <p class="text-danger">Confira os dados e tente novamente.</p>
-      }
-    </form>
+    @if (listing.adoption.ownerId === userId) {
+    @if (confirmingRemoval) {
+    <p class="confirm-text">Remover {{ listing.pet.name }} da lista de adoção?</p>
+    <div class="confirm-actions">
+      <button type="button" class="danger-button is-solid" (click)="confirmRemoveFromList()">Sim, remover</button>
+      <button type="button" class="secondary-button" (click)="cancelRemoveFromList()">Voltar</button>
+    </div>
+    @if (removeFailed) {
+    <p class="text-danger">Não foi possível remover. Tente novamente.</p>
+    }
+    } @else {
+    <div class="confirm-actions">
+      <button type="button" class="primary-button" (click)="requestMarkAsAdopted()">
+        <mat-icon>check_circle</mat-icon> Marcar como adotado
+      </button>
+      <button type="button" class="danger-button" (click)="requestRemoveFromList()">
+        <mat-icon>close</mat-icon> Remover da lista
+      </button>
+    </div>
+    @if (markAdoptedFailed) {
+    <p class="text-danger">Não foi possível concluir. Tente novamente.</p>
+    }
+    }
+    } @else {
+    <div class="confirm-actions">
+      <button type="button" class="secondary-button" (click)="closeAdoption()">Fechar</button>
+    </div>
+    }
   </div>
 </div>
 }
