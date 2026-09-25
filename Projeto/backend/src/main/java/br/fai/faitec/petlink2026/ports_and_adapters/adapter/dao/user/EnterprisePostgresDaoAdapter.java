@@ -21,7 +21,7 @@ public class EnterprisePostgresDaoAdapter implements EnterpriseDao {
     @Override
     public int add(EnterpriseModel entity) {
         final String userSql = "INSERT INTO user_model(email, full_name, password, phone) " +
-                "VALUES(?,?,?,?);";
+                "VALUES(?,?,crypt(?, gen_salt('bf')),?);";
 
         final String enterpriseSql = "INSERT INTO enterprise_model(cnpj, user_id) VALUES(?,?);";
 

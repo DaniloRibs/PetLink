@@ -21,7 +21,7 @@ public class PersonPostgresDaoAdapter implements PersonDao {
     @Override
     public int add(PersonModel entity) {
         final String userSql = "INSERT INTO user_model(email, full_name, password, phone) " +
-                "VALUES(?,?,?,?);";
+                "VALUES(?,?,crypt(?, gen_salt('bf')),?);";
 
         final String personSql = "INSERT INTO person_model(cpf, user_id) VALUES(?,?);";
 
