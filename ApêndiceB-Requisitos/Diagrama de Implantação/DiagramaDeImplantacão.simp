@@ -1,0 +1,287 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<sim-project version="14.82" multi-file="no" uid="simp2c68c24748a747f884b172e4e0b7dad5" creation-date="09/26/2026 17:46:57">
+  <meta>
+    <name>DiagramaDeImplantacão</name>
+    <authors>Danilo Ribeiro</authors>
+    <description />
+  </meta>
+  <counters models="1">
+    <entity-names>
+      <counter>
+        <item-type stereotype="component" type-id="component" type="Component" />
+        <value>1</value>
+      </counter>
+      <counter>
+        <item-type type-id="artifact" type="Artifact" />
+        <value>6</value>
+      </counter>
+      <counter>
+        <item-type type-id="node" type="Node" />
+        <value>4</value>
+      </counter>
+    </entity-names>
+    <entity-ids>
+      <counter>
+        <item-type type-id="component" type="Component" />
+        <value>2</value>
+      </counter>
+      <counter>
+        <item-type type-id="artifact" type="Artifact" />
+        <value>7</value>
+      </counter>
+      <counter>
+        <item-type type-id="node" type="Node" />
+        <value>5</value>
+      </counter>
+      <counter>
+        <item-type type-id="universal-connector" type="Universal Connector" />
+        <value>4</value>
+      </counter>
+      <counter>
+        <item-type type-id="communication-path" type="Communication Path" />
+        <value>5</value>
+      </counter>
+      <counter>
+        <item-type type-id="property" type="Property" />
+        <value>5</value>
+      </counter>
+    </entity-ids>
+    <diagrams>
+      <counter>
+        <type>SoftwareIdeasModeler.Core.Diagrams.UmlDiagrams.UmlComponentDiagram</type>
+        <value>1</value>
+      </counter>
+      <counter>
+        <type>SoftwareIdeasModeler.Core.Diagrams.UmlDiagrams.UmlDeploymentDiagram</type>
+        <value>1</value>
+      </counter>
+    </diagrams>
+    <fields />
+  </counters>
+  <alias-groups />
+  <management uid="md-a2454a6e6abc439a9b17de75d9cc9ceb" name="" task-id-sequence="0">
+    <working-schedule uid="ws-c574440a7f41439abed3cf03a4b9b116" hours="8" monday="8" tuesday="8" wednesday="8" thursday="8" friday="8" saturday="0" sunday="0" />
+    <persons>
+      <person id="">
+        <first-name>Danilo</first-name>
+        <last-name>Ribeiro</last-name>
+        <role />
+        <e-mail />
+        <phone-number />
+        <description />
+        <color>#00000000</color>
+        <working-schedule uid="ws-f95a735606c94b99a2831a90e679068d" hours="8" monday="8" tuesday="8" wednesday="8" thursday="8" friday="8" saturday="0" sunday="0" />
+      </person>
+      <person id="">
+        <first-name>Danilo</first-name>
+        <last-name>Ribeiro</last-name>
+        <role />
+        <e-mail />
+        <phone-number />
+        <description />
+        <color>#00000000</color>
+      </person>
+    </persons>
+    <teams />
+    <sprints />
+    <projects />
+    <modules />
+    <tasks />
+    <to-dos />
+  </management>
+  <glossary id="glsr-dfc2751070df475db6910238b99e0c5e" name="" order-index="-1" />
+  <types default="UML">
+    <type-sets>
+      <type-set file="UmlTypes.xml" />
+    </type-sets>
+    <custom-types>
+      <parameters />
+      <types>
+        <type id="Class:df7406d82a6b48878f185a943087688e" name="Navegador" class-ref="df7406d82a6b48878f185a943087688e" />
+        <type id="Class:eb853a754b8f43d79105f67369aa23b9" name="Servidor de Aplicação" class-ref="eb853a754b8f43d79105f67369aa23b9" />
+        <type id="Class:3abf33d7c81f46819cc28b13ea01f45f" name="Servidor de BD" class-ref="3abf33d7c81f46819cc28b13ea01f45f" />
+      </types>
+    </custom-types>
+  </types>
+  <items>
+    <item id="1f47536017cc499aa3e8c6bfbb328009" cid="PROP001" type="property" owner="96551a085bcc4aef8325d649984f550d" creator="" creation-date="09/26/2026 17:56:20" visibility="private">
+      <structural-feature type="Navegador" type-id="Class:df7406d82a6b48878f185a943087688e" />
+    </item>
+    <item id="e1c0518dffdf4676b46de8375aff9440" cid="PROP004" type="property" owner="fe39b743f0f44f87a8d70b623e95330b" creator="" creation-date="09/26/2026 17:57:10" visibility="private">
+      <structural-feature type="Servidor de BD" type-id="Class:3abf33d7c81f46819cc28b13ea01f45f" />
+    </item>
+    <item id="a82670a2668f4d14abe7c3f88641c168" cid="PROP003" type="property" owner="fe39b743f0f44f87a8d70b623e95330b" creator="" creation-date="09/26/2026 17:57:10" visibility="private">
+      <structural-feature type="Servidor de Aplicação" type-id="Class:eb853a754b8f43d79105f67369aa23b9" />
+    </item>
+    <item id="f89ee4ad24e843fe81c20ddf901e887e" cid="PROP002" type="property" owner="96551a085bcc4aef8325d649984f550d" creator="" creation-date="09/26/2026 17:56:20" visibility="private">
+      <structural-feature type="Servidor de Aplicação" type-id="Class:eb853a754b8f43d79105f67369aa23b9" />
+    </item>
+  </items>
+  <models>
+    <model id="pa0d252b05ad24bcb81cdf3683d5dccc8_163340888" name="Model1" namespace="" order-index="1">
+      <meta>
+        <authors>
+          <author> </author>
+        </authors>
+        <description />
+        <creation-date>09/26/2026 17:47:02</creation-date>
+        <change-date>01/01/0001 00:00:00</change-date>
+        <revision-count>0</revision-count>
+        <version />
+      </meta>
+      <abstract-items />
+      <sub-models />
+      <diagram type="uml-deployment" id="p7e153c25bf394dd7bbc75fb79fcd59d2_573449507" name="DeploymentDiagram1" order-index="2" overview-order-index="0" uid="" name-style="" auto-routed-paths="false" default-line-style="default">
+        <style>
+          <background-color index="1" color="#FFFFFFFF" />
+          <background-color index="2" color="#FFFFFFFF" />
+          <background-type type="solid" />
+        </style>
+        <meta>
+          <authors>
+            <author> </author>
+          </authors>
+          <description />
+          <creation-date>09/26/2026 17:48:24</creation-date>
+          <change-date>09/26/2026 17:56:24</change-date>
+          <revision-count>0</revision-count>
+          <version />
+        </meta>
+        <abstract-items>
+          <item id="f2df229bab9d4ec2b47b19e11b62a00d" cid="AF003" type="artifact" name="PetLink UI" owner="df7406d82a6b48878f185a943087688e" creator="" creation-date="09/26/2026 17:50:20" visibility="undefined">
+            <stereotypes>
+              <stereotype name="artifact" />
+            </stereotypes>
+            <stereotype-instances>
+              <stereotype id="f2df229bab9d4ec2b47b19e11b62a00d_artifact_c" type="artifact" creation-date="09/26/2026 17:50:20" ref="" />
+            </stereotype-instances>
+            <artifact filename="" />
+          </item>
+          <item id="5a3943713afd49a7b95c1f43911764f5" cid="AF006" type="artifact" name="Banco de dados" owner="3abf33d7c81f46819cc28b13ea01f45f" creator="" creation-date="09/26/2026 17:54:41" visibility="undefined">
+            <stereotypes>
+              <stereotype name="artifact" />
+            </stereotypes>
+            <stereotype-instances>
+              <stereotype id="5a3943713afd49a7b95c1f43911764f5_artifact_c" type="artifact" creation-date="09/26/2026 17:54:41" ref="" />
+            </stereotype-instances>
+            <artifact filename="" />
+          </item>
+          <item id="df7406d82a6b48878f185a943087688e" cid="NOD002" type="node" name="Navegador" creator="" creation-date="09/26/2026 17:49:11" visibility="undefined">
+            <stereotypes>
+              <stereotype name="device" />
+            </stereotypes>
+            <stereotype-instances>
+              <stereotype id="d99a6b4c28d84fd7b3dd4ab5425ff1b0" type="device" creation-date="09/26/2026 17:53:11" ref="" />
+            </stereotype-instances>
+            <owned-items />
+          </item>
+          <item id="3abf33d7c81f46819cc28b13ea01f45f" cid="NOD001" type="node" name="Servidor de BD" creator="" creation-date="09/26/2026 17:48:36" visibility="undefined">
+            <stereotypes>
+              <stereotype name="device" />
+            </stereotypes>
+            <stereotype-instances>
+              <stereotype id="3abf33d7c81f46819cc28b13ea01f45f_device_c" type="device" creation-date="09/26/2026 17:49:52" ref="" />
+            </stereotype-instances>
+            <owned-items />
+          </item>
+          <item id="eb853a754b8f43d79105f67369aa23b9" cid="NOD003" type="node" name="Servidor de Aplicação" creator="" creation-date="09/26/2026 17:49:13" visibility="undefined">
+            <stereotypes>
+              <stereotype name="device" />
+            </stereotypes>
+            <stereotype-instances>
+              <stereotype id="86b6231b3a2047a895ec330d7602789d" type="device" creation-date="09/26/2026 17:53:52" ref="" />
+            </stereotype-instances>
+            <owned-items />
+          </item>
+          <item id="fe39b743f0f44f87a8d70b623e95330b" cid="ELEM004" type="communication-path" name="JDBC" creator="" creation-date="09/26/2026 17:57:10" from="eb853a754b8f43d79105f67369aa23b9" to="3abf33d7c81f46819cc28b13ea01f45f" visibility="package">
+            <owned-items />
+            <relation from="eb853a754b8f43d79105f67369aa23b9" to="3abf33d7c81f46819cc28b13ea01f45f" derived="false">
+              <start-role id="umlar-8e74cc89-ab77-4f3f-a46e-c4307feafe2d" name="" navigability="" association-type="association" visibility="private" />
+              <end-role id="umlar-e8b5e641-d19a-4ed5-88b9-591ba85834f3" name="" navigability="" association-type="association" visibility="private" />
+            </relation>
+          </item>
+          <item id="eb98380b1dd540238c9aa5df2e6406aa" cid="AF004" type="artifact" name="API PetLink" owner="eb853a754b8f43d79105f67369aa23b9" creator="" creation-date="09/26/2026 17:54:04" visibility="undefined">
+            <stereotypes>
+              <stereotype name="artifact" />
+            </stereotypes>
+            <stereotype-instances>
+              <stereotype id="eb98380b1dd540238c9aa5df2e6406aa_artifact_c" type="artifact" creation-date="09/26/2026 17:54:04" ref="" />
+            </stereotype-instances>
+            <artifact filename="" />
+          </item>
+          <item id="96551a085bcc4aef8325d649984f550d" cid="ELEM001" type="communication-path" name="HTTPS" creator="" creation-date="09/26/2026 17:56:20" from="df7406d82a6b48878f185a943087688e" to="eb853a754b8f43d79105f67369aa23b9" visibility="package">
+            <owned-items />
+            <relation from="df7406d82a6b48878f185a943087688e" to="eb853a754b8f43d79105f67369aa23b9" derived="false">
+              <start-role id="umlar-10168dbe-ceb8-4b07-abe2-2da922c63818" name="" navigability="" association-type="association" visibility="private" />
+              <end-role id="umlar-39afb93d-c51a-4e6d-8a9f-a30b9336f824" name="" navigability="" association-type="association" visibility="private" />
+            </relation>
+          </item>
+          <item id="ff654250e27c4d0cb1bdeb6b536af777" cid="AF002" type="artifact" name="Artifact2" owner="3abf33d7c81f46819cc28b13ea01f45f" creator="" creation-date="09/26/2026 17:50:07" visibility="undefined">
+            <stereotypes>
+              <stereotype name="artifact" />
+            </stereotypes>
+            <stereotype-instances>
+              <stereotype id="ff654250e27c4d0cb1bdeb6b536af777_artifact_c" type="artifact" creation-date="09/26/2026 17:50:07" ref="" />
+            </stereotype-instances>
+            <artifact filename="" />
+          </item>
+          <item id="6d62b685577b4dc799a40fee6daddd1e" cid="AF005" type="artifact" name="PetLink Web" owner="eb853a754b8f43d79105f67369aa23b9" creator="" creation-date="09/26/2026 17:54:09" visibility="undefined">
+            <stereotypes>
+              <stereotype name="artifact" />
+            </stereotypes>
+            <stereotype-instances>
+              <stereotype id="6d62b685577b4dc799a40fee6daddd1e_artifact_c" type="artifact" creation-date="09/26/2026 17:54:09" ref="" />
+            </stereotype-instances>
+            <artifact filename="" />
+          </item>
+        </abstract-items>
+        <layer id="c84c053fbd8b4223bf3799ab77c1c242" name="Default" visible="true" enabled="true" locked="false">
+          <item id="3abf33d7c81f46819cc28b13ea01f45f" iid="2813303a910e476e8c1e8a997e08cfd6" creation-date="09/26/2026 17:48:36" order-index="0" type="entity">
+            <layout ax="1244" ay="570" awidth="403" aheight="370" x="1244" y="570" width="403" height="370" expanded="1244,570,403,370" collapsed="0,0,0,0" />
+          </item>
+          <item id="df7406d82a6b48878f185a943087688e" iid="58f84f9e005941e9a61e2339d4562dbc" creation-date="09/26/2026 17:49:11" order-index="1" type="entity">
+            <layout ax="489" ay="64" awidth="320" aheight="337" x="489" y="64" width="320" height="337" expanded="489,64,320,337" collapsed="0,0,0,0" />
+          </item>
+          <item id="5a3943713afd49a7b95c1f43911764f5" iid="8eaa2d6d788b4725928cb10b0b5c1cff" container="3abf33d7c81f46819cc28b13ea01f45f" container-iid="2813303a910e476e8c1e8a997e08cfd6" creation-date="09/26/2026 17:54:41" order-index="6" type="entity">
+            <layout ax="1343" ay="691" awidth="140" aheight="160" x="960" y="703" width="140" height="160" expanded="1343,653,140,160" collapsed="0,0,0,0" />
+            <artifact />
+          </item>
+          <item id="f2df229bab9d4ec2b47b19e11b62a00d" iid="29331b7dae5f4424a8f00d238825a626" container="df7406d82a6b48878f185a943087688e" container-iid="58f84f9e005941e9a61e2339d4562dbc" creation-date="09/26/2026 17:50:20" order-index="3" type="entity">
+            <layout ax="502" ay="152.5" awidth="140" aheight="160" x="599" y="152.5" width="140" height="160" expanded="599,152.5,140,160" collapsed="0,0,0,0" />
+            <artifact />
+          </item>
+          <item id="eb853a754b8f43d79105f67369aa23b9" iid="a9cf489e45ce405cb034a7b7b15530ed" creation-date="09/26/2026 17:49:13" order-index="2" type="entity">
+            <layout ax="1244" ay="64" awidth="403" aheight="337" x="1244" y="64" width="403" height="337" expanded="1244,64,403,337" collapsed="0,0,0,0" />
+          </item>
+          <item id="eb98380b1dd540238c9aa5df2e6406aa" iid="109578ad04034a1ab84b0a683bd5af3d" container="eb853a754b8f43d79105f67369aa23b9" container-iid="a9cf489e45ce405cb034a7b7b15530ed" creation-date="09/26/2026 17:54:04" order-index="4" type="entity">
+            <layout ax="1267" ay="183.91309" awidth="140" aheight="160" x="1100" y="183.91309" width="140" height="160" expanded="1100,183.91309,140,160" collapsed="0,0,0,0" />
+            <artifact />
+          </item>
+          <item id="6d62b685577b4dc799a40fee6daddd1e" iid="81221adb554a4718b1f5a86f44ce89cb" container="eb853a754b8f43d79105f67369aa23b9" container-iid="a9cf489e45ce405cb034a7b7b15530ed" creation-date="09/26/2026 17:54:09" order-index="5" type="entity">
+            <layout ax="1473" ay="183.91309" awidth="140" aheight="160" x="1306" y="183.91309" width="140" height="160" expanded="1306,183.91309,140,160" collapsed="0,0,0,0" />
+            <artifact />
+          </item>
+          <item id="96551a085bcc4aef8325d649984f550d" iid="5aebc4d24a944a56a9588472efe188cc" creation-date="09/26/2026 17:56:20" order-index="8" type="relation">
+            <layout start-role-position="25,15" end-role-position="25,-15" start-multiplicity-position="25,-15" end-multiplicity-position="25,15" line-style="oblique" start-auto-side="false" lock-start-point="true" lock-end-point="true" lock-to-fields="false" auto-path="" x1="809" y1="232" x2="1244" y2="232" start-border-pos="0.37462908029556274" end-border-pos="0.8753709197044373" start-local-pos="168" end-local-pos="168" name-position="0,20">
+              <points>
+                <point x="809" y="232" />
+                <point x="967" y="232.5" />
+                <point x="1244" y="232" />
+              </points>
+            </layout>
+            <relation from="df7406d82a6b48878f185a943087688e" from-iid="58f84f9e005941e9a61e2339d4562dbc" to="eb853a754b8f43d79105f67369aa23b9" to-iid="a9cf489e45ce405cb034a7b7b15530ed" />
+          </item>
+          <item id="fe39b743f0f44f87a8d70b623e95330b" iid="a8b58ba84aa34d998673a6baa09b8cfa" creation-date="09/26/2026 17:57:10" order-index="9" type="relation">
+            <layout start-role-position="25,15" end-role-position="25,-15" start-multiplicity-position="25,-15" end-multiplicity-position="25,15" line-style="oblique" lock-start-point="true" lock-to-fields="false" auto-path="" x1="1446" y1="401" x2="1446" y2="570" start-border-pos="0.6246898263027295" end-border-pos="0.12531017369727046" start-local-pos="202" name-position="40,-2">
+              <points>
+                <point x="1446" y="401" />
+                <point x="1446" y="570" />
+              </points>
+            </layout>
+            <relation from="eb853a754b8f43d79105f67369aa23b9" from-iid="a9cf489e45ce405cb034a7b7b15530ed" to="3abf33d7c81f46819cc28b13ea01f45f" to-iid="2813303a910e476e8c1e8a997e08cfd6" />
+          </item>
+        </layer>
+      </diagram>
+    </model>
+  </models>
+</sim-project>
