@@ -119,14 +119,14 @@ export class AnnouncementList implements OnInit, AfterViewInit, OnDestroy {
     this.cdr.detectChanges();
 
     try {
-      const page = this.announcements.length / this.PAGE_SIZE; // 0/6->0, 6/6->1, 12/6->2 ...
+      const page = this.announcements.length / this.PAGE_SIZE; 
       const nextPage = await this.announcementReadService.findPage(page);
 
       this.announcements = [...this.announcements, ...nextPage];
-      this.hasMore = nextPage.length === this.PAGE_SIZE; // página incompleta = acabou
+      this.hasMore = nextPage.length === this.PAGE_SIZE;
     } catch (error) {
       console.error('Erro ao carregar mais anúncios', error);
-      this.hasMore = false; // evita loop de erro tentando de novo sozinho
+      this.hasMore = false;
     } finally {
       this.loadingMore = false;
       this.cdr.detectChanges();
