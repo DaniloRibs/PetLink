@@ -3,7 +3,10 @@ package br.fai.faitec.petlink2026.controller;
 import br.fai.faitec.petlink2026.domain.sale.FarmAnimalSaleModel;
 import br.fai.faitec.petlink2026.dto.sale.CalculateFarmAnimalSalePriceDto;
 import br.fai.faitec.petlink2026.dto.sale.CreateFarmAnimalSaleDto;
+import br.fai.faitec.petlink2026.dto.sale.RequestSaleClosureDto;
+import br.fai.faitec.petlink2026.dto.sale.SaleClosureDecisionDto;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.service.sale.FarmAnimalSaleService;
+import br.fai.faitec.petlink2026.ports_and_adapters.port.service.sale.SaleTransferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +21,9 @@ public class FarmAnimalSaleRestController {
 
     @Autowired
     private FarmAnimalSaleService farmAnimalSaleService;
+
+    @Autowired
+    private SaleTransferService saleTransferService;
 
     //     BUSCAR TODAS AS VENDAS
     @GetMapping
@@ -76,6 +82,30 @@ public class FarmAnimalSaleRestController {
             @RequestBody final FarmAnimalSaleModel farmAnimalSaleModel) {
 
         boolean response = farmAnimalSaleService.update(id, farmAnimalSaleModel);
+
+        return response ? ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
+    }
+
+    // VENDEDOR INDICA O COMPRADOR PARA FECHAR A VENDA
+    @PatchMapping("/{id}/close")
+    public ResponseEntity<Void> requestSaleClosure(@PathVariable final int id, @RequestBody final RequestSaleClosureDto requestSaleClosureDto) {
+        boolean response = saleTransferService.requestSaleClosure(id, requestSaleClosureDto.getBuyerEmail());
+
+        return response ? ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
+    }
+
+    // O COMPRADOR ACEITA A VENDA: transfere os animais para o comprador
+    @PatchMapping("/{id}/close/confirm")
+    public ResponseEntity<Void> confirmSaleClosure(@PathVariable final int id, @RequestBody final SaleClosureDecisionDto saleClosureDecisionDto) {
+        boolean response = saleTransferService.confirmSaleClosure(id, saleClosureDecisionDto.getBuyerId());
+
+        return response ? ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
+    }
+
+    // O COMPRADOR RECUSA A VENDA
+    @PatchMapping("/{id}/close/reject")
+    public ResponseEntity<Void> rejectSaleClosure(@PathVariable final int id, @RequestBody final SaleClosureDecisionDto saleClosureDecisionDto) {
+        boolean response = saleTransferService.rejectSaleClosure(id, saleClosureDecisionDto.getBuyerId());
 
         return response ? ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
     }

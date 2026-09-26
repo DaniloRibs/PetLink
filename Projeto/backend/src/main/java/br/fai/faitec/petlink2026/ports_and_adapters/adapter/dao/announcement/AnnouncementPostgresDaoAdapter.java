@@ -14,6 +14,7 @@ import java.util.List;
 
 public class AnnouncementPostgresDaoAdapter implements AnnouncementDao {
 
+
     public static final int ANNOUNCEMENT_PAGE_SIZE = 6;
 
     private final Connection connection;

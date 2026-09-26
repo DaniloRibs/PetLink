@@ -17,6 +17,8 @@ public class FarmAnimalSaleModel {
     private double price;
     private int userId;
     private String contact;
+    private int buyerId;
+    private SaleStatus saleStatus = SaleStatus.NONE;
 
     public static double calculateSuggestedPriceByArroba(List<FarmAnimalModel> farmAnimals, double pricePerArroba) {
 
@@ -100,6 +102,22 @@ public class FarmAnimalSaleModel {
 
     public void setContact(String contact) {
         this.contact = contact;
+    }
+
+    public int getBuyerId() {
+        return buyerId;
+    }
+
+    public void setBuyerId(int buyerId) {
+        this.buyerId = buyerId;
+    }
+
+    public SaleStatus getSaleStatus() {
+        return saleStatus;
+    }
+
+    public void setSaleStatus(SaleStatus saleStatus) {
+        this.saleStatus = saleStatus;
     }
 
     public boolean isGroupSale() {

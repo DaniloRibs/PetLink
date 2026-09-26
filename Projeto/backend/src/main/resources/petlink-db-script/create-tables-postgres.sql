@@ -120,7 +120,10 @@ CREATE TABLE farm_animal_sale
     price NUMERIC NOT NULL,
     user_id INT NOT NULL,
     contact VARCHAR(100) NOT NULL,
-    CONSTRAINT fk_farm_animal_sale_user FOREIGN KEY (user_id) REFERENCES user_model(id) ON DELETE CASCADE
+    buyer_id INT,
+    sale_status VARCHAR(15) NOT NULL DEFAULT 'NONE',
+    CONSTRAINT fk_farm_animal_sale_user FOREIGN KEY (user_id) REFERENCES user_model(id) ON DELETE CASCADE,
+    CONSTRAINT fk_farm_animal_sale_buyer FOREIGN KEY (buyer_id) REFERENCES user_model(id) ON DELETE SET NULL
 );
 
 CREATE TABLE farm_animal_sale_item

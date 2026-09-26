@@ -2,6 +2,7 @@ package br.fai.faitec.petlink2026.ports_and_adapters.adapter.dao.sale;
 
 import br.fai.faitec.petlink2026.domain.sale.FarmAnimalSaleModel;
 import br.fai.faitec.petlink2026.domain.sale.PriceType;
+import br.fai.faitec.petlink2026.domain.sale.SaleStatus;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.sale.FarmAnimalSaleDao;
 
 import java.sql.Connection;
@@ -23,8 +24,8 @@ public class FarmAnimalSalePostgresDaoAdapter implements FarmAnimalSaleDao {
 
     @Override
     public int add(FarmAnimalSaleModel entity) {
-        final String saleSql = "INSERT INTO farm_animal_sale(description, price_type, price_per_arroba, price, user_id, contact) " +
-                "VALUES(?,?,?,?,?,?);";
+        final String saleSql = "INSERT INTO farm_animal_sale(description, price_type, price_per_arroba, price, user_id, contact, buyer_id, sale_status) " +
+                "VALUES(?,?,?,?,?,?,?,?);";
 
         final String itemSql = "INSERT INTO farm_animal_sale_item(farm_animal_sale_id, farm_animal_id) " +
                 "SELECT ?, id FROM farm_animal_model WHERE animal_id = ?;";
@@ -45,6 +46,15 @@ public class FarmAnimalSalePostgresDaoAdapter implements FarmAnimalSaleDao {
             saleStatement.setDouble(4, entity.getPrice());
             saleStatement.setInt(5, entity.getUserId());
             saleStatement.setString(6, entity.getContact());
+
+            if (entity.getBuyerId() > 0) {
+                saleStatement.setInt(7, entity.getBuyerId());
+            } else {
+                saleStatement.setNull(7, Types.INTEGER);
+            }
+
+            saleStatement.setString(8, entity.getSaleStatus() != null ? entity.getSaleStatus().name() : "NONE");
+
             saleStatement.execute();
 
             ResultSet saleKeys = saleStatement.getGeneratedKeys();
@@ -176,7 +186,9 @@ public class FarmAnimalSalePostgresDaoAdapter implements FarmAnimalSaleDao {
                 "price_per_arroba = ?, " +
                 "price = ?, " +
                 "user_id = ?, " +
-                "contact = ? " +
+                "contact = ?, " +
+                "buyer_id = ?, " +
+                "sale_status = ? " +
                 "WHERE id = ?;";
 
         final String deleteItemsSql = "DELETE FROM farm_animal_sale_item WHERE farm_animal_sale_id = ?;";
@@ -199,7 +211,15 @@ public class FarmAnimalSalePostgresDaoAdapter implements FarmAnimalSaleDao {
             saleStatement.setDouble(4, entity.getPrice());
             saleStatement.setInt(5, entity.getUserId());
             saleStatement.setString(6, entity.getContact());
-            saleStatement.setInt(7, id);
+
+            if (entity.getBuyerId() > 0) {
+                saleStatement.setInt(7, entity.getBuyerId());
+            } else {
+                saleStatement.setNull(7, Types.INTEGER);
+            }
+
+            saleStatement.setString(8, entity.getSaleStatus() != null ? entity.getSaleStatus().name() : "NONE");
+            saleStatement.setInt(9, id);
             saleStatement.executeUpdate();
             saleStatement.close();
 
@@ -254,6 +274,11 @@ public class FarmAnimalSalePostgresDaoAdapter implements FarmAnimalSaleDao {
         saleModel.setPrice(resultSet.getDouble("price"));
         saleModel.setUserId(resultSet.getInt("user_id"));
         saleModel.setContact(resultSet.getString("contact"));
+
+        final int buyerId = resultSet.getInt("buyer_id");
+        saleModel.setBuyerId(resultSet.wasNull() ? 0 : buyerId);
+
+        saleModel.setSaleStatus(SaleStatus.valueOf(resultSet.getString("sale_status")));
 
         return saleModel;
     }
