@@ -174,6 +174,23 @@ public class AnnouncementServiceAdapter implements AnnouncementService {
     }
 
     @Override
+    public List<ReadAnnouncementDto> getAnnouncementsPage(int page) {
+        if (page < 0) {
+            page = 0;
+        }
+
+        List<ReadAnnouncementDto> readAnnouncementDtos = new ArrayList<>();
+
+        for (AnnouncementModel announcementModel : announcementDao.readPage(page)) {
+            ReadAnnouncementDto readAnnouncementDto = getAnnouncementById(announcementModel.getId());
+            if (readAnnouncementDto != null) {
+                readAnnouncementDtos.add(readAnnouncementDto);
+            }
+        }
+        return readAnnouncementDtos;
+    }
+
+    @Override
     public boolean update(int id, AnnouncementModel announcementModel) {
         AnnouncementModel dataToUpdate = findById(id);
 

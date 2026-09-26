@@ -14,6 +14,8 @@ import java.util.List;
 
 public class AnnouncementPostgresDaoAdapter implements AnnouncementDao {
 
+    public static final int ANNOUNCEMENT_PAGE_SIZE = 6;
+
     private final Connection connection;
 
     public AnnouncementPostgresDaoAdapter(Connection connection) {
@@ -126,6 +128,51 @@ public class AnnouncementPostgresDaoAdapter implements AnnouncementDao {
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                final int entityId = resultSet.getInt("id");
+                final String title = resultSet.getString("title");
+                final String description = resultSet.getString("description");
+                final Date eventDate = resultSet.getDate("event_date");
+                final String location = resultSet.getString("location");
+                final int creatorId = resultSet.getInt("user_id");
+
+                final String auxType = resultSet.getString("announcement_type");
+                final AnnouncementType announcementType = AnnouncementType.valueOf(auxType);
+
+                final AnnouncementModel announcementModel = new AnnouncementModel();
+                announcementModel.setId(entityId);
+                announcementModel.setTitle(title);
+                announcementModel.setDescription(description);
+                announcementModel.setEventDate(eventDate);
+                announcementModel.setLocation(location);
+                announcementModel.setAnnouncementType(announcementType);
+                announcementModel.setIdCreator(creatorId);
+                announcementModel.setContact(resultSet.getString("contact"));
+
+                entities.add(announcementModel);
+            }
+
+            resultSet.close();
+            preparedStatement.close();
+
+            return entities;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public List<AnnouncementModel> readPage(int page) {
+        final List<AnnouncementModel> entities = new ArrayList<>();
+
+        final String sql = "SELECT * FROM announcement_model ORDER BY id LIMIT ? OFFSET ?;";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, ANNOUNCEMENT_PAGE_SIZE);
+            preparedStatement.setInt(2, page * ANNOUNCEMENT_PAGE_SIZE);
+
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 final int entityId = resultSet.getInt("id");

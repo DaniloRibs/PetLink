@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
@@ -21,7 +21,8 @@ import { FormatToolbarComponent } from '../../../../shared/format-toolbar/format
   templateUrl: './announcement-list.html',
   styleUrl: './announcement-list.css',
 })
-export class AnnouncementList implements OnInit {
+
+export class AnnouncementList implements OnInit, AfterViewInit, OnDestroy {
 
   AnnouncementType = AnnouncementType;
   user: User | null = null;
@@ -29,6 +30,25 @@ export class AnnouncementList implements OnInit {
   loading: boolean = true;
   isCompany: boolean = false;
   userEmail: string = '';
+
+  private readonly PAGE_SIZE = 6;
+  loadingMore: boolean = false;
+  hasMore: boolean = true;
+  private intersectionObserver?: IntersectionObserver;
+
+  @ViewChild('scrollSentinel') set scrollSentinelRef(ref: ElementRef<HTMLElement> | undefined) {
+    this.intersectionObserver?.disconnect();
+
+    if (ref) {
+      this.intersectionObserver = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          this.loadMore();
+        }
+      }, { threshold: 0.1 });
+
+      this.intersectionObserver.observe(ref.nativeElement);
+    }
+  }
 
   showForm: boolean = false;
   form: FormGroup;
@@ -75,13 +95,48 @@ export class AnnouncementList implements OnInit {
         this.form.patchValue({ type: AnnouncementType.LOST });
       }
 
-      this.announcements = await this.announcementReadService.findAll();
+      await this.loadMore();
     } catch (error) {
       console.error('Erro ao carregar campanhas de vacinação', error);
     } finally {
       this.loading = false;
       this.cdr.detectChanges();
     }
+  }
+
+  ngAfterViewInit(): void {}
+
+  ngOnDestroy(): void {
+    this.intersectionObserver?.disconnect();
+  }
+
+  async loadMore(): Promise<void> {
+    if (this.loadingMore || !this.hasMore) {
+      return;
+    }
+
+    this.loadingMore = true;
+    this.cdr.detectChanges();
+
+    try {
+      const page = this.announcements.length / this.PAGE_SIZE; // 0/6->0, 6/6->1, 12/6->2 ...
+      const nextPage = await this.announcementReadService.findPage(page);
+
+      this.announcements = [...this.announcements, ...nextPage];
+      this.hasMore = nextPage.length === this.PAGE_SIZE; // página incompleta = acabou
+    } catch (error) {
+      console.error('Erro ao carregar mais anúncios', error);
+      this.hasMore = false; // evita loop de erro tentando de novo sozinho
+    } finally {
+      this.loadingMore = false;
+      this.cdr.detectChanges();
+    }
+  }
+
+  private async reloadFromStart(): Promise<void> {
+    this.announcements = [];
+    this.hasMore = true;
+    await this.loadMore();
   }
 
   toggleForm(): void {
@@ -119,7 +174,7 @@ export class AnnouncementList implements OnInit {
 
     this.announcementCreateService.create(createAnnouncementDto).subscribe({
       next: async () => {
-        this.announcements = await this.announcementReadService.findAll();
+        await this.reloadFromStart();
         this.form.reset({ type: this.isCompany ? '' : AnnouncementType.LOST, contactMethod: 'email' });
         this.showForm = false;
         this.toastrService.success('Anúncio publicado com sucesso!');
@@ -138,8 +193,8 @@ export class AnnouncementList implements OnInit {
       return;
     }
     this.announcementDeleteService.delete(announcement.id).subscribe({
-      next: () => {
-        this.announcements = this.announcements.filter(c => c.id !== announcement.id);
+      next: async () => {
+        await this.reloadFromStart();
         this.toastrService.success('Campanha removida.');
         this.cdr.detectChanges();
       },

@@ -1,3 +1,4 @@
+
 <section class="menu-footer-card content-area">
   <div class="content-form-card">
     <div class="section-header">
@@ -116,6 +117,14 @@
       </announcement-card>
       }
     </div>
+
+    @if (hasMore) {
+    <div #scrollSentinel class="scroll-sentinel">
+      @if (loadingMore) {
+      <p class="load-more-text">Carregando mais...</p>
+      }
+    </div>
+    }
     }
   </div>
 </section>

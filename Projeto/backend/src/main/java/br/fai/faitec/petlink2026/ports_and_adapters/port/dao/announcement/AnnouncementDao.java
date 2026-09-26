@@ -9,7 +9,10 @@ import br.fai.faitec.petlink2026.ports_and_adapters.port.service.crud.CreateServ
 import br.fai.faitec.petlink2026.ports_and_adapters.port.service.crud.DeleteService;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.service.crud.FindService;
 
+import java.util.List;
+
 public interface AnnouncementDao extends CrudDao<AnnouncementModel> {
 
+    List<AnnouncementModel> readPage(int page);
 
 }

@@ -15,4 +15,6 @@ public interface ReadAnnouncementService {
 
     List<ReadAnnouncementDto> getAnnouncementsByUserId(int userId);
 
+    List<ReadAnnouncementDto> getAnnouncementsPage(int page);
+
 }

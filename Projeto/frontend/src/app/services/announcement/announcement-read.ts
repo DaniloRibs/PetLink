@@ -15,6 +15,10 @@ export class AnnouncementReadService {
     return firstValueFrom(this.http.get<Announcement[]>(`${environment.api_endpoint}/announcement`));
   }
 
+  findPage(page: number): Promise<Announcement[]> {
+  return firstValueFrom(this.http.get<Announcement[]>(`${environment.api_endpoint}/announcement/page/${page}`));
+}
+
   findByUserId(idCreator: number): Promise<Announcement[]> {
     return firstValueFrom(
       this.http.get<Announcement[]>(`${environment.api_endpoint}/announcement/user/${idCreator}`)

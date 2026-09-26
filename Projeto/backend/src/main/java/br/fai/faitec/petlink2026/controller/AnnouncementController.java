@@ -33,6 +33,13 @@ public class AnnouncementController {
         return announcement == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(announcement);
     }
 
+    // BUSCAR ANUNCIOS PAGINADOS (de 6 em 6 - ver ANNOUNCEMENT_PAGE_SIZE em AnnouncementPostgresDaoAdapter)
+    @GetMapping("/page/{page}")
+    public ResponseEntity<List<ReadAnnouncementDto>> getAnnouncementsByPage(@PathVariable final int page) {
+        List<ReadAnnouncementDto> announcements = announcementService.getAnnouncementsPage(page);
+        return ResponseEntity.ok(announcements);
+    }
+
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<ReadAnnouncementDto>> getAnnouncementsByUserId(@PathVariable final int userId) {
         List<ReadAnnouncementDto> announcements = announcementService.getAnnouncementsByUserId(userId);
