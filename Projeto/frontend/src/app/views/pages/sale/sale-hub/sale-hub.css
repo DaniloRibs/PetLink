@@ -276,6 +276,30 @@
     box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
 }
 
+.sale-modal .field-group input {
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(var(--primary-rgb), 0.2);
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 40px;
+    background-color: rgba(var(--primary-rgb), 0.05);
+    font: inherit;
+    color: #333;
+    transition: 0.2s;
+}
+
+.sale-modal .field-group input:focus {
+    border-color: var(--primary);
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.12);
+}
+
+.sale-modal .field-group input::placeholder {
+    color: rgba(0, 0, 0, 0.35);
+}
+
 .sale-modal-close {
     position: absolute;
     top: 14px;

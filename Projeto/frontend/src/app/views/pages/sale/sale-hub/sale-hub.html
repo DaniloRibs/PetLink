@@ -3,6 +3,30 @@
         <p class="footer-title">VENDAS</p>
         <h2>Compre ou venda animais de fazenda</h2>
 
+        @if (!loading && pendingClosures.length > 0) {
+        <div class="empty-state pending-transfer-banner">
+            <div class="empty-state-icon"><mat-icon>notifications_active</mat-icon></div>
+            <p class="empty-state-title">Você tem venda(s) esperando confirmação</p>
+            @for (listing of pendingClosures; track listing.sale.id) {
+            <div class="pending-transfer-item">
+                <span><strong>{{ saleTitle(listing) }}</strong> — R$ {{ listing.sale.price.toFixed(2) }} · vendido por
+                    {{ listing.sale.contact }}</span>
+                <div class="confirm-actions">
+                    <button type="button" class="primary-button" (click)="acceptClosure(listing)">
+                        <mat-icon>check_circle</mat-icon> Aceitar
+                    </button>
+                    <button type="button" class="danger-button" (click)="rejectClosure(listing)">
+                        <mat-icon>close</mat-icon> Recusar
+                    </button>
+                </div>
+            </div>
+            }
+            @if (closureDecisionFailed) {
+            <p class="text-danger">Não foi possível concluir. Tente novamente.</p>
+            }
+        </div>
+        }
+
         <div class="sale-tabs">
             <button class="sale-tab" [class.active]="activeTab === 'comprar'" (click)="setTab('comprar')">
                 <mat-icon>shopping_cart</mat-icon> Quero comprar
@@ -179,7 +203,11 @@
         <div class="pet-card-grid">
             @for (listing of mySales; track listing.sale.id) {
             <article class="pet-card">
+                @if (listing.sale.saleStatus === 'REJECTED') {
+                <span class="pet-badge rejected-badge">Recusado — disponível novamente</span>
+                } @else {
                 <span class="pet-badge">À venda</span>
+                }
                 @if (listing.animals.length > 0) {
                 <div class="pet-card-icon">
                     @if (speciesIcon(listing.animals[0].species)) {
@@ -194,7 +222,12 @@
                     :
                     'animais' }}</p>
                 <p class="sale-price">R$ {{ listing.sale.price.toFixed(2) }}</p>
+                @if (listing.sale.saleStatus === 'REJECTED') {
+                <button type="button" class="secondary-button" (click)="acknowledgeSaleRejection(listing)">Ok,
+                    entendi</button>
+                } @else {
                 <button type="button" class="primary-button" (click)="openSale(listing)">Saber mais</button>
+                }
             </article>
             }
         </div>
@@ -252,12 +285,28 @@
         @if (saleDeleteFailed) {
         <p class="text-danger">Não foi possível cancelar. Tente novamente.</p>
         }
+        } @else if (markingSold) {
+        <div class="field-group">
+            <label>E-mail de quem vai comprar</label>
+            <input type="email" placeholder="email@exemplo.com" [(ngModel)]="buyerEmailInput">
+        </div>
+        <div class="confirm-actions">
+            <button type="button" class="primary-button" (click)="confirmMarkAsSold()">
+                <mat-icon>check_circle</mat-icon> Confirmar venda
+            </button>
+            <button type="button" class="secondary-button" (click)="cancelMarkAsSold()">Cancelar</button>
+        </div>
+        @if (markSoldFailed) {
+        <p class="text-danger">Confira o e-mail informado e tente novamente.</p>
+        }
         } @else {
         <div class="confirm-actions">
+            <button type="button" class="primary-button" (click)="requestMarkAsSold()">
+                <mat-icon>check_circle</mat-icon> Marcar como vendido
+            </button>
             <button type="button" class="danger-button" (click)="requestDeleteSale()">
                 <mat-icon>delete</mat-icon> Cancelar venda
             </button>
-            <button type="button" class="secondary-button" (click)="closeSale()">Fechar</button>
         </div>
         }
         } @else {

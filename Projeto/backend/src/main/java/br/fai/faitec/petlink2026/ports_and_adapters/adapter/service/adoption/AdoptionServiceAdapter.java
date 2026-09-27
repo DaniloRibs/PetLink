@@ -120,8 +120,7 @@ public class AdoptionServiceAdapter implements AdoptionService {
             return false;
         }
 
-        dataToUpdate.setDescription(adoptionModel.getDescription());
-        dataToUpdate.setContact(adoptionModel.getContact());
+        dataToUpdate.setTransferStatus(adoptionModel.getTransferStatus());
 
         adoptionDao.updateInformation(id, dataToUpdate);
 

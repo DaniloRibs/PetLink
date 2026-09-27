@@ -110,6 +110,13 @@ public class FarmAnimalSaleRestController {
         return response ? ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
     }
 
+    // LISTAR VENDAS PENDENTES PARA UM COMPRADOR
+    @GetMapping("/pending/{buyerId}")
+    public ResponseEntity<List<FarmAnimalSaleModel>> getPendingSales(@PathVariable final int buyerId) {
+        List<FarmAnimalSaleModel> pending = saleTransferService.findPendingByBuyerId(buyerId);
+        return ResponseEntity.ok(pending);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteFarmAnimalSale(@PathVariable final int id) {
         FarmAnimalSaleModel farmAnimalSaleModel = farmAnimalSaleService.findById(id);

@@ -14,4 +14,6 @@ export interface FarmAnimalSale {
     price: number;
     userId: number;
     contact: string;
-}
+    buyerId?: number;
+    saleStatus?: 'NONE' | 'PENDING' | 'ACCEPTED' | 'REJECTED';
+} 

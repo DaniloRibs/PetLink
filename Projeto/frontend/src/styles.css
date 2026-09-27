@@ -1255,6 +1255,10 @@ a:hover {
     box-shadow: 0 4px 8px rgba(94, 63, 39, 0.2);
 }
 
+.pet-badge.rejected-badge {
+    background: #c0392b;
+}
+
 .form-row {
     min-width: 0;
 }
@@ -1384,4 +1388,23 @@ body:has(.sale-modal-overlay) {
     margin: 0;
     font: inherit;
     line-height: 1;
+}
+
+.pending-transfer-banner {
+    text-align: left;
+    align-items: stretch;
+    margin-bottom: 20px;
+}
+
+.pending-transfer-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 12px 16px;
+    border-radius: 12px;
+    background: #fff;
+    border: 1px solid rgba(var(--primary-rgb), 0.15);
+    margin-top: 10px;
 }

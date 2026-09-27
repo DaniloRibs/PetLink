@@ -10,7 +10,7 @@ export class AdoptionMarkAsAdoptedService {
 
   constructor(private http: HttpClient) { }
 
-  markAsAdopted(id: number): Observable<void> {
-    return this.http.patch<void>(`${environment.api_endpoint}/adoption/${id}/adopt`, {});
+  markAsAdopted(id: number, receiverEmail: string): Observable<void> {
+    return this.http.patch<void>(`${environment.api_endpoint}/adoption/${id}/adopt`, { receiverEmail });
   }
-}
+} 

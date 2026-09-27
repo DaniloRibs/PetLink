@@ -11,9 +11,9 @@ export class PetReadService {
 
   constructor(private http: HttpClient) { }
 
-  // findAll(): Promise<Pet[]> {
-  //   return firstValueFrom(this.http.get<Pet[]>(`${environment.api_endpoint}/pet`));
-  // }
+  findAll(): Promise<Pet[]> {
+    return firstValueFrom(this.http.get<Pet[]>(`${environment.api_endpoint}/pet`));
+  }
 
   async findByOwnerId(ownerId: number): Promise<Pet[]> {
     return firstValueFrom(

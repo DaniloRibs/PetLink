@@ -1,7 +1,7 @@
 import { speciesIcon } from '../../../../shared/pet-species-icon';
+import { FormsModule, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { forkJoin } from 'rxjs';
 import { speciesLabel } from '../../../../shared/pet-options';
@@ -16,6 +16,9 @@ import { AdoptionReadService } from '../../../../services/adoption/adoption-read
 import { AdoptionCreateService } from '../../../../services/adoption/adoption-create';
 import { AdoptionDeleteService } from '../../../../services/adoption/adoption-delete';
 import { AdoptionMarkAsAdoptedService } from '../../../../services/adoption/adoption-mark-as-adopted';
+import { AdoptionTransferPendingReadService } from '../../../../services/adoption/adoption-transfer-pending-read';
+import { AdoptionTransferDecisionService } from '../../../../services/adoption/adoption-transfer-decision';
+import { AdoptionUpdateService } from '../../../../services/adoption/adoption-update';
 
 interface AdoptionListing {
   adoption: Adoption;
@@ -24,7 +27,7 @@ interface AdoptionListing {
 
 @Component({
   selector: 'app-adoption-hub',
-  imports: [MatIconModule, ReactiveFormsModule],
+  imports: [MatIconModule, ReactiveFormsModule, FormsModule],
   templateUrl: './adoption-hub.html',
   styleUrl: './adoption-hub.css',
 })
@@ -40,6 +43,8 @@ export class AdoptionHub implements OnInit {
   sellablePets: Pet[] = [];
   myDonations: AdoptionListing[] = [];
   availableForAdoption: AdoptionListing[] = [];
+  pendingTransfers: AdoptionListing[] = [];
+  transferDecisionFailed: boolean = false;
 
   selectedAdoption: AdoptionListing | null = null;
   confirmingRemoval: boolean = false;
@@ -70,6 +75,9 @@ export class AdoptionHub implements OnInit {
     private adoptionCreateService: AdoptionCreateService,
     private adoptionDeleteService: AdoptionDeleteService,
     private adoptionMarkAsAdoptedService: AdoptionMarkAsAdoptedService,
+    private adoptionTransferPendingReadService: AdoptionTransferPendingReadService,
+    private adoptionTransferDecisionService: AdoptionTransferDecisionService,
+    private adoptionUpdateService: AdoptionUpdateService,
     private formBuilder: FormBuilder,
     private toastrService: ToastrService,
     private cdr: ChangeDetectorRef,
@@ -115,6 +123,8 @@ export class AdoptionHub implements OnInit {
         const bTime = b.adoption.publicationDate ? new Date(b.adoption.publicationDate).getTime() : 0;
         return aTime - bTime;
       });
+      const pending = await this.adoptionTransferPendingReadService.findPendingByReceiverId(this.userId).catch(() => []);
+      this.pendingTransfers = await this.loadListings(pending);
     } catch (error) {
       console.error('Erro ao carregar dados de adoção', error);
     } finally {
@@ -272,24 +282,89 @@ export class AdoptionHub implements OnInit {
     });
   }
 
+  markingAdopted: boolean = false;
+  receiverEmailInput: string = '';
+
   requestMarkAsAdopted(): void {
+    this.markingAdopted = true;
+    this.markAdoptedFailed = false;
+    this.receiverEmailInput = '';
+  }
+
+  cancelMarkAsAdopted(): void {
+    this.markingAdopted = false;
+    this.receiverEmailInput = '';
+  }
+
+  confirmMarkAsAdopted(): void {
     const adoptionId = this.selectedAdoption?.adoption.id;
-    if (adoptionId === undefined) {
+    if (adoptionId === undefined || !this.receiverEmailInput.trim()) {
+      this.markAdoptedFailed = true;
       return;
     }
 
     this.markAdoptedFailed = false;
-    this.adoptionMarkAsAdoptedService.markAsAdopted(adoptionId).subscribe({
+    this.adoptionMarkAsAdoptedService.markAsAdopted(adoptionId, this.receiverEmailInput.trim()).subscribe({
       next: () => {
+        this.markingAdopted = false;
         this.closeAdoption();
-        this.toastrService.success('Pet marcado como adotado!');
+        this.toastrService.success('Solicitação de transferência enviada! Aguardando confirmação do novo tutor.');
         this.reload();
       },
       error: (error) => {
-        console.error('Erro ao marcar adoção como concluída', error);
+        console.error('Erro ao solicitar transferência', error);
         this.markAdoptedFailed = true;
         this.cdr.detectChanges();
       },
+    });
+  }
+  acceptTransfer(listing: AdoptionListing): void {
+    if (!this.userId || listing.adoption.id === undefined) {
+      return;
+    }
+
+    this.transferDecisionFailed = false;
+    this.adoptionTransferDecisionService.confirm(listing.adoption.id, this.userId).subscribe({
+      next: () => {
+        this.toastrService.success(`${listing.pet.name} agora é seu!`);
+        this.reload();
+      },
+      error: (error) => {
+        console.error('Erro ao confirmar transferência', error);
+        this.transferDecisionFailed = true;
+        this.cdr.detectChanges();
+      },
+    });
+  }
+
+  rejectTransfer(listing: AdoptionListing): void {
+    if (!this.userId || listing.adoption.id === undefined) {
+      return;
+    }
+
+    this.transferDecisionFailed = false;
+    this.adoptionTransferDecisionService.reject(listing.adoption.id, this.userId).subscribe({
+      next: () => {
+        this.toastrService.info('Transferência recusada.');
+        this.reload();
+      },
+      error: (error) => {
+        console.error('Erro ao recusar transferência', error);
+        this.transferDecisionFailed = true;
+        this.cdr.detectChanges();
+      },
+    });
+  }
+  acknowledgeRejection(listing: AdoptionListing): void {
+    if (listing.adoption.id === undefined) {
+      return;
+    }
+
+    const updatedAdoption: Adoption = { ...listing.adoption, transferStatus: 'NONE' };
+
+    this.adoptionUpdateService.update(updatedAdoption).subscribe({
+      next: () => this.reload(),
+      error: (error) => console.error('Erro ao reconhecer recusa da transferência', error),
     });
   }
 }

@@ -4,6 +4,29 @@
     <h2>Adote ou doe com carinho</h2>
     <p class="hero-text">Conecte-se com pets que esperam por um novo lar, ou ofereça o seu para adoção.</p>
 
+    @if (!loading && pendingTransfers.length > 0) {
+    <div class="empty-state pending-transfer-banner">
+      <div class="empty-state-icon"><mat-icon>notifications_active</mat-icon></div>
+      <p class="empty-state-title">Você tem transferência(s) esperando confirmação</p>
+      @for (listing of pendingTransfers; track listing.adoption.id) {
+      <div class="pending-transfer-item">
+        <span><strong>{{ listing.pet.name }}</strong> — doado por {{ listing.adoption.contact }}</span>
+        <div class="confirm-actions">
+          <button type="button" class="primary-button" (click)="acceptTransfer(listing)">
+            <mat-icon>check_circle</mat-icon> Aceitar
+          </button>
+          <button type="button" class="danger-button" (click)="rejectTransfer(listing)">
+            <mat-icon>close</mat-icon> Recusar
+          </button>
+        </div>
+      </div>
+      }
+      @if (transferDecisionFailed) {
+      <p class="text-danger">Não foi possível concluir. Tente novamente.</p>
+      }
+    </div>
+    }
+
     <div class="adoption-tabs">
       <button class="adoption-tab" [class.active]="activeTab === 'adotar'" (click)="setTab('adotar')">
         <mat-icon>favorite</mat-icon> Quero adotar
@@ -143,7 +166,11 @@
     <div class="pet-card-grid">
       @for (listing of myDonations; track listing.adoption.id) {
       <article class="pet-card adoption-pet-card">
+        @if (listing.adoption.transferStatus === 'REJECTED') {
+        <span class="pet-badge rejected-badge">Recusado — disponível novamente</span>
+        } @else {
         <span class="pet-badge">Em adoção</span>
+        }
         <div class="pet-card-icon adoption-icon-ring">
           @if (speciesIcon(listing.pet.species)) {
           {{ speciesIcon(listing.pet.species) }}
@@ -153,7 +180,11 @@
         </div>
         <h3>{{ listing.pet.name }}</h3>
         <p>{{ speciesLabel(listing.pet.species) }} · {{ listing.pet.breed }}</p>
+        @if (listing.adoption.transferStatus === 'REJECTED') {
+        <button type="button" class="secondary-button" (click)="acknowledgeRejection(listing)">Ok, entendi</button>
+        } @else {
         <button type="button" class="primary-button" (click)="openAdoption(listing)">Saber mais</button>
+        }
       </article>
       }
     </div>
@@ -196,6 +227,20 @@
     @if (removeFailed) {
     <p class="text-danger">Não foi possível remover. Tente novamente.</p>
     }
+    } @else if (markingAdopted) {
+    <div class="field-group">
+      <label>E-mail de quem vai receber o pet</label>
+      <input type="email" placeholder="email@exemplo.com" [(ngModel)]="receiverEmailInput">
+    </div>
+    <div class="confirm-actions">
+      <button type="button" class="primary-button" (click)="confirmMarkAsAdopted()">
+        <mat-icon>check_circle</mat-icon> Confirmar transferência
+      </button>
+      <button type="button" class="secondary-button" (click)="cancelMarkAsAdopted()">Cancelar</button>
+    </div>
+    @if (markAdoptedFailed) {
+    <p class="text-danger">Confira o e-mail informado e tente novamente.</p>
+    }
     } @else {
     <div class="confirm-actions">
       <button type="button" class="primary-button" (click)="requestMarkAsAdopted()">
@@ -205,9 +250,6 @@
         <mat-icon>close</mat-icon> Remover da lista
       </button>
     </div>
-    @if (markAdoptedFailed) {
-    <p class="text-danger">Não foi possível concluir. Tente novamente.</p>
-    }
     }
     } @else {
     <div class="confirm-actions">

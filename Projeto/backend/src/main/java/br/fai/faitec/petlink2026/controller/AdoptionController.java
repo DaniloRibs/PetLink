@@ -93,6 +93,13 @@ public class AdoptionController {
         return response ? ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
     }
 
+    // LISTAR TRANSFERENCIAS PENDENTES PARA UM RECEPTOR
+    @GetMapping("/transfer/pending/{receiverId}")
+    public ResponseEntity<List<AdoptionModel>> getPendingTransfers(@PathVariable final int receiverId) {
+        List<AdoptionModel> pending = transferService.findPendingByReceiverId(receiverId);
+        return ResponseEntity.ok(pending);
+    }
+
     // APAGAR ADOCAO
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteAdoption(@PathVariable final int id) {

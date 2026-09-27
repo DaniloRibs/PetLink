@@ -6,4 +6,6 @@ export interface Adoption {
     contact: string;
     adopted?: boolean;
     publicationDate?: string;
-}
+    receiverId?: number;
+    transferStatus?: 'NONE' | 'PENDING' | 'ACCEPTED' | 'REJECTED';
+} 

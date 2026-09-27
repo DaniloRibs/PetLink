@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormsModule, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Pet } from '../../../../models/domain/pet';
 import { FarmAnimalSale, KG_PER_ARROBA, PriceType } from '../../../../models/domain/farmAnimalSale';
@@ -10,6 +10,12 @@ import { speciesIcon } from '../../../../shared/pet-species-icon';
 import { SaleReadService } from '../../../../services/sale/sale-read';
 import { FarmAnimalReadService } from '../../../../services/farm-animal/farm-animal-read';
 import { SaleDeleteService } from '../../../../services/sale/sale-delete';
+import { SaleRequestClosureService } from '../../../../services/sale/sale-request-closure';
+import { SaleClosureDecisionService } from '../../../../services/sale/sale-closure-decision';
+import { SaleTransferPendingReadService } from '../../../../services/sale/sale-transfer-pending-read';
+import { SaleUpdateService } from '../../../../services/sale/sale-update';
+
+
 
 
 interface SaleListing {
@@ -19,7 +25,7 @@ interface SaleListing {
 
 @Component({
     selector: 'app-sale-hub',
-    imports: [MatIconModule, ReactiveFormsModule],
+    imports: [MatIconModule, ReactiveFormsModule, FormsModule],
     templateUrl: './sale-hub.html',
     styleUrl: './sale-hub.css',
 })
@@ -38,10 +44,14 @@ export class SaleHub implements OnInit {
     availableSales: SaleListing[] = [];
     selectedAnimalIds: number[] = [];
     showSaleForm: boolean = false;
-
     saleForm: FormGroup;
     saleValidationFailed: boolean = false;
     saleCreatedOk: boolean = false;
+    pendingClosures: SaleListing[] = [];
+    closureDecisionFailed: boolean = false;
+    markingSold: boolean = false;
+    buyerEmailInput: string = '';
+    markSoldFailed: boolean = false;
 
     constructor(
         private farmAnimalReadService: FarmAnimalReadService,
@@ -49,6 +59,10 @@ export class SaleHub implements OnInit {
         private saleCreateService: SaleCreateService,
         private saleReadService: SaleReadService,
         private saleDeleteService: SaleDeleteService,
+        private saleRequestClosureService: SaleRequestClosureService,
+        private saleClosureDecisionService: SaleClosureDecisionService,
+        private saleTransferPendingReadService: SaleTransferPendingReadService,
+        private saleUpdateService: SaleUpdateService,
         private formBuilder: FormBuilder,
         private toastrService: ToastrService,
         private cdr: ChangeDetectorRef,
@@ -75,8 +89,15 @@ export class SaleHub implements OnInit {
             ]);
 
             this.sellableAnimals = myAnimals.filter(animal => !animal.forSell);
-            this.availableSales = await this.loadListings(allSales.filter(sale => sale.userId !== this.userId));
-            this.mySales = await this.loadListings(allSales.filter(sale => sale.userId === this.userId));
+            this.availableSales = await this.loadListings(allSales.filter(
+                sale => sale.userId !== this.userId && sale.saleStatus !== 'PENDING' && sale.saleStatus !== 'ACCEPTED'
+            ));
+            this.mySales = await this.loadListings(allSales.filter(
+                sale => sale.userId === this.userId && sale.saleStatus !== 'ACCEPTED'
+            ));
+
+            const pendingSales = await this.saleTransferPendingReadService.findPendingByBuyerId(this.userId).catch(() => []);
+            this.pendingClosures = await this.loadListings(pendingSales);
         } catch (error) {
             console.error('Erro ao carregar animais para venda', error);
         } finally {
@@ -206,6 +227,8 @@ export class SaleHub implements OnInit {
         this.selectedSale = listing;
         this.confirmingDelete = false;
         this.saleDeleteFailed = false;
+        this.markingSold = false;
+        this.markSoldFailed = false;
     }
 
     closeSale(): void {
@@ -277,6 +300,90 @@ export class SaleHub implements OnInit {
                 this.saleValidationFailed = true;
                 this.cdr.detectChanges();
             },
+        });
+    }
+    requestMarkAsSold(): void {
+        this.markingSold = true;
+        this.markSoldFailed = false;
+        this.buyerEmailInput = '';
+    }
+
+    cancelMarkAsSold(): void {
+        this.markingSold = false;
+        this.buyerEmailInput = '';
+    }
+
+    confirmMarkAsSold(): void {
+        const saleId = this.selectedSale?.sale.id;
+        if (saleId === undefined || !this.buyerEmailInput.trim()) {
+            this.markSoldFailed = true;
+            return;
+        }
+
+        this.markSoldFailed = false;
+        this.saleRequestClosureService.requestClosure(saleId, this.buyerEmailInput.trim()).subscribe({
+            next: () => {
+                this.markingSold = false;
+                this.closeSale();
+                this.toastrService.success('Solicitação de venda enviada! Aguardando confirmação do comprador.');
+                void this.ngOnInit();
+            },
+            error: (error) => {
+                console.error('Erro ao solicitar fechamento da venda', error);
+                this.markSoldFailed = true;
+                this.cdr.detectChanges();
+            },
+        });
+    }
+
+    acceptClosure(listing: SaleListing): void {
+        if (!this.userId || listing.sale.id === undefined) {
+            return;
+        }
+
+        this.closureDecisionFailed = false;
+        this.saleClosureDecisionService.confirm(listing.sale.id, this.userId).subscribe({
+            next: () => {
+                this.toastrService.success(`${this.saleTitle(listing)} agora é seu!`);
+                void this.ngOnInit();
+            },
+            error: (error) => {
+                console.error('Erro ao confirmar fechamento da venda', error);
+                this.closureDecisionFailed = true;
+                this.cdr.detectChanges();
+            },
+        });
+    }
+
+    rejectClosure(listing: SaleListing): void {
+        if (!this.userId || listing.sale.id === undefined) {
+            return;
+        }
+
+        this.closureDecisionFailed = false;
+        this.saleClosureDecisionService.reject(listing.sale.id, this.userId).subscribe({
+            next: () => {
+                this.toastrService.info('Venda recusada.');
+                void this.ngOnInit();
+            },
+            error: (error) => {
+                console.error('Erro ao recusar fechamento da venda', error);
+                this.closureDecisionFailed = true;
+                this.cdr.detectChanges();
+            },
+        });
+    }
+
+    acknowledgeSaleRejection(listing: SaleListing): void {
+        if (listing.sale.id === undefined) {
+            return;
+        }
+
+        const updatedSale: FarmAnimalSale = { ...listing.sale, saleStatus: 'NONE' };
+
+        this.saleUpdateService.update(updatedSale).subscribe({
+            next: () => void this.ngOnInit(),
+            error: (error) => console.error('Erro ao reconhecer recusa da venda', error),
         });
     }
 } 
