@@ -31,6 +31,7 @@ export class PetList implements OnInit {
   allPets: Pet[] = [];
   allFarmAnimals: Pet[] = [];
   loading: boolean = true;
+  skeletonPlaceholders: number[] = [1, 2, 3, 4, 5, 6];
 
   showForm: boolean = false;
   form: FormGroup;

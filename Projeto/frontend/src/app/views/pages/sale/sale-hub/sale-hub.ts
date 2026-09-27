@@ -52,6 +52,7 @@ export class SaleHub implements OnInit {
     markingSold: boolean = false;
     buyerEmailInput: string = '';
     markSoldFailed: boolean = false;
+    skeletonPlaceholders: number[] = [1, 2, 3, 4];
 
     constructor(
         private farmAnimalReadService: FarmAnimalReadService,

@@ -3,9 +3,16 @@
     <a routerLink="/painel" class="back-link primary-button"><mat-icon>arrow_back</mat-icon> Voltar para o painel</a>
 
     <p class="footer-title">MEU PERFIL</p>
-
     @if (loading) {
-    <p>Carregando...</p>
+    <div class="profile-layout">
+      <div class="profile-header">
+        <div class="profile-avatar skeleton-circle"></div>
+        <div class="profile-header-text">
+          <div class="skeleton-line" style="width: 160px;"></div>
+          <div class="skeleton-line" style="width: 110px;"></div>
+        </div>
+      </div>
+    </div>
     } @else {
     <div class="profile-layout">
       <div class="profile-header">
@@ -15,7 +22,7 @@
         <div class="profile-header-text">
           <h3 class="profile-summary-name">{{ entity?.fullname }}</h3>
           <span class="profile-summary-badge">
-            {{ entity?.accountType === AccountType.ENTERPRISE ? 'Empresa Parceira' : 'Tutor de Pet' }}
+            {{ entity?.accountType === AccountType.ENTERPRISE ? 'Conta Empresarial' : 'Conta Pessoal' }}
           </span>
         </div>
       </div>

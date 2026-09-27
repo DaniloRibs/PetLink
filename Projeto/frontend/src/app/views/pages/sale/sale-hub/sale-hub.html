@@ -38,7 +38,11 @@
 
         @if (loading) {
 
-        <p>Carregando...</p>
+        <div class="pet-card-grid">
+            @for (i of skeletonPlaceholders; track i) {
+            <div class="skeleton-card"></div>
+            }
+        </div>
 
         } @else if (activeTab === 'comprar') {
 

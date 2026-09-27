@@ -11,6 +11,27 @@ html,
     --primary-border-soft: #b99c8a;
 }
 
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(var(--primary-rgb), 0.35);
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(var(--primary-rgb), 0.55);
+    background-clip: padding-box;
+}
+
 .theme-farm {
     --primary: #3E7B3A;
     --primary-rgb: 62, 123, 58;
@@ -380,6 +401,16 @@ a:hover {
 .menu-page .primary-button:hover {
     background: var(--primary-dark);
     transform: translateY(-1px);
+}
+
+.menu-page .primary-button:active,
+.menu-page .menu-button:active,
+.menu-page .secondary-button:active,
+.menu-page .menu-link:active,
+.menu-page .danger-button:active,
+.stat-card:active {
+    transform: translateY(0) scale(0.97);
+    box-shadow: none;
 }
 
 .menu-page .action-btn.is-cancel {
@@ -1109,12 +1140,25 @@ a:hover {
     font-size: 32px;
     margin-bottom: 4px;
     opacity: 0.85;
+    animation: empty-float 2.4s ease-in-out infinite;
 }
 
 .empty-state-icon mat-icon {
     font-size: 32px;
     width: 32px;
     height: 32px;
+}
+
+@keyframes empty-float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-6px);
+    }
 }
 
 .empty-state-title {
@@ -1407,4 +1451,153 @@ body:has(.sale-modal-overlay) {
     background: #fff;
     border: 1px solid rgba(var(--primary-rgb), 0.15);
     margin-top: 10px;
+}
+
+@keyframes modalPop {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.sale-modal,
+.login-box.modal-form {
+    animation: modalPop 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.pet-card-grid,
+.empty-state {
+    animation: fadeIn 0.25s ease;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+.pet-card:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+@keyframes skeletonWave {
+    0% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0 50%;
+    }
+}
+
+.skeleton-card {
+    border-radius: 16px;
+    height: 180px;
+    background: linear-gradient(90deg,
+            rgba(var(--primary-rgb), 0.08) 25%,
+            rgba(var(--primary-rgb), 0.15) 37%,
+            rgba(var(--primary-rgb), 0.08) 63%);
+    background-size: 400% 100%;
+    animation: skeletonWave 1.4s ease infinite;
+}
+
+.pending-transfer-banner .empty-state-icon mat-icon {
+    animation: bellPulse 1.6s ease infinite;
+}
+
+@keyframes bellPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.15);
+    }
+}
+
+@media (max-width: 480px) {
+
+    .sale-modal,
+    .login-box.modal-form {
+        padding: 20px;
+        border-radius: 16px 16px 0 0;
+    }
+
+    .confirm-actions {
+        flex-direction: column;
+    }
+}
+
+.skeleton-card.skeleton-announcement {
+    height: 220px;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.load-more-spinner {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--primary);
+}
+
+.load-more-spinner mat-icon {
+    animation: spin 0.8s linear infinite;
+}
+
+.skeleton-line {
+    height: 16px;
+    border-radius: 8px;
+    background: linear-gradient(90deg,
+            rgba(var(--primary-rgb), 0.08) 25%,
+            rgba(var(--primary-rgb), 0.15) 37%,
+            rgba(var(--primary-rgb), 0.08) 63%);
+    background-size: 400% 100%;
+    animation: skeletonWave 1.4s ease infinite;
+}
+
+.skeleton-circle {
+    background: linear-gradient(90deg,
+            rgba(var(--primary-rgb), 0.08) 25%,
+            rgba(var(--primary-rgb), 0.15) 37%,
+            rgba(var(--primary-rgb), 0.08) 63%);
+    background-size: 400% 100%;
+    animation: skeletonWave 1.4s ease infinite;
+}
+
+@keyframes pulseFade {
+
+    0%,
+    100% {
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 0.7;
+    }
+}
+
+.stat-number.is-loading {
+    display: inline-block;
+    animation: pulseFade 1.2s ease infinite;
 }

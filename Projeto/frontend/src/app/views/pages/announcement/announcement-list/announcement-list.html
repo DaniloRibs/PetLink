@@ -1,4 +1,3 @@
-
 <section class="menu-footer-card content-area">
   <div class="content-form-card">
     <div class="section-header">
@@ -101,7 +100,11 @@
     }
 
     @if (loading) {
-    <p>Carregando...</p>
+    <div class="announcement-list">
+      @for (i of skeletonPlaceholders; track i) {
+      <div class="skeleton-card skeleton-announcement"></div>
+      }
+    </div>
     } @else if (announcements.length === 0) {
     <div class="empty-state">
       <div class="empty-state-icon"><mat-icon>campaign</mat-icon></div>
@@ -121,7 +124,9 @@
     @if (hasMore) {
     <div #scrollSentinel class="scroll-sentinel">
       @if (loadingMore) {
-      <p class="load-more-text">Carregando mais...</p>
+      <p class="load-more-text load-more-spinner">
+        <mat-icon>autorenew</mat-icon> Carregando mais...
+      </p>
       }
     </div>
     }

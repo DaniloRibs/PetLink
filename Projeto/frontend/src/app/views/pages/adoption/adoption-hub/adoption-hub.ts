@@ -45,16 +45,15 @@ export class AdoptionHub implements OnInit {
   availableForAdoption: AdoptionListing[] = [];
   pendingTransfers: AdoptionListing[] = [];
   transferDecisionFailed: boolean = false;
-
   selectedAdoption: AdoptionListing | null = null;
   confirmingRemoval: boolean = false;
   removeFailed: boolean = false;
   markAdoptedFailed: boolean = false;
-
   selectedPetId: number | null = null;
   showAdoptionForm: boolean = false;
   donationForm: FormGroup;
   donationValidationFailed: boolean = false;
+  skeletonPlaceholders: number[] = [1, 2, 3, 4];
 
   speciesIcon(species: string): string {
     return speciesIcon(species);

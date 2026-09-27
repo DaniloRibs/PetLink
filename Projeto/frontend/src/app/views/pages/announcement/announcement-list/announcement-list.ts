@@ -28,6 +28,7 @@ export class AnnouncementList implements OnInit, AfterViewInit, OnDestroy {
   user: User | null = null;
   announcements: Announcement[] = [];
   loading: boolean = true;
+  skeletonPlaceholders: number[] = [1, 2, 3];
   isCompany: boolean = false;
   userEmail: string = '';
 
@@ -104,7 +105,7 @@ export class AnnouncementList implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  ngAfterViewInit(): void {}
+  ngAfterViewInit(): void { }
 
   ngOnDestroy(): void {
     this.intersectionObserver?.disconnect();
@@ -119,7 +120,7 @@ export class AnnouncementList implements OnInit, AfterViewInit, OnDestroy {
     this.cdr.detectChanges();
 
     try {
-      const page = this.announcements.length / this.PAGE_SIZE; 
+      const page = this.announcements.length / this.PAGE_SIZE;
       const nextPage = await this.announcementReadService.findPage(page);
 
       this.announcements = [...this.announcements, ...nextPage];

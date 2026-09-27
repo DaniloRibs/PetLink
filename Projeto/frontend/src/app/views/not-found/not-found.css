@@ -1,0 +1,222 @@
+.not-found-page {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+.not-found-paw {
+    position: absolute;
+    z-index: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #8B4F2C;
+
+    pointer-events: none;
+}
+
+.not-found-paw mat-icon {
+    font-size: 42px;
+    width: 42px;
+    height: 42px;
+    line-height: 42px;
+}
+
+.horseshoe-icon {
+    width: 58px;
+    height: 58px;
+    display: block;
+
+    fill: #3E7B3A;
+    color: #3E7B3A;
+    stroke: none;
+}
+
+.horseshoe-icon path,
+.horseshoe-icon circle {
+    fill: #3E7B3A;
+    stroke: none;
+}
+
+.not-found-paw-1 {
+    top: 12%;
+    left: 13%;
+    transform: rotate(-20deg);
+}
+
+.not-found-paw-2 {
+    top: 22%;
+    left: 25%;
+    transform: rotate(18deg);
+}
+
+.not-found-paw-3 {
+    top: 12%;
+    right: 24%;
+    transform: rotate(-15deg);
+}
+
+.not-found-paw-4 {
+    top: 28%;
+    right: 11%;
+    transform: rotate(25deg);
+}
+
+.not-found-paw-5 {
+    bottom: 22%;
+    left: 10%;
+    transform: rotate(18deg);
+}
+
+.not-found-paw-6 {
+    bottom: 12%;
+    left: 25%;
+    transform: rotate(-18deg);
+}
+
+.not-found-paw-7 {
+    bottom: 17%;
+    right: 13%;
+    transform: rotate(-20deg);
+}
+
+.not-found-paw-8 {
+    bottom: 30%;
+    right: 26%;
+    transform: rotate(15deg);
+}
+
+.not-found-card {
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 100vh;
+
+    text-align: center;
+}
+
+.not-found-illustration {
+    max-width: 420px;
+    width: 80%;
+    height: auto;
+}
+
+
+.not-found-card h1 {
+    margin: 20px 0 10px;
+
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.not-found-card p {
+    max-width: 520px;
+
+    margin: 0 20px 28px;
+
+    font-size: 17px;
+    line-height: 1.6;
+}
+
+.primary-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    min-height: 56px;
+    padding: 0 32px;
+
+    border-radius: 50px;
+
+    background: #8B4F2C;
+    color: #fff;
+
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.primary-button:hover {
+    transform: translateY(-2px);
+    opacity: 0.92;
+}
+
+.primary-button mat-icon {
+    font-size: 22px;
+    width: 22px;
+    height: 22px;
+}
+
+@media (max-width: 768px) {
+
+    .not-found-illustration {
+        max-width: 320px;
+    }
+
+    .not-found-card h1 {
+        font-size: 26px;
+    }
+
+    .not-found-card p {
+        font-size: 15px;
+        max-width: 400px;
+    }
+
+    .not-found-paw mat-icon {
+        font-size: 30px;
+        width: 30px;
+        height: 30px;
+    }
+
+    .horseshoe-icon {
+        width: 42px;
+        height: 42px;
+    }
+
+    .not-found-paw-1 {
+        left: 5%;
+    }
+
+    .not-found-paw-2 {
+        left: 18%;
+    }
+
+    .not-found-paw-3 {
+        right: 18%;
+    }
+
+    .not-found-paw-4 {
+        right: 5%;
+    }
+
+    .not-found-paw-5 {
+        left: 5%;
+    }
+
+    .not-found-paw-6 {
+        left: 18%;
+    }
+
+    .not-found-paw-7 {
+        right: 5%;
+    }
+
+    .not-found-paw-8 {
+        right: 18%;
+    }
+}
