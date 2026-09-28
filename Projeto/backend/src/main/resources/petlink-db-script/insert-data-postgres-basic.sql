@@ -1056,29 +1056,145 @@ INSERT INTO vaccine_model (application_date, expiration_date, name, description,
 ('2026-06-02', '2027-06-02', 'Leishmaniose', 'Vacina anual', 'LEI-140', 1);
 
 INSERT INTO announcement_model (title, description, event_date, location, announcement_type, user_id, contact) VALUES
-('Feira de Adoção de Cães', 'Venha adotar seu novo melhor amigo.', '2024-05-10', 'Praça Central', 'ADOPTION', 6, '11966660003'),
-('Procura-se Gato', 'Meu gato sumiu próximo ao centro.', NULL, 'Rua das Flores, 123', 'LOST', 4, '11988880001'),
-('Venda de Cavalos', 'Cavalos de raça para montaria.', '2024-06-15', 'Fazenda Boa Vista', 'ADOPTION', 5, '19977770002'),
-('Encontrei um Cachorro', 'Cachorro preto, porte médio, com coleira azul.', NULL, 'Av. Paulista, 1000', 'LOST', 9, '11933330006'),
-('Leilão de Gado', 'Excelente oportunidade para pecuaristas.', '2024-07-20', 'Agropecuária Vale', 'ADOPTION', 8, '19944440005'),
-('Gato SRD para Adoção', 'Lindo filhote de gato.', NULL, 'PetShop Cão Feliz', 'ADOPTION', 6, '11966660003'),
-('Campanha de Vacinação Antirrábica Gratuita', 'Traga seu cão ou gato para a dose anual contra a raiva. Atendimento por ordem de chegada, com veterinário no local.', '2026-10-10', 'PetShop Cão Feliz - Rua das Acácias, 250', 'VACCINE', 6, '11966660003'),
-('Vacina V10 com 20% de desconto', 'Durante a semana do pet, a V10 e a gripe canina saem com 20% de desconto. Agende pelo telefone.', '2026-10-15', 'PetShop Cão Feliz', 'VACCINE', 6, '11966660003'),
-('Mutirão de Vacinação de Gatos (V4 e FeLV)', 'Vacinação múltipla felina e contra leucemia felina. Gatos devem vir em caixa de transporte.', '2026-11-14', 'PetShop Cão Feliz', 'VACCINE', 6, '11966660003'),
-('Vacinação contra Febre Aftosa - 2ª etapa', 'Vacinas disponíveis no balcão para pecuaristas cadastrados. Levar o cartão do produtor.', '2026-11-05', 'Agropecuária Vale - Balcão de atendimento', 'VACCINE', 8, '19944440005'),
-('Dia D de Vacinação de Equinos', 'Influenza, tétano e encefalomielite no curral central, com veterinário responsável e atestado no ato.', '2026-10-24', 'Fazenda Boa Vista - Curral central', 'VACCINE', 5, '19977770002'),
-('Vacinação de Aves - Newcastle', 'Campanha para pequenos criadores de aves. Vagas limitadas por lote.', '2026-10-30', 'BB enterprise - Galpão 2', 'VACCINE', 3, '31999990005'),
-('Feira de Adoção de Cães e Gatos', 'Mais de 15 animais vacinados e vermifugados esperando por um lar. Entrada gratuita.', '2026-10-18', 'Praça da Matriz', 'ADOPTION', 6, '11966660003'),
-('Gatos do celeiro procuram um lar', 'Gatos castrados e vacinados, ótimos para sítios e chácaras. Retirada na fazenda.', '2026-10-03', 'Fazenda Boa Vista', 'ADOPTION', 5, '19977770002'),
-('Projeto Adote um Amigo', 'Encontro de adoção responsável com termo de compromisso e acompanhamento nos primeiros 30 dias.', '2026-11-08', 'Parque Municipal', 'ADOPTION', 3, '31999990005'),
-('Pets da Agropecuária Vale para adoção', 'Cães e gatos resgatados na região, todos com a carteira de vacinação em dia.', '2026-11-21', 'Agropecuária Vale', 'ADOPTION', 8, '19944440005'),
-('Procura-se Beagle Perdido', 'Beagle tricolor, atende por Bidu, fugiu na sexta-feira à noite. Oferecemos recompensa.', NULL, 'Bairro Centro, próximo à padaria', 'LOST', 2, '31999990002'),
-('Vaca desgarrada encontrada', 'Vaca Nelore sem brinco encontrada na estrada. Aguardando o dono.', NULL, 'Estrada Vicinal, km 12', 'LOST', 2, '31999990002'),
-('Gato Siamês desaparecido', 'Gata Siamesa de olhos azuis, muito dócil, sumiu do prédio há dois dias.', NULL, 'Rua das Palmeiras, 45', 'LOST', 4, '11988880001'),
-('Encontrei uma Calopsita', 'Calopsita cinza com bochechas laranja pousou na minha varanda. Está bem cuidada.', NULL, 'Av. Brasil, 800', 'LOST', 7, '31955550004'),
-('Periquito verde fugiu', 'Periquito verde de 1 ano, responde pelo nome Kiwi. Fugiu pela janela.', NULL, 'Rua dos Ipês, 321', 'LOST', 9, '11933330006'),
-('Labrador perdido no parque', 'Labrador chocolate de coleira vermelha, muito brincalhona, perdida durante a caminhada.', NULL, 'Parque das Águas', 'LOST', 10, '11922220007'),
-('Égua perdida na estrada rural', 'Égua Mangalarga alazã com marca branca na testa, escapou do pasto durante a chuva.', NULL, 'Estrada do Vale, km 7', 'LOST', 8, '19944440005');
+('Feira de Adoção de Cães', '# Encontre seu Novo Companheiro!
+
+**Grande Feira de Adoção de Cães** com diversos patudos **vacinados, vermifugados e castrados** aguardando por um lar amoroso.
+
+*Requisitos para adoção: documento oficial com foto e comprovante de residência.*', '2024-05-10', 'Praça Central', 'ADOPTION', 6, '11966660003'),
+
+('Procura-se Gato Desaparecido', '# Procura-se Gato Perdido!
+
+**Gato macho castrado**, porte médio e pelagem curta. Sumiu nas proximidades do **Centro**.
+
+*Muito dócil, mas pode estar assustado.*
+
+Caso tenha qualquer informação, entre em contato!', NULL, 'Rua das Flores, 123', 'LOST', 4, '11988880001'),
+
+('Adoção Responsável de Cavalos', '# Oportunidade para Criadores
+
+**Cavalos de raça para montaria e manejo**, saudáveis e com **acompanhamento veterinário em dia**.
+
+*Observação: Adoção condicionada à comprovação de local e manejo adequados.*', '2024-06-15', 'Fazenda Boa Vista', 'ADOPTION', 5, '19977770002'),
+
+('Cachorro Encontrado no Centro', '# Animal Encontrado!
+
+**Cachorro macho, porte médio**, pelagem preta, vestindo **coleira azul**. Encontrado perambulando próximo à avenida.
+
+*Procura-se pelo tutor original mediante comprovação.*', NULL, 'Av. Paulista, 1000', 'LOST', 9, '11933330006'),
+
+('Evento Pecuário e Manejo de Gado', '# Oportunidade Pecuária
+
+**Exposição e remanejamento de lotes de gado** com **excelente linhagem** e sanidade garantida.
+
+*Acompanhamento completo por veterinários credenciados.*', '2024-07-20', 'Agropecuária Vale', 'ADOPTION', 8, '19944440005'),
+
+('Gato SRD para Adoção', '# Adote um Gatinho!
+
+**Lindo filhote de gato SRD (Sem Raça Definida)**, dócil, brincalhão e muito carinhoso.
+
+*Já vermifugado e com a primeira dose da vacina aplicada.*', NULL, 'PetShop Cão Feliz', 'ADOPTION', 6, '11966660003'),
+
+('Campanha de Vacinação Antirrábica Gratuita', '# Proteja seu Pet!
+
+**Vacinação Antirrábica Gratuita** para cães e gatos. A dose anual é **indispensável** contra a raiva.
+
+*Atendimento por ordem de chegada com médico veterinário no local.*', '2026-10-10', 'PetShop Cão Feliz - Rua das Acácias, 250', 'VACCINE', 6, '11966660003'),
+
+('Vacina V10 com 20% de Desconto', '# Semana da Saúde Pet
+
+**20% de desconto** nas vacinas **V10** e **Gripe Canina** durante toda a semana especial.
+
+*Necessário agendamento prévio por telefone.*', '2026-10-15', 'PetShop Cão Feliz', 'VACCINE', 6, '11966660003'),
+
+('Mutirão de Vacinação de Gatos (V4 e FeLV)', '# Saúde Felina em Dia
+
+**Mutirão de Imunização para Gatos** contra **V4** (múltipla felina) e **FeLV** (leucemia felina).
+
+*Requisito obrigatório: transportar o gato em caixa de transporte apropriada.*', '2026-11-14', 'PetShop Cão Feliz', 'VACCINE', 6, '11966660003'),
+
+('Vacinação contra Febre Aftosa - 2ª Etapa', '# Campanha Sanitária Pecuária
+
+**Doses disponíveis no balcão** para pecuaristas cadastrados. Mantenha seu rebanho regularizado.
+
+*Obrigatório apresentar o cartão do produtor rural no atendimento.*', '2026-11-05', 'Agropecuária Vale - Balcão de atendimento', 'VACCINE', 8, '19944440005'),
+
+('Dia D de Vacinação de Equinos', '# Imunização Equina
+
+**Vacinação contra Influenza, Tétano e Encefalomielite** no curral central.
+
+*Atendimento especializado com emissão de atestado veterinário no ato.*', '2026-10-24', 'Fazenda Boa Vista - Curral central', 'VACCINE', 5, '19977770002'),
+
+('Campanha de Vacinação de Aves (Newcastle)', '# Sanidade Avícola
+
+**Campanha de vacinação contra a Doença de Newcastle** voltada a pequenos e médios criadores de aves.
+
+*Vagas limitadas por lote de atendimento.*', '2026-10-30', 'BB enterprise - Galpão 2', 'VACCINE', 3, '31999990005'),
+
+('Feira de Adoção de Cães e Gatos', '# Amor em Quatro Patas
+
+**Mais de 15 cães e gatos** resgatados, totalmente **vacinados e vermifugados**, buscando um lar responsável.
+
+*Entrada gratuita para toda a família!*', '2026-10-18', 'Praça da Matriz', 'ADOPTION', 6, '11966660003'),
+
+('Gatos do Celeiro Procuram um Lar', '# Adoção para Sítios e Chácaras
+
+**Gatos adultos castrados e vacinados**, excelentes para ambientes rurais e propriedades de campo.
+
+*Retirada agendada diretamente na fazenda.*', '2026-10-03', 'Fazenda Boa Vista', 'ADOPTION', 5, '19977770002'),
+
+('Projeto Adote um Amigo', '# Adoção Responsável
+
+**Encontro comunitário de adoção** com assinatura de termo de responsabilidade.
+
+*Inclui acompanhamento nos primeiros 30 dias após a adoção.*', '2026-11-08', 'Parque Municipal', 'ADOPTION', 3, '31999990005'),
+
+('Pets da Agropecuária Vale para Adoção', '# Resgate e Proteção
+
+**Cães e gatos resgatados na região**, com a **carteira de vacinação totalmente em dia** e triagem de saúde concluída.
+
+*Venha conhecer seu novo amigo!*', '2026-11-21', 'Agropecuária Vale', 'ADOPTION', 8, '19944440005'),
+
+('PROCURA-SE: Beagle Perdido (Bidu)', '# Animal Desaparecido!
+
+**Beagle tricolor macho**, atende pelo nome **Bidu**. Fugiu na sexta-feira à noite.
+
+*Oferece-se recompensa por informações que levem à localização.*', NULL, 'Bairro Centro, próximo à padaria', 'LOST', 2, '31999990002'),
+
+('Vaca Nelore Encontrada na Estrada', '# Animal Encontrado!
+
+**Vaca Nelore fêmea sem brinco**, encontrada perambulando na via. Está abrigada e em segurança.
+
+*Aguardando contato do proprietário legítimo para comprovação.*', NULL, 'Estrada Vicinal, km 12', 'LOST', 2, '31999990002'),
+
+('PROCURA-SE: Gata Siamesa Desaparecida', '# Animal Sumido!
+
+**Gata Siamesa de olhos azuis**, pelagem clássica, muito dócil. Sumiu do apartamento há dois dias.
+
+*Favor verificar garagens e quintais próximos.*', NULL, 'Rua das Palmeiras, 45', 'LOST', 4, '11988880001'),
+
+('Calopsita Encontrada na Varanda', '# Ave Encontrada!
+
+**Calopsita cinza com bochechas alaranjadas**, bem cuidada e dócil. Pousou em uma varanda residencial.
+
+*Devolução mediante identificação precisa de detalhes pelo tutor.*', NULL, 'Av. Brasil, 800', 'LOST', 7, '31955550004'),
+
+('PROCURA-SE: Periquito Verde (Kiwi)', '# Ave Desaparecida!
+
+**Periquito verde de 1 ano**, responde carinhosamente pelo nome **Kiwi**. Fugiu acidentalmente pela janela.
+
+*Pode estar em árvores da região.*', NULL, 'Rua dos Ipês, 321', 'LOST', 9, '11933330006'),
+
+('PROCURA-SE: Cadela Labrador Chocolate', '# Animal Perdido no Parque!
+
+**Labrador fêmea de cor chocolate**, usando **coleira vermelha**. Muito brincalhona e carinhosa, perdeu-se durante o passeio.
+
+*Ajude-nos a encontrá-la!*', NULL, 'Parque das Águas', 'LOST', 10, '11922220007'),
+
+('PROCURA-SE: Égua Mangalarga Alazã', '# Animal Desaparecido em Área Rural!
+
+**Égua Mangalarga de pelagem alazã com marca branca na testa**. Escapou do pasto durante a tempestade.
+
+*Entre em contato se tiver qualquer informação.*', NULL, 'Estrada do Vale, km 7', 'LOST', 8, '19944440005');
 
 
 INSERT INTO adoption_model (pet_id, owner_id, description, contact, adopted, publication_date) VALUES
