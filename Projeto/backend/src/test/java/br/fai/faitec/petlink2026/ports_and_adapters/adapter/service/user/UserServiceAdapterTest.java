@@ -36,6 +36,11 @@ public class UserServiceAdapterTest {
     }
 
     @Test
+    public void shouldAcceptToPassword() {
+        assertFalse(userService.isPasswordInvalid("a1b2"));
+    }
+
+    @Test
     public void shouldRejectNegativeId() {
         assertTrue(userService.isIdInvalid(-1));
     }
