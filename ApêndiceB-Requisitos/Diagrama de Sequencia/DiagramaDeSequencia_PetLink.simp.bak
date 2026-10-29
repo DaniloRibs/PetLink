@@ -39,10 +39,6 @@
         <item-type type-id="element-detail" type="Element Detail" />
         <value>1</value>
       </counter>
-      <counter>
-        <item-type type="Unknown" />
-        <value>1</value>
-      </counter>
     </entity-names>
     <entity-ids>
       <counter>
@@ -97,10 +93,18 @@
     <diagrams>
       <counter>
         <type>SoftwareIdeasModeler.Core.Diagrams.UmlDiagrams.UmlClassDiagram</type>
-        <value>1</value>
+        <value>2</value>
       </counter>
       <counter>
         <type>SoftwareIdeasModeler.Core.Diagrams.UmlDiagrams.UmlSequenceDiagram</type>
+        <value>2</value>
+      </counter>
+      <counter>
+        <type>SoftwareIdeasModeler.Core.Diagrams.UmlDiagrams.UmlUseCaseDiagram</type>
+        <value>1</value>
+      </counter>
+      <counter>
+        <type>SoftwareIdeasModeler.Core.Diagrams.UmlDiagrams.UmlComponentDiagram</type>
         <value>1</value>
       </counter>
     </diagrams>
@@ -177,7 +181,7 @@
       </style>
       <structural-feature type="String" type-id="Uml.String" />
     </item>
-    <item id="19bc6a622ffe43d4a2ce112ba597f128" cid="PROP042" type="property" owner="f7a970ebe929414889549efc6ab7cac6" creator="" creation-date="08/25/2026 20:42:21" visibility="private">
+    <item id="19bc6a622ffe43d4a2ce112ba597f128" cid="PROP042" type="property" creator="" creation-date="08/25/2026 20:42:21" visibility="private">
       <structural-feature type="Vacina" type-id="Class:018b6461b62444578cc96c9ab1a434dc" />
     </item>
     <item id="ed90f1ab80df4f65a4a51185783f7f46" cid="PROP041" type="property" name="anunciante" owner="65b268f08a8947a088127f50e1be3aec" creator="" creation-date="08/25/2026 20:41:34" visibility="private">
@@ -223,7 +227,7 @@
         <source-code language="ActionScript" />
       </source-codes>
     </item>
-    <item id="f384d5df238b4e598f77cced1fbd650b" cid="PROP043" type="property" owner="f7a970ebe929414889549efc6ab7cac6" creator="" creation-date="08/25/2026 20:42:21" visibility="private">
+    <item id="f384d5df238b4e598f77cced1fbd650b" cid="PROP043" type="property" creator="" creation-date="08/25/2026 20:42:21" visibility="private">
       <structural-feature type="Pets" type-id="Class:436345dc76474b9caee0d4046d613260" />
     </item>
     <item id="1eeb4de4f86d42d5a82d50e8675039ca" cid="PROP023" type="property" name="rua" owner="6b9a7536ed3b4265b4b9b4eb3d1e61a3" creator="" creation-date="08/25/2026 20:29:12" visibility="private">
@@ -232,25 +236,25 @@
     <item id="56b364948f31424381a962963554515c" cid="PROP021" type="property" name="tutor" owner="436345dc76474b9caee0d4046d613260" creator="" creation-date="08/25/2026 20:26:35" visibility="private">
       <structural-feature type="User" type-id="Class:05ec210391d04881b0b8714921417167" />
     </item>
-    <item id="86e48aad7d634944a5009ce7e5e7a86c" cid="PROP034" type="property" owner="11d5c449404346eebca0f1fdf9acac43" creator="" creation-date="08/25/2026 20:36:29" visibility="private">
+    <item id="86e48aad7d634944a5009ce7e5e7a86c" cid="PROP034" type="property" creator="" creation-date="08/25/2026 20:36:29" visibility="private">
       <structural-feature type="Vacina" type-id="Class:018b6461b62444578cc96c9ab1a434dc" />
     </item>
     <item id="eeb268ba6aaf4504be7e83fcfc5cc45e" cid="PROP024" type="property" name="endereco" owner="6b9a7536ed3b4265b4b9b4eb3d1e61a3" creator="" creation-date="08/25/2026 20:29:36" visibility="private">
       <structural-feature type="String" type-id="Uml.String" />
     </item>
-    <item id="88670ab771fc44ff8817d4b3e035b466" cid="PROP050" type="property" owner="4b499893254a49859531bfa8a79ea12a" creator="" creation-date="08/25/2026 20:46:30" visibility="private">
+    <item id="88670ab771fc44ff8817d4b3e035b466" cid="PROP050" type="property" creator="" creation-date="08/25/2026 20:46:30" visibility="private">
       <structural-feature type="User" type-id="Class:05ec210391d04881b0b8714921417167" />
     </item>
-    <item id="2472f81a82a148f99477440cbbe9fb01" cid="PROP049" type="property" owner="b35ff8be211f4999ba203ef86e46bf99" creator="" creation-date="08/25/2026 20:42:31" visibility="private">
+    <item id="2472f81a82a148f99477440cbbe9fb01" cid="PROP049" type="property" creator="" creation-date="08/25/2026 20:42:31" visibility="private">
       <structural-feature type="Operador" type-id="Class:409191c8420a45bfbd93e943917362ce" />
     </item>
     <item id="bf69ca1212764868b1d4b01a3b5b6bb0" cid="PROP018" type="property" name="antigoTutor" owner="94997cbe04d94438b7e06257cbe95766" creator="" creation-date="08/25/2026 20:14:08" visibility="private">
       <structural-feature type="User" type-id="Class:05ec210391d04881b0b8714921417167" />
     </item>
-    <item id="5f847fdc39784d8696dec1369dfd3484" cid="PROP058" type="property" creation-date="09/17/2026 08:33:50">
+    <item id="5f847fdc39784d8696dec1369dfd3484" cid="PROP058" type="property" creation-date="09/17/2026 08:33:50" visibility="undefined">
       <structural-feature type="BancoDados" type-id="Class:742ba347f2204b42b2d91ba60e4432d6" />
     </item>
-    <item id="9ba8c9395ddb464a9061e0faae2c4ad8" cid="C012" type="class" name="BackendPetLink" creation-date="09/17/2026 08:33:38" />
+    <item id="9ba8c9395ddb464a9061e0faae2c4ad8" cid="C012" type="class" name="BackendPetLink" creation-date="09/17/2026 08:33:38" visibility="undefined" />
     <item id="409191c8420a45bfbd93e943917362ce" cid="C005" type="class" name="Operador" creator="" creation-date="08/25/2026 20:17:40" visibility="undefined">
       <owned-items />
       <attributes>
@@ -298,16 +302,16 @@
       </style>
       <structural-feature type="String" type-id="Uml.String" />
     </item>
-    <item id="60ec4e2adaa74e6cadb243ea8d3ecbb4" cid="PROP048" type="property" owner="b35ff8be211f4999ba203ef86e46bf99" creator="" creation-date="08/25/2026 20:42:31" visibility="private">
+    <item id="60ec4e2adaa74e6cadb243ea8d3ecbb4" cid="PROP048" type="property" creator="" creation-date="08/25/2026 20:42:31" visibility="private">
       <structural-feature type="endereco" type-id="Class:6b9a7536ed3b4265b4b9b4eb3d1e61a3" />
     </item>
     <item id="5fd019b8e3f9491ebd4a724ef339ca1c" cid="PROP036" type="property" name="dataAplicacao" owner="c4915042b76d48c49cdbf5836447d86d" creator="" creation-date="08/25/2026 20:36:35" visibility="private">
       <structural-feature type="DateTime" type-id="Uml.DateTime" />
     </item>
-    <item id="7efd555c431d476f9b4153ffd54ea48e" cid="PROP035" type="property" owner="11d5c449404346eebca0f1fdf9acac43" creator="" creation-date="08/25/2026 20:36:29" visibility="private">
+    <item id="7efd555c431d476f9b4153ffd54ea48e" cid="PROP035" type="property" creator="" creation-date="08/25/2026 20:36:29" visibility="private">
       <structural-feature type="RegistroVacina" type-id="Class:c4915042b76d48c49cdbf5836447d86d" />
     </item>
-    <item id="3f2599f526794f4f972c309aa6b5b0e8" cid="PROP056" type="property" creation-date="09/17/2026 08:33:29">
+    <item id="3f2599f526794f4f972c309aa6b5b0e8" cid="PROP056" type="property" creation-date="09/17/2026 08:33:29" visibility="undefined">
       <structural-feature type="FrontendPetLink" type-id="Class:505a763777d948f2a88c964229dfc8ed" />
     </item>
     <item id="13f9bf04471b45c29148c0cb27a8315f" cid="PROP009" type="property" name="dataAdocao" owner="94997cbe04d94438b7e06257cbe95766" creator="" creation-date="08/25/2026 20:10:24" visibility="private">
@@ -335,13 +339,13 @@
       </style>
       <structural-feature type="DateTime" type-id="Uml.DateTime" />
     </item>
-    <item id="bf9402379272436d9d48e828396209fa" cid="PROP057" type="property" creation-date="09/17/2026 08:33:38">
+    <item id="bf9402379272436d9d48e828396209fa" cid="PROP057" type="property" creation-date="09/17/2026 08:33:38" visibility="undefined">
       <structural-feature type="BackendPetLink" type-id="Class:9ba8c9395ddb464a9061e0faae2c4ad8" />
     </item>
     <item id="97a44828521c44e08aac18579c15f606" cid="PROP022" type="property" name="cidade" owner="6b9a7536ed3b4265b4b9b4eb3d1e61a3" creator="" creation-date="08/25/2026 20:28:57" visibility="private">
       <structural-feature type="String" type-id="Uml.String" />
     </item>
-    <item id="9c122aa20580488eb4c5da4e02bcbd2d" cid="PROP047" type="property" owner="3447ec5f9c454ba3ac41dc3ac32d5370" creator="" creation-date="08/25/2026 20:42:28" visibility="private">
+    <item id="9c122aa20580488eb4c5da4e02bcbd2d" cid="PROP047" type="property" creator="" creation-date="08/25/2026 20:42:28" visibility="private">
       <structural-feature type="Anuncio" type-id="Class:65b268f08a8947a088127f50e1be3aec" />
     </item>
     <item id="c4915042b76d48c49cdbf5836447d86d" cid="C008" type="class" name="RegistroVacina" creator="" creation-date="08/25/2026 20:35:09" visibility="undefined">
@@ -354,7 +358,7 @@
         <source-code language="ActionScript" />
       </source-codes>
     </item>
-    <item id="505a763777d948f2a88c964229dfc8ed" cid="C011" type="class" name="FrontendPetLink" creation-date="09/17/2026 08:33:29" />
+    <item id="505a763777d948f2a88c964229dfc8ed" cid="C011" type="class" name="FrontendPetLink" creation-date="09/17/2026 08:33:29" visibility="undefined" />
     <item id="fa2175cb15f94049b8d258b77a566722" cid="PROP053" type="property" name="estadoDoacao" owner="800c7090916c44a5bac5799cd31585bc" creator="" creation-date="08/25/2026 20:47:11" visibility="private">
       <style style-name="Custom Style" shadow-type="smooth" shadow-offset="2,2" shadow-visible="true" shadow-color="#3A555555" shadow-radius="8" wrap-name-text="true" wrap-other-text="true" padding="2" glow-color="#FFFFFF" accuracy="0.9">
         <text-style type="name" color="#555555" font="Segoe UI;11.25;B" />
@@ -380,10 +384,10 @@
       </style>
       <structural-feature type="Boolean" type-id="Uml.Boolean" />
     </item>
-    <item id="cfca7516c36f44ed871d5c087d2c35bc" cid="PROP044" type="property" owner="d00c8b49b25f4085ba9b654a99050dcf" creator="" creation-date="08/25/2026 20:42:24" visibility="private">
+    <item id="cfca7516c36f44ed871d5c087d2c35bc" cid="PROP044" type="property" creator="" creation-date="08/25/2026 20:42:24" visibility="private">
       <structural-feature type="Adocao" type-id="Class:94997cbe04d94438b7e06257cbe95766" />
     </item>
-    <item id="d547c85f85bf4021adf03f8d4f000c17" cid="PROP045" type="property" owner="d00c8b49b25f4085ba9b654a99050dcf" creator="" creation-date="08/25/2026 20:42:24" visibility="private">
+    <item id="d547c85f85bf4021adf03f8d4f000c17" cid="PROP045" type="property" creator="" creation-date="08/25/2026 20:42:24" visibility="private">
       <structural-feature type="User" type-id="Class:05ec210391d04881b0b8714921417167" />
     </item>
     <item id="84bf09cb520b4dd1a7e7643b2abc8c1a" cid="PROP006" type="property" name="sexo" owner="436345dc76474b9caee0d4046d613260" creator="" creation-date="08/25/2026 20:04:23" visibility="private">
@@ -411,7 +415,7 @@
       </style>
       <structural-feature type="String" type-id="Uml.String" />
     </item>
-    <item id="a31c0913a813459f96a0d0f249b303c4" cid="PROP015" type="property" owner="a7a151e13e624a378325a949c4c56155" creator="" creation-date="08/25/2026 20:11:50" visibility="private">
+    <item id="a31c0913a813459f96a0d0f249b303c4" cid="PROP015" type="property" creator="" creation-date="08/25/2026 20:11:50" visibility="private">
       <structural-feature type="Adocao" type-id="Class:94997cbe04d94438b7e06257cbe95766" />
     </item>
     <item id="e9a2a4b96599478b8db0d86a1fede3fa" cid="PROP030" type="property" name="descricao" owner="018b6461b62444578cc96c9ab1a434dc" creator="" creation-date="08/25/2026 20:33:51" visibility="private">
@@ -470,12 +474,6 @@
       </style>
       <structural-feature type="User" type-id="Class:05ec210391d04881b0b8714921417167" />
     </item>
-    <item id="2b8154de87a04f618c7a096eb43bd7dd" cid="PROP017" type="property" name="pet" owner="94997cbe04d94438b7e06257cbe95766" creator="" creation-date="08/25/2026 20:13:49" visibility="private">
-      <structural-feature type="Pets" type-id="Class:436345dc76474b9caee0d4046d613260" />
-    </item>
-    <item id="f70ad28df1854fc28ac7abb657e6dacd" cid="PROP051" type="property" owner="4b499893254a49859531bfa8a79ea12a" creator="" creation-date="08/25/2026 20:46:30" visibility="private">
-      <structural-feature type="AnuncioAdocao" type-id="Class:800c7090916c44a5bac5799cd31585bc" />
-    </item>
     <item id="65b268f08a8947a088127f50e1be3aec" cid="C009" type="class" name="Anuncio" creator="" creation-date="08/25/2026 20:38:16" visibility="undefined">
       <owned-items />
       <attributes>
@@ -487,6 +485,12 @@
       <source-codes>
         <source-code language="ActionScript" />
       </source-codes>
+    </item>
+    <item id="f70ad28df1854fc28ac7abb657e6dacd" cid="PROP051" type="property" creator="" creation-date="08/25/2026 20:46:30" visibility="private">
+      <structural-feature type="AnuncioAdocao" type-id="Class:800c7090916c44a5bac5799cd31585bc" />
+    </item>
+    <item id="2b8154de87a04f618c7a096eb43bd7dd" cid="PROP017" type="property" name="pet" owner="94997cbe04d94438b7e06257cbe95766" creator="" creation-date="08/25/2026 20:13:49" visibility="private">
+      <structural-feature type="Pets" type-id="Class:436345dc76474b9caee0d4046d613260" />
     </item>
     <item id="4c582210b086420ebd40d91810a3ca4f" cid="PROP037" type="property" name="vacina" owner="c4915042b76d48c49cdbf5836447d86d" creator="" creation-date="08/25/2026 20:37:23" visibility="private">
       <structural-feature type="Vacina" type-id="Class:018b6461b62444578cc96c9ab1a434dc" />
@@ -547,6 +551,18 @@
       </style>
       <structural-feature type="String" type-id="Uml.String" />
     </item>
+    <item id="94997cbe04d94438b7e06257cbe95766" cid="C003" type="class" name="Adocao" creator="" creation-date="08/25/2026 20:10:10" visibility="undefined">
+      <owned-items />
+      <attributes>
+        <attribute id="a870c33e6346d49c4a13ff151ad2dd320716" cid="PROP009" name="dataAdocao" creation-date="08/25/2026 20:10:24" property-ref="13f9bf04471b45c29148c0cb27a8315f" />
+        <attribute id="a1fa9a48c0b0a4aa4b151a19b8195946a748" cid="PROP017" name="pet" creation-date="08/25/2026 20:13:49" property-ref="2b8154de87a04f618c7a096eb43bd7dd" />
+        <attribute id="a9d92b3b92aaf4679b4ee1897966010b7668" cid="PROP018" name="antigoTutor" creation-date="08/25/2026 20:14:08" property-ref="bf69ca1212764868b1d4b01a3b5b6bb0" />
+        <attribute id="ace3ac2919ab049c0a6f1330d7687d2fa404" cid="PROP019" name="novoTutor" creation-date="08/25/2026 20:14:34" property-ref="40e01f079c8e49f3b5e8ae9916cd1999" />
+      </attributes>
+      <source-codes>
+        <source-code language="ActionScript" />
+      </source-codes>
+    </item>
     <item id="0efa14fc3fc447e8aeaae16f1b78e931" cid="PROP020" type="property" name="cnpj" owner="409191c8420a45bfbd93e943917362ce" creator="" creation-date="08/25/2026 20:17:55" visibility="private">
       <style style-name="Custom Style" shadow-type="smooth" shadow-offset="2,2" shadow-visible="true" shadow-color="#3A555555" shadow-radius="8" wrap-name-text="true" wrap-other-text="true" padding="2" glow-color="#FFFFFF" accuracy="0.9">
         <text-style type="name" color="#555555" font="Segoe UI;11.25;B" />
@@ -572,19 +588,7 @@
       </style>
       <structural-feature type="String" type-id="Uml.String" />
     </item>
-    <item id="94997cbe04d94438b7e06257cbe95766" cid="C003" type="class" name="Adocao" creator="" creation-date="08/25/2026 20:10:10" visibility="undefined">
-      <owned-items />
-      <attributes>
-        <attribute id="a870c33e6346d49c4a13ff151ad2dd320716" cid="PROP009" name="dataAdocao" creation-date="08/25/2026 20:10:24" property-ref="13f9bf04471b45c29148c0cb27a8315f" />
-        <attribute id="a1fa9a48c0b0a4aa4b151a19b8195946a748" cid="PROP017" name="pet" creation-date="08/25/2026 20:13:49" property-ref="2b8154de87a04f618c7a096eb43bd7dd" />
-        <attribute id="a9d92b3b92aaf4679b4ee1897966010b7668" cid="PROP018" name="antigoTutor" creation-date="08/25/2026 20:14:08" property-ref="bf69ca1212764868b1d4b01a3b5b6bb0" />
-        <attribute id="ace3ac2919ab049c0a6f1330d7687d2fa404" cid="PROP019" name="novoTutor" creation-date="08/25/2026 20:14:34" property-ref="40e01f079c8e49f3b5e8ae9916cd1999" />
-      </attributes>
-      <source-codes>
-        <source-code language="ActionScript" />
-      </source-codes>
-    </item>
-    <item id="afe0817b11e6418886a22a26e3bc6fcb" cid="PROP046" type="property" owner="3447ec5f9c454ba3ac41dc3ac32d5370" creator="" creation-date="08/25/2026 20:42:28" visibility="private">
+    <item id="afe0817b11e6418886a22a26e3bc6fcb" cid="PROP046" type="property" creator="" creation-date="08/25/2026 20:42:28" visibility="private">
       <structural-feature type="Operador" type-id="Class:409191c8420a45bfbd93e943917362ce" />
     </item>
     <item id="676b5892711743fdbaeb73c6b7aed3a9" cid="PROP025" type="property" name="numero" owner="6b9a7536ed3b4265b4b9b4eb3d1e61a3" creator="" creation-date="08/25/2026 20:29:50" visibility="private">
@@ -645,12 +649,12 @@
     <item id="56e4db69f346458388febcb00b4a6a48" cid="PROP004" type="property" name="senha" owner="05ec210391d04881b0b8714921417167" creator="" creation-date="08/25/2026 19:45:02" visibility="private">
       <structural-feature type="String" type-id="Uml.String" />
     </item>
-    <item id="742ba347f2204b42b2d91ba60e4432d6" cid="C013" type="class" name="BancoDados" creation-date="09/17/2026 08:33:50" />
+    <item id="742ba347f2204b42b2d91ba60e4432d6" cid="C013" type="class" name="BancoDados" creation-date="09/17/2026 08:33:50" visibility="undefined" />
+    <item id="4dd53b7c65424c16a7e7b41eeb4ac018" cid="PROP014" type="property" creator="" creation-date="08/25/2026 20:11:50" visibility="private">
+      <structural-feature type="Pets" type-id="Class:436345dc76474b9caee0d4046d613260" />
+    </item>
     <item id="c7ffac79f866469e9c99425840548a5e" cid="PROP028" type="property" name="endereco" owner="409191c8420a45bfbd93e943917362ce" creator="" creation-date="08/25/2026 20:30:40" visibility="private">
       <structural-feature type="endereco" type-id="Class:6b9a7536ed3b4265b4b9b4eb3d1e61a3" />
-    </item>
-    <item id="4dd53b7c65424c16a7e7b41eeb4ac018" cid="PROP014" type="property" owner="a7a151e13e624a378325a949c4c56155" creator="" creation-date="08/25/2026 20:11:50" visibility="private">
-      <structural-feature type="Pets" type-id="Class:436345dc76474b9caee0d4046d613260" />
     </item>
     <item id="018b6461b62444578cc96c9ab1a434dc" cid="C006" type="class" name="Vacina" creator="" creation-date="08/25/2026 20:19:22" visibility="undefined">
       <owned-items />
@@ -677,11 +681,7 @@
       </meta>
       <abstract-items />
       <sub-models />
-<<<<<<< HEAD:ApêndiceB-Requisitos/Diagrama de Sequencia/DiagramaDeSequencia_PetLink.simp.bak
-      <diagram type="uml-sequence" id="pa0c7caf05da1479c91603d0cd935fe0d_225612654" name="SequenceDiagram1" order-index="2" overview-order-index="0" uid="" name-style="" auto-routed-paths="false" default-line-style="default">
-=======
       <diagram type="uml-sequence" id="pa0c7caf05da1479c91603d0cd935fe0d_225612654" name="SequenceDiagram1" order-index="2" overview-order-index="0" uid="" name-style="" auto-routed-paths="false" default-line-style="default" view-location="-51,14" zoom="0.8">
->>>>>>> main:ApêndiceB-Requisitos/DiagramaDeSequencia_PetLink.simp
         <style>
           <background-color index="1" color="#FFFFFFFF" />
           <background-color index="2" color="#FFFFFFFF" />
@@ -857,20 +857,12 @@
             <sequence-action show-sequence-number="false" />
           </item>
           <item id="a32769086e994690b1c162ab610dcbff" iid="f2379af471ae4d15bd92610d3b8aed3e" container="b072465aec124d3fa73f3e27b4a007fb" container-iid="e20f06f4f3ff4b6f8490897eae36e0a0" creation-date="08/26/2026 10:41:38" order-index="18" type="entity">
-<<<<<<< HEAD:ApêndiceB-Requisitos/Diagrama de Sequencia/DiagramaDeSequencia_PetLink.simp.bak
-            <layout ax="1011.5" ay="677" awidth="20" aheight="99" x="1011.5" y="677" width="20" height="99" expanded="1011.5,677,20,99" collapsed="0,0,0,0" container-layout="simple">
-=======
             <layout ax="1011.5" ay="671" awidth="20" aheight="85" x="1011.5" y="677" width="20" height="85" expanded="1011.5,671,20,85" collapsed="0,0,0,0" container-layout="simple">
->>>>>>> main:ApêndiceB-Requisitos/DiagramaDeSequencia_PetLink.simp
               <container-layout padding="10,10,10,10" />
             </layout>
           </item>
           <item id="30796d1009634616a01512d2e681472c" iid="550bd5bf793940ff88a0a43ce6f8de6c" container="b072465aec124d3fa73f3e27b4a007fb" container-iid="e20f06f4f3ff4b6f8490897eae36e0a0" creation-date="08/26/2026 10:38:19" order-index="13" type="entity">
-<<<<<<< HEAD:ApêndiceB-Requisitos/Diagrama de Sequencia/DiagramaDeSequencia_PetLink.simp.bak
-            <layout ax="1011.5" ay="320" awidth="20" aheight="107" x="1011.5" y="320" width="20" height="107" expanded="1011.5,320,20,107" collapsed="0,0,0,0" container-layout="simple">
-=======
             <layout ax="1011.5" ay="330" awidth="20" aheight="85" x="1011.5" y="330" width="20" height="85" expanded="1011.5,330,20,85" collapsed="0,0,0,0" container-layout="simple">
->>>>>>> main:ApêndiceB-Requisitos/DiagramaDeSequencia_PetLink.simp
               <container-layout padding="10,10,10,10" />
             </layout>
           </item>
@@ -925,45 +917,27 @@
             <sequence-action show-sequence-number="false" />
           </item>
           <item id="44340607ec2f475b84fb6cebec1dd8e9" iid="ecde4d056b6c4138a74ba34b939fe0b2" creation-date="08/26/2026 10:38:36" order-index="14" type="relation">
-<<<<<<< HEAD:ApêndiceB-Requisitos/Diagrama de Sequencia/DiagramaDeSequencia_PetLink.simp.bak
-            <layout message-x="906" message-y="327" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="785" y1="346" x2="1012" y2="346" start-border-pos="0.33647798742138363" end-border-pos="0.9392523364485981" start-local-pos="55" end-local-pos="26" name-position="8,-19">
-              <points>
-                <point x="785" y="346" />
-                <point x="1012" y="346" />
-=======
             <layout message-x="906" message-y="337" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="785" y1="356" x2="1012" y2="356" start-border-pos="0.35220125786163525" end-border-pos="0.9235294117647059" start-local-pos="65" end-local-pos="26" name-position="8,-19">
               <points>
                 <point x="785" y="356" />
                 <point x="1012" y="356" />
->>>>>>> main:ApêndiceB-Requisitos/DiagramaDeSequencia_PetLink.simp
               </points>
             </layout>
             <relation from="6d4021a2ce434166a0146579c3130fe8" from-iid="9264c78cdd9f48e98c3e99c4786a997f" to="30796d1009634616a01512d2e681472c" to-iid="550bd5bf793940ff88a0a43ce6f8de6c" />
             <sequence-action show-sequence-number="false" />
           </item>
           <item id="a420beb758414c1da010c477be416d39" iid="f0e1e648d2fd4bd99bf4ae98ed67e186" creation-date="08/26/2026 10:39:07" order-index="15" type="relation">
-<<<<<<< HEAD:ApêndiceB-Requisitos/Diagrama de Sequencia/DiagramaDeSequencia_PetLink.simp.bak
-            <layout message-x="896" message-y="384" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="1012" y1="404" x2="785" y2="404" start-border-pos="0.8037383177570093" end-border-pos="0.4276729559748428" start-local-pos="84" end-local-pos="113" name-position="-2,-20">
-              <points>
-                <point x="1012" y="404" />
-                <point x="785" y="404" />
-=======
             <layout message-x="896" message-y="383" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="1012" y1="403" x2="785" y2="403" start-border-pos="0.7852941176470588" end-border-pos="0.42610062893081757" start-local-pos="73" end-local-pos="112" name-position="-2,-20">
               <points>
                 <point x="1012" y="403" />
                 <point x="785" y="403" />
->>>>>>> main:ApêndiceB-Requisitos/DiagramaDeSequencia_PetLink.simp
               </points>
             </layout>
             <relation from="30796d1009634616a01512d2e681472c" from-iid="550bd5bf793940ff88a0a43ce6f8de6c" to="6d4021a2ce434166a0146579c3130fe8" to-iid="9264c78cdd9f48e98c3e99c4786a997f" />
             <sequence-action show-sequence-number="false" />
           </item>
           <item id="ad24f34775b4410d97b8991d63303bf3" iid="c3ecb840b8d34601aceb0d8c4c59182c" creation-date="08/26/2026 10:40:57" order-index="17" type="relation">
-<<<<<<< HEAD:ApêndiceB-Requisitos/Diagrama de Sequencia/DiagramaDeSequencia_PetLink.simp.bak
-            <layout message-x="620.5" message-y="694" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="488" y1="671" x2="765" y2="671" start-border-pos="0.32303370786516855" end-border-pos="0.9385474860335196" start-local-pos="78" end-local-pos="44" name-position="-5.5,23">
-=======
             <layout message-x="637.5" message-y="649" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="488" y1="671" x2="765" y2="671" start-border-pos="0.32303370786516855" end-border-pos="0.9385474860335196" start-local-pos="78" end-local-pos="44" name-position="11.5,-22">
->>>>>>> main:ApêndiceB-Requisitos/DiagramaDeSequencia_PetLink.simp
               <points>
                 <point x="488" y="671" />
                 <point x="765" y="671" />
@@ -973,45 +947,27 @@
             <sequence-action show-sequence-number="false" />
           </item>
           <item id="caeb10a32a5b4e0e987f8a556aefb90b" iid="42027f42cbf14691b04dbf560c2a3144" creation-date="08/26/2026 10:41:53" order-index="19" type="relation">
-<<<<<<< HEAD:ApêndiceB-Requisitos/Diagrama de Sequencia/DiagramaDeSequencia_PetLink.simp.bak
-            <layout message-x="910.5" message-y="694" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="785" y1="703" x2="1012" y2="703" start-border-pos="0.35614525139664804" end-border-pos="0.9343434343434344" start-local-pos="76" end-local-pos="26" name-position="12.5,-9">
-              <points>
-                <point x="785" y="703" />
-                <point x="1012" y="703" />
-=======
             <layout message-x="907.5" message-y="673" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="785" y1="691" x2="1012" y2="691" start-border-pos="0.3393854748603352" end-border-pos="0.9411764705882353" start-local-pos="64" end-local-pos="20" name-position="9.5,-18">
               <points>
                 <point x="785" y="691" />
                 <point x="1012" y="691" />
->>>>>>> main:ApêndiceB-Requisitos/DiagramaDeSequencia_PetLink.simp
               </points>
             </layout>
             <relation from="ad2788a33319436fa93ad9a05d26b6f4" from-iid="f31d0fa5f4ca4511b253498e8ae19b35" to="a32769086e994690b1c162ab610dcbff" to-iid="f2379af471ae4d15bd92610d3b8aed3e" />
             <sequence-action show-sequence-number="false" />
           </item>
           <item id="50a8a6d2e73a46a7b1a4d4a6bf77aac4" iid="29fd51e40260411f8f7f583fef06c77a" creation-date="08/26/2026 10:42:14" order-index="20" type="relation">
-<<<<<<< HEAD:ApêndiceB-Requisitos/Diagrama de Sequencia/DiagramaDeSequencia_PetLink.simp.bak
-            <layout message-x="910.5" message-y="750" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="1012" y1="765" x2="785" y2="765" start-border-pos="0.7777777777777778" end-border-pos="0.44273743016759776" start-local-pos="88" end-local-pos="138" name-position="12.5,-15">
-              <points>
-                <point x="1012" y="765" />
-                <point x="785" y="765" />
-=======
             <layout message-x="910.5" message-y="729" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="1012" y1="744" x2="785" y2="744" start-border-pos="0.7852941176470588" end-border-pos="0.4134078212290503" start-local-pos="73" end-local-pos="117" name-position="12.5,-15">
               <points>
                 <point x="1012" y="744" />
                 <point x="785" y="744" />
->>>>>>> main:ApêndiceB-Requisitos/DiagramaDeSequencia_PetLink.simp
               </points>
             </layout>
             <relation from="a32769086e994690b1c162ab610dcbff" from-iid="f2379af471ae4d15bd92610d3b8aed3e" to="ad2788a33319436fa93ad9a05d26b6f4" to-iid="f31d0fa5f4ca4511b253498e8ae19b35" />
             <sequence-action show-sequence-number="false" />
           </item>
           <item id="a43a33da6c484cde9d9df9296f0d8c7a" iid="e79a1b57b19041b0bcc3a17dccd453c9" creation-date="08/26/2026 10:43:06" order-index="21" type="relation">
-<<<<<<< HEAD:ApêndiceB-Requisitos/Diagrama de Sequencia/DiagramaDeSequencia_PetLink.simp.bak
-            <layout message-x="626" message-y="806" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="765" y1="786" x2="488" y2="786" start-border-pos="0.7779329608938548" end-border-pos="0.4307116104868914" start-local-pos="159" end-local-pos="193" name-position="0,20">
-=======
             <layout message-x="629.5" message-y="762" line-style="oblique" lock-start-point="true" lock-end-point="true" start-absolute-lock="true" end-absolute-lock="true" lock-to-fields="false" auto-path="" x1="765" y1="786" x2="488" y2="786" start-border-pos="0.7779329608938548" end-border-pos="0.4307116104868914" start-local-pos="159" end-local-pos="193" name-position="3.5,-24">
->>>>>>> main:ApêndiceB-Requisitos/DiagramaDeSequencia_PetLink.simp
               <points>
                 <point x="765" y="786" />
                 <point x="488" y="786" />
@@ -1041,6 +997,82 @@
             <sequence-action show-sequence-number="false" />
           </item>
         </layer>
+      </diagram>
+      <diagram type="uml-sequence" id="pa7e72966286e42f7bdc9fc302bd3b694_611315073" name="SequenceDiagram2" order-index="3" overview-order-index="1" uid="" name-style="" auto-routed-paths="false" default-line-style="default">
+        <style>
+          <background-color index="1" color="#FFFFFFFF" />
+          <background-color index="2" color="#FFFFFFFF" />
+          <background-type type="solid" />
+        </style>
+        <meta>
+          <authors>
+            <author> </author>
+          </authors>
+          <description />
+          <creation-date>10/08/2026 17:12:18</creation-date>
+          <change-date>10/08/2026 17:12:18</change-date>
+          <revision-count>0</revision-count>
+          <version />
+        </meta>
+        <abstract-items />
+        <layer id="52068ce0b4bd4f1791d6a3cd6eac6ef7" name="Default" visible="true" enabled="true" locked="false" />
+      </diagram>
+      <diagram type="uml-class" id="p20603b9d28774786bff7cb0e61dd9c20_693696780" name="ClassDiagram2" order-index="4" overview-order-index="2" uid="" name-style="" auto-routed-paths="false" default-line-style="default">
+        <style>
+          <background-color index="1" color="#FFFFFFFF" />
+          <background-color index="2" color="#FFFFFFFF" />
+          <background-type type="solid" />
+        </style>
+        <meta>
+          <authors>
+            <author> </author>
+          </authors>
+          <description />
+          <creation-date>10/08/2026 17:12:37</creation-date>
+          <change-date>10/08/2026 17:12:37</change-date>
+          <revision-count>0</revision-count>
+          <version />
+        </meta>
+        <abstract-items />
+        <layer id="b389748a374a4d03957543046c3fa3f6" name="Default" visible="true" enabled="true" locked="false" />
+      </diagram>
+      <diagram type="uml-usecase" id="p48b84285147f45c1a001f1403ae917da_718513137" name="UseCaseDiagram1" order-index="5" overview-order-index="3" uid="" name-style="" auto-routed-paths="false" default-line-style="default">
+        <style>
+          <background-color index="1" color="#FFFFFFFF" />
+          <background-color index="2" color="#FFFFFFFF" />
+          <background-type type="solid" />
+        </style>
+        <meta>
+          <authors>
+            <author> </author>
+          </authors>
+          <description />
+          <creation-date>10/08/2026 17:12:46</creation-date>
+          <change-date>10/08/2026 17:12:46</change-date>
+          <revision-count>0</revision-count>
+          <version />
+        </meta>
+        <abstract-items />
+        <layer id="b6667959dea54585a2e696d685e16654" name="Default" visible="true" enabled="true" locked="false" />
+      </diagram>
+      <diagram type="uml-component" id="pdf6c5453521844148859fc050eaefb9c_379670428" name="ComponentDiagram1" order-index="6" overview-order-index="4" uid="" name-style="" auto-routed-paths="false" default-line-style="default">
+        <style>
+          <background-color index="1" color="#FFFFFFFF" />
+          <background-color index="2" color="#FFFFFFFF" />
+          <background-type type="solid" />
+        </style>
+        <meta>
+          <authors>
+            <author> </author>
+          </authors>
+          <description />
+          <creation-date>10/08/2026 17:13:02</creation-date>
+          <change-date>10/08/2026 17:13:02</change-date>
+          <revision-count>0</revision-count>
+          <version />
+        </meta>
+        <abstract-items />
+        <layer id="a09d043324d9470b8e1227f709f9a727" name="Default" visible="true" enabled="true" locked="false" />
       </diagram>
     </model>
   </models>
