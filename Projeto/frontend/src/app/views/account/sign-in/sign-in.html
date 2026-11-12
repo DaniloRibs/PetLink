@@ -15,25 +15,25 @@
         <div class="login-box">
           <h2>Login</h2>
           <form>
-            <input type="email" placeholder="E-mail" [formControl]="email">
+            <input type="email" placeholder="E-mail" [formControl]="email" data-testid="login-email">
             @if (email.touched && email.invalid) {
-            <p class="text-danger">Digite um e-mail válido.</p>
+            <p class="text-danger" data-testid="login-email-error">Digite um e-mail válido.</p>
             }
 
-            <input type="password" placeholder="Senha" [formControl]="password">
+            <input type="password" placeholder="Senha" [formControl]="password" data-testid="login-password">
             @if (password.touched && password.invalid) {
-            <p class="text-danger">Digite sua senha.</p>
+            <p class="text-danger" data-testid="login-password-error">Digite sua senha.</p>
             }
 
-            <input type="button" value="Entrar" (click)="login()">
+            <input type="button" value="Entrar" (click)="login()" data-testid="login-btn">
           </form>
 
           @if (loginValidationFailed) {
-          <p class="text-danger">Email e/ou senha incorretos</p>
+          <p class="text-danger" data-testid="login-error">Email e/ou senha incorretos</p>
           }
 
           <div class="auth-links">
-            <a routerLink="/account/sign-up">Criar conta</a>
+            <a routerLink="/account/sign-up" data-testid="login-signup-link">Criar conta</a>
           </div>
         </div>
 
