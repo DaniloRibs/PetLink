@@ -1,6 +1,5 @@
 import { $, browser } from "@wdio/globals";
 
-
 class LoginPage {
   public get inputEmail() {
     return $("[data-testid=\"login-email\"]");

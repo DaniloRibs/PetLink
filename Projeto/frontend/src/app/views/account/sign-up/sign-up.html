@@ -18,47 +18,49 @@
 
             <div class="toggle-group" role="radiogroup" aria-label="Tipo de conta">
               <label class="toggle-option">
-                <input type="radio" formControlName="accountType" [value]="AccountType.PERSON">
+                <input type="radio" formControlName="accountType" [value]="AccountType.PERSON" data-testid="signup-type-person">
                 <span>Pessoa</span>
               </label>
               <label class="toggle-option">
-                <input type="radio" formControlName="accountType" [value]="AccountType.ENTERPRISE">
+                <input type="radio" formControlName="accountType" [value]="AccountType.ENTERPRISE" data-testid="signup-type-enterprise">
                 <span>Empresa</span>
               </label>
             </div>
 
-            <input type="text" [placeholder]="isEmpresa ? 'Razão Social' : 'Nome Completo'" formControlName="fullname">
-            <input type="email" placeholder="E-mail" formControlName="email">
+            <input type="text" [placeholder]="isEmpresa ? 'Razão Social' : 'Nome Completo'" formControlName="fullname" data-testid="signup-fullname">
+            <input type="email" placeholder="E-mail" formControlName="email" data-testid="signup-email">
             @if (form.get('email')?.touched && form.get('email')?.invalid) {
-            <p class="text-danger">Digite um e-mail válido (ex: nome&#64;exemplo.com).</p>
+            <p class="text-danger" data-testid="signup-email-error">Digite um e-mail válido (ex: nome&#64;exemplo.com).</p>
             }
             <input type="tel" placeholder="Telefone (opcional)" formControlName="phone" mask="(00) 00000-0000"
-              [dropSpecialCharacters]="true">
+              [dropSpecialCharacters]="true" data-testid="signup-phone">
 
             @if (form.get('phone')?.touched && form.get('phone')?.invalid) {
-            <p class="text-danger">Telefone inválido.</p>
+            <p class="text-danger" data-testid="signup-phone-error">Telefone inválido.</p>
             }
 
             <div class="document-field">
               <input type="text" [placeholder]="isEmpresa ? 'CNPJ' : 'CPF (opcional)'" formControlName="document"
-                [mask]="isEmpresa ? '00.000.000/0000-00' : '000.000.000-00'" [dropSpecialCharacters]="true">
+                [mask]="isEmpresa ? '00.000.000/0000-00' : '000.000.000-00'" [dropSpecialCharacters]="true"
+                data-testid="signup-document">
             </div>
 
             @if (form.get('document')?.touched && form.get('document')?.invalid) {
-            <p class="text-danger">{{ isEmpresa ? 'CNPJ obrigatório e deve ser válido.' : 'CPF inválido.' }}</p>
+            <p class="text-danger" data-testid="signup-document-error">{{ isEmpresa ? 'CNPJ obrigatório e deve ser válido.' : 'CPF inválido.' }}</p>
             }
 
-            <input type="password" placeholder="Senha (mínimo 4 caracteres)" formControlName="password">
+            <input type="password" placeholder="Senha (mínimo 4 caracteres)" formControlName="password"
+              data-testid="signup-password">
 
-            <input type="submit" value="Cadastrar">
+            <input type="submit" value="Cadastrar" data-testid="signup-btn">
 
             @if (createValidationFailed) {
-            <p class="text-danger">Confira os dados informados e tente novamente.</p>
+            <p class="text-danger" data-testid="signup-error">Confira os dados informados e tente novamente.</p>
             }
           </form>
 
           <div class="auth-links">
-            <a routerLink="/account/sign-in">Já tenho uma conta</a>
+            <a routerLink="/account/sign-in" data-testid="signup-signin-link">Já tenho uma conta</a>
           </div>
         </div>
 
@@ -75,7 +77,7 @@
   </div>
 
   @if (showLgpdModal) {
-  <div class="modal-overlay" (click)="declineLgpd()">
+  <div class="modal-overlay" (click)="declineLgpd()" data-testid="lgpd-modal">
     <div class="login-box modal-form lgpd-modal" role="dialog" aria-modal="true" (click)="$event.stopPropagation()">
       <button type="button" class="modal-close" (click)="declineLgpd()" aria-label="Fechar">
         <span class="material-icons" aria-hidden="true">close</span>
@@ -98,8 +100,8 @@
 
       <p class="confirm-text">Você concorda com os termos acima?</p>
       <div class="confirm-actions">
-        <button type="button" class="lgpd-accept-button" (click)="acceptLgpd()">Aceitar</button>
-        <button type="button" class="lgpd-decline-button" (click)="declineLgpd()">Discordar</button>
+        <button type="button" class="lgpd-accept-button" (click)="acceptLgpd()" data-testid="lgpd-accept">Aceitar</button>
+        <button type="button" class="lgpd-decline-button" (click)="declineLgpd()" data-testid="lgpd-decline">Discordar</button>
       </div>
     </div>
   </div>

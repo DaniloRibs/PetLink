@@ -23,21 +23,18 @@ baixe algumas extensoes para auxiliar no code do angular e no js
 342.858.710-33
 
 
-# Testes 
+# Testes E2E (WebdriverIO + Allure)
 
-# Como executar
-1. Rode o projeto normalmente.
-3. Rode os testes:
+## Pré-requisitos
 
-- npm run test:e2e      (Ambos)    
-- npm run test:smoke        
-- npm run test:regression   
+## Como executar
+- `npm run test:e2e`         (todos)
+- `npm run test:smoke`       (fluxos críticos: login e cadastro)
+- `npm run test:regression`  (cenários alternativos e validações)
+- `HEADLESS=true npm run test:e2e` roda sem abrir o Chrome.
+- Variáveis opcionais: `BASE_URL` (padrão `http://localhost:4200`) e `API_URL` (padrão `http://localhost:8080/api`).
 
-
-# Relatório
+## Relatório
 ```
 npm run allure:report
 ```
-
-## Estrutura
-Os elementos são buscados por `data-testid` (ex.: `login-email`, `login-btn`).

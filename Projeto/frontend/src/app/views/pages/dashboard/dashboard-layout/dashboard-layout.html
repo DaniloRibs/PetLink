@@ -26,7 +26,7 @@
       <app-notification-bell></app-notification-bell>
 
       <div class="user-menu">
-        <button type="button" class="user-menu-trigger" (click)="toggleUserMenu()">
+        <button type="button" class="user-menu-trigger" (click)="toggleUserMenu()" data-testid="user-menu-trigger">
           <span class="user-avatar">{{ userInitial }}</span>
           <span class="user-menu-name">{{ currentUser?.fullname || userEmail || 'Minha conta' }}</span>
           <span class="user-menu-chevron">▾</span>
@@ -37,7 +37,7 @@
           <a routerLink="/painel/conta/perfil" class="user-menu-item" (click)="closeUserMenu()">
             <mat-icon>settings</mat-icon> Meu perfil
           </a>
-          <button type="button" class="user-menu-item user-menu-item-danger" (click)="logout()">
+          <button type="button" class="user-menu-item user-menu-item-danger" (click)="logout()" data-testid="logout-btn">
             <mat-icon>logout</mat-icon> Sair
           </button>
         </div>
