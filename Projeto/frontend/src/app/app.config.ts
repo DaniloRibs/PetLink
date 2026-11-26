@@ -6,11 +6,13 @@ import { routes } from './app.routes';
 
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 
-import { provideHttpClient, withInterceptorsFromDi, withFetch } from '@angular/common/http';
+import { provideHttpClient, withInterceptors, withInterceptorsFromDi, withFetch } from '@angular/common/http';
 
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 import { provideToastr } from 'ngx-toastr';
+
+import { authenticationInterceptor } from './services/security/interceptor/authentication.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,7 +20,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideClientHydration(withEventReplay()),
-    provideHttpClient(withInterceptorsFromDi(), withFetch()),
+    provideHttpClient(withInterceptors([authenticationInterceptor]), withInterceptorsFromDi(), withFetch()),
     provideAnimationsAsync(),
     provideToastr({
       positionClass: 'toast-bottom-right',

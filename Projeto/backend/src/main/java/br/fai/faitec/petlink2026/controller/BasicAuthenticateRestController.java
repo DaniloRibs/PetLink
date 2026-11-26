@@ -4,6 +4,7 @@ import br.fai.faitec.petlink2026.domain.user.UserModel;
 import br.fai.faitec.petlink2026.dto.user.AutenticationDto;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.rest_controllers.AuthenticationRestController;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.service.security.AuthenticationService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Profile("basic")
 @RestController
 @RequestMapping("/authenticate")
 public class BasicAuthenticateRestController implements AuthenticationRestController {

@@ -9,8 +9,8 @@ import br.fai.faitec.petlink2026.ports_and_adapters.adapter.dao.user.EnterpriseP
 import br.fai.faitec.petlink2026.ports_and_adapters.adapter.dao.user.PersonPostgresDaoAdapter;
 import br.fai.faitec.petlink2026.ports_and_adapters.adapter.dao.user.UserPostgresDaoAdapter;
 import br.fai.faitec.petlink2026.ports_and_adapters.adapter.dao.vaccine.VaccinePostgresDaoAdapter;
-import br.fai.faitec.petlink2026.ports_and_adapters.adapter.sucurity.BasicAuthenticationServiceAdapter;
-import br.fai.faitec.petlink2026.ports_and_adapters.adapter.sucurity.JwtAuthenticationServiceAdapter;
+import br.fai.faitec.petlink2026.ports_and_adapters.adapter.service.security.basic.BasicAuthenticationServiceAdapter;
+import br.fai.faitec.petlink2026.ports_and_adapters.adapter.service.security.jwt.JwtAuthenticationServiceAdapter;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.adoption.AdoptionDao;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.animal.FarmAnimalDao;
 import br.fai.faitec.petlink2026.ports_and_adapters.port.dao.announcement.AnnouncementDao;
@@ -107,8 +107,8 @@ public class AppConfiguration {
 
     @Profile("jwt")
     @Bean
-    public AuthenticationService jwtAuthenticationService() {
-        return new JwtAuthenticationServiceAdapter();
+    public AuthenticationService jwtAuthenticationService(final PasswordEncoder passwordEncoder, final UserService userService) {
+        return new JwtAuthenticationServiceAdapter(passwordEncoder, userService);
     }
 
     @Bean

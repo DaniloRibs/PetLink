@@ -2,7 +2,9 @@ package br.fai.faitec.petlink2026;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 
+@ConfigurationPropertiesScan
 @SpringBootApplication
 public class Petlink2026Application {
 

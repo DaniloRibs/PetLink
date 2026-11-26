@@ -172,8 +172,11 @@ export class MyProfile implements OnInit {
       this.entity.document = document;
 
       if (emailWasChanged) {
-        this.authenticationService.addDataToLocalStorage(email);
-        this.emailChanged = true;
+        this.authenticationService.logout();
+        this.currentUserService.clear();
+        this.toastrService.info('Seu e-mail de login foi atualizado. Entre novamente com o novo e-mail.');
+        await this.router.navigate(['/account/sign-in']);
+        return;
       }
 
       this.updateOk = true;

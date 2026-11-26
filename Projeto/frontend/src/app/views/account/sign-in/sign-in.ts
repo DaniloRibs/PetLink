@@ -98,8 +98,11 @@ export class SignIn implements OnInit, OnDestroy {
     };
 
     this.authenticationService.authenticate(credentials).subscribe({
-      next: (user) => {
-        this.authenticationService.addDataToLocalStorage(user.email);
+      next: (response) => {
+        if (!this.authenticationService.saveSession(response.token)) {
+          this.loginValidationFailed = true;
+          return;
+        }
         this.router.navigate(['/painel']);
       },
       error: (error) => {

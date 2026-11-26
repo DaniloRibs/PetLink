@@ -1,4 +1,4 @@
-package br.fai.faitec.petlink2026.ports_and_adapters.adapter.sucurity;
+package br.fai.faitec.petlink2026.ports_and_adapters.adapter.service.security.basic;
 
 
 import br.fai.faitec.petlink2026.domain.user.UserModel;

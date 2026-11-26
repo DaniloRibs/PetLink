@@ -1,6 +1,7 @@
 import { inject } from "@angular/core";
 import { CanActivateFn, Router } from "@angular/router";
 import { AuthenticationService } from "../authentication";
+import { CurrentUserService } from "../current-user";
 
 export const authenticationGuard: CanActivateFn = (route, state) => {
 
@@ -13,6 +14,7 @@ export const authenticationGuard: CanActivateFn = (route, state) => {
         return true;
     }
 
+    inject(CurrentUserService).clear();
     router.navigate(['/account/sign-in']);
     return false;
 };
